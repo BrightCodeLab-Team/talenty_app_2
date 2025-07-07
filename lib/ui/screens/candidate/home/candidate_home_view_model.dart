@@ -25,246 +25,259 @@ class CandidateHomeViewModel extends BaseViewModel {
   ];
 
   ///
+  ///. filtering logics
+  ///
+
+  List<JobVacancyModel> filteredVacancies = [];
+  bool filtersApplied = false;
+
+  void applyFilters({
+    String? category,
+    String? minSalary,
+    String? maxSalary,
+    String? federalEntity,
+    String? municipality,
+    String? workModality,
+    String? skill,
+  }) {
+    filteredVacancies =
+        vacancies.where((vacancy) {
+          // Salary filter - handle string comparison
+          bool salaryMatch = true;
+          if (minSalary != null && minSalary.isNotEmpty ||
+              maxSalary != null && maxSalary.isNotEmpty) {
+            // Convert filter values to numbers safely
+            final filterMin = double.tryParse(minSalary ?? '0') ?? 0;
+            final filterMax = double.tryParse(maxSalary ?? '999999') ?? 999999;
+
+            // Convert vacancy values to numbers safely
+            final vacancyMin = double.tryParse(vacancy.minSalary ?? '0') ?? 0;
+            final vacancyMax = double.tryParse(vacancy.maxSalary ?? '0') ?? 0;
+
+            // Check if vacancy range overlaps with filter range
+            salaryMatch = vacancyMax >= filterMin && vacancyMin <= filterMax;
+          }
+
+          // Location filters
+          bool locationMatch = true;
+          if (federalEntity != null && federalEntity != '--Selecciona uno--') {
+            locationMatch = (vacancy.state?.toLowerCase() ?? '').contains(
+              federalEntity.toLowerCase(),
+            );
+          }
+          if (municipality != null && municipality != 'Selecciona una opción') {
+            locationMatch =
+                locationMatch &&
+                (vacancy.municipality?.toLowerCase() ?? '').contains(
+                  municipality.toLowerCase(),
+                );
+          }
+
+          // Work modality filter
+          bool modalityMatch = true;
+          if (workModality != null) {
+            modalityMatch = (vacancy.workMode?.toLowerCase() ?? '').contains(
+              workModality.toLowerCase(),
+            );
+          }
+
+          // Skill filter
+          bool skillMatch = true;
+          if (skill != null) {
+            skillMatch = (vacancy.technicalSkills?.toLowerCase() ?? '')
+                .contains(skill.toLowerCase());
+          }
+
+          return salaryMatch && locationMatch && modalityMatch && skillMatch;
+        }).toList();
+
+    filtersApplied = true;
+    notifyListeners();
+  }
+
   ///
   ///
-  // final List<JobVacancyModel> vacancies = [
-  //   JobVacancyModel(
-  //     location: 'Coyoacan, CDMX. XXXXXXXXXXXXX',
-  //     // Basic Info
-  //     jobTitle: "Marketing Intern r nhstrsn6t nst emytdebr htt jud67 u7 u",
-  //     jobSubTitle: 'Viajes Premium nnnnnnnnnnnnn',
-  //     state: "Mexico City",
-  //     municipality: "Coyoacán",
-  //     neighborhood: "Romero de Terreros",
-
-  //     // Job Info
-  //     startDate: '',
-  //     endDate: '',
-  //     workMode: '',
-  //     workSchedule: '',
-
-  //     // Employment Details
-  //     canStartImmediately: '',
-  //     requiresExperience: '',
-  //     workDays: '',
-
-  //     // Salary & Benefits
-  //     minSalary: '10000.000000000',
-  //     maxSalary: '15000.0000000000',
-  //     paymentFrequency: '',
-  //     benefits: 'qqq,qqqq,www,eee,',
-
-  //     // Skills
-  //     softSkills: '',
-  //     technicalSkills: '',
-
-  //     // Description
-  //     jobDescription: "We seek a creative designer with experience in...",
-  //   ),
-  //   JobVacancyModel(
-  //     // Basic Info
-  //     jobTitle: "Graphic Designer",
-  //     jobSubTitle: 'intern',
-  //     state: "Mexico City",
-  //     municipality: "Coyoacán",
-  //     neighborhood: "Romero de Terreros",
-
-  //     // Job Info
-  //     startDate: '',
-  //     endDate: '',
-  //     workMode: '',
-  //     workSchedule: '',
-
-  //     // Employment Details
-  //     canStartImmediately: '',
-  //     requiresExperience: '',
-  //     workDays: '',
-
-  //     // Salary & Benefits
-  //     minSalary: '10000.0',
-  //     maxSalary: '15000.0',
-  //     paymentFrequency: '',
-  //     benefits: 'qqq,qqqq,www,eee,',
-
-  //     // Skills
-  //     softSkills: '',
-  //     technicalSkills: '',
-
-  //     // Description
-  //     jobDescription: "We seek a creative designer with experience in...",
-  //   ),
-  //   JobVacancyModel(
-  //     // Basic Info
-  //     jobTitle: "Graphic Designer",
-  //     jobSubTitle: 'intern',
-  //     state: "Mexico City",
-  //     municipality: "Coyoacán",
-  //     neighborhood: "Romero de Terreros",
-
-  //     // Job Info
-  //     startDate: '',
-  //     endDate: '',
-  //     workMode: '',
-  //     workSchedule: '',
-
-  //     // Employment Details
-  //     canStartImmediately: '',
-  //     requiresExperience: '',
-  //     workDays: '',
-
-  //     // Salary & Benefits
-  //     minSalary: '10000.0',
-  //     maxSalary: '15000.0',
-  //     paymentFrequency: '',
-  //     benefits: 'qqq,qqqq,www,eee,',
-
-  //     // Skills
-  //     softSkills: '',
-  //     technicalSkills: '',
-
-  //     // Description
-  //     jobDescription: "We seek a creative designer with experience in...",
-  //   ),
-  // ];
-
+  ///
   final List<JobVacancyModel> vacancies = [
+    // Remote job in California with Flutter skills (matches first category)
     JobVacancyModel(
-      jobTitle: 'Software Engineer',
-      jobSubTitle: 'Frontend Specialist',
+      jobTitle: 'Flutter Developer',
+      jobSubTitle: 'Mobile Specialist',
       imageUrl: AppAssets.img,
       state: 'California',
       municipality: 'San Francisco',
       neighborhood: 'SOMA',
-      workingHours: '10',
+      workingHours: '8',
       jobType: 'Tiempo completo',
-
       startDate: '2025-08-01',
       endDate: '2025-12-31',
       workMode: 'Remote',
-      workSchedule: '9 AM - 5 PM',
-
+      workSchedule: 'Flexible',
       canStartImmediately: 'Yes',
       requiresExperience: '2+ Years',
       workDays: 'Monday to Friday',
-
-      minSalary: '70000',
-      maxSalary: '90000',
+      minSalary: '5000',
+      maxSalary: '8000',
       paymentFrequency: 'Monthly',
-      benefits: 'Health Insurance, Remote Work, Paid Leave',
-
+      benefits: 'Health Insurance, Remote Work',
       softSkills: 'Teamwork, Communication',
-      technicalSkills: 'Flutter, Dart, Git',
+      technicalSkills: 'Flutter, Dart, Mobile Development',
       maxSkillSelections: '5',
-
-      jobDescription:
-          'We are looking for a Flutter developer to work on our mobile apps.',
+      jobDescription: 'Flutter developer needed for mobile app development.',
       location: 'Remote',
       jobPostedTime: '2025-07-01',
-      matches: '85%',
+      matches: '90%',
     ),
+
+    // On-site Graphic Designer in New York (matches second category)
     JobVacancyModel(
       jobTitle: 'Graphic Designer',
-      jobSubTitle: 'Brand & UI Specialist',
+      jobSubTitle: 'Visual Artist',
       imageUrl: AppAssets.menulogo,
       state: 'New York',
       municipality: 'Brooklyn',
       neighborhood: 'Williamsburg',
-      workingHours: '5',
-      jobType: 'tiempo parcial',
-
+      workingHours: '8',
+      jobType: 'Tiempo completo',
       startDate: '2025-07-15',
       endDate: '2025-10-15',
       workMode: 'On-Site',
-      workSchedule: '10 AM - 6 PM',
-
+      workSchedule: '9 AM - 6 PM',
       canStartImmediately: 'No',
       requiresExperience: '1+ Years',
-      workDays: 'Tuesday to Saturday',
-
-      minSalary: '40000',
-      maxSalary: '55000',
+      workDays: 'Monday to Friday',
+      minSalary: '4000',
+      maxSalary: '6000',
       paymentFrequency: 'Biweekly',
-      benefits: 'Meal Coupons, Work Equipment, Annual Bonus',
-
-      softSkills: 'Creativity, Time Management',
-      technicalSkills: 'Adobe XD, Figma, Photoshop',
+      benefits: 'Creative Environment, Equipment Provided',
+      softSkills: 'Creativity, Attention to Detail',
+      technicalSkills: 'Adobe Photoshop, Illustrator, UI/UX',
       maxSkillSelections: '4',
-
-      jobDescription:
-          'Creative designer needed for branding and UI/UX projects.',
+      jobDescription: 'Graphic designer for marketing materials and branding.',
       location: 'Brooklyn, NY',
       jobPostedTime: '2025-06-25',
-      matches: '78%',
+      matches: '85%',
     ),
+
+    // Hybrid Data Analyst in Texas (matches third category)
     JobVacancyModel(
       jobTitle: 'Data Analyst',
-      jobSubTitle: 'Entry-Level Role',
+      jobSubTitle: 'Business Intelligence',
       imageUrl: AppAssets.img2,
       state: 'Texas',
       municipality: 'Austin',
       neighborhood: 'Downtown',
-
+      workingHours: '7',
+      jobType: 'Tiempo completo',
       startDate: '2025-09-01',
       endDate: '2026-03-01',
       workMode: 'Hybrid',
       workSchedule: 'Flexible',
-      workingHours: '6',
-
-      jobType: 'tiempo parcial',
-
       canStartImmediately: 'Yes',
       requiresExperience: 'No',
       workDays: 'Monday to Friday',
-
-      minSalary: '50000',
-      maxSalary: '65000',
+      minSalary: '3000',
+      maxSalary: '5000',
       paymentFrequency: 'Monthly',
-      benefits: 'Flexible Hours, Training, Gym Membership',
-
-      softSkills: 'Analytical Thinking, Curiosity',
-      technicalSkills: 'SQL, Python, Excel',
+      benefits: 'Training, Career Growth',
+      softSkills: 'Analytical Thinking, Problem Solving',
+      technicalSkills: 'SQL, Python, Excel, Data Visualization',
       maxSkillSelections: '6',
-
       jobDescription:
-          'Assist in data gathering, analysis, and reporting tasks.',
+          'Entry-level data analyst position with training provided.',
       location: 'Austin, TX',
       jobPostedTime: '2025-07-02',
-      matches: '91%',
+      matches: '88%',
     ),
-    JobVacancyModel(
-      jobTitle: 'digital Marketing',
-      jobSubTitle: 'Entry-Level Role',
-      imageUrl: AppAssets.img2,
-      state: 'Texas',
-      municipality: 'Austin',
-      neighborhood: 'Downtown',
 
+    // Digital Marketing in Jalisco (matches fourth category)
+    JobVacancyModel(
+      jobTitle: 'Digital Marketing Specialist',
+      jobSubTitle: 'Social Media',
+      imageUrl: AppAssets.img2,
+      state: 'Jalisco',
+      municipality: 'Guadalajara',
+      neighborhood: 'Centro',
+      workingHours: '6',
+      jobType: 'tiempo parcial',
       startDate: '2025-09-01',
       endDate: '2026-03-01',
-      workMode: 'Hybrid',
+      workMode: 'Remote',
       workSchedule: 'Flexible',
-      workingHours: '6',
-
-      jobType: 'tiempo parcial',
-
       canStartImmediately: 'Yes',
       requiresExperience: 'No',
       workDays: 'Monday to Friday',
-
-      minSalary: '50000',
-      maxSalary: '65000',
+      minSalary: '2000',
+      maxSalary: '4000',
       paymentFrequency: 'Monthly',
-      benefits: 'Flexible Hours, Training, Gym Membership',
-
-      softSkills: 'Analytical Thinking, Curiosity',
-      technicalSkills: 'SQL, Python, Excel',
-      maxSkillSelections: '6',
-
-      jobDescription:
-          'Assist in data gathering, analysis, and reporting tasks.',
-      location: 'Austin, TX',
+      benefits: 'Flexible Hours, Creative Freedom',
+      softSkills: 'Creativity, Communication',
+      technicalSkills: 'Social Media, SEO, Content Creation',
+      maxSkillSelections: '5',
+      jobDescription: 'Manage social media and digital marketing campaigns.',
+      location: 'Remote',
       jobPostedTime: '2025-07-02',
-      matches: '91%',
+      matches: '92%',
+    ),
+
+    // Part-time Frontend Developer in Nuevo León
+    JobVacancyModel(
+      jobTitle: 'Frontend Developer',
+      jobSubTitle: 'React Specialist',
+      imageUrl: AppAssets.img,
+      state: 'Nuevo León',
+      municipality: 'Monterrey',
+      neighborhood: 'San Pedro',
+      workingHours: '6',
+      jobType: 'tiempo parcial',
+      startDate: '2025-08-15',
+      endDate: '2025-12-15',
+      workMode: 'Hybrid',
+      workSchedule: 'Flexible',
+      canStartImmediately: 'Yes',
+      requiresExperience: '1+ Years',
+      workDays: 'Monday to Friday',
+      minSalary: '3500',
+      maxSalary: '5500',
+      paymentFrequency: 'Monthly',
+      benefits: 'Flexible Schedule, Tech Equipment',
+      softSkills: 'Problem Solving, Teamwork',
+      technicalSkills: 'React, JavaScript, HTML/CSS',
+      maxSkillSelections: '5',
+      jobDescription: 'Part-time frontend developer for web applications.',
+      location: 'Monterrey, NL',
+      jobPostedTime: '2025-07-10',
+      matches: '87%',
+    ),
+
+    // On-site Backend Developer in Ciudad de México
+    JobVacancyModel(
+      jobTitle: 'Backend Developer',
+      jobSubTitle: 'Node.js Expert',
+      imageUrl: AppAssets.menulogo,
+      state: 'Ciudad de México',
+      municipality: 'Benito Juárez',
+      neighborhood: 'Nápoles',
+      workingHours: '8',
+      jobType: 'Tiempo completo',
+      startDate: '2025-08-01',
+      endDate: '2025-12-31',
+      workMode: 'On-Site',
+      workSchedule: '9 AM - 6 PM',
+      canStartImmediately: 'No',
+      requiresExperience: '3+ Years',
+      workDays: 'Monday to Friday',
+      minSalary: '7000',
+      maxSalary: '10000',
+      paymentFrequency: 'Monthly',
+      benefits: 'Health Insurance, Bonuses',
+      softSkills: 'Problem Solving, Communication',
+      technicalSkills: 'Node.js, MongoDB, API Development',
+      maxSkillSelections: '6',
+      jobDescription: 'Senior backend developer for enterprise applications.',
+      location: 'Mexico City',
+      jobPostedTime: '2025-07-05',
+      matches: '95%',
     ),
   ];
 }

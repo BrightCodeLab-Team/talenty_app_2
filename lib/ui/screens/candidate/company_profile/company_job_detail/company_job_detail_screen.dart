@@ -164,20 +164,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Icon(Icons.watch_later_outlined),
-              // AnimateIcon(
-              //   key: UniqueKey(),
-              //   onTap: () {},
-              //   iconType: IconType.continueAnimation,
-              //   height: 70,
-              //   width: 70,
-              //   color: Color.fromRGBO(
-              //     Random.secure().nextInt(255),
-              //     Random.secure().nextInt(255),
-              //     Random.secure().nextInt(255),
-              //     1,
-              //   ),
-              //   animateIcon: AnimateIcons.bell,
-              // ),
+
               Text(
                 '${model.companyJobsVacancyList[index].jobType},  Turno de ${model.companyJobsVacancyList[index].workingHours} horas',
                 style: style14M.copyWith(color: blackColor),

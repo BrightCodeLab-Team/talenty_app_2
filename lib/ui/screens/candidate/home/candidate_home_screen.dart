@@ -1,5 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'dart:math';
+
+import 'package:animated_icon/animated_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -121,31 +124,38 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                       10.verticalSpace,
                       model.categorySelect == 0
                           ? GridView.builder(
-                            physics:
-                                NeverScrollableScrollPhysics(), // Important to prevent nested scrolling
+                            physics: NeverScrollableScrollPhysics(),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  mainAxisSpacing: 10.0, // Spacing between rows
-                                  crossAxisSpacing:
-                                      10.0, // Spacing between columns
-
-                                  childAspectRatio:
-                                      0.37, // Adjust this value to control item height (width / height)
+                                  mainAxisSpacing: 10.0,
+                                  crossAxisSpacing: 10.0,
+                                  childAspectRatio: 0.37,
                                 ),
-                            itemCount: model.vacancies.length,
-                            shrinkWrap:
-                                true, // Keep this true since it's inside a SingleChildScrollView
+                            itemCount:
+                                model.filtersApplied
+                                    ? model.filteredVacancies.length
+                                    : model.vacancies.length,
+                            shrinkWrap: true,
                             itemBuilder: (BuildContext context, int index) {
+                              final vacancy =
+                                  model.filtersApplied
+                                      ? model.filteredVacancies[index]
+                                      : model.vacancies[index];
+
                               return CustomCandidateHomeVacancyWidget(
                                 onTap: () {
                                   _showCustomJobDetailDialog(
                                     context,
                                     model,
-                                    index,
+                                    model.filtersApplied
+                                        ? model.vacancies.indexOf(
+                                          vacancy,
+                                        ) // Get original index
+                                        : index,
                                   );
                                 },
-                                vacancyModel: model.vacancies[index],
+                                vacancyModel: vacancy,
                               );
                             },
                           )
@@ -298,47 +308,67 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             onTap: () {
                               Get.to(CompanyProfileScreen());
                             },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: blackColor.withOpacity(0.2),
-                                    spreadRadius: 1,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Image.asset(
-                                    model.vacancies[index].imageUrl ?? '',
-                                    height: 30,
-                                    width: 30,
-                                  ),
-                                  SizedBox(width: 8),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Viajes Premium',
-                                        style: style14M.copyWith(),
-                                      ),
-                                      Text(
-                                        'Ver Perfil →',
-                                        style: style12M.copyWith(
-                                          color: textGreyColor,
-                                        ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: blackColor.withOpacity(0.2),
+                                        spreadRadius: 1,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 3),
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset(
+                                        model.vacancies[index].imageUrl ?? '',
+                                        height: 30,
+                                        width: 30,
+                                      ),
+                                      SizedBox(width: 8),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Viajes Premium',
+                                            style: style14M.copyWith(),
+                                          ),
+                                          Text(
+                                            'Ver Perfil →',
+                                            style: style12M.copyWith(
+                                              color: textGreyColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                AnimateIcon(
+                                  key: UniqueKey(),
+                                  onTap: () {},
+                                  iconType: IconType.continueAnimation,
+                                  height: 70,
+                                  width: 70,
+                                  color: Color.fromRGBO(
+                                    Random.secure().nextInt(255),
+                                    Random.secure().nextInt(255),
+                                    Random.secure().nextInt(255),
+                                    1,
+                                  ),
+                                  animateIcon: AnimateIcons.add,
+                                ),
+                                Text(''),
+                              ],
                             ),
                           ),
                           15.verticalSpace,
@@ -483,7 +513,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
             //   Image.asset(AppAssets.filter, height: 24, width: 24),
             GestureDetector(
               onTap: () {
-                _showFilterBottomSheet();
+                _showFilterBottomSheet(model);
               },
               child: Icon(Icons.filter_alt_rounded),
             ),
@@ -511,7 +541,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   ///. bottom sheet
   ///
   // Method to show the filter bottom sheet
-  void _showFilterBottomSheet() {
+  void _showFilterBottomSheet(CandidateHomeViewModel model) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -930,6 +960,18 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                               Expanded(
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    // Apply filters
+
+                                    model.applyFilters(
+                                      category: selectedCategory,
+                                      minSalary: _salaryMinController.text,
+                                      maxSalary: _salaryMaxController.text,
+                                      federalEntity: selectedFederalEntity,
+                                      municipality: selectedMunicipality,
+                                      workModality: selectedWorkModality,
+                                      skill: selectedSkill,
+                                    );
+
                                     Navigator.pop(context);
                                   },
                                   style: ElevatedButton.styleFrom(
