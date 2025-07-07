@@ -1,5 +1,8 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
+import 'dart:math';
+
+import 'package:animated_icon/animated_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
@@ -11,11 +14,17 @@ import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/comapny_profile_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_view_model.dart';
 
 class CompanyJobDetailScreen extends StatelessWidget {
-  JobVacancyModel jobVacancyModel;
-  CompanyJobDetailScreen({required this.jobVacancyModel});
+  final JobVacancyModel jobVacancyModel;
+  final int index; // Add index as a required parameter
+  final CompanyProfileViewModel? jobModel;
+  CompanyJobDetailScreen({
+    required this.jobVacancyModel,
+    required this.index, // Make it required
+    this.jobModel,
+  });
 
   final ScrollController _scrollController = ScrollController();
 
@@ -34,9 +43,10 @@ class CompanyJobDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int index = 0;
     return ChangeNotifierProvider(
-      create: (context) => CompanyJobDetailViewModel(),
-      child: Consumer<CompanyJobDetailViewModel>(
+      create: (context) => CompanyProfileViewModel(),
+      child: Consumer<CompanyProfileViewModel>(
         builder:
             (context, model, child) => Scaffold(
               body: SingleChildScrollView(
@@ -62,9 +72,9 @@ class CompanyJobDetailScreen extends StatelessWidget {
                         CustomBackButton(),
                       ],
                     ),
-                    _firstSection(),
+                    _firstSection(model),
                     _secondSection(),
-                    _thirdSection(),
+                    _thirdSection(model),
                     _fourthSection(),
                     _fifthSection(),
                     _sixthSection(),
@@ -81,7 +91,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
   ///
   ///. first section
   ///
-  Padding _firstSection() {
+  Padding _firstSection(CompanyProfileViewModel model) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -108,6 +118,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
                 ],
               ),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(AppAssets.menulogo, height: 30, width: 30),
@@ -128,21 +139,22 @@ class CompanyJobDetailScreen extends StatelessWidget {
           ),
           15.verticalSpace,
           Text(
-            '${jobVacancyModel.jobTitle}',
+            '${model.companyJobsVacancyList[index].jobTitle}',
             style: style24B.copyWith(color: blackColor),
           ),
           5.verticalSpace,
           Text(
-            '\$${jobVacancyModel.minSalary}-\$${jobVacancyModel.maxSalary}',
+            '\$${model.companyJobsVacancyList[index].minSalary}-\$${model.companyJobsVacancyList[index].maxSalary}',
             style: style20B.copyWith(color: blackColor),
           ),
           5.verticalSpace,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.location_pin),
+              Image.asset(AppAssets.location, scale: 4, color: blackColor),
+              3.horizontalSpace,
               Text(
-                "${jobVacancyModel.location}",
+                "${model.companyJobsVacancyList[index].location}",
                 style: style14M.copyWith(color: blackColor),
               ),
             ],
@@ -152,8 +164,22 @@ class CompanyJobDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Icon(Icons.watch_later_outlined),
+              // AnimateIcon(
+              //   key: UniqueKey(),
+              //   onTap: () {},
+              //   iconType: IconType.continueAnimation,
+              //   height: 70,
+              //   width: 70,
+              //   color: Color.fromRGBO(
+              //     Random.secure().nextInt(255),
+              //     Random.secure().nextInt(255),
+              //     Random.secure().nextInt(255),
+              //     1,
+              //   ),
+              //   animateIcon: AnimateIcons.bell,
+              // ),
               Text(
-                '${jobVacancyModel.jobType},  Turno de ${jobVacancyModel.workingHours} horas',
+                '${model.companyJobsVacancyList[index].jobType},  Turno de ${model.companyJobsVacancyList[index].workingHours} horas',
                 style: style14M.copyWith(color: blackColor),
               ),
             ],
@@ -209,7 +235,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
   ///
   ///. third section
   ///
-  Padding _thirdSection() {
+  Padding _thirdSection(CompanyProfileViewModel model) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -224,7 +250,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
           5.verticalSpace,
           Text(
             // 'Buscamos un diseñador creativo con experiencia en diseño gráfico y visual. El candidato ideal debe tener habilidades en el uso de herramientas como Adobe Photoshop, Illustrator y Figma, y ser capaz de crear conceptos visuales atractivos para  diferentes plataformas. Se valorará la capacidad de trabajar de manera autónoma y en equipo, adaptándose a las necesidades del proyecto y manteniendo siempre una estética coherente con la marca. ',
-            "${jobVacancyModel.jobDescription}",
+            "${model.companyJobsVacancyList[index].jobDescription}",
             style: style14M.copyWith(color: lightBlackColor),
           ),
 

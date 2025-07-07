@@ -401,6 +401,27 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                               Get.to(
                                 CompanyJobDetailScreen(
                                   jobVacancyModel: model.vacancies[index],
+
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  index: index,
                                 ),
                               );
                             },
@@ -1117,6 +1138,10 @@ _categories({required CandidateHomeViewModel model}) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                model.categorySelect == index
+                    ? Icon(Icons.cancel_outlined, color: whiteColor, size: 20)
+                    : SizedBox(),
+                model.categorySelect == index ? 3.horizontalSpace : SizedBox(),
                 Text(
                   categries[index],
                   style: style12M.copyWith(
@@ -1126,10 +1151,6 @@ _categories({required CandidateHomeViewModel model}) {
                             : lightBlackColor,
                   ),
                 ),
-                model.categorySelect == index ? 5.horizontalSpace : SizedBox(),
-                model.categorySelect == index
-                    ? Icon(Icons.close, color: whiteColor, size: 20)
-                    : SizedBox(),
               ],
             ),
           ),

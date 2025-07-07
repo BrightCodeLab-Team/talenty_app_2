@@ -45,6 +45,7 @@ dependencies:
   device_info_plus: ^11.4.0
   flutter_screenutil: ^5.9.3
   provider: ^6.1.5
+  animated_icon:
   # easy_localization: ^3.0.7+1
   flutter_localizations:
     sdk: flutter

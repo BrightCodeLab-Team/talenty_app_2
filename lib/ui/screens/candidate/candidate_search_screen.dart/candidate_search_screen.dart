@@ -64,21 +64,85 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
       child: Consumer<CandidateHomeViewModel>(
         builder:
             (context, model, child) => Scaffold(
-              appBar: AppBar(
-                backgroundColor: whiteColor,
-                title: TextFormField(
-                  onFieldSubmitted: (value) => _filterJobs(value),
-                  controller: _searchController,
-                  onTap: () => _filterJobs(_searchController.text),
-                  decoration: authFieldDecoration.copyWith(
-                    suffix: Icon(Icons.cancel_outlined),
-                    hintText: 'search...',
-                    hintStyle: style16M.copyWith(color: blackColor),
-                    prefixIcon: Image.asset(AppAssets.searchIcon, scale: 4),
+              // appBar: AppBar(
+              //   backgroundColor: whiteColor,
+              //   titleSpacing: 0.0, // Remove default title spacing
+              //   centerTitle: false,
+              //   title: Padding(
+              //     padding: EdgeInsets.symmetric(
+              //       horizontal: 16.w,
+              //     ), // Add some horizontal padding
+              //     child: SizedBox(
+              //       height: 40.h,
+              //       width: double.infinity,
+              //       child: TextFormField(
+              //         onFieldSubmitted: (value) => _filterJobs(value),
+              //         controller: _searchController,
+              //         onTap: () => _filterJobs(_searchController.text),
+              //         decoration: authFieldDecoration.copyWith(
+              //           suffixIcon: IconButton(
+              //             // Using IconButton for better tap area for suffix
+              //             icon: Icon(Icons.close),
+              //             onPressed: () {
+              //               navigator!.pop();
+              //             },
+              //           ),
+              //           hintText: 'Search...',
+              //           hintStyle: style16M.copyWith(color: blackColor),
+              //           prefixIcon: Image.asset(AppAssets.searchIcon, scale: 4),
+              //           contentPadding: EdgeInsets.symmetric(
+              //             vertical: 8.h,
+              //             horizontal: 10.w,
+              //           ), // Adjust content padding
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      10.verticalSpace,
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                        ), // Add some horizontal padding
+                        child: SizedBox(
+                          height: 40.h,
+                          width: double.infinity,
+                          child: TextFormField(
+                            onFieldSubmitted: (value) => _filterJobs(value),
+                            controller: _searchController,
+                            onTap: () => _filterJobs(_searchController.text),
+                            decoration: authFieldDecoration.copyWith(
+                              suffixIcon: IconButton(
+                                // Using IconButton for better tap area for suffix
+                                icon: Icon(Icons.close),
+                                onPressed: () {
+                                  navigator!.pop();
+                                },
+                              ),
+                              hintText: 'Search...',
+                              hintStyle: style16M.copyWith(color: blackColor),
+                              prefixIcon: Image.asset(
+                                AppAssets.searchIcon,
+                                scale: 4,
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 8.h,
+                                horizontal: 10.w,
+                              ), // Adjust content padding
+                            ),
+                          ),
+                        ),
+                      ),
+                      20.verticalSpace,
+                      Center(child: _buildSearchResults(model)),
+                    ],
                   ),
                 ),
               ),
-              body: _buildSearchResults(model),
             ),
       ),
     );
@@ -154,11 +218,13 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
     CandidateHomeViewModel model,
     int index,
   ) {
+    final job = filteredVacancies[index]; // Use the filtered list instead
+
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      barrierColor: Colors.black54, // Darkens the background
+      barrierColor: Colors.black54,
       transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (
         BuildContext buildContext,
@@ -167,15 +233,11 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
       ) {
         return Center(
           child: Material(
-            type: MaterialType.transparency, // Make Material transparent
+            type: MaterialType.transparency,
             child: Container(
               height: MediaQuery.of(buildContext).size.height * 0.9,
-              width:
-                  MediaQuery.of(buildContext).size.width *
-                  0.98, // Adjust width as needed
-              margin: EdgeInsets.symmetric(
-                horizontal: 20,
-              ), // Add horizontal margin for spacing
+              width: MediaQuery.of(buildContext).size.width * 0.98,
+              margin: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20.0),
@@ -196,16 +258,14 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                     Stack(
                       children: [
                         Container(
-                          height: 180, // Adjust height to match the image
+                          height: 180,
                           decoration: BoxDecoration(
-                            color: Color(0xFF28407B), // Dark blue background
+                            color: Color(0xFF28407B),
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(20.0),
                             ),
                             image: DecorationImage(
-                              image: AssetImage(
-                                model.vacancies[index].imageUrl ?? '',
-                              ),
+                              image: AssetImage(job.imageUrl ?? ''),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -268,9 +328,6 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                         ),
                       ],
                     ),
-                    // MOVED PART STARTS HERE
-
-                    // MOVED PART ENDS HERE
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
@@ -299,7 +356,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Image.asset(
-                                    model.vacancies[index].imageUrl ?? '',
+                                    job.imageUrl ?? '',
                                     height: 30,
                                     width: 30,
                                   ),
@@ -325,28 +382,24 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                             ),
                           ),
                           15.verticalSpace,
-                          Text(
-                            '${model.vacancies[index].jobTitle}',
-                            style: style24B..copyWith(),
-                          ),
+                          Text('${job.jobTitle}', style: style24B.copyWith()),
                           SizedBox(height: 4),
                           Text(
-                            "${model.vacancies[index].location ?? 'set location'} •${model.vacancies[index].state ?? 'set state'}",
+                            "${job.location ?? 'set location'} •${job.state ?? 'set state'}",
                             style: style14M.copyWith(),
                           ),
                           SizedBox(height: 8),
                           Text(
-                            "\$${model.vacancies[index].minSalary ?? 'set min salary'}-\$${model.vacancies[index].maxSalary ?? 'set max salary'}",
+                            "\$${job.minSalary ?? 'set min salary'}-\$${job.maxSalary ?? 'set max salary'}",
                             style: style20B,
                           ),
                           SizedBox(height: 16),
                           Wrap(
-                            spacing: 8.w, // Horizontal spacing
-                            runSpacing: 8.h, // Vertical spacing for new rows
+                            spacing: 8.w,
+                            runSpacing: 8.h,
                             children: List.generate(model.tagItemsList.length, (
                               index,
                             ) {
-                              // Display data using index
                               return CustomIconTextTag(
                                 item: model.tagItemsList[index],
                               );
@@ -363,7 +416,6 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // Handle dismiss/dislike action
                               Navigator.of(buildContext).pop();
                             },
                             child: Container(
@@ -383,7 +435,29 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                             onTap: () {
                               Get.to(
                                 CompanyJobDetailScreen(
-                                  jobVacancyModel: model.vacancies[index],
+                                  jobVacancyModel: job, // Use the filtered job
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  index: index,
                                 ),
                               );
                             },
@@ -400,7 +474,6 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Handle favorite/like action
                               Navigator.of(buildContext).pop();
                             },
                             child: Container(
@@ -416,7 +489,6 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                               ),
                             ),
                           ),
-                          15.verticalSpace,
                         ],
                       ),
                     ),

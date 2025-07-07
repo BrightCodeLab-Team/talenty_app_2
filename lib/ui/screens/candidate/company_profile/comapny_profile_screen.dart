@@ -241,7 +241,39 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
           return CustomJobVacancyCard(
             onTap: () {
               Get.to(
-                CompanyJobDetailScreen(jobVacancyModel: JobVacancyModel()),
+                CompanyJobDetailScreen(
+                  jobVacancyModel: JobVacancyModel(),
+
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  index: index,
+                ),
               );
             },
             jobVacancyModel: model.companyJobsVacancyList[index],
