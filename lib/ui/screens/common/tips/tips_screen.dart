@@ -9,6 +9,7 @@ import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/screens/common/tips/tips_view_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TipsScreen extends StatelessWidget {
   @override
@@ -145,39 +146,56 @@ class TipsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 const Spacer(),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 5,
-                                  ),
-                                  margin: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    color: whiteColor,
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                      width: 1,
-                                      color: greyColor,
+                                GestureDetector(
+                                  onTap: () async {
+                                    final url = Uri.parse(
+                                      'https://viajespremium.com.mx/',
+                                    );
+                                    if (await canLaunchUrl(url)) {
+                                      await launchUrl(
+                                        url,
+                                        mode: LaunchMode.externalApplication,
+                                      );
+                                    } else {
+                                      // Optionally handle the error
+                                      print('Could not launch $url');
+                                    }
+                                  },
+
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 5,
                                     ),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.touch_app_outlined,
-                                        size: 18,
-                                        color: lightBlackColor,
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: whiteColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        width: 1,
+                                        color: greyColor,
                                       ),
-                                      SizedBox(width: 8),
-                                      Text(
-                                        'Conoce más',
-                                        style: GoogleFonts.roboto(
-                                          textStyle: style16M.copyWith(
-                                            fontWeight: FontWeight.w400,
-                                            color: lightBlackColor,
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.touch_app_outlined,
+                                          size: 18,
+                                          color: lightBlackColor,
+                                        ),
+                                        SizedBox(width: 8),
+                                        Text(
+                                          'Conoce más',
+                                          style: GoogleFonts.roboto(
+                                            textStyle: style16M.copyWith(
+                                              fontWeight: FontWeight.w400,
+                                              color: lightBlackColor,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
