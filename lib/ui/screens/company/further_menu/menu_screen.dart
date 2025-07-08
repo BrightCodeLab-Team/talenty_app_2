@@ -10,11 +10,9 @@ import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/menu_resuse/menu_reuse.dart';
 import 'package:talenty_app/ui/screens/common/tips/tips_screen.dart';
-
 import 'package:talenty_app/ui/screens/company/further_menu/menu_view_model.dart';
 import 'package:talenty_app/ui/screens/company/notifications/notification_screen.dart';
 import 'package:talenty_app/ui/screens/edit_recruiter/edit_recruiter.dart';
-import 'package:talenty_app/ui/screens/my_data/my_data_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   @override

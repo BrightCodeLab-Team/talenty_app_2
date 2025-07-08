@@ -424,7 +424,7 @@ class CustomJobVacancyCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: Colors.white,

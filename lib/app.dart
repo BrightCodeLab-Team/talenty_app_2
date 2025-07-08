@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
-import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
 
+import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
               ), // Use your constants
 
               builder: (context, child) => CandidateOTPScreen(email: 'awais'),
+
             ),
           ),
     );

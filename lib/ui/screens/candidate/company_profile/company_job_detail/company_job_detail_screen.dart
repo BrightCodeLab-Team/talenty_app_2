@@ -12,7 +12,9 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
+import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
+import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/comapny_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
@@ -23,11 +25,13 @@ class CompanyJobDetailScreen extends StatelessWidget {
   // un comment this if problem not solved
   //final CompanyProfileViewModel? jobModel;
   final CandidateHomeViewModel? jobModel;
+  final bool fromFirstTab; // Add this flag
 
   CompanyJobDetailScreen({
     required this.jobVacancyModel,
     required this.index, // Make it required
     this.jobModel,
+    this.fromFirstTab = false,
   });
 
   final ScrollController _scrollController = ScrollController();
@@ -82,13 +86,35 @@ class CompanyJobDetailScreen extends StatelessWidget {
                         CustomBackButton(),
                       ],
                     ),
+                    if (fromFirstTab)
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 20,
+                          left: 20.0,
+                          right: 20,
+                        ),
+                        child: CustomButton(
+                          text: 'Enviar mensaje a la empresa',
+                          onTap: () {
+                            Get.to(CandidateChatScreen());
+                          },
+                          backgroundColor: primaryColor,
+                          textColor: whiteColor,
+                          image: Image.asset(
+                            AppAssets.chat,
+                            color: whiteColor,
+                            scale: 4,
+                          ),
+                        ),
+                      ),
+
                     _firstSection(model),
                     _secondSection(),
                     _thirdSection(model),
                     _fourthSection(),
                     _fifthSection(),
                     _sixthSection(),
-                    _seventhSection(), //last section
+                    _seventhSection(context), //last section
                   ],
                 ),
               ),
@@ -433,7 +459,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
   ///
   ///. third section
   ///
-  Padding _seventhSection() {
+  Padding _seventhSection(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -451,67 +477,177 @@ class CompanyJobDetailScreen extends StatelessWidget {
             style: style14M.copyWith(color: lightBlackColor),
           ),
           20.verticalSpace,
-          Padding(
-            padding: const EdgeInsets.only(bottom: 24.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: pinkColor),
-                      color: whiteColor,
-                      shape: BoxShape.circle,
-                    ),
-                    padding: EdgeInsets.all(15),
-                    child: Icon(Icons.close, color: pinkColor, size: 30),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _scrollController.animateTo(
-                      0,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: blackColor),
-                      shape: BoxShape.circle,
-                    ),
-                    padding: EdgeInsets.all(15),
-                    child: Center(
-                      child: Icon(
-                        Icons.arrow_upward,
-                        color: blackColor,
 
-                        size: 20,
+          if (fromFirstTab)
+            // Show column with two buttons when from first tab
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                children: [
+                  20.verticalSpace,
+                  // First button
+                  CustomButton(
+                    text: 'Enviar mensaje a la empresa',
+                    onTap: () {
+                      Get.to(CandidateChatScreen());
+                    },
+                    backgroundColor: primaryColor,
+                    textColor: whiteColor,
+                    image: Image.asset(
+                      AppAssets.chat,
+                      color: whiteColor,
+                      scale: 4,
+                    ),
+                  ),
+                  10.verticalSpace,
+                  // Second button
+                  CustomButton(
+                    borderColor: brownColor,
+                    text: 'Rechazar match',
+                    onTap: () {
+                      showRejectMatchDialog(context);
+                    },
+                    backgroundColor: whiteColor,
+                    textColor: brownColor,
+                  ),
+                  20.verticalSpace,
+                ],
+              ),
+            )
+          else
+            Padding(
+              padding: const EdgeInsets.only(bottom: 24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: pinkColor),
+                        color: whiteColor,
+                        shape: BoxShape.circle,
+                      ),
+                      padding: EdgeInsets.all(15),
+                      child: Icon(Icons.close, color: pinkColor, size: 30),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _scrollController.animateTo(
+                        0,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: blackColor),
+                        shape: BoxShape.circle,
+                      ),
+                      padding: EdgeInsets.all(15),
+                      child: Center(
+                        child: Icon(
+                          Icons.arrow_upward,
+                          color: blackColor,
+
+                          size: 20,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: whiteColor,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.green),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: whiteColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.green),
+                      ),
+                      padding: EdgeInsets.all(15),
+                      child: Icon(
+                        Icons.favorite,
+                        color: Colors.green,
+                        size: 30,
+                      ),
                     ),
-                    padding: EdgeInsets.all(15),
-                    child: Icon(Icons.favorite, color: Colors.green, size: 30),
                   ),
-                ),
-                15.verticalSpace,
-              ],
+                  15.verticalSpace,
+                ],
+              ),
             ),
-          ),
 
           CustomDivider(),
         ],
       ),
+    );
+  }
+
+  ///
+  ///. cancel dialog box
+  ///
+  void showRejectMatchDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Talenty Logo
+                Image.asset(AppAssets.appLogo2, scale: 4, height: 40),
+                const SizedBox(height: 20),
+
+                Text(
+                  '¿Seguro que quieres rechazar éste match?',
+                  textAlign: TextAlign.center,
+                  style: style16B.copyWith(color: blackColor),
+                ),
+                const SizedBox(height: 15),
+
+                // Description text
+                Text(
+                  'Al rechazar el match, ya no podrás conversar con esta empresa y se eliminará la conexión de forma permanente.',
+                  textAlign: TextAlign.center,
+                  style: style16M.copyWith(color: blackColor),
+                ),
+                const SizedBox(height: 30),
+
+                // "Rechazar match" button
+                CustomButton(
+                  borderColor: brownColor,
+                  text: 'Rechazar match',
+                  onTap: () {
+                    // Handle reject match logic
+                    Navigator.of(context).pop(true);
+                  },
+                  backgroundColor: primaryColor,
+                  textColor: whiteColor,
+                ),
+                const SizedBox(height: 15),
+
+                // "Cancelar" button
+                CustomButton(
+                  borderColor: blackColor,
+                  text: 'Cancelar',
+                  onTap: () {
+                    Navigator.of(context).pop(false);
+                  },
+                  backgroundColor: whiteColor,
+                  textColor: blackColor,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

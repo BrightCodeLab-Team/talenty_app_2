@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
@@ -16,7 +17,9 @@ class CustomButton extends StatelessWidget {
     this.textColor,
     this.borderColor,
     this.radius,
+    this.image, // ✅ NEW optional image
   });
+
   final String text;
   final double? width;
   final double? height;
@@ -27,6 +30,7 @@ class CustomButton extends StatelessWidget {
   final Color? borderColor;
   final double? radius;
   final VoidCallback? onTap;
+  final Widget? image; // ✅ NEW image widget
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +51,16 @@ class CustomButton extends StatelessWidget {
           border: Border.all(color: borderColor ?? Colors.transparent),
         ),
         child: Center(
-          child: Text(
-            text.tr,
-            style: style16M.copyWith(color: textColor ?? whiteColor),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (image != null) ...[image!, 5.horizontalSpace],
+              Text(
+                text.tr,
+                style: style16M.copyWith(color: textColor ?? whiteColor),
+              ),
+            ],
           ),
         ),
       ),
