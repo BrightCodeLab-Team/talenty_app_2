@@ -159,6 +159,7 @@ class TipsScreen extends StatelessWidget {
                                     } else {
                                       // Optionally handle the error
                                       print('Could not launch $url');
+                                      // You might want to show a snackbar or alert to the user here
                                     }
                                   },
 
