@@ -68,6 +68,8 @@ class AppAssets {
   static String location = "$iconsAssets/location.png";
   static String transferOutline = "$iconsAssets/transfer-outline.png";
   static String eyeIcon = "$iconsAssets/eyeIcon.png";
+  static String meGustaImg = "$staticAssets/meGustaImg.png";
+  static String noMeGustImg = "$staticAssets/noMeGustImg.png";
 
   /*    
 

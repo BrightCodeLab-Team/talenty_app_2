@@ -181,321 +181,380 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
     CandidateHomeViewModel model,
     int index,
   ) {
+    // Create animation controller for swipe effects
+    final AnimationController _swipeController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: Navigator.of(context),
+    );
+
+    // Track swipe state
+    double _swipeOffset = 0;
+    String _swipeImage = '';
+
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      barrierColor: Colors.black54, // Darkens the background
+      barrierColor: Colors.black54,
       transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (
         BuildContext buildContext,
         Animation animation,
         Animation secondaryAnimation,
       ) {
-        return Center(
-          child: Material(
-            type: MaterialType.transparency, // Make Material transparent
-            child: Container(
-              height: MediaQuery.of(buildContext).size.height * 0.9,
-              width:
-                  MediaQuery.of(buildContext).size.width *
-                  0.98, // Adjust width as needed
-              margin: EdgeInsets.symmetric(
-                horizontal: 20,
-              ), // Add horizontal margin for spacing
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 3,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
+        return GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onHorizontalDragStart: (details) {
+            _swipeController.reset();
+          },
+          onHorizontalDragUpdate: (details) {
+            _swipeOffset = details.delta.dx;
+            if (_swipeOffset > 0) {
+              _swipeImage = AppAssets.noMeGustImg; // Right swipe image
+            } else {
+              _swipeImage = AppAssets.meGustaImg; // Left swipe image
+            }
+          },
+          onHorizontalDragEnd: (details) {
+            if (_swipeOffset.abs() > 20) {
+              _swipeController.forward().then((_) {
+                Future.delayed(Duration(seconds: 1), () {
+                  _swipeController.reverse();
+                });
+              });
+            }
+            _swipeOffset = 0;
+          },
+          child: AnimatedBuilder(
+            animation: _swipeController,
+            builder: (context, child) {
+              if (_swipeController.value > 0) {
+                return Center(
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Colors.black.withOpacity(0.5),
+                      child: Center(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: MediaQuery.of(context).size.height * 0.8,
+                          child: Image.asset(_swipeImage, fit: BoxFit.contain),
+                        ),
+                      ),
+                    ),
                   ),
-                ],
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                          height: 180, // Adjust height to match the image
-                          decoration: BoxDecoration(
-                            color: Color(0xFF28407B), // Dark blue background
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(20.0),
+                );
+              }
+
+              return Transform.translate(
+                offset: Offset(_swipeOffset, 0),
+                child: Opacity(
+                  opacity: 1 - _swipeController.value,
+                  child: Center(
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: Container(
+                        height: MediaQuery.of(buildContext).size.height * 0.9,
+                        width: MediaQuery.of(buildContext).size.width * 0.98,
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 3,
+                              blurRadius: 10,
+                              offset: Offset(0, 5),
                             ),
-                            image: DecorationImage(
-                              image: AssetImage(
-                                model.vacancies[index].imageUrl ?? '',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                          ],
+                        ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Stack(
                                 children: [
-                                  Text(
-                                    'VIAJES',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
+                                  Container(
+                                    height: 180,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF28407B),
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(20.0),
+                                      ),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          model.vacancies[index].imageUrl ?? '',
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          bottom: 20.0,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'VIAJES',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              ' | ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              'PREMIUM®',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    ' | ',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    'PREMIUM®',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
+                                  Positioned(
+                                    top: 10,
+                                    left: 10,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(buildContext).pop();
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.all(8.2),
+                                        decoration: BoxDecoration(
+                                          color: Colors.black.withOpacity(0.3),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(
+                                          Icons.arrow_back,
+                                          color: Colors.white,
+                                          size: 24,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 10,
-                          left: 10,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(buildContext).pop();
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.3),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                Icons.arrow_back,
-                                color: Colors.white,
-                                size: 24,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // MOVED PART STARTS HERE
-
-                    // MOVED PART ENDS HERE
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          15.verticalSpace,
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(CompanyProfileScreen());
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: blackColor.withOpacity(0.2),
-                                        spreadRadius: 1,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Image.asset(
-                                        model.vacancies[index].imageUrl ?? '',
-                                        height: 30,
-                                        width: 30,
-                                      ),
-                                      SizedBox(width: 8),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    15.verticalSpace,
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.to(CompanyProfileScreen());
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            'Viajes Premium',
-                                            style: style14M.copyWith(),
-                                          ),
-                                          Text(
-                                            'Ver Perfil →',
-                                            style: style12M.copyWith(
-                                              color: textGreyColor,
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 10,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: blackColor.withOpacity(
+                                                    0.2,
+                                                  ),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 3),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Image.asset(
+                                                  model
+                                                          .vacancies[index]
+                                                          .imageUrl ??
+                                                      '',
+                                                  height: 30,
+                                                  width: 30,
+                                                ),
+                                                SizedBox(width: 8),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Viajes Premium',
+                                                      style:
+                                                          style14M.copyWith(),
+                                                    ),
+                                                    Text(
+                                                      'Ver Perfil →',
+                                                      style: style12M.copyWith(
+                                                        color: textGreyColor,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
                                           ),
+                                          AnimateIcon(
+                                            key: UniqueKey(),
+                                            onTap: () {},
+                                            iconType:
+                                                IconType.continueAnimation,
+                                            height: 70,
+                                            width: 70,
+                                            color: Color.fromRGBO(
+                                              Random.secure().nextInt(255),
+                                              Random.secure().nextInt(255),
+                                              Random.secure().nextInt(255),
+                                              1,
+                                            ),
+                                            animateIcon: AnimateIcons.add,
+                                          ),
+                                          Text(''),
                                         ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    15.verticalSpace,
+                                    Text(
+                                      '${model.vacancies[index].jobTitle}',
+                                      style: style24B..copyWith(),
+                                    ),
+                                    SizedBox(height: 4),
+                                    Text(
+                                      "${model.vacancies[index].location ?? 'set location'} •${model.vacancies[index].state ?? 'set state'}",
+                                      style: style14M.copyWith(),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      "\$${model.vacancies[index].minSalary ?? 'set min salary'}-\$${model.vacancies[index].maxSalary ?? 'set max salary'}",
+                                      style: style20B,
+                                    ),
+                                    SizedBox(height: 16),
+                                    Wrap(
+                                      spacing: 8.w,
+                                      runSpacing: 8.h,
+                                      children: List.generate(
+                                        model.tagItemsList.length,
+                                        (index) {
+                                          return CustomIconTextTag(
+                                            item: model.tagItemsList[index],
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                AnimateIcon(
-                                  key: UniqueKey(),
-                                  onTap: () {},
-                                  iconType: IconType.continueAnimation,
-                                  height: 70,
-                                  width: 70,
-                                  color: Color.fromRGBO(
-                                    Random.secure().nextInt(255),
-                                    Random.secure().nextInt(255),
-                                    Random.secure().nextInt(255),
-                                    1,
-                                  ),
-                                  animateIcon: AnimateIcons.add,
+                              ),
+                              SizedBox(height: 24),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 24.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(buildContext).pop();
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: pinkColor,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        padding: EdgeInsets.all(15),
+                                        child: Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                          size: 30,
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.to(
+                                          CompanyJobDetailScreen(
+                                            jobVacancyModel:
+                                                model.vacancies[index],
+                                            index: index,
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: blackColor),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        padding: EdgeInsets.all(15),
+                                        child: Center(
+                                          child: Image.asset(
+                                            AppAssets.eyeIcon,
+                                            scale: 4,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(buildContext).pop();
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: greenColor,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        padding: EdgeInsets.all(15),
+                                        child: Icon(
+                                          Icons.favorite,
+                                          color: Colors.white,
+                                          size: 30,
+                                        ),
+                                      ),
+                                    ),
+                                    15.verticalSpace,
+                                  ],
                                 ),
-                                Text(''),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          15.verticalSpace,
-                          Text(
-                            '${model.vacancies[index].jobTitle}',
-                            style: style24B..copyWith(),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            "${model.vacancies[index].location ?? 'set location'} •${model.vacancies[index].state ?? 'set state'}",
-                            style: style14M.copyWith(),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            "\$${model.vacancies[index].minSalary ?? 'set min salary'}-\$${model.vacancies[index].maxSalary ?? 'set max salary'}",
-                            style: style20B,
-                          ),
-                          SizedBox(height: 16),
-                          Wrap(
-                            spacing: 8.w, // Horizontal spacing
-                            runSpacing: 8.h, // Vertical spacing for new rows
-                            children: List.generate(model.tagItemsList.length, (
-                              index,
-                            ) {
-                              // Display data using index
-                              return CustomIconTextTag(
-                                item: model.tagItemsList[index],
-                              );
-                            }),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                    SizedBox(height: 24),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 24.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              // Handle dismiss/dislike action
-                              Navigator.of(buildContext).pop();
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: pinkColor,
-                                shape: BoxShape.circle,
-                              ),
-                              padding: EdgeInsets.all(15),
-                              child: Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(
-                                CompanyJobDetailScreen(
-                                  jobVacancyModel: model.vacancies[index],
-
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  index: index,
-                                ),
-                              );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: blackColor),
-                                shape: BoxShape.circle,
-                              ),
-                              padding: EdgeInsets.all(15),
-                              child: Center(
-                                child: Image.asset(AppAssets.eyeIcon, scale: 4),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              // Handle favorite/like action
-                              Navigator.of(buildContext).pop();
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: greenColor,
-                                shape: BoxShape.circle,
-                              ),
-                              padding: EdgeInsets.all(15),
-                              child: Icon(
-                                Icons.favorite,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                          15.verticalSpace,
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
         );
       },
-    );
+    ).then((_) {
+      _swipeController.dispose();
+    });
   }
 
   ///
