@@ -12,6 +12,7 @@ import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
 
 class CompanyProfileScreen extends StatefulWidget {
   // final JobVacancyModel jobVacancyModel;
@@ -38,8 +39,16 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => CompanyProfileViewModel(),
-      child: Consumer<CompanyProfileViewModel>(
+      create:
+          (context) =>
+              //CompanyProfileViewModel(),
+              CandidateHomeViewModel(),
+
+      child: Consumer<
+        CandidateHomeViewModel
+
+        //CompanyProfileViewModel
+      >(
         builder:
             (context, model, child) => Scaffold(
               body: Stack(
@@ -230,13 +239,16 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
   ///
   ///. first tab bar view
   ///
-  Padding firstTabBarView(CompanyProfileViewModel model) {
+  Padding firstTabBarView(
+    //CompanyProfileViewModel model
+    CandidateHomeViewModel model,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: ListView.builder(
         physics: const ClampingScrollPhysics(),
         shrinkWrap: true,
-        itemCount: model.companyJobsVacancyList.length,
+        itemCount: model.vacancies.length,
         itemBuilder: (context, index) {
           return CustomJobVacancyCard(
             onTap: () {
@@ -276,7 +288,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
                 ),
               );
             },
-            jobVacancyModel: model.companyJobsVacancyList[index],
+            jobVacancyModel: model.vacancies[index],
           );
         },
       ),

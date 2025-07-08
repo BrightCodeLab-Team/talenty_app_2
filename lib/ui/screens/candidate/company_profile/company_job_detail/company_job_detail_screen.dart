@@ -15,11 +15,15 @@ import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/comapny_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
 
 class CompanyJobDetailScreen extends StatelessWidget {
   final JobVacancyModel jobVacancyModel;
   final int index; // Add index as a required parameter
-  final CompanyProfileViewModel? jobModel;
+  // un comment this if problem not solved
+  //final CompanyProfileViewModel? jobModel;
+  final CandidateHomeViewModel? jobModel;
+
   CompanyJobDetailScreen({
     required this.jobVacancyModel,
     required this.index, // Make it required
@@ -45,8 +49,14 @@ class CompanyJobDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final int index = 0;
     return ChangeNotifierProvider(
-      create: (context) => CompanyProfileViewModel(),
-      child: Consumer<CompanyProfileViewModel>(
+      create:
+          (context) =>
+              //CompanyProfileViewModel(),
+              CandidateHomeViewModel(),
+      child: Consumer<
+        //CompanyProfileViewModel
+        CandidateHomeViewModel
+      >(
         builder:
             (context, model, child) => Scaffold(
               body: SingleChildScrollView(
@@ -91,7 +101,10 @@ class CompanyJobDetailScreen extends StatelessWidget {
   ///
   ///. first section
   ///
-  Padding _firstSection(CompanyProfileViewModel model) {
+  Padding _firstSection(
+    // CompanyProfileViewModel model
+    CandidateHomeViewModel model,
+  ) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -139,12 +152,14 @@ class CompanyJobDetailScreen extends StatelessWidget {
           ),
           15.verticalSpace,
           Text(
-            '${model.companyJobsVacancyList[index].jobTitle}',
+            // '${model.companyJobsVacancyList[index].jobTitle}',
+            '${model.vacancies[index].jobTitle}',
             style: style24B.copyWith(color: blackColor),
           ),
           5.verticalSpace,
           Text(
-            '\$${model.companyJobsVacancyList[index].minSalary}-\$${model.companyJobsVacancyList[index].maxSalary}',
+            // '\$${model.companyJobsVacancyList[index].minSalary}-\$${model.companyJobsVacancyList[index].maxSalary}',
+            '\$${model.vacancies[index].minSalary}-\$${model.vacancies[index].maxSalary}',
             style: style20B.copyWith(color: blackColor),
           ),
           5.verticalSpace,
@@ -154,7 +169,8 @@ class CompanyJobDetailScreen extends StatelessWidget {
               Image.asset(AppAssets.location, scale: 4, color: blackColor),
               3.horizontalSpace,
               Text(
-                "${model.companyJobsVacancyList[index].location}",
+                // "${model.companyJobsVacancyList[index].location}",
+                "${model.vacancies[index].location}",
                 style: style14M.copyWith(color: blackColor),
               ),
             ],
@@ -166,7 +182,8 @@ class CompanyJobDetailScreen extends StatelessWidget {
               Icon(Icons.watch_later_outlined),
 
               Text(
-                '${model.companyJobsVacancyList[index].jobType},  Turno de ${model.companyJobsVacancyList[index].workingHours} horas',
+                // '${model.companyJobsVacancyList[index].jobType},  Turno de ${model.companyJobsVacancyList[index].workingHours} horas',
+                '${model.vacancies[index].jobType},  Turno de ${model.vacancies[index].workingHours} horas',
                 style: style14M.copyWith(color: blackColor),
               ),
             ],
@@ -222,7 +239,10 @@ class CompanyJobDetailScreen extends StatelessWidget {
   ///
   ///. third section
   ///
-  Padding _thirdSection(CompanyProfileViewModel model) {
+  Padding _thirdSection(
+    //CompanyProfileViewModel model
+    CandidateHomeViewModel model,
+  ) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -236,8 +256,8 @@ class CompanyJobDetailScreen extends StatelessWidget {
           ),
           5.verticalSpace,
           Text(
-            // 'Buscamos un diseñador creativo con experiencia en diseño gráfico y visual. El candidato ideal debe tener habilidades en el uso de herramientas como Adobe Photoshop, Illustrator y Figma, y ser capaz de crear conceptos visuales atractivos para  diferentes plataformas. Se valorará la capacidad de trabajar de manera autónoma y en equipo, adaptándose a las necesidades del proyecto y manteniendo siempre una estética coherente con la marca. ',
-            "${model.companyJobsVacancyList[index].jobDescription}",
+            // "${model.companyJobsVacancyList[index].jobDescription}",
+            "${model.vacancies[index].jobDescription}",
             style: style14M.copyWith(color: lightBlackColor),
           ),
 

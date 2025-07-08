@@ -3,7 +3,7 @@ import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
 
 class CompanyProfileViewModel extends BaseViewModel {
-  List<JobVacancyModel> companyJobsVacancyList = [
+  /* List<JobVacancyModel> companyJobsVacancyList = [
     JobVacancyModel(
       jobTitle: 'Software Engineer',
       jobSubTitle: 'Frontend Specialist',
@@ -142,7 +142,78 @@ class CompanyProfileViewModel extends BaseViewModel {
       jobPostedTime: '2025-07-02',
       matches: '91%',
     ),
+    JobVacancyModel(
+      jobTitle: 'Flutter developer',
+      jobSubTitle: 'Entry-Level Role',
+      imageUrl: AppAssets.img2,
+      state: 'Texas',
+      municipality: 'Austin',
+      neighborhood: 'Downtown',
+
+      startDate: '2025-09-01',
+      endDate: '2026-03-01',
+      workMode: 'Hybrid',
+      workSchedule: 'Flexible',
+      workingHours: '6',
+
+      jobType: 'tiempo parcial',
+
+      canStartImmediately: 'Yes',
+      requiresExperience: 'No',
+      workDays: 'Monday to Friday',
+
+      minSalary: '50000',
+      maxSalary: '65000',
+      paymentFrequency: 'Monthly',
+      benefits: 'Flexible Hours, Training, Gym Membership',
+
+      softSkills: 'Analytical Thinking, Curiosity',
+      technicalSkills: 'SQL, Python, Excel',
+      maxSkillSelections: '6',
+
+      jobDescription:
+          'Assist in data gathering, analysis, and reporting tasks.',
+      location: 'Austin, TX',
+      jobPostedTime: '2025-07-02',
+      matches: '91%',
+    ),
+    JobVacancyModel(
+      jobTitle: 'Web developer',
+      jobSubTitle: 'Entry-Level Role',
+      imageUrl: AppAssets.img2,
+      state: 'Texas',
+      municipality: 'Austin',
+      neighborhood: 'Downtown',
+
+      startDate: '2025-09-01',
+      endDate: '2026-03-01',
+      workMode: 'Hybrid',
+      workSchedule: 'Flexible',
+      workingHours: '6',
+
+      jobType: 'tiempo parcial',
+
+      canStartImmediately: 'Yes',
+      requiresExperience: 'No',
+      workDays: 'Monday to Friday',
+
+      minSalary: '50000',
+      maxSalary: '65000',
+      paymentFrequency: 'Monthly',
+      benefits: 'Flexible Hours, Training, Gym Membership',
+
+      softSkills: 'Analytical Thinking, Curiosity',
+      technicalSkills: 'SQL, Python, Excel',
+      maxSkillSelections: '6',
+
+      jobDescription:
+          'Assist in data gathering, analysis, and reporting tasks.',
+      location: 'Austin, TX',
+      jobPostedTime: '2025-07-02',
+      matches: '91%',
+    ),
   ];
+*/
 }
 /*
   final String? imageUrl;
