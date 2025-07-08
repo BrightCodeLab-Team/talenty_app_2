@@ -23,11 +23,13 @@ class CompanyJobDetailScreen extends StatelessWidget {
   // un comment this if problem not solved
   //final CompanyProfileViewModel? jobModel;
   final CandidateHomeViewModel? jobModel;
+  final bool fromFirstTab; // Add this flag
 
   CompanyJobDetailScreen({
     required this.jobVacancyModel,
     required this.index, // Make it required
     this.jobModel,
+    this.fromFirstTab = false,
   });
 
   final ScrollController _scrollController = ScrollController();
@@ -82,6 +84,9 @@ class CompanyJobDetailScreen extends StatelessWidget {
                         CustomBackButton(),
                       ],
                     ),
+                    if (fromFirstTab)
+                      Container(height: 100, width: 100, color: primaryColor),
+
                     _firstSection(model),
                     _secondSection(),
                     _thirdSection(model),
@@ -451,63 +456,111 @@ class CompanyJobDetailScreen extends StatelessWidget {
             style: style14M.copyWith(color: lightBlackColor),
           ),
           20.verticalSpace,
-          Padding(
-            padding: const EdgeInsets.only(bottom: 24.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: pinkColor),
-                      color: whiteColor,
-                      shape: BoxShape.circle,
-                    ),
-                    padding: EdgeInsets.all(15),
-                    child: Icon(Icons.close, color: pinkColor, size: 30),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _scrollController.animateTo(
-                      0,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: blackColor),
-                      shape: BoxShape.circle,
-                    ),
-                    padding: EdgeInsets.all(15),
-                    child: Center(
-                      child: Icon(
-                        Icons.arrow_upward,
-                        color: blackColor,
 
-                        size: 20,
+          if (fromFirstTab)
+            // Show column with two buttons when from first tab
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                children: [
+                  20.verticalSpace,
+                  // First button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: pinkColor,
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        'Apply Now',
+                        style: style16B.copyWith(color: Colors.white),
                       ),
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: whiteColor,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.green),
+                  10.verticalSpace,
+                  // Second button
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: pinkColor),
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        'Save for Later',
+                        style: style16B.copyWith(color: pinkColor),
+                      ),
                     ),
-                    padding: EdgeInsets.all(15),
-                    child: Icon(Icons.favorite, color: Colors.green, size: 30),
                   ),
-                ),
-                15.verticalSpace,
-              ],
+                  20.verticalSpace,
+                ],
+              ),
+            )
+          else
+            Padding(
+              padding: const EdgeInsets.only(bottom: 24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: pinkColor),
+                        color: whiteColor,
+                        shape: BoxShape.circle,
+                      ),
+                      padding: EdgeInsets.all(15),
+                      child: Icon(Icons.close, color: pinkColor, size: 30),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _scrollController.animateTo(
+                        0,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: blackColor),
+                        shape: BoxShape.circle,
+                      ),
+                      padding: EdgeInsets.all(15),
+                      child: Center(
+                        child: Icon(
+                          Icons.arrow_upward,
+                          color: blackColor,
+
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: whiteColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.green),
+                      ),
+                      padding: EdgeInsets.all(15),
+                      child: Icon(
+                        Icons.favorite,
+                        color: Colors.green,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                  15.verticalSpace,
+                ],
+              ),
             ),
-          ),
 
           CustomDivider(),
         ],

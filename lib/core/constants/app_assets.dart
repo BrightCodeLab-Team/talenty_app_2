@@ -58,6 +58,7 @@ class AppAssets {
   static String vacancyEmpty = "$staticAssets/vacancy_empty.png";
   static String globeIcon = "$iconsAssets/globeIcon.png";
   static String badgeIcon = "$iconsAssets/badgeIcon.png";
+  static String experienceIcon = "$iconsAssets/experienceIcon.png";
 
   ///
   /// Vacancy  SCREEN

@@ -201,7 +201,7 @@ class CandidateRootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(2);
             },
-            text: "Vacantes",
+            text: "Matches",
           ),
 
           CustomBottomNavigator(
