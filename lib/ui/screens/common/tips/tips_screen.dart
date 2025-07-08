@@ -164,6 +164,7 @@ class TipsScreen extends StatelessWidget {
                                   },
 
                                   child: Container(
+                                    width: double.infinity,
                                     padding: EdgeInsets.symmetric(
                                       horizontal: 10,
                                       vertical: 5,
