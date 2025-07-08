@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
-import 'package:talenty_app/ui/screens/candidate/home/candidate_home_screen.dart';
+
+import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: title,
             translations: LocalizationService(),
-            locale: DevicePreview.locale(context),
+            // locale: DevicePreview.locale(context),
+            locale: Locale('es'),
             builder: DevicePreview.appBuilder,
             defaultTransition: Transition.rightToLeft,
             themeMode:
@@ -42,7 +44,8 @@ class MyApp extends StatelessWidget {
                 _designHeight,
               ), // Use your constants
 
-              builder: (context, child) => CandidateHomeScreen(),
+              builder: (context, child) => CandidateOTPScreen(email: 'awais'),
+
             ),
           ),
     );

@@ -165,7 +165,7 @@ class RegisterCompany16PercentScreen extends StatelessWidget {
                         text: TextSpan(
                           style: style16M.copyWith(color: lightBlackColor),
                           children: [
-                            TextSpan(text: 'ai_continue'.tr),
+                            TextSpan(text: 'by_continue'.tr),
                             TextSpan(
                               text: 'terms_and_condition'.tr,
                               style: style16B.copyWith(
