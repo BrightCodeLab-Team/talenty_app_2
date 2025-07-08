@@ -12,7 +12,9 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
+import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
+import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/comapny_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
@@ -85,7 +87,26 @@ class CompanyJobDetailScreen extends StatelessWidget {
                       ],
                     ),
                     if (fromFirstTab)
-                      Container(height: 100, width: 100, color: primaryColor),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 20,
+                          left: 20.0,
+                          right: 20,
+                        ),
+                        child: CustomButton(
+                          text: 'Enviar mensaje a la empresa',
+                          onTap: () {
+                            Get.to(CandidateChatScreen());
+                          },
+                          backgroundColor: primaryColor,
+                          textColor: whiteColor,
+                          image: Image.asset(
+                            AppAssets.chat,
+                            color: whiteColor,
+                            scale: 4,
+                          ),
+                        ),
+                      ),
 
                     _firstSection(model),
                     _secondSection(),
@@ -93,7 +114,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
                     _fourthSection(),
                     _fifthSection(),
                     _sixthSection(),
-                    _seventhSection(), //last section
+                    _seventhSection(context), //last section
                   ],
                 ),
               ),
@@ -438,7 +459,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
   ///
   ///. third section
   ///
-  Padding _seventhSection() {
+  Padding _seventhSection(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -465,35 +486,29 @@ class CompanyJobDetailScreen extends StatelessWidget {
                 children: [
                   20.verticalSpace,
                   // First button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: pinkColor,
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'Apply Now',
-                        style: style16B.copyWith(color: Colors.white),
-                      ),
+                  CustomButton(
+                    text: 'Enviar mensaje a la empresa',
+                    onTap: () {
+                      Get.to(CandidateChatScreen());
+                    },
+                    backgroundColor: primaryColor,
+                    textColor: whiteColor,
+                    image: Image.asset(
+                      AppAssets.chat,
+                      color: whiteColor,
+                      scale: 4,
                     ),
                   ),
                   10.verticalSpace,
                   // Second button
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: pinkColor),
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'Save for Later',
-                        style: style16B.copyWith(color: pinkColor),
-                      ),
-                    ),
+                  CustomButton(
+                    borderColor: brownColor,
+                    text: 'Rechazar match',
+                    onTap: () {
+                      showRejectMatchDialog(context);
+                    },
+                    backgroundColor: whiteColor,
+                    textColor: brownColor,
                   ),
                   20.verticalSpace,
                 ],
@@ -565,6 +580,74 @@ class CompanyJobDetailScreen extends StatelessWidget {
           CustomDivider(),
         ],
       ),
+    );
+  }
+
+  ///
+  ///. cancel dialog box
+  ///
+  void showRejectMatchDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Talenty Logo
+                Image.asset(AppAssets.appLogo2, scale: 4, height: 40),
+                const SizedBox(height: 20),
+
+                Text(
+                  '¿Seguro que quieres rechazar éste match?',
+                  textAlign: TextAlign.center,
+                  style: style16B.copyWith(color: blackColor),
+                ),
+                const SizedBox(height: 15),
+
+                // Description text
+                Text(
+                  'Al rechazar el match, ya no podrás conversar con esta empresa y se eliminará la conexión de forma permanente.',
+                  textAlign: TextAlign.center,
+                  style: style16M.copyWith(color: blackColor),
+                ),
+                const SizedBox(height: 30),
+
+                // "Rechazar match" button
+                CustomButton(
+                  borderColor: brownColor,
+                  text: 'Rechazar match',
+                  onTap: () {
+                    // Handle reject match logic
+                    Navigator.of(context).pop(true);
+                  },
+                  backgroundColor: primaryColor,
+                  textColor: whiteColor,
+                ),
+                const SizedBox(height: 15),
+
+                // "Cancelar" button
+                CustomButton(
+                  borderColor: blackColor,
+                  text: 'Cancelar',
+                  onTap: () {
+                    Navigator.of(context).pop(false);
+                  },
+                  backgroundColor: whiteColor,
+                  textColor: blackColor,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

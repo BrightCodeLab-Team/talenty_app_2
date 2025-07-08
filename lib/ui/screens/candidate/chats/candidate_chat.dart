@@ -7,8 +7,8 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model.dart';
 
-class CandidateChat extends StatelessWidget {
-  const CandidateChat({super.key});
+class CandidateChatScreen extends StatelessWidget {
+  const CandidateChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

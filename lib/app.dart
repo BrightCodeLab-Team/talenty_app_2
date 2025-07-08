@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
                 _designHeight,
               ), // Use your constants
 
-              builder: (context, child) => CandidateMatchesScreen(),
+              builder: (context, child) => CandidateRootScreen(),
             ),
           ),
     );

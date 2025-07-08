@@ -26,7 +26,7 @@ class CandidateRootScreenViewModel extends BaseViewModel {
     CandidateHomeScreen(),
     TipsScreen(),
     CandidateMatchesScreen(),
-    CandidateChat(),
+    CandidateChatScreen(),
     CandidateMasScreen(),
   ];
 
