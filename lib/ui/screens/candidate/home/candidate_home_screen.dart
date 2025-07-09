@@ -115,7 +115,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                         style: style16M,
                       ),
                       10.verticalSpace,
-                      model.vacancies.isNotEmpty && model.vacancies != null
+                      model.vacancies.isNotEmpty
                           ? _categories(model: model)
                           : SizedBox(),
                       10.verticalSpace,
@@ -497,7 +497,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
       builder: (context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setModalState) {
-            void _selectWorkModality(String modality) {
+            void selectWorkModality(String modality) {
               setModalState(() {
                 selectedWorkModality = modality;
                 workModalities.remove(modality);
@@ -505,7 +505,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
               });
             }
 
-            void _selectSkill(String skill) {
+            void selectSkill(String skill) {
               setModalState(() {
                 if (selectedSkill == skill) {
                   selectedSkill = null;
@@ -763,7 +763,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                         ),
                                         onSelected: (bool selected) {
                                           if (selected) {
-                                            _selectWorkModality(modality);
+                                            selectWorkModality(modality);
                                           }
                                         },
                                       ),
@@ -839,7 +839,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                           0.4,
                                         ),
                                         onSelected: (bool selected) {
-                                          _selectSkill(skill);
+                                          selectSkill(skill);
                                         },
                                       ),
                                     );

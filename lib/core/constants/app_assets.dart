@@ -58,6 +58,9 @@ class AppAssets {
   static String vacancyEmpty = "$staticAssets/vacancy_empty.png";
   static String globeIcon = "$iconsAssets/globeIcon.png";
   static String badgeIcon = "$iconsAssets/badgeIcon.png";
+  static String cel= "$iconsAssets/cell.png";
+  static String clock= "$iconsAssets/clock.png";
+  static String tieperson= "$iconsAssets/tie person.png";
 
   ///
   /// Vacancy  SCREEN
@@ -92,4 +95,8 @@ class AppAssets {
 
   static String img = "$dynamicAssets/image.png";
   static String img2 = "$dynamicAssets/image2.png";
+  static String man = "$dynamicAssets/man.png";
+  static String leopard = "$dynamicAssets/leopard.png";
+
+
 }

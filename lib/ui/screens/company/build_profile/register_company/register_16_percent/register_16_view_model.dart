@@ -74,8 +74,9 @@ class Register16ViewModel extends BaseViewModel {
   void _onFieldChanged() {
     // existing logic for title and description
     if (titleErrorFlag && validateTitle() == null) titleErrorFlag = false;
-    if (descriptionErrorFlag && validateDescription() == null)
+    if (descriptionErrorFlag && validateDescription() == null) {
       descriptionErrorFlag = false;
+    }
 
     notifyListeners();
   }

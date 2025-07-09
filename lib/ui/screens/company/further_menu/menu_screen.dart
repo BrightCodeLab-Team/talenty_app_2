@@ -14,7 +14,6 @@ import 'package:talenty_app/ui/screens/common/tips/tips_screen.dart';
 import 'package:talenty_app/ui/screens/company/further_menu/menu_view_model.dart';
 import 'package:talenty_app/ui/screens/company/notifications/notification_screen.dart';
 import 'package:talenty_app/ui/screens/edit_recruiter/edit_recruiter.dart';
-import 'package:talenty_app/ui/screens/my_data/my_data_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   @override
@@ -47,7 +46,7 @@ class MenuScreen extends StatelessWidget {
                       ///
                       /// Title
                       ///
-                      Text('Mi Cuenta', style: style16source),
+                                 Text('Mi Cuenta', style: style16source),
                       18.verticalSpace,
                       MenuReuse(
                         leading: Image.asset(
@@ -63,7 +62,7 @@ class MenuScreen extends StatelessWidget {
                           //     builder: (context) => EditRecruiter(),
                           //   ),
                           // );
-                        },
+                        },  child: AnimatedContainer(duration: Duration()),
                       ),
 
                       MenuReuse(
@@ -74,7 +73,7 @@ class MenuScreen extends StatelessWidget {
                         title: 'Notificaciones',
                         onTap: () {
                           Get.to(() => NotificationScreen());
-                        },
+                        },  child: AnimatedContainer(duration: Duration()),
                       ),
 
                       MenuReuse(
@@ -83,7 +82,7 @@ class MenuScreen extends StatelessWidget {
                           scale: 4.5,
                         ),
                         title: 'Mi calendario',
-                        onTap: () {},
+                        onTap: () {},  child: AnimatedContainer(duration: Duration()),
                       ),
 
                       MenuReuse(
@@ -94,7 +93,7 @@ class MenuScreen extends StatelessWidget {
                         title: 'Mis estadísticas',
                         onTap: () {
                           //Get.to(() => MyDataScreen());
-                        },
+                        },  child: AnimatedContainer(duration: Duration()),
                       ),
 
                       MenuReuse(
@@ -105,7 +104,7 @@ class MenuScreen extends StatelessWidget {
                         title: 'Tips',
                         onTap: () {
                           Get.to(() => TipsScreen());
-                        },
+                        },  child: AnimatedContainer(duration: Duration()),
                       ),
                       //
                       SizedBox(height: 35),
@@ -120,7 +119,7 @@ class MenuScreen extends StatelessWidget {
                           scale: 4.5,
                         ),
                         title: 'Configuración de cuenta',
-                        onTap: () {},
+                        onTap: () {},  child: AnimatedContainer(duration: Duration()),
                       ),
 
                       //
@@ -130,7 +129,7 @@ class MenuScreen extends StatelessWidget {
                           scale: 4.5,
                         ),
                         title: 'Aviso de privacidad',
-                        onTap: () {},
+                        onTap: () {},  child: AnimatedContainer(duration: Duration()),
                       ),
                       20.verticalSpace,
                     ],
@@ -143,6 +142,7 @@ class MenuScreen extends StatelessWidget {
   }
 }
 
+ 
 _profile() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,

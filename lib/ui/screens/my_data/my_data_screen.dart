@@ -2,12 +2,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 
 class MyDataScreen extends StatelessWidget {
@@ -420,6 +417,8 @@ Widget _buildMatchesRealizadosCard() {
 // }
 
 class AnimatedBarChart extends StatefulWidget {
+  const AnimatedBarChart({super.key});
+
   @override
   _AnimatedBarChartState createState() => _AnimatedBarChartState();
 }
@@ -476,7 +475,7 @@ class _AnimatedBarChartState extends State<AnimatedBarChart>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300,
       child: AnimatedBuilder(
         animation: _animation,
@@ -548,6 +547,8 @@ class _AnimatedBarChartState extends State<AnimatedBarChart>
 }
 
 class InteractiveAnimatedBarChart extends StatefulWidget {
+  const InteractiveAnimatedBarChart({super.key});
+
   @override
   _InteractiveAnimatedBarChartState createState() =>
       _InteractiveAnimatedBarChartState();
@@ -607,7 +608,7 @@ class _InteractiveAnimatedBarChartState
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300,
       child: AnimatedBuilder(
         animation: _animation,
@@ -689,6 +690,8 @@ class _InteractiveAnimatedBarChartState
 }
 
 class LoopingAnimatedBarChart extends StatefulWidget {
+  const LoopingAnimatedBarChart({super.key});
+
   @override
   _LoopingAnimatedBarChartState createState() =>
       _LoopingAnimatedBarChartState();
@@ -748,7 +751,7 @@ class _LoopingAnimatedBarChartState extends State<LoopingAnimatedBarChart>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300,
       child: AnimatedBuilder(
         animation: _animation,
@@ -824,7 +827,7 @@ enum ChartAnimationType { animatedOnce, interactive, looping }
 class CombinedAnimatedBarChart extends StatefulWidget {
   final ChartAnimationType type;
 
-  CombinedAnimatedBarChart({required this.type});
+  const CombinedAnimatedBarChart({super.key, required this.type});
 
   @override
   _CombinedAnimatedBarChartState createState() =>
@@ -1015,6 +1018,6 @@ class _CombinedAnimatedBarChartState extends State<CombinedAnimatedBarChart>
 _text({required String text}) {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),
-    child: Text('$text', style: TextStyle(fontSize: 10)),
+    child: Text(text, style: TextStyle(fontSize: 10)),
   );
 }

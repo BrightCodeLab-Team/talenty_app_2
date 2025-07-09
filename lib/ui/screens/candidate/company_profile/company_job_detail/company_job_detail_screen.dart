@@ -496,7 +496,7 @@ class TagItem {
 class CustomIconTextTag extends StatelessWidget {
   final TagItem item;
 
-  const CustomIconTextTag({Key? key, required this.item}) : super(key: key);
+  const CustomIconTextTag({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {

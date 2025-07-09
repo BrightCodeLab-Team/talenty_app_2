@@ -6,12 +6,15 @@ import 'package:talenty_app/core/constants/text_style.dart';
 class MenuReuse extends StatelessWidget {
   final Widget leading;
   final String title;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final Widget? trailing;
   // ignore: use_key_in_widget_constructors
   const MenuReuse({
     required this.leading,
     required this.title,
-    required this.onTap,
+     this.onTap, 
+     this.trailing,
+   AnimatedContainer? child,
   });
 
   @override
@@ -35,10 +38,11 @@ class MenuReuse extends StatelessWidget {
                     leading,
                     5.horizontalSpace,
                     Text(title, style: style14sourceblack),
+                                // if (trailing != null) trailing!,
                   ],
                 ),
 
-                Icon(Icons.arrow_forward_ios, size: 20, color: lightBlackColor),
+        trailing ?? Icon(Icons.arrow_forward_ios, size: 20, color: lightBlackColor),
               ],
             ),
             10.verticalSpace,

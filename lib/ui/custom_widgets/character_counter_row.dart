@@ -9,7 +9,7 @@ class CharacterCounterRow extends StatelessWidget {
   final int maxLength;
   final String label;
 
-  const CharacterCounterRow({
+  const CharacterCounterRow({super.key, 
     required this.error,
     required this.currentLength,
     required this.maxLength,
