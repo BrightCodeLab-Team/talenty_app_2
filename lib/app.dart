@@ -8,6 +8,9 @@ import 'package:device_preview/device_preview.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
 
 import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/candidat_root/candidate_root_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/home/candidate_home_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/matches/candidate_matches_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
@@ -44,8 +47,7 @@ class MyApp extends StatelessWidget {
                 _designHeight,
               ), // Use your constants
 
-              builder: (context, child) => CandidateOTPScreen(email: 'awais'),
-
+              builder: (context, child) => CandidateMatchesScreen(),
             ),
           ),
     );

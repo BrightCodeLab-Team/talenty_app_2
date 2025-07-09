@@ -13,9 +13,14 @@ import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
 
-class CandidateMatchesScreen extends StatelessWidget {
+class CandidateMatchesScreen extends StatefulWidget {
   const CandidateMatchesScreen({super.key});
 
+  @override
+  State<CandidateMatchesScreen> createState() => _CandidateMatchesScreenState();
+}
+
+class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -432,325 +437,747 @@ class CandidateMatchesScreen extends StatelessWidget {
   ///
   ///. detail dialog box fir tabbar view 2
   ///
+  // void
+  // _showCustomJobDetailDialog(
+  //   BuildContext context,
+  //   CandidateHomeViewModel model,
+  //   int index,
+  // ) {
+  //   showGeneralDialog(
+  //     context: context,
+  //     barrierDismissible: true,
+  //     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+  //     barrierColor: Colors.black54, // Darkens the background
+  //     transitionDuration: const Duration(milliseconds: 200),
+  //     pageBuilder: (
+  //       BuildContext buildContext,
+  //       Animation animation,
+  //       Animation secondaryAnimation,
+  //     ) {
+  //       return Center(
+  //         child: Material(
+  //           type: MaterialType.transparency, // Make Material transparent
+  //           child: Container(
+  //             height: MediaQuery.of(buildContext).size.height * 0.9,
+  //             width:
+  //                 MediaQuery.of(buildContext).size.width *
+  //                 0.98, // Adjust width as needed
+  //             margin: EdgeInsets.symmetric(
+  //               horizontal: 20,
+  //             ), // Add horizontal margin for spacing
+  //             decoration: BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: BorderRadius.circular(20.0),
+  //               boxShadow: [
+  //                 BoxShadow(
+  //                   color: Colors.grey.withOpacity(0.3),
+  //                   spreadRadius: 3,
+  //                   blurRadius: 10,
+  //                   offset: Offset(0, 5),
+  //                 ),
+  //               ],
+  //             ),
+  //             child: SingleChildScrollView(
+  //               child: Column(
+  //                 mainAxisSize: MainAxisSize.min,
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Stack(
+  //                     children: [
+  //                       Container(
+  //                         height: 180, // Adjust height to match the image
+  //                         decoration: BoxDecoration(
+  //                           color: Color(0xFF28407B), // Dark blue background
+  //                           borderRadius: BorderRadius.vertical(
+  //                             top: Radius.circular(20.0),
+  //                           ),
+  //                           image: DecorationImage(
+  //                             image: AssetImage(
+  //                               model.vacancies[index].imageUrl ?? '',
+  //                             ),
+  //                             fit: BoxFit.cover,
+  //                           ),
+  //                         ),
+  //                         child: Align(
+  //                           alignment: Alignment.bottomCenter,
+  //                           child: Padding(
+  //                             padding: const EdgeInsets.only(bottom: 20.0),
+  //                             child: Row(
+  //                               mainAxisAlignment: MainAxisAlignment.center,
+  //                               children: [
+  //                                 Text(
+  //                                   'VIAJES',
+  //                                   style: TextStyle(
+  //                                     color: Colors.white,
+  //                                     fontSize: 24,
+  //                                     fontWeight: FontWeight.bold,
+  //                                   ),
+  //                                 ),
+  //                                 Text(
+  //                                   ' | ',
+  //                                   style: TextStyle(
+  //                                     color: Colors.white,
+  //                                     fontSize: 24,
+  //                                     fontWeight: FontWeight.bold,
+  //                                   ),
+  //                                 ),
+  //                                 Text(
+  //                                   'PREMIUM®',
+  //                                   style: TextStyle(
+  //                                     color: Colors.white,
+  //                                     fontSize: 24,
+  //                                     fontWeight: FontWeight.bold,
+  //                                   ),
+  //                                 ),
+  //                               ],
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                       Positioned(
+  //                         top: 10,
+  //                         left: 10,
+  //                         child: GestureDetector(
+  //                           onTap: () {
+  //                             Navigator.of(buildContext).pop();
+  //                           },
+  //                           child: Container(
+  //                             padding: EdgeInsets.all(8),
+  //                             decoration: BoxDecoration(
+  //                               color: Colors.black.withOpacity(0.3),
+  //                               shape: BoxShape.circle,
+  //                             ),
+  //                             child: Icon(
+  //                               Icons.arrow_back,
+  //                               color: Colors.white,
+  //                               size: 24,
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                   // MOVED PART STARTS HERE
+
+  //                   // MOVED PART ENDS HERE
+  //                   Padding(
+  //                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+  //                     child: Column(
+  //                       crossAxisAlignment: CrossAxisAlignment.start,
+  //                       children: [
+  //                         15.verticalSpace,
+  //                         GestureDetector(
+  //                           onTap: () {
+  //                             Get.to(CompanyProfileScreen());
+  //                           },
+  //                           child: Row(
+  //                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                             children: [
+  //                               Container(
+  //                                 padding: EdgeInsets.symmetric(horizontal: 10),
+  //                                 decoration: BoxDecoration(
+  //                                   color: Colors.white,
+  //                                   borderRadius: BorderRadius.circular(10),
+  //                                   boxShadow: [
+  //                                     BoxShadow(
+  //                                       color: blackColor.withOpacity(0.2),
+  //                                       spreadRadius: 1,
+  //                                       blurRadius: 5,
+  //                                       offset: Offset(0, 3),
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //                                 child: Row(
+  //                                   mainAxisSize: MainAxisSize.min,
+  //                                   children: [
+  //                                     Image.asset(
+  //                                       model.vacancies[index].imageUrl ?? '',
+  //                                       height: 30,
+  //                                       width: 30,
+  //                                     ),
+  //                                     SizedBox(width: 8),
+  //                                     Column(
+  //                                       crossAxisAlignment:
+  //                                           CrossAxisAlignment.start,
+  //                                       children: [
+  //                                         Text(
+  //                                           'Viajes Premium',
+  //                                           style: style14M.copyWith(),
+  //                                         ),
+  //                                         Text(
+  //                                           'Ver Perfil →',
+  //                                           style: style12M.copyWith(
+  //                                             color: textGreyColor,
+  //                                           ),
+  //                                         ),
+  //                                       ],
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //                               ),
+  //                               AnimateIcon(
+  //                                 key: UniqueKey(),
+  //                                 onTap: () {},
+  //                                 iconType: IconType.continueAnimation,
+  //                                 height: 70,
+  //                                 width: 70,
+  //                                 color: Color.fromRGBO(
+  //                                   Random.secure().nextInt(255),
+  //                                   Random.secure().nextInt(255),
+  //                                   Random.secure().nextInt(255),
+  //                                   1,
+  //                                 ),
+  //                                 animateIcon: AnimateIcons.add,
+  //                               ),
+  //                               Text(''),
+  //                             ],
+  //                           ),
+  //                         ),
+  //                         15.verticalSpace,
+  //                         Text(
+  //                           '${model.vacancies[index].jobTitle}',
+  //                           style: style24B..copyWith(),
+  //                         ),
+  //                         SizedBox(height: 4),
+  //                         Text(
+  //                           "${model.vacancies[index].location ?? 'set location'} •${model.vacancies[index].state ?? 'set state'}",
+  //                           style: style14M.copyWith(),
+  //                         ),
+  //                         SizedBox(height: 8),
+  //                         Text(
+  //                           "\$${model.vacancies[index].minSalary ?? 'set min salary'}-\$${model.vacancies[index].maxSalary ?? 'set max salary'}",
+  //                           style: style20B,
+  //                         ),
+  //                         SizedBox(height: 16),
+  //                         Wrap(
+  //                           spacing: 8.w, // Horizontal spacing
+  //                           runSpacing: 8.h, // Vertical spacing for new rows
+  //                           children: List.generate(model.tagItemsList.length, (
+  //                             index,
+  //                           ) {
+  //                             // Display data using index
+  //                             return CustomIconTextTag(
+  //                               item: model.tagItemsList[index],
+  //                             );
+  //                           }),
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                   SizedBox(height: 24),
+  //                   Padding(
+  //                     padding: const EdgeInsets.only(bottom: 24.0),
+  //                     child: Row(
+  //                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                       children: [
+  //                         GestureDetector(
+  //                           onTap: () {
+  //                             // Handle dismiss/dislike action
+  //                             Navigator.of(buildContext).pop();
+  //                           },
+  //                           child: Container(
+  //                             decoration: BoxDecoration(
+  //                               color: pinkColor,
+  //                               shape: BoxShape.circle,
+  //                             ),
+  //                             padding: EdgeInsets.all(15),
+  //                             child: Icon(
+  //                               Icons.close,
+  //                               color: Colors.white,
+  //                               size: 30,
+  //                             ),
+  //                           ),
+  //                         ),
+  //                         GestureDetector(
+  //                           onTap: () {
+  //                             Get.to(
+  //                               CompanyJobDetailScreen(
+  //                                 jobVacancyModel: model.vacancies[index],
+
+  //                                 ///
+
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 ///
+  //                                 index: index,
+  //                               ),
+  //                             );
+  //                           },
+  //                           child: Container(
+  //                             decoration: BoxDecoration(
+  //                               border: Border.all(color: blackColor),
+  //                               shape: BoxShape.circle,
+  //                             ),
+  //                             padding: EdgeInsets.all(15),
+  //                             child: Center(
+  //                               child: Image.asset(AppAssets.eyeIcon, scale: 4),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                         GestureDetector(
+  //                           onTap: () {
+  //                             // Handle favorite/like action
+  //                             Navigator.of(buildContext).pop();
+  //                           },
+  //                           child: Container(
+  //                             decoration: BoxDecoration(
+  //                               color: greenColor,
+  //                               shape: BoxShape.circle,
+  //                             ),
+  //                             padding: EdgeInsets.all(15),
+  //                             child: Icon(
+  //                               Icons.favorite,
+  //                               color: Colors.white,
+  //                               size: 30,
+  //                             ),
+  //                           ),
+  //                         ),
+  //                         15.verticalSpace,
+  //                       ],
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+  ////
+  ///
+  ///
+  ///
+  ///
+  ///
+
   void _showCustomJobDetailDialog(
     BuildContext context,
     CandidateHomeViewModel model,
-    int index,
+    int initialIndex,
   ) {
+    int currentIndex = initialIndex;
+    final AnimationController _swipeController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: Navigator.of(context),
+    );
+    String _swipeImage = '';
+    bool _isSwiping = false;
+    double _swipeOffset = 0.0;
+
+    void _handleSwipe(bool isRightSwipe) {
+      if (!_swipeController.isAnimating) {
+        _swipeController.forward().then((_) {
+          Future.delayed(const Duration(milliseconds: 300), () {
+            if (mounted) {
+              setState(() {
+                if (isRightSwipe) {
+                  currentIndex =
+                      currentIndex > 0
+                          ? currentIndex - 1
+                          : model.vacancies.length - 1;
+                } else {
+                  currentIndex =
+                      currentIndex < model.vacancies.length - 1
+                          ? currentIndex + 1
+                          : 0;
+                }
+                _isSwiping = false;
+                _swipeOffset = 0.0;
+                _swipeController.reset();
+              });
+            }
+          });
+        });
+      }
+    }
+
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      barrierColor: Colors.black54, // Darkens the background
-      transitionDuration: const Duration(milliseconds: 200),
-      pageBuilder: (
-        BuildContext buildContext,
-        Animation animation,
-        Animation secondaryAnimation,
-      ) {
-        return Center(
-          child: Material(
-            type: MaterialType.transparency, // Make Material transparent
-            child: Container(
-              height: MediaQuery.of(buildContext).size.height * 0.9,
-              width:
-                  MediaQuery.of(buildContext).size.width *
-                  0.98, // Adjust width as needed
-              margin: EdgeInsets.symmetric(
-                horizontal: 20,
-              ), // Add horizontal margin for spacing
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 3,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                  ),
-                ],
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                          height: 180, // Adjust height to match the image
-                          decoration: BoxDecoration(
-                            color: Color(0xFF28407B), // Dark blue background
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(20.0),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage(
-                                model.vacancies[index].imageUrl ?? '',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'VIAJES',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    ' | ',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    'PREMIUM®',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 10,
-                          left: 10,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(buildContext).pop();
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.3),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                Icons.arrow_back,
-                                color: Colors.white,
-                                size: 24,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // MOVED PART STARTS HERE
+      barrierColor: Colors.black54,
+      transitionDuration: const Duration(milliseconds: 100),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onHorizontalDragStart: (details) {
+                setState(() {
+                  _isSwiping = true;
+                  _swipeOffset = 0.0;
+                  _swipeController.reset();
+                });
+              },
+              onHorizontalDragUpdate: (details) {
+                if (!_isSwiping) return;
+                setState(() {
+                  _swipeOffset += details.delta.dx;
+                  if (_swipeOffset > 50) {
+                    _swipeImage =
+                        AppAssets.noMeGustImg; // Right swipe - "NO ME GUSTA"
+                  } else if (_swipeOffset < -50) {
+                    _swipeImage =
+                        AppAssets.meGustaImg; // Left swipe - "ME GUSTA"
+                  } else {
+                    _swipeImage = '';
+                  }
+                });
+              },
+              onHorizontalDragEnd: (details) {
+                if (!_isSwiping) return;
 
-                    // MOVED PART ENDS HERE
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          15.verticalSpace,
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(CompanyProfileScreen());
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: blackColor.withOpacity(0.2),
-                                        spreadRadius: 1,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Image.asset(
-                                        model.vacancies[index].imageUrl ?? '',
-                                        height: 30,
-                                        width: 30,
-                                      ),
-                                      SizedBox(width: 8),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Viajes Premium',
-                                            style: style14M.copyWith(),
-                                          ),
-                                          Text(
-                                            'Ver Perfil →',
-                                            style: style12M.copyWith(
-                                              color: textGreyColor,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                AnimateIcon(
-                                  key: UniqueKey(),
-                                  onTap: () {},
-                                  iconType: IconType.continueAnimation,
-                                  height: 70,
-                                  width: 70,
-                                  color: Color.fromRGBO(
-                                    Random.secure().nextInt(255),
-                                    Random.secure().nextInt(255),
-                                    Random.secure().nextInt(255),
-                                    1,
-                                  ),
-                                  animateIcon: AnimateIcons.add,
-                                ),
-                                Text(''),
-                              ],
+                // Check if swipe was strong enough
+                if (details.primaryVelocity! > 300 || _swipeOffset > 100) {
+                  // Right swipe - reject
+                  _handleSwipe(true);
+                } else if (details.primaryVelocity! < -300 ||
+                    _swipeOffset < -100) {
+                  // Left swipe - like
+                  _handleSwipe(false);
+                } else {
+                  // Return to original position
+                  setState(() {
+                    _isSwiping = false;
+                    _swipeOffset = 0.0;
+                    _swipeImage = '';
+                    _swipeController.reset();
+                  });
+                }
+              },
+              child: AnimatedBuilder(
+                animation: _swipeController,
+                builder: (context, child) {
+                  return Stack(
+                    children: [
+                      // Main Job Card Content
+                      Transform.translate(
+                        offset: Offset(_isSwiping ? _swipeOffset * 0.7 : 0, 0),
+                        child: Transform.rotate(
+                          angle: _isSwiping ? _swipeOffset * 0.0008 : 0,
+                          child: Opacity(
+                            opacity:
+                                _isSwiping
+                                    ? (1 -
+                                            ((_swipeOffset.abs() /
+                                                    MediaQuery.of(
+                                                      context,
+                                                    ).size.width) *
+                                                0.8))
+                                        .clamp(0.3, 1.0)
+                                    : 1.0,
+                            child: _buildJobDetailContent(
+                              context,
+                              model,
+                              currentIndex,
                             ),
                           ),
-                          15.verticalSpace,
-                          Text(
-                            '${model.vacancies[index].jobTitle}',
-                            style: style24B..copyWith(),
+                        ),
+                      ),
+
+                      // Feedback Overlay
+                      if (_isSwiping)
+                        IgnorePointer(
+                          child: Container(
+                            color: Colors.black.withOpacity(
+                              0.5 * (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
+                            ),
+                            child: Center(
+                              child: Opacity(
+                                opacity: (_swipeOffset.abs() / 100).clamp(
+                                  0.0,
+                                  1.0,
+                                ),
+                                child: Image.asset(
+                                  _swipeImage,
+                                  scale: 4,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
                           ),
-                          SizedBox(height: 4),
-                          Text(
-                            "${model.vacancies[index].location ?? 'set location'} •${model.vacancies[index].state ?? 'set state'}",
-                            style: style14M.copyWith(),
+                        ),
+                    ],
+                  );
+                },
+              ),
+            );
+          },
+        );
+      },
+    ).then((_) {
+      _swipeController.dispose();
+    });
+  }
+
+  Widget _buildJobDetailContent(
+    BuildContext context,
+    CandidateHomeViewModel model,
+    int index,
+  ) {
+    if (index < 0 || index >= model.vacancies.length) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    final vacancy = model.vacancies[index];
+    return Center(
+      child: Material(
+        type: MaterialType.transparency,
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.9,
+          width: MediaQuery.of(context).size.width * 0.98,
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 3,
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: 180,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF28407B),
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(20.0),
+                        ),
+                        image: DecorationImage(
+                          image: AssetImage(vacancy.imageUrl ?? ''),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                'VIAJES',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                ' | ',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'PREMIUM®',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 8),
-                          Text(
-                            "\$${model.vacancies[index].minSalary ?? 'set min salary'}-\$${model.vacancies[index].maxSalary ?? 'set max salary'}",
-                            style: style20B,
-                          ),
-                          SizedBox(height: 16),
-                          Wrap(
-                            spacing: 8.w, // Horizontal spacing
-                            runSpacing: 8.h, // Vertical spacing for new rows
-                            children: List.generate(model.tagItemsList.length, (
-                              index,
-                            ) {
-                              // Display data using index
-                              return CustomIconTextTag(
-                                item: model.tagItemsList[index],
-                              );
-                            }),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                    SizedBox(height: 24),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 24.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              // Handle dismiss/dislike action
-                              Navigator.of(buildContext).pop();
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: pinkColor,
-                                shape: BoxShape.circle,
-                              ),
-                              padding: EdgeInsets.all(15),
-                              child: Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
+                    Positioned(
+                      top: 10,
+                      left: 10,
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Container(
+                          padding: const EdgeInsets.all(8.2),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                            shape: BoxShape.circle,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(
-                                CompanyJobDetailScreen(
-                                  jobVacancyModel: model.vacancies[index],
-
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  index: index,
-                                ),
-                              );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: blackColor),
-                                shape: BoxShape.circle,
-                              ),
-                              padding: EdgeInsets.all(15),
-                              child: Center(
-                                child: Image.asset(AppAssets.eyeIcon, scale: 4),
-                              ),
-                            ),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 24,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              // Handle favorite/like action
-                              Navigator.of(buildContext).pop();
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: greenColor,
-                                shape: BoxShape.circle,
-                              ),
-                              padding: EdgeInsets.all(15),
-                              child: Icon(
-                                Icons.favorite,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                          15.verticalSpace,
-                        ],
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 15),
+                      GestureDetector(
+                        onTap: () => Get.to(CompanyProfileScreen()),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: blackColor.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Image.asset(
+                                    vacancy.imageUrl ?? '',
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Viajes Premium',
+                                        style: style14M.copyWith(),
+                                      ),
+                                      Text(
+                                        'Ver Perfil →',
+                                        style: style12M.copyWith(
+                                          color: textGreyColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      Text('${vacancy.jobTitle}', style: style24B.copyWith()),
+                      const SizedBox(height: 4),
+                      Text(
+                        "${vacancy.location ?? 'set location'} •${vacancy.state ?? 'set state'}",
+                        style: style14M.copyWith(),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        "\$${vacancy.minSalary ?? 'set min salary'}-\$${vacancy.maxSalary ?? 'set max salary'}",
+                        style: style20B,
+                      ),
+                      const SizedBox(height: 16),
+                      Wrap(
+                        spacing: 8.w,
+                        runSpacing: 8.h,
+                        children: List.generate(model.tagItemsList.length, (i) {
+                          return CustomIconTextTag(item: model.tagItemsList[i]);
+                        }),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 24.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: pinkColor,
+                            shape: BoxShape.circle,
+                          ),
+                          padding: const EdgeInsets.all(15),
+                          child: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            CompanyJobDetailScreen(
+                              jobVacancyModel: vacancy,
+                              index: index,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: blackColor),
+                            shape: BoxShape.circle,
+                          ),
+                          padding: const EdgeInsets.all(15),
+                          child: Center(
+                            child: Image.asset(AppAssets.eyeIcon, scale: 4),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: greenColor,
+                            shape: BoxShape.circle,
+                          ),
+                          padding: const EdgeInsets.all(15),
+                          child: const Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
