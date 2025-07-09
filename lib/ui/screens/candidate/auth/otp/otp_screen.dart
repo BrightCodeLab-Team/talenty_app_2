@@ -9,16 +9,17 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/build_Profile/mandatory_registeration/mandatory_student_registration.dart';
+import 'package:talenty_app/ui/screens/company/auth/otp_screen/otp_view_model.dart';
 import 'package:talenty_app/ui/screens/company/build_profile/register_company/register_company_0_percent_screen.dart';
 
 import '../../../../custom_widgets/paddings_and_margins/custom_padding.dart';
-import 'otp_view_model.dart';
 
-class OtpScreen extends StatelessWidget {
+class CandidateOTPScreen extends StatelessWidget {
   final String email;
   final String _timer = "01:00";
 
-  OtpScreen({required this.email});
+  CandidateOTPScreen({required this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class OtpScreen extends StatelessWidget {
               child: CustomButton(
                 onTap: () {
                   if (model.validateOtp()) {
-                    Get.to(() => RegisterCompany0PercentScreen());
+                    Get.to(() => MandatoryStudentRegistration());
                   }
                 },
                 text: 'btn_continue'.tr,
@@ -55,16 +56,13 @@ class OtpScreen extends StatelessWidget {
                     Text('otp_verify_title'.tr, style: style24M),
                     20.verticalSpace,
 
-                    // Text(
-                    //   'otp_instruction'.tr,
-                    //   maxLines: 3,
-                    //   style: style14M.copyWith(color: textDarkGreyColor),
-                    // ),
                     RichText(
                       text: TextSpan(
                         style: style14M.copyWith(color: textDarkGreyColor),
                         children: [
-                          TextSpan(text: 'otp_instruction'.tr),
+                          TextSpan(
+                            text: 'Ingresa el código que mandamos a '.tr,
+                          ),
                           TextSpan(text: " $email" ?? ''),
                         ],
                       ),
@@ -91,26 +89,32 @@ class OtpScreen extends StatelessWidget {
                     ),
 
                     if (model.otpError != null && model.otpError!.isNotEmpty)
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.h),
-                        child: Text(
-                          model.otpError ?? "",
-                          style: TextStyle(color: Colors.red, fontSize: 12),
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 8.h),
+                          child: Text(
+                            model.otpError ?? "",
+                            style: TextStyle(color: Colors.red, fontSize: 12),
+                          ),
                         ),
                       ),
                     20.verticalSpace,
-                    Row(
-                      children: [
-                        Text(
-                          'otp_resend_timer'.tr,
-                          style: style14M.copyWith(color: textDarkGreyColor),
-                        ),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'otp_resend_timer'.tr,
+                            style: style14M.copyWith(color: textDarkGreyColor),
+                          ),
 
-                        Text(
-                          model.timerText,
-                          style: style14M.copyWith(color: textDarkGreyColor),
-                        ),
-                      ],
+                          Text(
+                            model.timerText,
+                            style: style14M.copyWith(color: textDarkGreyColor),
+                          ),
+                        ],
+                      ),
                     ),
                     if (model.canResend) ...[
                       10.verticalSpace,
@@ -118,11 +122,13 @@ class OtpScreen extends StatelessWidget {
                         onTap: () {
                           model.resendOtp();
                         },
-                        child: Text(
-                          'Resend OTP',
-                          style: style14M.copyWith(
-                            color: primaryColor,
-                            fontWeight: FontWeight.w600,
+                        child: Center(
+                          child: Text(
+                            'Resend OTP',
+                            style: style14M.copyWith(
+                              color: primaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),

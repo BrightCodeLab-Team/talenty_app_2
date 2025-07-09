@@ -1,10 +1,16 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/others/base_view_model.dart';
 
 class OtpViewModel extends BaseViewModel {
+  List<TextEditingController> controllers = List.generate(
+    6,
+    (_) => TextEditingController(),
+  );
+  List<FocusNode> focusNodes = List.generate(6, (_) => FocusNode());
   String otp = '';
   String? otpError;
   bool hasError = false;
@@ -29,6 +35,19 @@ class OtpViewModel extends BaseViewModel {
     otpError = null;
     hasError = false;
     notifyListeners();
+  }
+
+  void onOtpFieldChanged(String value, int index) {
+    if (value.isNotEmpty && index < 5) {
+      FocusScope.of(
+        focusNodes[index].context!,
+      ).requestFocus(focusNodes[index + 1]);
+    }
+
+    String code = controllers.map((e) => e.text).join();
+    if (code.length == 6) {
+      updateOtp(code);
+    }
   }
 
   bool get isComplete => otp.length == 6;

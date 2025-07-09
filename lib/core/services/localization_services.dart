@@ -247,7 +247,7 @@ class LocalizationService extends Translations {
           'E.g.: I am a professional in administrative assistance, with experience in office management, agenda coordination and operational support.',
       '0/500 characters': '0/500 characters',
       "description_limit_exceeded": "Description cannot exceed 500 characters",
-      'ai_continue':
+      'by_continue':
           'By continuing, I confirm that I have read and accepted the ',
       'terms_and_condition': ' Terms and Conditions',
       'talenty_as_well': ' of Talenty, as well as the ',
@@ -1178,7 +1178,7 @@ class LocalizationService extends Translations {
       "description_limit_exceeded":
           "La descripción no puede exceder los 500 caracteres",
       "Description cannot exceed 500 characters'"
-              'ai_continue':
+              'by_continue':
           'Al continuar, confirmo que he leído y acepto los ',
       'terms_and_condition': ' Términos y Condiciones',
       'talenty_as_well': ' de Talenty, así como las ',

@@ -21,44 +21,49 @@ class CustomDropDownTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      width: MediaQuery.of(context).size.width,
-      height: 48,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
-        border: Border.all(
-          color:
-              text == ''
-                  ? hasDroppedDown
-                      ? lightBlackColor
-                      : borderColor ?? borderGreyColor
-                  : lightBlackColor,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            text == '' ? 'select_option'.tr : text,
-            style: style14M.copyWith(
-              color:
-                  text == ''
-                      ? hasDroppedDown
-                          ? lightBlackColor
-                          : borderGreyColor
-                      : lightBlackColor,
-            ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        width: MediaQuery.of(context).size.width,
+        height: 48,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.r),
+          border: Border.all(
+            color:
+                text == ''
+                    ? hasDroppedDown
+                        ? lightBlackColor
+                        : borderColor ?? borderGreyColor
+                    : lightBlackColor,
           ),
-          GestureDetector(
-            onTap: onTap,
-            child: Image.asset(
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              flex: 1,
+              child: Text(
+                text == '' ? 'select_option'.tr : text,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: style14M.copyWith(
+                  color:
+                      text == ''
+                          ? hasDroppedDown
+                              ? lightBlackColor
+                              : borderGreyColor
+                          : lightBlackColor,
+                ),
+              ),
+            ),
+            Image.asset(
               hasDroppedDown ? AppAssets.arrowUp : AppAssets.arrowDown,
               width: 24,
               height: 24,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
