@@ -100,4 +100,15 @@ class AppAssets {
 
   static String img = "$dynamicAssets/image.png";
   static String img2 = "$dynamicAssets/image2.png";
+
+  ///
+  ///.  candidate profile screen
+  ///
+  static String cp1 = "$iconsAssets/cp1.png";
+  static String cp3 = "$iconsAssets/cp3.png";
+  static String cp4 = "$iconsAssets/cp4.png";
+  static String cp5 = "$iconsAssets/cp5.png";
+  static String cp6 = "$iconsAssets/cp6.png";
+  static String cp7 = "$iconsAssets/cp7.png";
+  static String cp8 = "$iconsAssets/cp8.png";
 }

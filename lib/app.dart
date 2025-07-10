@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
-import 'package:talenty_app/ui/screens/candidate/candidat_root/candidate_root_screen.dart';
-import 'package:talenty_app/ui/screens/common/splash_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/build_Profile/mandatory_registeration/mandatory_student_registration.dart';
+import 'package:talenty_app/ui/screens/candidate/home/candidate_home_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/mas/candidate_profile.dart/candidate_profile_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/mas/mas_calendar_screen/calendar_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
                 _designWidth,
                 _designHeight,
               ), // Use your constants
-              builder: (context, child) => SplashScreen(),
+              builder: (context, child) => CandidateProfileScreen(),
             ),
           ),
     );

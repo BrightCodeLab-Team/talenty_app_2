@@ -243,10 +243,10 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                   _swipeOffset += details.delta.dx;
                   if (_swipeOffset > 50) {
                     _swipeImage =
-                        AppAssets.noMeGustImg; // Right swipe - "NO ME GUSTA"
+                        AppAssets.meGustaImg; // Right swipe - "NO ME GUSTA"
                   } else if (_swipeOffset < -50) {
                     _swipeImage =
-                        AppAssets.meGustaImg; // Left swipe - "ME GUSTA"
+                        AppAssets.noMeGustImg; // Left swipe - "ME GUSTA"
                   } else {
                     _swipeImage = '';
                   }
