@@ -47,6 +47,9 @@ class AppAssets {
   static String loaderIcon = "$iconsAssets/loaderIcon.png";
   static String arrowUp = "$iconsAssets/arrowUp.png";
   static String arrowDown = "$iconsAssets/arrowDown.png";
+  static String BlockedCompaniesIcon = "$iconsAssets/Blocked CompaniesIcon.png";
+  static String profileIcon = "$iconsAssets/profileIcon.png";
+  static String watchIcon = "$iconsAssets/watchIcon.png";
 
   ///
   /// Home SCREEN
@@ -59,6 +62,8 @@ class AppAssets {
   static String globeIcon = "$iconsAssets/globeIcon.png";
   static String badgeIcon = "$iconsAssets/badgeIcon.png";
   static String experienceIcon = "$iconsAssets/experienceIcon.png";
+
+  static String menuCameraIcon = "$iconsAssets/menuCameraIcon.png";
 
   ///
   /// Vacancy  SCREEN

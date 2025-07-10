@@ -2,7 +2,6 @@ import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
-import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
 
 class CandidateHomeViewModel extends BaseViewModel {
   int categorySelect = 0;
