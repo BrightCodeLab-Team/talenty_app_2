@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
 import 'package:talenty_app/ui/screens/candidate/candidat_root/candidate_root_screen.dart';
+import 'package:talenty_app/ui/screens/common/splash_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
@@ -42,8 +43,7 @@ class MyApp extends StatelessWidget {
                 _designWidth,
                 _designHeight,
               ), // Use your constants
-
-              builder: (context, child) => CandidateRootScreen(),
+              builder: (context, child) => SplashScreen(),
             ),
           ),
     );
