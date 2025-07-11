@@ -75,6 +75,8 @@ class AppAssets {
   static String eyeIcon = "$iconsAssets/eyeIcon.png";
   static String meGustaImg = "$staticAssets/meGustaImg.png";
   static String noMeGustImg = "$staticAssets/noMeGustImg.png";
+  static String AvailabilityScreenThreeImage =
+      "$staticAssets/AvailabilityScreenThreeImage.png";
 
   /*    
 

@@ -29,7 +29,6 @@ class CandidateProfileScreen extends StatelessWidget {
                       20.verticalSpace,
                       _profile(),
                       20.verticalSpace,
-
                       Text('Mi CV', style: style16source),
                       18.verticalSpace,
                       MenuReuse(

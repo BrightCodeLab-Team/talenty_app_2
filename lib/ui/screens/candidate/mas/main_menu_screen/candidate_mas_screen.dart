@@ -6,8 +6,11 @@ import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/menu_resuse/menu_reuse.dart';
+import 'package:talenty_app/ui/screens/candidate/mas/availability_screen_3/availability_screen_3.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/c_mas_deactivate_visibility_screen/deactivate_visibility_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/mas/candidate_profile.dart/candidate_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/mas_calendar_screen/calendar_screen.dart';
 import 'package:talenty_app/ui/screens/common/splash2_screen.dart';
 import 'package:talenty_app/ui/screens/company/further_menu/menu_view_model.dart';
@@ -28,6 +31,28 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
       child: Consumer<MenuViewModel>(
         builder:
             (context, model, child) => Scaffold(
+              appBar: AppBar(
+                backgroundColor: transparent,
+                leading: Padding(
+                  padding: EdgeInsetsGeometry.only(left: 15),
+                  child: CustomBackButton(),
+                ),
+                title: Image.asset(AppAssets.appLogo2, scale: 4),
+                centerTitle: true,
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: Row(
+                      children: [
+                        Image.asset(AppAssets.eyeIcon, scale: 4),
+                        4.horizontalSpace,
+                        Icon(Icons.file_copy, color: greyColor),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
               ///
               /// Start Body
               ///
@@ -38,8 +63,6 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Center(child: Container(height: 50, color: whiteColor)),
-
                       ///
                       /// Profile
                       ///
@@ -156,7 +179,9 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       MenuReuse(
                         leading: Image.asset(AppAssets.watchIcon, scale: 4.5),
                         title: 'Mi disponibilidad',
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(AvailabilityScreenThree());
+                        },
                         child: AnimatedContainer(duration: Duration()),
                       ),
 
@@ -189,16 +214,16 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       10.verticalSpace,
                       MenuReuse(
                         leading: Image.asset(
-                          '$iconsAssets/shield.png',
+                          AppAssets.BlockedCompaniesIcon,
                           scale: 4.5,
                         ),
-                        title: 'Privacidad y Seguridad',
+                        title: 'tèrminos Condiciones',
                         onTap: () {},
                         child: AnimatedContainer(duration: Duration()),
                       ),
                       20.verticalSpace,
 
-                      Text('Privacidad y Seguridad', style: style16source),
+                      Text('Administraciòn de cuenta', style: style16source),
                       18.verticalSpace,
 
                       MenuReuse(
@@ -240,21 +265,34 @@ _profile() {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      CircleAvatar(radius: 40.r, backgroundImage: AssetImage(AppAssets.img2)),
+      GestureDetector(
+        onTap: () {
+          Get.to(CandidateProfileScreen());
+        },
+        child: CircleAvatar(
+          radius: 40.r,
+          backgroundImage: AssetImage(AppAssets.img2),
+        ),
+      ),
       4.horizontalSpace,
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Jorge Pérez', style: style24),
-          4.verticalSpace,
-          Row(
-            children: [
-              Text('Ver Perfil', style: style14source),
-              SizedBox(width: 4.w),
-              Icon(Icons.arrow_forward, color: lightBlackColor, size: 14),
-            ],
-          ),
-        ],
+      GestureDetector(
+        onTap: () {
+          Get.to(CandidateProfileScreen());
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Jorge Pérez', style: style24),
+            4.verticalSpace,
+            Row(
+              children: [
+                Text('Ver Perfil', style: style14source),
+                SizedBox(width: 4.w),
+                Icon(Icons.arrow_forward, color: lightBlackColor, size: 14),
+              ],
+            ),
+          ],
+        ),
       ),
       Spacer(),
       Image.asset(AppAssets.badgeIcon, scale: 4),
