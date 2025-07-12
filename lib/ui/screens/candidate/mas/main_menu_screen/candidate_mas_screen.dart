@@ -7,7 +7,7 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
-import 'package:talenty_app/ui/custom_widgets/menu_resuse/menu_reuse.dart';
+import 'package:talenty_app/ui/custom_widgets/menu_reuse/menu_reuse.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/availability_screen_3/availability_screen_3.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/c_mas_deactivate_visibility_screen/deactivate_visibility_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/candidate_profile.dart/candidate_profile_screen.dart';

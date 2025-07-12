@@ -77,7 +77,7 @@ class AppAssets {
   static String noMeGustImg = "$staticAssets/noMeGustImg.png";
   static String AvailabilityScreenThreeImage =
       "$staticAssets/AvailabilityScreenThreeImage.png";
-
+  static String blockCompaniesImg = "$staticAssets/blockCompaniesImg.png";
   /*    
 
       Bottom Navigator Bar Assets

@@ -5,7 +5,7 @@ import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
-import 'package:talenty_app/ui/custom_widgets/menu_resuse/menu_reuse.dart';
+import 'package:talenty_app/ui/custom_widgets/menu_reuse/menu_reuse.dart';
 import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
 
 class CandidateProfileScreen extends StatelessWidget {
