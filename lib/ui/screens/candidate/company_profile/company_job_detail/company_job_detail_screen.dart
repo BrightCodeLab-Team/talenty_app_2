@@ -1,8 +1,4 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
-
-import 'dart:math';
-
-import 'package:animated_icon/animated_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
@@ -13,10 +9,10 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
+import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat.dart';
-import 'package:talenty_app/ui/screens/candidate/company_profile/comapny_profile_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
 
 class CompanyJobDetailScreen extends StatelessWidget {
@@ -51,7 +47,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int index = 0;
+    // final int index = 0;
     return ChangeNotifierProvider(
       create:
           (context) =>
@@ -648,53 +644,6 @@ class CompanyJobDetailScreen extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-///
-///. custom ability widget
-///
-class TagItem {
-  final String text;
-
-  TagItem(this.text);
-}
-
-// 2. Create the custom widget
-class CustomIconTextTag extends StatelessWidget {
-  final TagItem item;
-
-  const CustomIconTextTag({Key? key, required this.item}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxWidth: 150.w, // 💡 Limit the width per tag
-      ),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 6.h),
-        decoration: BoxDecoration(
-          border: Border.all(color: greyColor),
-          borderRadius: BorderRadius.circular(6.r),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Icon(item.icon, size: 16, color: Colors.grey[700]),
-            SizedBox(width: 4.w),
-            Flexible(
-              child: Text(
-                item.text,
-                style: style16M.copyWith(color: textGreyColor),
-                overflow: TextOverflow.ellipsis, // prevent overflow
-                softWrap: false,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

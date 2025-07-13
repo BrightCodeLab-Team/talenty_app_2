@@ -1,5 +1,3 @@
-import 'package:talenty_app/core/constants/app_assets.dart';
-import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
 
 class CompanyProfileViewModel extends BaseViewModel {

@@ -8,7 +8,12 @@ import 'package:talenty_app/core/constants/text_style.dart';
 class MenuReuse extends StatelessWidget {
   final leading;
   final String title;
-  const MenuReuse({required this.leading, required this.title, super.key});
+  const MenuReuse({
+    required this.leading,
+    required this.title,
+    super.key,
+    required Null Function() onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
-import 'package:talenty_app/ui/custom_widgets/menu_resuse/menu_reuse.dart';
+import 'package:talenty_app/ui/custom_widgets/menu_reuse.dart';
 import 'package:talenty_app/ui/screens/common/tips/tips_screen.dart';
 import 'package:talenty_app/ui/screens/company/further_menu/menu_view_model.dart';
 import 'package:talenty_app/ui/screens/company/notifications/notification_screen.dart';
