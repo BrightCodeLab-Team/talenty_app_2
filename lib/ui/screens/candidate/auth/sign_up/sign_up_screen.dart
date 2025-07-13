@@ -9,7 +9,6 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/sign_up/sign_up_view_model.dart';
-import 'package:talenty_app/ui/screens/company/auth/otp_screen/otp_screen.dart';
 
 import '../../../../../core/constants/auth_field_decoration.dart';
 import '../../../../custom_widgets/buttons/custom_buttons.dart';
@@ -39,7 +38,7 @@ class CandidateSignUpScreen extends StatelessWidget {
                       45.verticalSpace,
                       Header(),
                       25.verticalSpace,
-                      Text('Crea una cuenta'.tr, style: style24M),
+                      Text('create_an_account'.tr, style: style24M),
                       20.verticalSpace,
 
                       20.verticalSpace,
@@ -47,7 +46,7 @@ class CandidateSignUpScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Ingresa tu correo electrónico'.tr,
+                            'enter_your_email'.tr,
                             style: style16M.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -74,7 +73,7 @@ class CandidateSignUpScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Contraseña crear cuenta'.tr,
+                            'password_create_account'.tr,
                             style: style16M.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -129,8 +128,7 @@ class CandidateSignUpScreen extends StatelessWidget {
                       10.verticalSpace,
 
                       Text(
-                        'Crea una contraseña segura de al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos.'
-                            .tr,
+                        'register_company_password_info'.tr.tr,
                         maxLines: 3,
                         style: style14M.copyWith(color: textDarkGreyColor),
                       ),
