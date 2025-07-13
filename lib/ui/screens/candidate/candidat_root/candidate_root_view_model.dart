@@ -6,7 +6,7 @@ import 'package:talenty_app/core/enums/view_state.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat.dart';
 import 'package:talenty_app/ui/screens/candidate/home/candidate_home_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/mas/candidate_mas_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/mas/main_menu_screen/candidate_mas_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/matches/candidate_matches_screen.dart';
 import 'package:talenty_app/ui/screens/common/tips/tips_screen.dart';
 

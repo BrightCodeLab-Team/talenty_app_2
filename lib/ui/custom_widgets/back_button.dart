@@ -12,8 +12,8 @@ class CustomBackButton extends StatelessWidget {
       top: 10,
       left: 10,
       child: CircleAvatar(
-        radius: 20.r,
-        backgroundColor: textDarkGreyColor,
+        radius: 17.r,
+        backgroundColor: lightBlackColor,
         child: IconButton(
           onPressed: () {
             navigator!.pop();

@@ -6,8 +6,7 @@ import 'package:talenty_app/app.dart';
 import 'package:talenty_app/core/enums/env.dart';
 import 'package:talenty_app/core/others/logger_customization/custom_logger.dart';
 import 'package:talenty_app/core/constants/provider.dart';
-
-import 'locator.dart';
+import 'package:talenty_app/locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

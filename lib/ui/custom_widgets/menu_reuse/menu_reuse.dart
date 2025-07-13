@@ -7,11 +7,19 @@ class MenuReuse extends StatelessWidget {
   final Widget leading;
   final String title;
   final VoidCallback onTap;
+  final Widget? trailing;
+  final TextStyle? textStyle;
+  final Color? trailingIconColor; // NEW: optional color for trailing icon
+
   // ignore: use_key_in_widget_constructors
   const MenuReuse({
     required this.leading,
     required this.title,
     required this.onTap,
+    required AnimatedContainer child,
+    this.trailing,
+    this.textStyle,
+    this.trailingIconColor,
   });
 
   @override
@@ -34,16 +42,19 @@ class MenuReuse extends StatelessWidget {
                   children: [
                     leading,
                     5.horizontalSpace,
-                    Text(title, style: style14sourceblack),
+                    Text(title, style: textStyle ?? style14sourceblack),
                   ],
                 ),
-
-                Icon(Icons.arrow_forward_ios, size: 20, color: lightBlackColor),
+                trailing ??
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 20,
+                      color: trailingIconColor ?? lightBlackColor,
+                    ),
               ],
             ),
             10.verticalSpace,
             horizontaldiDivider(),
-            20.verticalSpace,
           ],
         ),
       ),

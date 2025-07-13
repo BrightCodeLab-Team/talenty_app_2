@@ -47,6 +47,9 @@ class AppAssets {
   static String loaderIcon = "$iconsAssets/loaderIcon.png";
   static String arrowUp = "$iconsAssets/arrowUp.png";
   static String arrowDown = "$iconsAssets/arrowDown.png";
+  static String BlockedCompaniesIcon = "$iconsAssets/Blocked CompaniesIcon.png";
+  static String profileIcon = "$iconsAssets/profileIcon.png";
+  static String watchIcon = "$iconsAssets/watchIcon.png";
 
   ///
   /// Home SCREEN
@@ -60,6 +63,8 @@ class AppAssets {
   static String badgeIcon = "$iconsAssets/badgeIcon.png";
   static String experienceIcon = "$iconsAssets/experienceIcon.png";
 
+  static String menuCameraIcon = "$iconsAssets/menuCameraIcon.png";
+
   ///
   /// Vacancy  SCREEN
   ///
@@ -70,7 +75,9 @@ class AppAssets {
   static String eyeIcon = "$iconsAssets/eyeIcon.png";
   static String meGustaImg = "$staticAssets/meGustaImg.png";
   static String noMeGustImg = "$staticAssets/noMeGustImg.png";
-
+  static String AvailabilityScreenThreeImage =
+      "$staticAssets/AvailabilityScreenThreeImage.png";
+  static String blockCompaniesImg = "$staticAssets/blockCompaniesImg.png";
   /*    
 
       Bottom Navigator Bar Assets
@@ -95,4 +102,15 @@ class AppAssets {
 
   static String img = "$dynamicAssets/image.png";
   static String img2 = "$dynamicAssets/image2.png";
+
+  ///
+  ///.  candidate profile screen
+  ///
+  static String cp1 = "$iconsAssets/cp1.png";
+  static String cp3 = "$iconsAssets/cp3.png";
+  static String cp4 = "$iconsAssets/cp4.png";
+  static String cp5 = "$iconsAssets/cp5.png";
+  static String cp6 = "$iconsAssets/cp6.png";
+  static String cp7 = "$iconsAssets/cp7.png";
+  static String cp8 = "$iconsAssets/cp8.png";
 }

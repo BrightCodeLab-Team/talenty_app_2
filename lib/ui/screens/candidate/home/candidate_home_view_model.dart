@@ -1,7 +1,7 @@
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
-import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
+import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
 
 class CandidateHomeViewModel extends BaseViewModel {
   int categorySelect = 0;
@@ -267,8 +267,8 @@ class CandidateHomeViewModel extends BaseViewModel {
       canStartImmediately: 'No',
       requiresExperience: '3+ Years',
       workDays: 'Monday to Friday',
-      minSalary: '7000',
-      maxSalary: '10000',
+      minSalary: '1000',
+      maxSalary: '2000',
       paymentFrequency: 'Monthly',
       benefits: 'Health Insurance, Bonuses',
       softSkills: 'Problem Solving, Communication',
