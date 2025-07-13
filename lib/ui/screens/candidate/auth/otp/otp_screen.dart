@@ -46,95 +46,107 @@ class CandidateOTPScreen extends StatelessWidget {
             // BODY
             //
             body: SingleChildScrollView(
-              child: CustomPadding(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    45.verticalSpace,
-                    Header(hasBackButton: false),
-                    25.verticalSpace,
-                    Text('otp_verify_title'.tr, style: style24M),
-                    20.verticalSpace,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
 
-                    RichText(
-                      text: TextSpan(
-                        style: style14M.copyWith(color: textDarkGreyColor),
-                        children: [
-                          TextSpan(
-                            text: 'Ingresa el código que mandamos a '.tr,
-                          ),
-                          TextSpan(text: " $email" ?? ''),
-                        ],
-                      ),
-                      maxLines: 3,
+                children: [
+                  45.verticalSpace,
+                  Header(hasBackButton: false),
+                  25.verticalSpace,
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Text('otp_verify_title'.tr, style: style24M),
                     ),
-                    20.verticalSpace,
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: OtpTextField(
-                        fieldWidth: 51.0,
-                        numberOfFields: 6,
-                        showFieldAsBox: true,
-                        focusedBorderColor:
-                            model.hasError ? primaryColor : lightBlackColor,
-                        enabledBorderColor:
-                            model.hasError ? primaryColor : lightBlackColor,
-                        cursorColor: blackColor,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        borderRadius: BorderRadius.circular(8.r),
-                        onSubmit: (value) {
-                          model.updateOtp(value);
-                        },
-                      ),
-                    ),
+                  ),
+                  20.verticalSpace,
 
-                    if (model.otpError != null && model.otpError!.isNotEmpty)
-                      Center(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 8.h),
-                          child: Text(
-                            model.otpError ?? "",
-                            style: TextStyle(color: Colors.red, fontSize: 12),
-                          ),
-                        ),
-                      ),
-                    20.verticalSpace,
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'otp_resend_timer'.tr,
-                            style: style14M.copyWith(color: textDarkGreyColor),
-                          ),
-
-                          Text(
-                            model.timerText,
-                            style: style14M.copyWith(color: textDarkGreyColor),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (model.canResend) ...[
-                      10.verticalSpace,
-                      GestureDetector(
-                        onTap: () {
-                          model.resendOtp();
-                        },
-                        child: Center(
-                          child: Text(
-                            'Resend OTP',
-                            style: style14M.copyWith(
-                              color: primaryColor,
-                              fontWeight: FontWeight.w600,
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: RichText(
+                        text: TextSpan(
+                          style: style14M.copyWith(color: textDarkGreyColor),
+                          children: [
+                            TextSpan(
+                              text: 'Ingresa el código que mandamos a '.tr,
                             ),
+                            TextSpan(text: " $email" ?? ''),
+                          ],
+                        ),
+                        maxLines: 3,
+                      ),
+                    ),
+                  ),
+                  20.verticalSpace,
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: OtpTextField(
+                      fieldWidth: 55.0,
+                      numberOfFields: 6,
+                      showFieldAsBox: true,
+                      focusedBorderColor:
+                          model.hasError ? primaryColor : lightBlackColor,
+                      enabledBorderColor:
+                          model.hasError ? primaryColor : lightBlackColor,
+                      cursorColor: blackColor,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      borderRadius: BorderRadius.circular(8.r),
+                      onSubmit: (value) {
+                        model.updateOtp(value);
+                      },
+                    ),
+                  ),
+
+                  if (model.otpError != null && model.otpError!.isNotEmpty)
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 8.h),
+                        child: Text(
+                          model.otpError ?? "",
+                          style: TextStyle(color: Colors.red, fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  20.verticalSpace,
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'otp_resend_timer'.tr,
+                          style: style14M.copyWith(color: textDarkGreyColor),
+                        ),
+
+                        Text(
+                          model.timerText,
+                          style: style14M.copyWith(color: textDarkGreyColor),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (model.canResend) ...[
+                    10.verticalSpace,
+                    GestureDetector(
+                      onTap: () {
+                        model.resendOtp();
+                      },
+                      child: Center(
+                        child: Text(
+                          'Resend OTP',
+                          style: style14M.copyWith(
+                            color: primaryColor,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
-                    ],
+                    ),
                   ],
-                ),
+                ],
               ),
             ),
           );
