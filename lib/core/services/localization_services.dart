@@ -86,6 +86,9 @@ class LocalizationService extends Translations {
           'Create a secure password of at least 8 characters—including uppercase, lowercase, numbers, and symbols.',
       'register_company_confirm_password_label': 'Confirm Password',
       'register_company_confirm_password_hint': 'Confirm your password',
+      'create_an_account': 'Create an Account',
+      'enter_your_email': 'Enter your email',
+      'password_create_account': 'Password create account',
       // OTP Screen
       'otp_verify_title': 'Verify your email',
       'otp_instruction': 'Enter the code we sent to',
@@ -1012,6 +1015,10 @@ class LocalizationService extends Translations {
           'Crea una contraseña segura de al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos.',
       'register_company_confirm_password_label': 'Confirmar Contraseña',
       'register_company_confirm_password_hint': 'Confirma tu contraseña',
+      'create_an_account': 'Crea una cuenta',
+      'enter_your_email': 'Ingresa tu correo electrónico',
+      'password_create_account': 'Contraseña crear cuenta',
+
       // OTP Screen
       'otp_verify_title': 'Verifica tu correo',
       'otp_instruction': 'Ingresa el código que mandamos a ',

@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
             title: title,
             translations: LocalizationService(),
             // locale: DevicePreview.locale(context),
-            locale: Locale('es'),
+            locale: Locale('en'),
             builder: DevicePreview.appBuilder,
             defaultTransition: Transition.rightToLeft,
             themeMode:
@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
                 _designWidth,
                 _designHeight,
               ), // Use your constants
+
               builder: (context, child) => CandidateRootScreen(),
             ),
           ),
