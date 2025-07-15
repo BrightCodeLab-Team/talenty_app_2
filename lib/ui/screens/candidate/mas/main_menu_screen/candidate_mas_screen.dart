@@ -9,8 +9,10 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/menu_reuse/menu_reuse.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/availability_screen_3/availability_screen_3.dart';
+import 'package:talenty_app/ui/screens/candidate/mas/block_companies/block_companies_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/c_mas_deactivate_visibility_screen/deactivate_visibility_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/candidate_profile.dart/candidate_profile_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/mas/delete_account/delete_account_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/mas_calendar_screen/calendar_screen.dart';
 import 'package:talenty_app/ui/screens/common/splash2_screen.dart';
 import 'package:talenty_app/ui/screens/company/further_menu/menu_view_model.dart';
@@ -197,7 +199,9 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                           scale: 4,
                         ),
                         title: 'Empresas bloqueadas',
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(BlockedCompaniesScreen());
+                        },
                         child: AnimatedContainer(duration: Duration()),
                       ),
                       10.verticalSpace,
@@ -229,7 +233,9 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       MenuReuse(
                         leading: Icon(Icons.delete, color: primaryColor),
                         title: 'Eliminar cuenta',
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(CandidateDeleteAccountScreen());
+                        },
                         textStyle: style14sourceblack?.copyWith(
                           color: primaryColor,
                         ),

@@ -1,12 +1,14 @@
-// lib/widgets/company_blocked_card.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/core/model/compnay_model/company_model.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
+import 'package:talenty_app/ui/custom_widgets/divider.dart';
+import 'package:talenty_app/ui/screens/candidate/mas/block_companies/block_companies_view_model.dart';
 
 class BlockedCompaniesScreen extends StatelessWidget {
   final BlockedCompaniesViewModel viewModel = Get.put(
@@ -36,12 +38,12 @@ class BlockedCompaniesScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(AppAssets.menulogo, height: 200.h),
+                  Image.asset(AppAssets.vacancyEmpty, height: 200.h),
                   20.verticalSpace,
                   Text(
                     'No tienes empresas bloqueadas en este momento.',
                     textAlign: TextAlign.center,
-                    style: style16M.copyWith(color: greyColor),
+                    style: style16M.copyWith(color: blackColor),
                   ),
                 ],
               ),
@@ -67,14 +69,14 @@ class BlockedCompaniesScreen extends StatelessWidget {
                     Center(
                       child: Image.asset(
                         AppAssets.blockCompaniesImg,
-                        scale: 5,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Icon(
-                            Icons.block,
-                            size: 80.h,
-                            color: greyColor,
-                          );
-                        },
+                        scale: 4,
+                        // errorBuilder: (context, error, stackTrace) {
+                        //   return Icon(
+                        //     Icons.block,
+                        //     size: 80.h,
+                        //     color: greyColor,
+                        //   );
+                        // },
                       ),
                     ),
                     10.verticalSpace,
@@ -87,10 +89,12 @@ class BlockedCompaniesScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // Changed from Expanded ListView to direct ListView with shrinkWrap
+              // Re-introducing ListView.builder with shrinkWrap and NeverScrollableScrollPhysics
               ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap:
+                    true, // Important: Makes the ListView take only as much space as its children
+                physics:
+                    NeverScrollableScrollPhysics(), // Important: Prevents the ListView from scrolling independently
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 itemCount: viewModel.blockedCompanies.length,
                 itemBuilder: (context, index) {
@@ -130,6 +134,7 @@ class BlockedCompaniesScreen extends StatelessWidget {
 ///
 ///. Block company custom widget
 ///
+
 class CompanyBlockedCard extends StatelessWidget {
   final CompanyProfileModel company;
   final VoidCallback onUnblockPressed;
@@ -145,11 +150,11 @@ class CompanyBlockedCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-        color: secondaryColor, // Assuming whiteColor is defined
+        color: Color(0xffF8F8F8), // Assuming whiteColor is defined
         borderRadius: BorderRadius.circular(10.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: blackColor.withOpacity(0.2),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, 3), // changes position of shadow
@@ -160,11 +165,11 @@ class CompanyBlockedCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2),
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: 24.r,
+                  radius: 20.r,
                   backgroundColor: greyColor, // Placeholder for logo
                   // You can use company.logoUrl here with NetworkImage if available
                   child:
@@ -173,8 +178,7 @@ class CompanyBlockedCard extends StatelessWidget {
                             child: Image.network(
                               company.logoUrl,
                               fit: BoxFit.cover,
-                              width: 48.r,
-                              height: 48.r,
+
                               errorBuilder:
                                   (context, error, stackTrace) => Icon(
                                     Icons.business,
@@ -185,66 +189,77 @@ class CompanyBlockedCard extends StatelessWidget {
                           : Icon(Icons.business, color: whiteColor),
                 ),
                 2.horizontalSpace,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          company.companyName,
-                          style: style16B.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: blackColor,
-                          ), // Assuming blackColor
-                        ),
-
-                        Spacer(),
-                        Container(
-                          // padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                          decoration: BoxDecoration(
-                            color: primaryColor.withOpacity(
-                              0.1,
-                            ), // Assuming redColor
-                            borderRadius: BorderRadius.circular(5.r),
+                Expanded(
+                  // Added Expanded to allow text to take available space
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            company.companyName,
+                            style: style16B.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: blackColor,
+                            ), // Assuming blackColor
                           ),
-                          child: Text(
-                            company
-                                .status
-                                .tr, // Use .tr for localization if needed
-                            style: style14B.copyWith(
-                              color: primaryColor,
-                            ), // Assuming style12R
+                          Spacer(),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 2.w,
+                              vertical: 2.h,
+                            ), // Added padding
+                            decoration: BoxDecoration(
+                              color: primaryColor.withOpacity(
+                                0.2,
+                              ), // Assuming redColor
+                              borderRadius: BorderRadius.circular(3.r),
+                            ),
+                            child: Text(
+                              company
+                                  .status
+                                  .tr, // Use .tr for localization if needed
+                              style: style12M.copyWith(
+                                color: primaryColor,
+                              ), // Assuming style12R
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          company.location,
-                          style: style14M.copyWith(
-                            color: textGreyColor,
-                          ), // Assuming style14R and greyColor
-                        ),
-                        Text(
-                          ",${company.state}",
-                          style: style14M.copyWith(color: textGreyColor),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            company.location,
+                            style: style14M.copyWith(
+                              color: textGreyColor,
+                            ), // Assuming style14R and greyColor
+                          ),
+                          Text(
+                            ",${company.state}",
+                            style: style14M.copyWith(color: textGreyColor),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          16.verticalSpace,
-          CustomButton(
-            text: 'Desbloquear',
-            onTap: onUnblockPressed,
-            backgroundColor: primaryColor, // Assuming redColor
-            textColor: whiteColor,
-            radius: 8.r,
+
+          Padding(padding: const EdgeInsets.all(8.0), child: CustomDivider()),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: CustomButton(
+              text: 'Desbloquear',
+              onTap: onUnblockPressed,
+              backgroundColor: primaryColor, // Assuming redColor
+              textColor: whiteColor,
+              radius: 8.r,
+            ),
           ),
+          15.verticalSpace,
         ],
       ),
     );
@@ -282,14 +297,8 @@ class UnblockConfirmationDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                // Optional: Close button if you want one here, otherwise it's just the header
-                // IconButton(
-                //   icon: Icon(Icons.close),
-                //   onPressed: () => Get.back(),
-                // ),
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                
               ],
             ),
             // Header with Talenty logo/text, similar to your app bar
@@ -312,7 +321,7 @@ class UnblockConfirmationDialog extends StatelessWidget {
             Text(
               '¿Está seguro de que quiere desbloquear a esta empresa?',
               textAlign: TextAlign.center,
-              style: style14M.copyWith(color: blackColor),
+              style: style14B.copyWith(color: blackColor),
             ),
             10.verticalSpace,
             Text(
@@ -329,7 +338,7 @@ class UnblockConfirmationDialog extends StatelessWidget {
               },
               backgroundColor: primaryColor,
               textColor: whiteColor,
-              radius: 8.r,
+              radius: 14.r,
             ),
             12.verticalSpace,
             CustomButton(
@@ -338,121 +347,13 @@ class UnblockConfirmationDialog extends StatelessWidget {
                 Get.back(); // Just close the dialog
               },
               backgroundColor: Colors.transparent, // Transparent background
-              textColor: greyColor, // Text color for cancel
-              borderColor: greyColor.withOpacity(0.3), // Light border
-              radius: 8.r,
+              textColor: blackColor, // Text color for cancel
+              borderColor: blackColor, // Light border
+              radius: 14.r,
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-///
-///. view model
-///
-
-class BlockedCompaniesViewModel extends GetxController {
-  // Observable list of blocked companies
-  RxList<CompanyProfileModel> blockedCompanies = <CompanyProfileModel>[].obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    // Initialize with some dummy data
-    _loadBlockedCompanies();
-  }
-
-  void _loadBlockedCompanies() {
-    // In a real app, you would fetch this from an API or local storage
-    blockedCompanies.value = [
-      CompanyProfileModel(
-        state: 'CDMX',
-        id: '1',
-        companyName: 'Talenty',
-        location: 'Colombia',
-        status: 'Bloqueada',
-        logoUrl: AppAssets.menulogo,
-      ),
-      CompanyProfileModel(
-        state: 'CDMX',
-        id: '2',
-        companyName: 'Rappi food',
-        location: 'México',
-        status: 'Bloqueada',
-        logoUrl: AppAssets.menulogo,
-      ),
-      // Add more dummy companies as needed
-    ];
-  }
-
-  void unblockCompany(String companyId) {
-    blockedCompanies.removeWhere((company) => company.id == companyId);
-    // In a real app, you would also send an API request to unblock the company
-    Get.snackbar(
-      'Éxito',
-      'Empresa desbloqueada con éxito.',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: greenColor,
-      colorText: whiteColor,
-    );
-  }
-}
-
-///
-/// model
-///
-// lib/models/company_profile_model.dart
-class CompanyProfileModel {
-  final String id; // Unique ID for the company
-  final String companyName;
-  final String location;
-  final String status; // e.g., "Bloqueada" (Blocked), "Activa" (Active)
-  final String logoUrl; // Optional: if you have company logos
-  final String state;
-
-  CompanyProfileModel({
-    required this.id,
-    required this.companyName,
-    required this.location,
-    required this.status,
-    this.logoUrl = '', // Default empty if no logo
-    required this.state,
-  });
-
-  // Optional: Add a factory constructor for easy deserialization from JSON if needed
-  factory CompanyProfileModel.fromJson(Map<String, dynamic> json) {
-    return CompanyProfileModel(
-      state: json['state'] as String,
-      id: json['id'] as String,
-      companyName: json['companyName'] as String,
-      location: json['location'] as String,
-      status: json['status'] as String,
-      logoUrl: json['logoUrl'] as String? ?? '',
-    );
-  }
-
-  // Optional: Add a toJson method for easy serialization to JSON if needed
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'companyName': companyName,
-      'location': location,
-      'status': status,
-      'logoUrl': logoUrl,
-    };
-  }
-
-  // Helper to create a copy with updated status (e.g., for unblocking)
-  CompanyProfileModel copyWith({String? status}) {
-    return CompanyProfileModel(
-      state: state,
-      id: id,
-      companyName: companyName,
-      location: location,
-      status: status ?? this.status,
-      logoUrl: logoUrl,
     );
   }
 }

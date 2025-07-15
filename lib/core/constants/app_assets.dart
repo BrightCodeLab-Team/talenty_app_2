@@ -21,6 +21,7 @@ class AppAssets {
   static String registerCompanyImage = "$staticAssets/registerCompanyImage.png";
   static String registerRecruiterImage =
       "$staticAssets/registerRecruiterImage.png";
+  static String deleteAccountGif = "$staticAssets/deleteAccountGif.png";
 
   /*    
 
@@ -77,7 +78,7 @@ class AppAssets {
   static String noMeGustImg = "$staticAssets/noMeGustImg.png";
   static String AvailabilityScreenThreeImage =
       "$staticAssets/AvailabilityScreenThreeImage.png";
-  static String blockCompaniesImg = "$staticAssets/blockCompaniesImg.png";
+  static String blockCompaniesImg = "$staticAssets/blockCompainiesImg.png";
   /*    
 
       Bottom Navigator Bar Assets

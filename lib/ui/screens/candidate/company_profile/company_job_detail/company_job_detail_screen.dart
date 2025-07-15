@@ -13,7 +13,7 @@ import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_view_model.dart';
 
 class CompanyJobDetailScreen extends StatelessWidget {
   final JobVacancyModel jobVacancyModel;

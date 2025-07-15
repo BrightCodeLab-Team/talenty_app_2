@@ -10,7 +10,7 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_view_model.dart';
 
 class CompanyProfileScreen extends StatefulWidget {
   // final JobVacancyModel jobVacancyModel;

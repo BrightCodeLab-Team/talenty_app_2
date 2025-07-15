@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,7 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_view_model.dart';
 
 class CandidateMatchesScreen extends StatefulWidget {
   const CandidateMatchesScreen({super.key});

@@ -14,7 +14,7 @@ import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_search/candidate_search.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/home/candidate_home_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_view_model.dart';
 import 'package:talenty_app/ui/screens/company/notifications/notification_screen.dart';
 
 class CandidateHomeScreen extends StatefulWidget {
