@@ -30,12 +30,12 @@ class TranslationScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => Get.updateLocale(const Locale('en')),
-              child: const Text('Switch to English'),
+              child:  Text('Switch'.tr),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () => Get.updateLocale(const Locale('es')),
-              child: const Text('Switch to Spanish'),
+              child: Text('spanish'.tr),
             ),
           ],
         ),

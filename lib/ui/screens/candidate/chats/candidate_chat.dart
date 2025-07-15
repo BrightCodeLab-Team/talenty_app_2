@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
@@ -33,7 +34,7 @@ class CandidateChatScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Chats",
+                          "chats".tr,
                           style: GoogleFonts.lora(
                             color: blackColor,
                             fontSize: 24,
@@ -45,7 +46,7 @@ class CandidateChatScreen extends StatelessWidget {
                     ),
                     20.verticalSpace,
                     Text(
-                      'Tus vacantes',
+                       'Your_vacancies'.tr,
                       style: style14M.copyWith(color: textGreyColor),
                     ),
                     SizedBox(height: 8),

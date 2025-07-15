@@ -124,7 +124,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                                   navigator!.pop();
                                 },
                               ),
-                              hintText: 'Search...',
+                              hintText: 'Search'.tr,
                               hintStyle: style16M.copyWith(color: blackColor),
                               prefixIcon: Image.asset(
                                 AppAssets.searchIcon,
@@ -158,7 +158,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
             Image.asset(AppAssets.searchIcon, height: 100, width: 100),
             SizedBox(height: 20),
             Text(
-              'Search for jobs',
+              'Search for jobs'.tr,
               style: style20B.copyWith(color: textDarkGreyColor),
             ),
             SizedBox(height: 8),
@@ -179,12 +179,12 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
             Image.asset(AppAssets.vacancyEmpty, height: 100, width: 100),
             SizedBox(height: 20),
             Text(
-              'No jobs found',
+              'No jobs found'.tr,
               style: style20B.copyWith(color: textDarkGreyColor),
             ),
             SizedBox(height: 8),
             Text(
-              'Try different keywords or filters',
+             'keyboard'.tr,
               style: style14M.copyWith(color: textGreyColor),
             ),
           ],
@@ -278,7 +278,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'VIAJES',
+                                   'viajes'.tr,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -294,7 +294,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                                     ),
                                   ),
                                   Text(
-                                    'PREMIUM®',
+                                 'prenium'.tr,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -367,11 +367,11 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Viajes Premium',
+                                       'Viajes PREMIUM'.tr,
                                         style: style14M.copyWith(),
                                       ),
                                       Text(
-                                        'Ver Perfil →',
+                                         'ver_perfil →'.tr,
                                         style: style12M.copyWith(
                                           color: textGreyColor,
                                         ),

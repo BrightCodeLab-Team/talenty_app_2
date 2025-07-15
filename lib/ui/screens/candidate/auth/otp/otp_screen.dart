@@ -11,9 +11,7 @@ import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/build_Profile/mandatory_registeration/mandatory_student_registration.dart';
 import 'package:talenty_app/ui/screens/company/auth/otp_screen/otp_view_model.dart';
-import 'package:talenty_app/ui/screens/company/build_profile/register_company/register_company_0_percent_screen.dart';
 
-import '../../../../custom_widgets/paddings_and_margins/custom_padding.dart';
 
 class CandidateOTPScreen extends StatelessWidget {
   final String email;
@@ -74,7 +72,7 @@ class CandidateOTPScreen extends StatelessWidget {
                             TextSpan(
                               text: 'Ingresa el código que mandamos a '.tr,
                             ),
-                            TextSpan(text: " $email" ?? ''),
+                            TextSpan(text: " $email"),
                           ],
                         ),
                         maxLines: 3,

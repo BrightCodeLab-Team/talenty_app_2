@@ -45,14 +45,14 @@ class MenuScreen extends StatelessWidget {
                       ///
                       /// Title
                       ///
-                      Text('Mi Cuenta', style: style16source),
+                      Text('My Account'.tr, style: style16source),
                       18.verticalSpace,
                       MenuReuse(
                         leading: Image.asset(
                           '$iconsAssets/vector.png',
                           scale: 4.5,
                         ),
-                        title: 'Perfil administrativo',
+                        title:'Administrative profile'.tr,
                         onTap: () {
                           Get.to(() => EditRecruiter());
                           // Navigator.push(
@@ -69,7 +69,7 @@ class MenuScreen extends StatelessWidget {
                           '$iconsAssets/bell.png',
                           scale: 4.5,
                         ),
-                        title: 'Notificaciones',
+                        title: 'notifications'.tr,
                         onTap: () {
                           Get.to(() => NotificationScreen());
                         },
@@ -80,7 +80,7 @@ class MenuScreen extends StatelessWidget {
                           '$iconsAssets/calender.png',
                           scale: 4.5,
                         ),
-                        title: 'Mi calendario',
+                        title: 'My Calendar'.tr,
                         onTap: () {},
                       ),
 
@@ -89,7 +89,7 @@ class MenuScreen extends StatelessWidget {
                           '$iconsAssets/addcontact.png',
                           scale: 4.5,
                         ),
-                        title: 'Mis estadísticas',
+                        title:    'My stats'.tr,
                         onTap: () {
                           //Get.to(() => MyDataScreen());
                         },
@@ -100,7 +100,7 @@ class MenuScreen extends StatelessWidget {
                           '$iconsAssets/tips.png',
                           scale: 4.5,
                         ),
-                        title: 'Tips',
+                        title: 'Tips'.tr,
                         onTap: () {
                           Get.to(() => TipsScreen());
                         },
@@ -108,7 +108,7 @@ class MenuScreen extends StatelessWidget {
                       //
                       SizedBox(height: 35),
                       //
-                      Text('Privacidad y Seguridad', style: style16source),
+                      Text('Privacy and Security'.tr, style: style16source),
                       //
                       18.verticalSpace,
                       //
@@ -117,7 +117,7 @@ class MenuScreen extends StatelessWidget {
                           '$iconsAssets/setting.png',
                           scale: 4.5,
                         ),
-                        title: 'Configuración de cuenta',
+                        title:  'Account Settings'.tr,
                         onTap: () {},
                       ),
 
@@ -127,7 +127,7 @@ class MenuScreen extends StatelessWidget {
                           '$iconsAssets/shield.png',
                           scale: 4.5,
                         ),
-                        title: 'Aviso de privacidad',
+                        title: 'Privacy Notice'.tr,
                         onTap: () {},
                       ),
                       20.verticalSpace,
@@ -155,12 +155,12 @@ _profile() {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('Viajes Premium', style: style24),
+          Text('Viajes_PREMIUM'.tr, style: style24),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('Ver Perfil de Empresa', style: style14source),
+              Text('View Company Profile'.tr, style: style14source),
               //
               SizedBox(width: 5.w),
               //

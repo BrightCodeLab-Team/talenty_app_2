@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/auth_field_decoration.dart';
@@ -30,17 +31,17 @@ class RecruiterScreen extends StatelessWidget {
                   children: [
                     Center(child: Image.asset(AppAssets.appLogo2, scale: 6)),
                     30.verticalSpace,
-                    Text("Mis Reclutadores", style: style24M),
+                    Text("My Recruiters".tr, style: style24M),
                     16.verticalSpace,
                     Text(
-                      "Aquí puedes visualizar la información de cada reclutador, editar sus datos, suspender su acceso o eliminar su cuenta según sea necesario.",
+                      'recruiters_information'.tr,
                       style: style16M,
                     ),
                     10.verticalSpace,
 
                     TextFormField(
                       decoration: authFieldDecoration.copyWith(
-                        hintText: 'Busca reclutador',
+                        hintText:'Looking for a recruiter'.tr,
                         prefixIcon: Icon(Icons.search, color: lightBlackColor),
                       ),
                       onChanged: (value) {
@@ -108,7 +109,7 @@ _button() {
           ),
           5.horizontalSpace,
           Text(
-            "Crear reclutador",
+          "Create_recruiter".tr,
             style: style16M.copyWith(color: lightBlackColor),
           ),
         ],
@@ -226,7 +227,7 @@ Widget _recruiterCard(RecruiterModel recruiter) {
         ///
         /// Tags Section
         ///
-        Center(child: Text("Estado de las vacantes", style: style14M)),
+        Center(child: Text( "Status_of_Vacancies".tr, style: style14M)),
         10.verticalSpace,
         Wrap(
           spacing: 8,

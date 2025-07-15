@@ -15,6 +15,8 @@ class LocalizationService extends Translations {
   Map<String, Map<String, String>> get keys {
     const Map<String, String> english = {
       "hello": "Hello world!",
+      'Switch':'Switch to English',
+      'spanish':'Switch to Spanish',
       'choose_one': 'Choose one:',
       'i_am_candidate': "I am a candidate",
       'i_am_company_or_recruiter': 'I am a company or recruiter',
@@ -95,6 +97,7 @@ class LocalizationService extends Translations {
       'otp_resend_timer': 'Resend code in ',
       'passwordsDoNotMatch': 'Passwords do not match',
       'please_enter_6_digit_code': 'Please enter the full 6-digit code',
+      'resend_otp' : 'Resend OTP',
 
       // NotificationPermissionScreen
       'notif_title': 'Stay informed at all times',
@@ -309,6 +312,12 @@ class LocalizationService extends Translations {
       'notifications': 'Notifications',
       'You have a new notification! Check the details in the app and stay up to date with updates.':
           'You have a new notification! Check the details in the app and stay up to date with updates.',
+              'search' : 'Search...',
+              'search_for' : 'Search for jobs',
+              'job': 'Find your dream job by searching for keywords',
+             'found' :  'No jobs found',
+             'keyboard' :'Try different keywords or filters',
+
 
       // ### Pagina Tutorial 4
       // ```dart
@@ -463,9 +472,11 @@ class LocalizationService extends Translations {
       // ### Pagina Perfil reclutador
       // ```dart
       'Position': 'Position',
-
+        'viajes' : 'VIAJES',
+      'prenium' : 'PREMIUM®',
       'Company': 'Company',
       'Viajes PREMIUM': 'Viajes PREMIUM',
+       'ver_perfil →' : 'Ver Perfil →',
       'Email': 'Email',
       'jessicagonzalez@viajespremium.com': 'jessicagonzalez@viajespremium.com',
       'I am a Human Resources professional with experience in recruitment and talent development. I focus on creating positive work environments.':
@@ -504,6 +515,7 @@ class LocalizationService extends Translations {
       '20_Matches': '20 Matches',
       'Salary_range_10000_to_15000': '10,000 - 15,000',
       'Onsite': 'Onsite',
+         "Transfer Vacancy":"Transferir vacante",
 
       // ### Pagina informacion del reclutador
       // ```dart
@@ -513,6 +525,7 @@ class LocalizationService extends Translations {
       'Posted': '2 weeks ago',
       'Matches': '20 Matches',
       'Salary_Range': '10,000 - 15,000',
+        'salary':'8,000 - 10,000',
       'Work_Type': 'Onsite',
 
       // ### Pagina Poner foto overlay
@@ -662,7 +675,8 @@ class LocalizationService extends Translations {
       '🧠_Machine_Learning_/_AI': '🧠 Machine Learning / AI',
       '⚙️_Software_engineering': '⚙️ Software Engineering',
       '🏗️_Project_management': '🏗️ Project Management',
-
+      'developer': 'Flutter Developer',
+      'mobile_specialist':'Mobile Specialist',
       // ### Pagina Habilidades
       // ```dart
       'Required_Skills': 'Required Skills',
@@ -778,9 +792,15 @@ class LocalizationService extends Translations {
       // ### Pagina empleados
       // ```dart
       'About_Us': 'About Us',
-
+      'Name':  'Nombre',
       'Jessica_Gonzáles_Cruz': 'Jessica Gonzáles Cruz',
+      'professional':'Soy profesional en Recursos Humanos con experiencia en reclutamiento y desarrollo de talento. Me enfoco en crear ambientes laborales productivos y positivos.',
+       'position': 'Puesto',
       'Human_Resources': 'Human Resources',
+       'mail':  'Correo',
+       'email': 'j.arellano@empresa.com',
+       'password':  'Contraseña',
+       
 
       // ### Pagina Visualizacion de vacante Pt 2
       // ```dart
@@ -806,6 +826,7 @@ class LocalizationService extends Translations {
       "your_vacancies": 'Your Vacancies',
       "my_vacancies": 'My Vacancies',
       "all": 'All',
+       "web" : '¡Hola! soy Jorge Pérez diseñador web...',
       "art_and_design": 'Art and Design',
       "programming_and_technology": 'Programming and Technology',
       "create_vacancy": 'Create Vacancy',
@@ -819,6 +840,8 @@ class LocalizationService extends Translations {
       "14_matches_found": '14 Matches Found',
       "explore_candidates": 'Explore Candidates',
       "vacancy_in_edit_mode": 'Vacancy in Edit Mode',
+      "Becario programación" :   'Becario programación',
+       'Ventas': 'Ventas',
 
       // ### Ajuste vacante Popup
       // ```dart
@@ -830,6 +853,9 @@ class LocalizationService extends Translations {
       // ### Pagina Informacion del reclutador
       // ```dart
       "web_design": 'Web Design',
+      ' graphic_design':  ' Graphic Design',
+      'mobile_development':   'Mobile Development',
+      'marketing_digital': 'Marketing Digital',
       "programming_intern": 'Programming Intern',
       "vacancy_deleted": 'Vacancy Deleted',
       "matches_found_50": '50 Matches Found',
@@ -986,11 +1012,14 @@ class LocalizationService extends Translations {
           'Tu puente entre el talento joven y el mundo laboral.',
       'login_title': 'Iniciar Sesión',
       'btn_candidate': 'Soy candidato',
+      "My_Recruiters":"Mis Reclutadores",
       'btn_recruiter': 'Soy empresa o reclutador',
       'label_email': 'Correo',
       'label_required': '*obligatorio',
       'hint_email': 'Ingresa tu correo',
+      'Looking for a recruiter': 'Busca reclutador',
       'label_password': 'Contraseña',
+      'Recruiters':'Reclutadores',
       'hint_password': 'Ingresa tu Contraseña',
       'enterValidEmail': 'Por favor ingresa un correo válido',
       'invalidEmail': 'Dirección de correo inválida',
@@ -1026,6 +1055,7 @@ class LocalizationService extends Translations {
       'passwordsDoNotMatch': 'Las contraseñas no coinciden',
       'please_enter_6_digit_code':
           'Por favor, introduzca el código completo de 6 dígitos',
+          'Resend OTP': 'Reenviar OTP',
       // NotificationPermissionScreen
       'notif_title': 'Mantente informado en todo momento',
       'notif_body':
@@ -1226,12 +1256,14 @@ class LocalizationService extends Translations {
       // ```dart
       'home': 'Inicio',
       'tips': 'Tips',
+      'matches' : 'Matches',
       'chats': 'Chats',
       'more': 'Más',
       'You don`t have any active vacancies yet. Create one now to view them and start receiving applications.':
           'Aún no tienes vacantes activas. Crea una ahora para visualizarlas y empezar a recibir postulaciones.',
       'Create vacancy': 'Crear Vacante',
       'It all starts with a connection.': 'Todo empieza con una conexión.',
+      "Everything starts with a match.":  "Todo empieza con un match",
       'My vacancies': 'Mis Vacantes',
       'Your categories': 'Tus Categorías',
       'Your_vacancies': 'Tus Vacantes',
@@ -1248,8 +1280,16 @@ class LocalizationService extends Translations {
       // ### Pagina Tutorial 3
       // ```dart
       'notifications': 'Notificaciones',
+      'View Company Profile':'Ver Perfil de Empresa',
       'You have a new notification! Check the details in the app and stay up to date with updates.':
           '¡Tienes una nueva notificación! Revisa los detalles en la app y mantente al tanto de las actualizaciones',
+            'Search' : 'Buscar',
+            "Post your vacancy on TALENTY and increase your chances of finding the ideal candidate." :  "Publique su vacante en TALENTY y multiplique sus oportunidades de encontrar al candidato ideal.",
+            'Search for jobs': 'buscar empleo',
+           ' Find your dream job by searching for keywords' : 'Encuentra el trabajo de tus sueños buscando palabras clave',
+             'No jobs found' : 'No se encontraron trabajos',
+                'keyboard': 'Pruebe diferentes palabras clave o filtros',
+       "In this section you can see all the vacancies you have created yourself":"En esta sección podrás ver todas las vacantes que has creado tú mismo.",
 
       // ### Pagina Tutorial 4
       // ```dart
@@ -1387,8 +1427,10 @@ class LocalizationService extends Translations {
       // ```dart
       'Jessica González Cruz Perez': 'Jessica González Cruz Perez',
       'Ver Perfil': 'View Profile',
-      'Mi Cuenta': 'My Account',
+      'My Account': 'Mi Cuenta',
       'Mi calendario': 'My Calendar',
+      'My stats': 'Mis estadísticas',
+      'Administrative profile': 'Perfil administrativo',
       'Privacidad y Seguridad': 'Privacy and Security',
       'Configuración de cuenta': 'Account Settings',
       'Aviso de privacidad': 'Privacy Notice',
@@ -1405,9 +1447,13 @@ class LocalizationService extends Translations {
       // ### Pagina Perfil reclutador
       // ```dart
       'Puesto': 'Position',
+       'viajes' :'VIAJES',
+       'prenium' :'PREMIUM®',
+      'ver_perfil →' : 'Ver Perfil →',
       'Recursos_Humanos': 'Human_Resources',
       'Empresa': 'Company',
-      'Viajes_PREMIUM': 'Viajes_PREMIUM',
+      'Registro': 'Record',
+      'Viajes_PREMIUM': 'Viajes PREMIUM',
       'Correo': 'Email',
       'jessicagonzalez@viajespremium.com': 'jessicagonzalez@viajespremium.com',
       'Soy_profesional_en_Recursos_Humanos_con_experiencia_en_reclutamiento_y_desarrollo_de_talento._Me_enfoco_en_crear_ambientes_laborales_positivos_':
@@ -1464,6 +1510,8 @@ class LocalizationService extends Translations {
           'Puedes subir una foto para que tu perfil luzca completo. Recuerda elegir una imagen clara y presentable.',
       'Confirm': 'Confirmar',
       'Change_photo': 'Cambiar foto',
+      'Charging':  'Cargando',
+      'No se pudo mostrar la imagen.': 'Could Not Display Image.',
 
       // # Crear vacante reclutador
       // ### Pagina informacion Basica
@@ -1599,6 +1647,8 @@ class LocalizationService extends Translations {
       '🧠_Machine_Learning_/_AI': '🧠 Machine Learning / IA',
       '⚙️_Software_engineering': '⚙️ Ingeniería de software',
       '🏗️_Project_management': '🏗️ Gestión de proyectos',
+      'developer': 'Desarrolladora Flutter',
+      'mobile_specialist':'Especialista en Móviles',
 
       // ### Pagina Habilidades
       // ```dart
@@ -1725,16 +1775,26 @@ class LocalizationService extends Translations {
           'Omega 306, Romero de Terreros, Coyoacán, 04310 Ciudad de México, CDMX',
       'Sector': 'Sector',
       'Private': 'Privado',
+      'employ' : 'Nùmro de empleados',
       '1-10_Employees': '1-10 empleados',
       'company_name': 'Razón Social',
       'Soluciones_Integrales_del_Pacífico,_S.A._de_C.V.':
           'Soluciones Integrales del Pacífico, S.A. de C.V.',
+          'mision': 'Misión',
+          'jesus_arellano': 'Jesus Arellano',
+           'recursos_humanos':  'Recursos Humanos',
+           'match': '¡Match!',
 
       // ### Pagina empleados
       // ```dart
+      'Name':  'Name',
       'Jessica_Gonzáles_Cruz': 'Jessica Gonzáles Cruz',
+      'professional':'I am a Human Resources professional with experience in recruiting and talent development. I focus on creating productive and positive work environments.',
+       'mail':'Mail',
       'Human_Resources': 'Recursos Humanos',
-
+      'email': 'j.arellano@empresa.com',
+      'password':'Password',
+       
       // ### Pagina Visualizacion de vacante Pt 2
       // ```dart
       'Full_time,_10-hour_shift': 'Tiempo completo,  Turno de 10 horas',
@@ -1756,10 +1816,12 @@ class LocalizationService extends Translations {
       "your_vacancies": 'Tus Vacantes',
       "my_vacancies": 'Mis Vacantes',
       "all": 'Todos',
+      "web" : '¡Hola! soy Jorge Pérez diseñador web...',
       "art_and_design": 'Arte y Diseño',
       "programming_and_technology": 'Programación y Tecnología',
       "create_vacancy": 'Crear vacante',
       "vacancy": 'Vacante',
+      'jorge_pérez':'Jorge Pérez',
       "web_designer": 'Diseñador Web',
       "active_vacancy": 'Vacante Activa',
       "start_label": 'Inicio:',
@@ -1770,6 +1832,9 @@ class LocalizationService extends Translations {
       "explore_candidates": 'Explorar candidatos',
       "vacancy_in_edit_mode": 'Vacante en Edición',
       "Home": 'Inicio',
+      'Matches' :'Partidos',
+     "Becario programación" :   'Becario programación',
+     'Ventas': 'Ventas',
 
       // ### Ajuste vacante Popup
       // ```dart
@@ -1782,6 +1847,8 @@ class LocalizationService extends Translations {
       // ### Pagina Informacion del reclutador
       // ```dart
       "web_design": 'Diseño web',
+       ' graphic_design': 'Diseño Gráfico',
+       'mobile_development' : 'Desarrollo Mobile',
       "programming_intern": 'Becario programación',
       "vacancy_deleted": 'Vacante Eliminada',
       "matches_found_50": '50 Match obtenidos',
@@ -1823,7 +1890,7 @@ class LocalizationService extends Translations {
           'Define cómo se organizará el trabajo para la vacante',
       "progress_20_percent": '20%',
       "When is the start date for the vacancy?":
-          '¿Cuándo es la fecha de inicio de la vacante?',
+          '¿Cuándo es la fecha de  de la vacante?',
       "When will your vacancy posting end?":
           '¿Cuándo finalizará la publicación de tu vacante?',
       "June 30, 2025": '30 junio del 2025',

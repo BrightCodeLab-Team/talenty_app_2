@@ -2,6 +2,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -180,7 +181,7 @@ class CandidateRootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(0);
             },
-            text: "Inicio",
+            text: "home".tr,
           ),
           CustomBottomNavigator(
             currentIndex: model.selectedScreen,
@@ -189,7 +190,7 @@ class CandidateRootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(1);
             },
-            text: 'Tips',
+            text: 'tips'.tr,
           ),
           CustomBottomNavigator(
             currentIndex: model.selectedScreen,
@@ -201,7 +202,7 @@ class CandidateRootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(2);
             },
-            text: "Matches",
+            text: "Matches".tr,
           ),
 
           CustomBottomNavigator(
@@ -211,7 +212,7 @@ class CandidateRootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(3);
             },
-            text: "Chats",
+            text: "chats".tr,
           ),
           CustomBottomNavigator(
             currentIndex: model.selectedScreen,
@@ -220,7 +221,7 @@ class CandidateRootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(4);
             },
-            text: "Más",
+            text: "more".tr,
           ),
         ],
       ),

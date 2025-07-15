@@ -78,7 +78,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       30.verticalSpace,
                       MenuReuse(
                         leading: Image.asset(AppAssets.profileIcon, scale: 4.5),
-                        title: 'Visibilidad para las empresas',
+                        title:  'Visibility for companies'.tr,
                         onTap: () {
                           Get.to(() => DeactivateVisibilityScreen());
                         },
@@ -86,7 +86,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       ),
                       isDisponible
                           ? Text(
-                            'Tu perfil está visible actualmente.',
+                            'Your profile is currently visible.'.tr,
                             style: style14source.copyWith(
                               color: Colors.grey.shade700,
                             ),
@@ -98,14 +98,14 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                             ),
                           ),
                       30.verticalSpace,
-                      Text('Mi Cuenta', style: style16source),
+                      Text( 'My Account'.tr, style: style16source),
                       18.verticalSpace,
                       MenuReuse(
                         leading: Image.asset(
                           AppAssets.menuCameraIcon,
                           scale: 4,
                         ),
-                        title: 'Disponibilidad Inmediata',
+                        title:     'Immediate Availability'.tr,
                         trailing: Container(
                           constraints: const BoxConstraints(minWidth: 140),
                           child: InkWell(
@@ -169,7 +169,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                           '$iconsAssets/calender.png',
                           scale: 4.5,
                         ),
-                        title: 'Mi calendario',
+                        title: 'My Calendar'.tr,
                         onTap: () {
                           Get.to(() => CandidateMasCalendarScreen());
                         },
@@ -178,7 +178,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       10.verticalSpace,
                       MenuReuse(
                         leading: Image.asset(AppAssets.watchIcon, scale: 4.5),
-                        title: 'Mi disponibilidad',
+                        title:  'My availability'.tr,
                         onTap: () {
                           Get.to(AvailabilityScreenThree());
                         },
@@ -187,7 +187,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
 
                       20.verticalSpace,
                       //
-                      Text('Privacidad y Seguridad', style: style16source),
+                      Text( 'Privacy and Security'.tr, style: style16source),
                       //
                       18.verticalSpace,
                       //
@@ -196,7 +196,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                           AppAssets.BlockedCompaniesIcon,
                           scale: 4,
                         ),
-                        title: 'Empresas bloqueadas',
+                        title:  "Blocked companies".tr,
                         onTap: () {},
                         child: AnimatedContainer(duration: Duration()),
                       ),
@@ -207,7 +207,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                           '$iconsAssets/shield.png',
                           scale: 4.5,
                         ),
-                        title: 'Aviso de privacidad',
+                        title:  'Privacy Notice'.tr,
                         onTap: () {},
                         child: AnimatedContainer(duration: Duration()),
                       ),
@@ -217,18 +217,18 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                           AppAssets.BlockedCompaniesIcon,
                           scale: 4.5,
                         ),
-                        title: 'tèrminos Condiciones',
+                        title: "Terms and Conditions".tr,
                         onTap: () {},
                         child: AnimatedContainer(duration: Duration()),
                       ),
                       20.verticalSpace,
 
-                      Text('Administraciòn de cuenta', style: style16source),
+                      Text(  "Account management".tr, style: style16source),
                       18.verticalSpace,
 
                       MenuReuse(
                         leading: Icon(Icons.delete, color: primaryColor),
-                        title: 'Eliminar cuenta',
+                        title:  'Delete Account'.tr,
                         onTap: () {},
                         textStyle: style14sourceblack?.copyWith(
                           color: primaryColor,
@@ -239,7 +239,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       10.verticalSpace,
                       MenuReuse(
                         leading: Icon(Icons.logout, color: primaryColor),
-                        title: 'Tèrminos y condiciones',
+                        title: "Terms and Conditions".tr,
                         onTap: () {
                           Get.offAll(Splash2Screen());
                         },
@@ -282,11 +282,11 @@ _profile() {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Jorge Pérez', style: style24),
+            Text(   'jorge_pérez'.tr, style: style24),
             4.verticalSpace,
             Row(
               children: [
-                Text('Ver Perfil', style: style14source),
+                Text('View_Profile'.tr, style: style14source),
                 SizedBox(width: 4.w),
                 Icon(Icons.arrow_forward, color: lightBlackColor, size: 14),
               ],

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/enums/view_state.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
@@ -39,27 +40,27 @@ class CandidateRootScreenViewModel extends BaseViewModel {
 
   final List<Map<String, String>> onboardingSteps = [
     {
-      'title': 'Crear Vacante',
+      'title': 'Create vacancy'.tr,
       'description':
-          'Crea una vacante en pocos pasos y encuentra al candidato ideal para tu empresa.',
+          'Create a vacancy in just a few steps and find the ideal candidate for your company.'.tr,
       'icon': '$iconsAssets/polygon.png',
     },
     {
-      'title': 'Buscador',
+      'title': 'Search engine'.tr,
       'description':
-          'Utiliza el buscador para encontrar rápidamente tus vacantes creadas.',
+          'Use the search engine to quickly find your created vacancies.'.tr,
       'icon': '$iconsAssets/polygon.png',
     },
     {
-      'title': 'Notificaciones',
+      'title': 'notifications'.tr,
       'description':
-          '¡Tienes una nueva notificación! Revisa los detalles en la app y mantente al tanto de las actualizaciones',
+          'You have a new notification! Check the details in the app and stay up to date with updates.'.tr,
       'icon': '$iconsAssets/polygon.png',
     },
     {
-      'title': 'Buscador',
+      'title': 'Search engine'.tr,
       'description':
-          'Utiliza el buscador para encontrar rápidamente tus vacantes creadas.',
+          'Use the search engine to quickly find your created vacancies.'.tr,
       'icon': '$iconsAssets/polygon2.png',
     },
   ];

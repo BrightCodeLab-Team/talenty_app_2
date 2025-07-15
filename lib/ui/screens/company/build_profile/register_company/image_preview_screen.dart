@@ -54,10 +54,10 @@ class ImagePreviewScreen extends StatelessWidget {
                         progressWidth: MediaQuery.sizeOf(context).width * 0.25,
                       ),
                       30.verticalSpace,
-                      Text('Información Básica', style: style24M),
+                      Text( 'basic_information'.tr, style: style24M),
                       16.verticalSpace,
                       Text(
-                        'Completa los datos básicos para comenzar a crear la cuenta de la empresa.',
+                      'Fill_in_the_basic_data_to_start_creating_your_vacancy.'.tr,
                         style: style16M.copyWith(color: lightBlackColor),
                       ),
                       40.verticalSpace,
@@ -76,7 +76,7 @@ class ImagePreviewScreen extends StatelessWidget {
                                           // fit: BoxFit.cover,
                                         )
                                         : Text(
-                                          'Could Not Display Image.',
+                                          'No se pudo mostrar la imagen.'.tr,
                                           style: style20B,
                                         )
                                     : isLogo
@@ -86,7 +86,7 @@ class ImagePreviewScreen extends StatelessWidget {
                                           // fit: BoxFit.cover,
                                         )
                                         : Text(
-                                          'Could Not Display Image.',
+                                          'No se pudo mostrar la imagen.'.tr,
                                           style: style20B,
                                         )
                                     : model.coverFile != null
@@ -95,7 +95,7 @@ class ImagePreviewScreen extends StatelessWidget {
                                       // fit: BoxFit.cover,
                                     )
                                     : Text(
-                                      'Could Not Display Image.',
+                                      'No se pudo mostrar la imagen.'.tr,
                                       style: style20B,
                                     ),
                           ),
@@ -103,7 +103,7 @@ class ImagePreviewScreen extends StatelessWidget {
                       ),
                       20.verticalSpace,
                       CustomButton(
-                        text: 'Confirmar',
+                        text:  'Confirm'.tr,
                         onTap: () {
                           Get.back();
                         },
@@ -112,7 +112,7 @@ class ImagePreviewScreen extends StatelessWidget {
                       ),
                       24.verticalSpace,
                       CustomButton(
-                        text: 'Cambiar foto',
+                        text: 'Change_photo'.tr,
                         onTap: () {
                           showModalBottomSheet(
                             context: context,
@@ -162,7 +162,7 @@ class ImagePreviewScreen extends StatelessWidget {
                               ),
                               5.horizontalSpace,
                               Text(
-                                'Cargando',
+                                 'Charging'.tr,
                                 style: style16B.copyWith(
                                   color: lightBlackColor,
                                 ),

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -30,12 +31,12 @@ class VacanciesScreen extends StatelessWidget {
                     Center(child: Image.asset(AppAssets.appLogo2, scale: 6)),
                     30.verticalSpace,
                     Text(
-                      "Vacantes Publicadas por tus Reclutadores",
+                    "Vacancies Posted by Your Recruiters".tr,
                       style: style24M,
                     ),
                     16.verticalSpace,
                     Text(
-                      "Estas son las vacantes creadas por los miembros de tu equipo de reclutamiento. Puedes supervisarlas y dar seguimiento.",
+                    "Vacancies Posted by Your Recruiters".tr,
                       style: style16M,
                     ),
                     10.verticalSpace,
@@ -165,8 +166,8 @@ Widget _vacanciesCard(VacancyModel vacancy) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(AppAssets.calendar, scale: 4),
-            Text('  Inicio: ', style: style14M),
-            Text("Marzo/30/2025", style: style14M),
+            Text(  'home'.tr, style: style14M),
+            Text(  "start_date".tr, style: style14M),
           ],
         ),
         Row(
@@ -175,7 +176,7 @@ Widget _vacanciesCard(VacancyModel vacancy) {
           children: [
             Image.asset(AppAssets.calendar, scale: 4),
             Text('  Vigencia: ', style: style14M),
-            Text("Junio/30/2025", style: style14M),
+            Text(  "start_date".tr, style: style14M),
           ],
         ),
         10.verticalSpace,
@@ -194,7 +195,7 @@ Widget _vacanciesCard(VacancyModel vacancy) {
               children: [
                 Image.asset(AppAssets.match, scale: 4),
                 1.horizontalSpace,
-                Text("20 Matches", style: style14M),
+                Text('20_Matches'.tr, style: style14M),
               ],
             ),
             Row(
@@ -203,7 +204,7 @@ Widget _vacanciesCard(VacancyModel vacancy) {
               children: [
                 Image.asset(AppAssets.payments, scale: 4),
                 1.horizontalSpace,
-                Text("8,000 - 10,000", style: style14M),
+                Text('salary'.tr, style: style14M),
               ],
             ),
             Row(
@@ -212,7 +213,7 @@ Widget _vacanciesCard(VacancyModel vacancy) {
               children: [
                 Image.asset(AppAssets.location, scale: 4),
                 1.horizontalSpace,
-                Text("Remoto", style: style14M),
+                Text('Remote'.tr, style: style14M),
               ],
             ),
           ],
@@ -227,7 +228,7 @@ Widget _vacanciesCard(VacancyModel vacancy) {
           child: CustomSocialButton(
             // width: 163,
             height: 40,
-            text: "Transferir vacante",
+            text: "Transfer Vacancy".tr,
             icon: Image.asset(AppAssets.payments, scale: 4),
             backgroundColor: whiteColor,
             textColor: lightBlackColor,

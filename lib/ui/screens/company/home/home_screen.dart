@@ -43,15 +43,15 @@ class HomeScreen extends StatelessWidget {
 
                       20.verticalSpace,
 
-                      Text("Mis Vacantes", style: style24M),
+                      Text(  'My vacancies'.tr, style: style24M),
                       10.verticalSpace,
                       Text(
-                        "En esta sección podrás ver todas las vacantes que has creado tú mismo. ",
+                        "In this section you can see all the vacancies you have created yourself".tr,
                         style: style14M,
                       ),
                       20.verticalSpace,
 
-                      Text("Tus Categorías", style: style14M),
+                      Text( 'Your categories'.tr, style: style14M),
                       10.verticalSpace,
 
                       ///
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                           : SizedBox(),
 
                       10.verticalSpace,
-                      Text("Tus Vacantes", style: style14M),
+                      Text('Tus Vacantes'.tr, style: style14M),
                       model.vacancies.isNotEmpty && model.vacancies != null
                           ? GestureDetector(
                             onTap: () {
@@ -93,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                                       width: 24,
                                     ),
                                     5.horizontalSpace,
-                                    Text("Crear vacante", style: style16M),
+                                    Text( 'Create vacancy'.tr, style: style16M),
                                   ],
                                 ),
                               ),
@@ -103,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 10.0),
                             child: Center(
                               child: Text(
-                                "Todo empieza con un match.",
+                                "Everything starts with a match.".tr,
                                 style: style24M.copyWith(
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -130,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                               Image.asset(AppAssets.vacancyEmpty),
                               30.verticalSpace,
                               Text(
-                                "Publique su vacante en TALENTY y multiplique sus oportunidades de encontrar al candidato ideal.",
+                              "Post your vacancy on TALENTY and increase your chances of finding the ideal candidate.".tr,
                                 style: style16M,
                               ),
                               30.verticalSpace,
@@ -162,7 +162,7 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       5.horizontalSpace,
                                       Text(
-                                        "Crear Vacante",
+                                        'Create vacancy'.tr,
                                         style: style16M.copyWith(
                                           color: whiteColor,
                                         ),

@@ -127,7 +127,7 @@ class CandidateSignUpScreen extends StatelessWidget {
                       10.verticalSpace,
 
                       Text(
-                        'register_company_password_info'.tr.tr,
+                        'register_company_password_info'.tr,
                         maxLines: 3,
                         style: style14M.copyWith(color: textDarkGreyColor),
                       ),
