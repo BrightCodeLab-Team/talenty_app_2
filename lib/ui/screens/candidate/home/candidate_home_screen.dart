@@ -24,10 +24,10 @@ class CandidateHomeScreen extends StatefulWidget {
 
 class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   final List<String> categories = [
-    'Diseño Web',
-    'Diseño Gráfico',
-    'Desarrollo Mobile',
-    'Marketing Digital',
+    "web_design".tr,
+    ' graphic_design'.tr,
+    'mobile_development'.tr,
+    'marketing_digital'.tr,
   ];
   final List<String> federalEntities = [
     '--Selecciona uno--',
@@ -46,12 +46,12 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   String? selectedWorkModality;
 
   List<String> skills = [
-    'Diseño web',
-    'Diseño gráfico',
+     "web_design".tr,
+    ' graphic_design'.tr,
     'UI/UX',
     'Front-end',
     'Back-end',
-    'Mobile Development',
+    'mobile_development'.tr,
   ];
   String? selectedSkill;
 
@@ -936,7 +936,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                         label: Row(
                                           children: [
                                             Icon(
-                                              skill == 'Diseño web'
+                                              skill ==  "web_design".tr
                                                   ? Icons.public
                                                   : skill == 'Diseño gráfico'
                                                   ? Icons.palette
@@ -1017,7 +1017,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
 
                                       // Reset skill order (if they were manipulated)
                                       skills = [
-                                        'Diseño web',
+                                         "web_design".tr,
                                         'Diseño gráfico',
                                         'UI/UX',
                                         'Front-end',

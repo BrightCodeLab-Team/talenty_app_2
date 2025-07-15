@@ -1,23 +1,24 @@
+import 'package:get/get_utils/get_utils.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/model/company/chat_items.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
 
 class ChatViewModel extends BaseViewModel {
   final List<String> filters = [
-    'Todos',
-    'Diseño web',
-    'Becario programación',
-    'Ventas',
+    "all".tr,
+     "web_designer".tr,
+    "Becario programación".tr,
+      'Ventas'.tr,
   ];
 
-  String selectedFilter = 'Todos';
+  String selectedFilter = "all".tr;
 
   // Static list of all chats
   final List<ChatItem> _allChats = [
     ChatItem(
       name: 'Jorge Pérez',
-      role: 'Diseñador Web',
-      preview: '¡Hola! soy Jorge Pérez diseñador web...',
+      role:  "web_designer".tr,
+      preview: "web".tr,
       timestamp: '7:03 pm',
       unreadCount: 1,
       avatarUrl: AppAssets.img,
@@ -25,8 +26,8 @@ class ChatViewModel extends BaseViewModel {
     ),
     ChatItem(
       name: 'Jorge Pérez',
-      role: 'Becario en Programación',
-      preview: '¡Hola! soy Jorge Pérez diseñador web...',
+      role:  "Becario programación".tr,
+      preview: "web".tr,
       timestamp: '7:03 pm',
       unreadCount: 0,
       avatarUrl: AppAssets.img2,
@@ -35,7 +36,7 @@ class ChatViewModel extends BaseViewModel {
     ChatItem(
       name: 'Jorge Pérez',
       role: 'Programador HTML',
-      preview: '¡Hola! soy Jorge Pérez diseñador web...',
+      preview: "web".tr,
       timestamp: '7:03 pm',
       unreadCount: 0,
       avatarUrl: AppAssets.img,
@@ -44,7 +45,7 @@ class ChatViewModel extends BaseViewModel {
     ChatItem(
       name: 'Jorge Pérez',
       role: 'Becario en ventas',
-      preview: '¡Hola! soy Jorge Pérez diseñador web...',
+      preview: "web".tr,
       timestamp: '7:03 pm',
       unreadCount: 0,
       avatarUrl: AppAssets.img2,
@@ -54,7 +55,7 @@ class ChatViewModel extends BaseViewModel {
 
   // Getter returns filtered list based on selectedFilter
   List<ChatItem> get chats {
-    if (selectedFilter == 'Todos') return _allChats;
+    if (selectedFilter == "all".tr) return _allChats;
 
     return _allChats.where((c) {
       final lower = c.role.toLowerCase();

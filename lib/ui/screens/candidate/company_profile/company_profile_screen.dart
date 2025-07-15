@@ -126,11 +126,11 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
                                   borderRadius: BorderRadius.circular(15),
                                   boxShadow: [],
                                 ),
-                                child: const Column(
+                                child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Viajes Premium',
+                                      'Viajes_Premium'.tr,
                                       style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold,
@@ -138,7 +138,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
                                       ),
                                     ),
                                     Text(
-                                      'Industria Turística',
+                                     'Tourism_Industry'.tr,
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: Colors.grey,
@@ -165,9 +165,9 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
                             dividerColor: greyColor.withOpacity(0.4),
                             dividerHeight: 4,
                             tabs: [
-                              Tab(text: 'Vacantes'),
-                              Tab(text: 'Nosotros'),
-                              Tab(text: 'Empleados'),
+                              Tab(text: 'Vacantes'.tr),
+                              Tab(text: 'About_Us'.tr),
+                              Tab(text: 'Employees'.tr),
                             ],
                             labelStyle: const TextStyle(
                               fontWeight: FontWeight.bold,
@@ -305,13 +305,13 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
           10.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Text('Descripción', style: style16B),
+            child: Text(  'Description'.tr, style: style16B),
           ),
           10.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Text(
-              'En Viajes Premium®, somos la única empresa que garantiza las mejores experiencias de viaje. Con 19 años en el mercado, te ofrecemos vivencias mágicas e inolvidables en una amplia variedad de destinos en México y alrededor del mundo. Estamos en constante expansión, trabajando en la incorporación de nuevos destinos para brindarte experiencias aún más excepcionales.',
+              'At_Viajes_Premium®,_we_are_the_only_company_that_guarantees_the_best_travel_experiences._With_19_years_in_the_market,_we_offer_you_magical_and_unforgettable_experiences_in_a_wide_variety_of_destinations_in_Mexico_and_around_the_world._We_are_constantly_expanding,_working_to_incorporate_new_destinations_to_bring_you_even_more_exceptional_experiences.'.tr,
               style: style14M.copyWith(color: lightBlackColor),
             ),
           ),
@@ -320,13 +320,13 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
           10.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Text('Misión', style: style16B),
+            child: Text('mision'.tr, style: style16B),
           ),
           10.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Text(
-              'Omega 306, Romero de Terreros, Coyoacán, 04310 Ciudad de México, CDMX',
+             'Omega_306,_Romero_de_Terreros,_Coyoacán,_04310_Mexico_City,_CDMX'.tr,
               style: style14M.copyWith(color: blackColor),
             ),
           ),
@@ -335,19 +335,19 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
           10.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Text('Sector', style: style16B),
+            child: Text( 'Sector'.tr, style: style16B),
           ),
           10.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Text('Privado', style: style14M.copyWith(color: blackColor)),
+            child: Text( 'Private'.tr, style: style14M.copyWith(color: blackColor)),
           ),
           10.verticalSpace,
           CustomDivider(),
           10.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Text('Nùmro de empleados', style: style16B),
+            child: Text('employ'.tr, style: style16B),
           ),
           10.verticalSpace,
           Padding(
@@ -389,11 +389,11 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
                   backgroundImage: AssetImage(AppAssets.img2),
                 ),
                 title: Text(
-                  'Jesús Arellano',
+                  'jesus_arellano'.tr,
                   style: style18B.copyWith(color: blackColor),
                 ),
                 subtitle: Text(
-                  'Recursos Humanos',
+                     'recursos_humanos'.tr,
                   style: style14M.copyWith(color: blackColor),
                 ),
               ),
@@ -475,7 +475,7 @@ class CustomJobVacancyCard extends StatelessWidget {
                                 vertical: 2,
                               ),
                               child: Text(
-                                '¡Match!',
+                               'match'.tr,
                                 style: style12M.copyWith(
                                   color: darkBlueColor,
                                   fontSize: 11,

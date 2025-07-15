@@ -2,6 +2,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -180,7 +181,7 @@ class RootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(0);
             },
-            text: "Inicio",
+            text:'home'.tr,
           ),
           CustomBottomNavigator(
             currentIndex: model.selectedScreen,
@@ -192,7 +193,7 @@ class RootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(1);
             },
-            text: 'Reclutadores',
+            text:  'Recruiters'.tr,
           ),
           CustomBottomNavigator(
             currentIndex: model.selectedScreen,
@@ -204,7 +205,7 @@ class RootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(2);
             },
-            text: "Vacantes",
+            text:  'Vacancies'.tr,
           ),
 
           CustomBottomNavigator(
@@ -214,7 +215,7 @@ class RootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(3);
             },
-            text: "Chats",
+            text: 'chats'.tr,
           ),
           CustomBottomNavigator(
             currentIndex: model.selectedScreen,
@@ -223,7 +224,7 @@ class RootScreen extends StatelessWidget {
             onPressed: () {
               model.updatedScreen(4);
             },
-            text: "Más",
+            text:  'more'.tr,
           ),
         ],
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
@@ -8,7 +9,14 @@ import 'package:intl/intl.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/mas_calendar_screen/candidate_calendar_screen.dart';
 
-class CandidateMasCalendarScreen extends StatelessWidget {
+
+class CandidateMasCalendarScreen extends StatefulWidget {
+  @override
+  _CandidateMasCalendarScreenState createState() => _CandidateMasCalendarScreenState();
+}
+class _CandidateMasCalendarScreenState extends State<CandidateMasCalendarScreen> {
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -32,13 +40,13 @@ class CandidateMasCalendarScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           CustomBackButton(),
-                          const SizedBox(width: 16),
-                          Image.asset(AppAssets.appLogo2, scale: 4),
+                          const SizedBox(width: 36),
+                          Image.asset(AppAssets.appLogo2, scale: 6),
                         ],
                       ),
 
                       const SizedBox(height: 24),
-                      Text('Calendario', style: style20B),
+                      Text('Calendario', style: style24M),
                       const SizedBox(height: 6),
                       Text(
                         'En este calendario se mostrarán todas las fechas en las que tengas una entrevista asignada.',
@@ -60,67 +68,121 @@ class CandidateMasCalendarScreen extends StatelessWidget {
                               'Selecciona una fecha disponible',
                               style: style14B,
                             ),
-                            const SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '$currentMonth $currentYear',
-                                  style: style14sourceblack,
-                                ),
-                                const Icon(Icons.chevron_left, size: 18),
-                              ],
-                            ),
+                            // const SizedBox(height: 16),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   children: [
+                            //     Text(
+                            //       '$currentMonth $currentYear',
+                            //       style: style14sourceblack,
+                            //     ),
+                            //     const Icon(Icons.chevron_left, size: 18),
+                            //   ],
+                            // ),
                             const SizedBox(height: 10),
-                            GridView.builder(
-                              shrinkWrap: true,
-                              itemCount: 31,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 7,
-                                    mainAxisSpacing: 10,
-                                    crossAxisSpacing: 10,
-                                    childAspectRatio: 1,
-                                  ),
-                              itemBuilder: (context, index) {
-                                final day = index + 1;
-                                final selected = vm.selectedDate?.day == day;
-                                return GestureDetector(
-                                  onTap:
-                                      () => vm.selectDate(
-                                        DateTime(now.year, now.month, day),
-                                      ),
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color:
-                                            selected
-                                                ? blackColor
-                                                : cardborderColor,
-                                      ),
-                                      color:
-                                          selected
-                                              ? blackColor
-                                              : Colors.transparent,
-                                    ),
-                                    child: Text(
-                                      day.toString(),
-                                      style: style14sourceblack.copyWith(
-                                        fontWeight:
-                                            selected
-                                                ? FontWeight.bold
-                                                : FontWeight.normal,
-                                        color:
-                                            selected ? whiteColor : blackColor,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+                                 TableCalendar(
+                         firstDay: DateTime.utc(2020, 1, 1),
+                         lastDay: DateTime.utc(2030, 12, 31),
+                         focusedDay: _focusedDay,
+                         selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                         onDaySelected: (selectedDay, focusedDay) {
+                          setState(() {
+                         _selectedDay = selectedDay;
+                         _focusedDay = focusedDay;
+                         });
+                          },
+                       calendarStyle: CalendarStyle(
+                      isTodayHighlighted: true,
+                      selectedDecoration: BoxDecoration(
+                       color: blackColor,
+                      shape: BoxShape.circle,
+                        ),
+                   selectedTextStyle: TextStyle(color: whiteColor),
+                   todayDecoration: BoxDecoration(
+                  border: Border.all(color: blackColor),
+                     shape: BoxShape.circle,
+                       ),
+                 todayTextStyle: TextStyle(color: greyColor),
+                 ),
+                headerStyle: HeaderStyle(
+                formatButtonVisible: false,
+                  titleCentered: true,
+               leftChevronIcon: Icon(Icons.chevron_left, color: blackColor),
+               rightChevronIcon: Icon(Icons.chevron_right, color: blackColor),
+               titleTextStyle:  style20B,
+                     
+  ),
+ calendarBuilders: CalendarBuilders(
+  defaultBuilder: (context, day, focusedDay) {
+    if ([17, 18, 19,21,24,25,26,28,31].contains(day.day))
+      return Center(
+        child: Container(
+          height: 36,
+          width: 36,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: greyColor, width: 1),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            '${day.day}',
+            style: TextStyle(color: blackColor),
+          ),
+        ),
+      );
+    
+    return null; 
+  },
+),
+                            // GridView.builder(
+                            //   shrinkWrap: true,
+                            //   itemCount: 31,
+                            //   gridDelegate:
+                            //       const SliverGridDelegateWithFixedCrossAxisCount(
+                            //         crossAxisCount: 7,
+                            //         mainAxisSpacing: 10,
+                            //         crossAxisSpacing: 10,
+                            //         childAspectRatio: 1,
+                            //       ),
+                            //   itemBuilder: (context, index) {
+                            //     final day = index + 1;
+                            //     final selected = vm.selectedDate?.day == day;
+                            //     return GestureDetector(
+                            //       onTap:
+                            //           () => vm.selectDate(
+                            //             DateTime(now.year, now.month, day),
+                            //           ),
+                            //       child: Container(
+                            //         alignment: Alignment.center,
+                            //         decoration: BoxDecoration(
+                            //           shape: BoxShape.circle,
+                            //           border: Border.all(
+                            //             color:
+                            //                 selected
+                            //                     ? blackColor
+                            //                     : cardborderColor,
+                            //           ),
+                            //           color:
+                            //               selected
+                            //                   ? blackColor
+                            //                   : Colors.transparent,
+                            //         ),
+                            //         child: Text(
+                            //           day.toString(),
+                            //           style: style14sourceblack.copyWith(
+                            //             fontWeight:
+                            //                 selected
+                            //                     ? FontWeight.bold
+                            //                     : FontWeight.normal,
+                            //             color:
+                            //                 selected ? whiteColor : blackColor,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
+                         ) ],
                         ),
                       ),
 

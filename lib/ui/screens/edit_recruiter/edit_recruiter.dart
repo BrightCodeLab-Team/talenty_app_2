@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:get/route_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -113,12 +114,12 @@ class _EditRecruiterState extends State<EditRecruiter> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: 100.h), // Space for profile picture
-                      Text('Jessica Gonzáles Cruz', style: style16N),
+                      Text('Jessica_Gonzáles_Cruz'.tr, style: style16N),
                       SizedBox(height: 10.h),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
-                          'Soy profesional en Recursos Humanos con experiencia en reclutamiento y desarrollo de talento. Me enfoco en crear ambientes laborales productivos y positivos.',
+                          'professional'.tr,
                           textAlign: TextAlign.center,
                           style: style14sourceblack,
                         ),
@@ -127,8 +128,8 @@ class _EditRecruiterState extends State<EditRecruiter> {
 
                       _buildUserInfoTile(
                         context,
-                        'Nombre',
-                        'Jessica Gonzáles Cruz',
+                       'Name'.tr,
+                        'Jessica_Gonzáles_Cruz'.tr,
                         onTap: () {},
                       ),
                       SizedBox(height: 29.h),
@@ -140,8 +141,8 @@ class _EditRecruiterState extends State<EditRecruiter> {
                       SizedBox(height: 29.h),
                       _buildUserInfoTile(
                         context,
-                        'Puesto',
-                        'Recursos Humanos',
+                        'position'.tr,
+                        'Human_Resources'.tr,
                         onTap: () {},
                       ),
                       SizedBox(height: 29.h),
@@ -153,8 +154,8 @@ class _EditRecruiterState extends State<EditRecruiter> {
                       SizedBox(height: 29.h),
                       _buildUserInfoTile(
                         context,
-                        'Correo',
-                        'j.arellano@empresa.com',
+                      'Mail'.tr,
+                      'email'.tr,
                         onTap: () {},
                       ),
                       SizedBox(height: 29.h),
@@ -164,7 +165,7 @@ class _EditRecruiterState extends State<EditRecruiter> {
                       SizedBox(height: 29.h),
                       _buildUserInfoTile(
                         context,
-                        'Contraseña',
+                         'password'.tr,
                         '••••••••',
                         isPassword: true,
                         onTap: () {},
@@ -176,8 +177,8 @@ class _EditRecruiterState extends State<EditRecruiter> {
                       SizedBox(height: 29.h),
                       _buildUserInfoTile(
                         context,
-                        'Empresa',
-                        'Viajes PREMIUM',
+                       'Company'.tr,
+                         'Viajes_PREMIUM'.tr,
                         onTap: () {},
                       ),
 
@@ -189,8 +190,8 @@ class _EditRecruiterState extends State<EditRecruiter> {
 
                       _buildUserInfoTile(
                         context,
-                        'Registro',
-                        '23/Marzo/2025',
+                     'Record'.tr,
+                        '23/Marzo/2025'.tr,
                         showArrow: false,
                         onTap: () {},
                       ),

@@ -241,6 +241,10 @@ class LocalizationService extends Translations {
       'fifty_percent': '50%',
       'first_names': 'First name',
       'jessica': 'Jessica',
+      'María':'María',
+       'isabella': 'Isabella',
+       'alejandro': 'Alejandro',
+        'emmanuel':  'Emmanuel',
       'last_names_label': 'Last name',
       'gonzales': 'Gonzales',
       'cruz': 'Cruz',
@@ -515,7 +519,7 @@ class LocalizationService extends Translations {
       '20_Matches': '20 Matches',
       'Salary_range_10000_to_15000': '10,000 - 15,000',
       'Onsite': 'Onsite',
-         "Transfer Vacancy":"Transferir vacante",
+      "Transfer Vacancy":"Transferir vacante",
 
       // ### Pagina informacion del reclutador
       // ```dart
@@ -525,8 +529,9 @@ class LocalizationService extends Translations {
       'Posted': '2 weeks ago',
       'Matches': '20 Matches',
       'Salary_Range': '10,000 - 15,000',
-        'salary':'8,000 - 10,000',
+      'salary':'8,000 - 10,000',
       'Work_Type': 'Onsite',
+      
 
       // ### Pagina Poner foto overlay
       // ```dart
@@ -696,7 +701,7 @@ class LocalizationService extends Translations {
           'How would you describe this position?',
       'Eg:_We_are_looking_for_a_responsible_and_organized_Administrative_Assistant_to_support_operational_and_office_tasks._Their_main_role_will_be_to_manage_documentation,_coordinate_schedules,_answer_calls,_and_provide_support_to_the_team_in_daily_administrative_activities...':
           'E.g.: We are looking for a responsible and organized Administrative Assistant to support operational and office tasks. The main responsibilities include managing documentation, coordinating schedules, answering calls, and supporting the team in daily administrative activities...',
-
+  'We are looking for a Flutter developer with experience building scalable mobile apps...':'Buscamos un desarrollador Flutter con experiencia en apps móviles escalables...',
       // ### Pagina Resumen de datos
       // ```dart
       'Edit_vacancy': 'Edit Vacancy',
@@ -831,17 +836,22 @@ class LocalizationService extends Translations {
       "programming_and_technology": 'Programming and Technology',
       "create_vacancy": 'Create Vacancy',
       "vacancy": 'Vacancy',
+      "Vacancy Expired": "Vacante Vencida",
       "web_designer": 'Web Designer',
       "active_vacancy": 'Active Vacancy',
       "start_label": 'Start:',
+      "23/Marzo/2025":"23/Marzo/2025",
       "start_date": 'March/30/2025',
       "validity": 'Validity:',
       "June/30/2025": 'June/30/2025',
+      "Abril/01/2025":"Abril/01/2025",
+      "july": "Julio/01/2025",
       "14_matches_found": '14 Matches Found',
       "explore_candidates": 'Explore Candidates',
       "vacancy_in_edit_mode": 'Vacancy in Edit Mode',
       "Becario programación" :   'Becario programación',
        'Ventas': 'Ventas',
+       
 
       // ### Ajuste vacante Popup
       // ```dart
@@ -1012,14 +1022,12 @@ class LocalizationService extends Translations {
           'Tu puente entre el talento joven y el mundo laboral.',
       'login_title': 'Iniciar Sesión',
       'btn_candidate': 'Soy candidato',
-      "My_Recruiters":"Mis Reclutadores",
       'btn_recruiter': 'Soy empresa o reclutador',
+      "My_Recruiters":"Mis Reclutadores",
       'label_email': 'Correo',
       'label_required': '*obligatorio',
       'hint_email': 'Ingresa tu correo',
-      'Looking for a recruiter': 'Busca reclutador',
       'label_password': 'Contraseña',
-      'Recruiters':'Reclutadores',
       'hint_password': 'Ingresa tu Contraseña',
       'enterValidEmail': 'Por favor ingresa un correo válido',
       'invalidEmail': 'Dirección de correo inválida',
@@ -1036,6 +1044,7 @@ class LocalizationService extends Translations {
       'login_recruiter_highlight': 'reclutador',
       'login_recruiter_suffix':
           ', pide a tu empresa que te asigne las credenciales, e ingrésalas para acceder a tu cuenta de reclutador.',
+
       // Register Account
       'register_company_title': 'Crear cuenta de empresa',
       'register_company_description':
@@ -1220,7 +1229,7 @@ class LocalizationService extends Translations {
       'terms_and_condition': ' Términos y Condiciones',
       'talenty_as_well': ' de Talenty, así como las ',
       'privacy_policy': 'Políticas de Privacidad.',
-
+      'recruiters_information':  "Aquí puedes visualizar la información de cada reclutador, editar sus datos, suspender su acceso o eliminar su cuenta según sea necesario.",
       // ### Pagina informacion del reclutador - 50% Pt-2
       // ```dart
       'Human Resources': 'Recursos Humanos',
@@ -1262,6 +1271,7 @@ class LocalizationService extends Translations {
       'You don`t have any active vacancies yet. Create one now to view them and start receiving applications.':
           'Aún no tienes vacantes activas. Crea una ahora para visualizarlas y empezar a recibir postulaciones.',
       'Create vacancy': 'Crear Vacante',
+      "Vacancies Posted by Your Recruiters":"Vacantes Publicadas por tus Reclutadores",
       'It all starts with a connection.': 'Todo empieza con una conexión.',
       "Everything starts with a match.":  "Todo empieza con un match",
       'My vacancies': 'Mis Vacantes',
@@ -1400,6 +1410,11 @@ class LocalizationService extends Translations {
       // ### Pagina Editar nombre
       // ```dart
       'Eliminar Cuenta': 'Delete Account',
+      "Account management":"Administraciòn de cuenta",
+      'Privacy Notice':'Aviso de privacidad',
+      "Blocked companies":'Empresas bloqueadas',
+      'Privacy and Security':'Privacidad y Seguridad',
+      'My availability': 'Mi disponibilidad',
       'Continuar': 'Continue',
       'Al eliminar tu cuenta, se borrarán de forma permanente todos tus datos personales, historial de actividad, conversaciones, vacantes creadas (si aplica) y cualquier información asociada a tu perfil.':
           'By deleting your account, all your personal data, activity history, conversations, job postings (if applicable), and any information associated with your profile will be permanently erased.',
@@ -1428,7 +1443,10 @@ class LocalizationService extends Translations {
       'Jessica González Cruz Perez': 'Jessica González Cruz Perez',
       'Ver Perfil': 'View Profile',
       'My Account': 'Mi Cuenta',
+      'Visibility for companies':'Visibilidad para las empresas',
       'Mi calendario': 'My Calendar',
+      'Your profile is currently visible.': 'Tu perfil está visible actualmente.',
+      'Immediate Availability':'Disponibilidad Inmediata',
       'My stats': 'Mis estadísticas',
       'Administrative profile': 'Perfil administrativo',
       'Privacidad y Seguridad': 'Privacy and Security',
@@ -1495,6 +1513,8 @@ class LocalizationService extends Translations {
       '20_Matches': '20 Matches',
       '10,000_-_15,000': '10,000 - 15,000',
       'Presencial': 'Onsite',
+      "Vacancies Created":"Vacante Creadas",
+      "Monthly data.":"Datos mensuales.",
 
       // ### Pagina Poner foto overlay
       // ```dart
@@ -1502,6 +1522,9 @@ class LocalizationService extends Translations {
           'Te recomendamos utilizar una fotografía presentable y bien iluminada.',
       'Choose_from_library': 'Elegir de la biblioteca',
       'Take_photo': 'Tomar foto',
+      "Create_recruiter":  "Crear reclutador",
+      "Status_of_Vacancies":"Estado de las vacantes",
+      "jessica_gonzalez":  "jessica_gonzalez",
 
       // ### Pagina informacion del reclutador - Photo
       // ```dart
@@ -1822,6 +1845,7 @@ class LocalizationService extends Translations {
       "create_vacancy": 'Crear vacante',
       "vacancy": 'Vacante',
       'jorge_pérez':'Jorge Pérez',
+      "Terms and Conditions":'Tèrminos y condiciones',
       "web_designer": 'Diseñador Web',
       "active_vacancy": 'Vacante Activa',
       "start_label": 'Inicio:',
@@ -1862,6 +1886,7 @@ class LocalizationService extends Translations {
           'Esta acción no se puede deshacer. La vacante será eliminada permanentemente de la plataforma. Se perderá todo su historial, los matches realizados, las entrevistas agendadas y cualquier vínculo con procesos de selección en curso.',
       "confirm_delete_button": 'Eliminar',
       "cancel_button": 'Cancelar',
+      "Matches made":"Matches realizados",
 
       // ```
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/model/company/recruite.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -35,11 +36,11 @@ class RecruiterViewModel extends ChangeNotifier {
 
   final List<RecruiterModel> _allRecruiters = [
     RecruiterModel(
-      name: "Jessica Gonzalez",
-      role: "Recursos Humanos",
+      name:   "jessica_gonzalez".tr,
+      role:    'Human Resources'.tr,
       imageUrl: AppAssets.img2, // AppAssets.img2
       description:
-          "Soy profesional en Recursos Humanos con experiencia en reclutamiento y desarrollo...",
+          'professional'.tr,
       createdDate: "30 de marzo del 2025",
       tags: [
         TagModel(
@@ -64,11 +65,11 @@ class RecruiterViewModel extends ChangeNotifier {
     ),
 
     RecruiterModel(
-      name: "Awais Khan",
-      role: "Flutter Developer",
+      name: "awais".tr,
+      role:  'developer'.tr,
       imageUrl: AppAssets.img2, // AppAssets.img2
       description:
-          "Soy profesional en Recursos Humanos con experiencia en reclutamiento y desarrollo...",
+             'professional'.tr,
       createdDate: "30 de marzo del 2025",
       tags: [
         TagModel(

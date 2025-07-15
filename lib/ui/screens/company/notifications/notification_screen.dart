@@ -48,7 +48,7 @@ class NotificationScreen extends StatelessWidget {
                   ),
                   20.verticalSpace,
                   Text(
-                    "Notificaciones",
+                    'notifications'.tr,
                     style: GoogleFonts.lora(
                       textStyle: style16M.copyWith(
                         fontSize: 24,
@@ -82,7 +82,7 @@ class NotificationScreen extends StatelessWidget {
                       : Expanded(
                         child: Center(
                           child: Text(
-                            "Aún no tienes notificaciones nuevas.",
+                             'You don`t have any active vacancies yet'.tr,
                             style: style20M,
                           ),
                         ),

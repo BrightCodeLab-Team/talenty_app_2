@@ -1,3 +1,4 @@
+import 'package:get/get_utils/get_utils.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
@@ -12,16 +13,16 @@ class CandidateHomeViewModel extends BaseViewModel {
   }
 
   final List<TagItem> tagItemsList = [
-    TagItem('💪 Resiliencia'),
-    TagItem('💡 Pensamiento crítico'),
-    TagItem('🧠 Resolución de problemas'),
-    TagItem('🕊️ Empatía'),
-    TagItem('🗣️ Comunicación asertiva'),
-    TagItem('🧘‍️ Manejo del estrés'),
-    TagItem('🚀 Proactividad'),
-    TagItem('🤝 Trabajo en equipo'),
-    TagItem('💻 Uso de la Inteligencia Artificial'),
-    TagItem('⏰ Gestión del tiempo'),
+    TagItem('💪_Resilience'.tr),
+    TagItem('💡_Critical_thinking'.tr),
+    TagItem('🧠_Problem_solving'.tr),
+    TagItem( '🕊️_Empathy'.tr),
+    TagItem( '🗣️_Assertive_communication'.tr),
+    TagItem( '🧘‍️_Stress_management'.tr),
+    TagItem('🚀_Proactivity'.tr),
+    TagItem('🤝_Teamwork'.tr),
+    TagItem('💻_Use_of_Artificial_Intelligence'.tr),
+    TagItem('⏰_Time_management'.tr),
   ];
 
   ///

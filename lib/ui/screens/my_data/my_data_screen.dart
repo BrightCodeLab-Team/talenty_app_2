@@ -2,6 +2,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
@@ -31,7 +32,7 @@ class MyDataScreen extends StatelessWidget {
               ///
               _header(),
               SizedBox(height: 16),
-              Text('Mis Estadísticas', style: style24B),
+              Text('My stats'.tr, style: style24B),
               //
               SizedBox(height: 16),
               //
@@ -95,8 +96,8 @@ class MyDataScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Vacante Creadas", style: style14M),
-                        Text("Datos mensuales.", style: style10),
+                        Text("Vacancies Created".tr, style: style14M),
+                        Text( "Monthly data.".tr, style: style10),
                       ],
                     ),
                     Divider(color: textDarkGreyColor, thickness: 0.5),
@@ -125,8 +126,8 @@ class MyDataScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Vacante Creadas", style: style14M),
-                        Text("Datos mensuales.", style: style10),
+                        Text( "Vacancies Created".tr, style: style14M),
+                        Text(   "Monthly data.".tr, style: style10),
                       ],
                     ),
                     Divider(color: textDarkGreyColor, thickness: 0.5),
@@ -214,9 +215,9 @@ Widget _buildMatchesRealizadosCard() {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Matches realizados', style: style16M),
+            Text( "Matches made".tr, style: style16M),
             Text(
-              'Datos mensuales.',
+                "Monthly data.".tr,
               style: style12M.copyWith(fontWeight: FontWeight.w400),
             ),
           ],
@@ -491,24 +492,24 @@ class _AnimatedBarChartState extends State<AnimatedBarChart>
                       switch (value.toInt()) {
                         case 0:
                           return Text(
-                            'Jessica',
+                            'jessica'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         case 1:
-                          return Text('María', style: TextStyle(fontSize: 10));
+                          return Text('María'.tr, style: TextStyle(fontSize: 10));
                         case 2:
                           return Text(
-                            'Isabella',
+                            'isabella'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         case 3:
                           return Text(
-                            'Alejandro',
+                            'alejandro'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         case 4:
                           return Text(
-                            'Emmanuel',
+                            'emmanuel'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         default:
@@ -632,24 +633,24 @@ class _InteractiveAnimatedBarChartState
                       switch (value.toInt()) {
                         case 0:
                           return Text(
-                            'Jessica',
+                            'jessica'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         case 1:
-                          return Text('María', style: TextStyle(fontSize: 10));
+                          return Text('María'.tr, style: TextStyle(fontSize: 10));
                         case 2:
                           return Text(
-                            'Isabella',
+                            'isabella'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         case 3:
                           return Text(
-                            'Alejandro',
+                            'alejandro'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         case 4:
                           return Text(
-                            'Emmanuel',
+                            'emmanuel'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         default:
@@ -763,24 +764,24 @@ class _LoopingAnimatedBarChartState extends State<LoopingAnimatedBarChart>
                       switch (value.toInt()) {
                         case 0:
                           return Text(
-                            'Jessica',
+                            'jessica'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         case 1:
-                          return Text('María', style: TextStyle(fontSize: 10));
+                          return Text('María'.tr, style: TextStyle(fontSize: 10));
                         case 2:
                           return Text(
-                            'Isabella',
+                            'isabella'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         case 3:
                           return Text(
-                            'Alejandro',
+                            'alejandro'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         case 4:
                           return Text(
-                            'Emmanuel',
+                            'emmanuel'.tr,
                             style: TextStyle(fontSize: 10),
                           );
                         default:
@@ -966,18 +967,18 @@ class _CombinedAnimatedBarChartState extends State<CombinedAnimatedBarChart>
                   getTitlesWidget: (value, _) {
                     switch (value.toInt()) {
                       case 0:
-                        return _text(text: 'Jessica');
+                        return _text(text: 'jessica'.tr);
                       case 1:
-                        return _text(text: 'María');
+                        return _text(text: 'María'.tr);
 
                       case 2:
-                        return _text(text: 'Isabella');
+                        return _text(text: 'isabella'.tr);
 
                       case 3:
-                        return _text(text: 'Alejandro');
+                        return _text(text: 'alejandro'.tr);
 
                       case 4:
-                        return _text(text: 'Emmanuel');
+                        return _text(text: 'emmanuel'.tr);
 
                       default:
                         return SizedBox.shrink();
