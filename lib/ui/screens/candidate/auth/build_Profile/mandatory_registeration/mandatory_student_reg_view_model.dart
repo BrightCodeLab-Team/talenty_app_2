@@ -148,7 +148,6 @@ class MandatoryStudentRegViewModel extends BaseViewModel {
     'Azcapotzalco',
     'Coyoacán',
     'Cuajimalpa de Morlos',
-
     'Gustavo A, Medero',
     'Iztacalco',
     'Lamagdalena Contreras',

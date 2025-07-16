@@ -492,6 +492,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
                     image: Image.asset(
                       AppAssets.chat,
                       color: whiteColor,
+
                       scale: 4,
                     ),
                   ),
