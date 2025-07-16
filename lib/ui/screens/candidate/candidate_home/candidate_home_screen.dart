@@ -161,6 +161,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           ? Text('2')
                           : Text('3'),
                       // Consider replacing this with a relevant widget for other categories
+                      20.verticalSpace,
                     ],
                   ),
                 ),
@@ -169,10 +170,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
       ),
     );
   }
-
-  ///
-  ///. dialogue box
-  ///
 
   ///
   ///. dialogue box

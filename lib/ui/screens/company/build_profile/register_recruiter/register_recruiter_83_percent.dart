@@ -23,8 +23,8 @@ class RegisterRecruiter83PercentScreen extends StatelessWidget {
           //
           // Floating Button
           //
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
             child: CustomButton(
               horizontalPadding: 20,
               text: 'btn_continue'.tr,
@@ -41,8 +41,7 @@ class RegisterRecruiter83PercentScreen extends StatelessWidget {
                   model.isRecruiter83FormValid ? primaryColor : greyColor,
             ),
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+
           //
           // BODY
           //

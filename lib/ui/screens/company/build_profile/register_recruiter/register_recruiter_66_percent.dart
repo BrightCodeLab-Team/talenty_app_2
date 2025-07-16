@@ -17,8 +17,8 @@ class RegisterRecruiter66PercentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
         child: CustomButton(
           text: 'btn_continue'.tr,
           onTap: () {
@@ -28,7 +28,7 @@ class RegisterRecruiter66PercentScreen extends StatelessWidget {
           backgroundColor: primaryColor,
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
       //
       // BODY
       //
@@ -67,7 +67,7 @@ class RegisterRecruiter66PercentScreen extends StatelessWidget {
                 'buisness_profile_description'.tr,
                 style: style14M.copyWith(color: textDarkGreyColor),
               ),
-              150.verticalSpace,
+              50.verticalSpace,
             ],
           ),
         ),

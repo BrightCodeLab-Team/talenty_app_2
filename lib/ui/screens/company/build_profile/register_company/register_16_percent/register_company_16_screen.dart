@@ -196,8 +196,8 @@ class RegisterCompany16PercentScreen extends StatelessWidget {
           ///
           /// Floating Button
           ///
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
             child: CustomButton(
               text: 'btn_continue'.tr,
               onTap: () {
@@ -214,10 +214,25 @@ class RegisterCompany16PercentScreen extends StatelessWidget {
               backgroundColor: model.isFormFilled ? primaryColor : greyColor,
             ),
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
         );
       },
     );
   }
 }
+/*
+ CustomButton(
+              text: 'btn_continue'.tr,
+              onTap: () {
+                model.validateForm(); // Show errors if any
+
+                // Check if both fields are valid
+                final isTitleValid = model.validateTitle() == null;
+                final isDescriptionValid = model.validateDescription() == null;
+
+                if (isTitleValid && isDescriptionValid) {
+                  Get.to(() => RegisterCompany33PercentScreen());
+                }
+              },
+              backgroundColor: model.isFormFilled ? primaryColor : greyColor,
+            ),
+            */

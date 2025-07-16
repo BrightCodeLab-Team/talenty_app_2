@@ -242,7 +242,7 @@ class RegisterCompany50PercentScreen extends StatelessWidget {
                             model.postalCodeError ? 'field_required'.tr : null,
                       ),
                     ),
-                    150.verticalSpace,
+                    50.verticalSpace,
                   ],
                 ),
               ),
@@ -252,8 +252,8 @@ class RegisterCompany50PercentScreen extends StatelessWidget {
           ///
           /// Floating Button
           ///
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          bottomNavigationBar: Padding(
+            padding: EdgeInsetsGeometry.symmetric(horizontal: 15, vertical: 15),
             child: CustomButton(
               text: 'btn_continue'.tr,
               onTap: () {
@@ -273,8 +273,6 @@ class RegisterCompany50PercentScreen extends StatelessWidget {
               backgroundColor: model.isFormValid ? primaryColor : greyColor,
             ),
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
         );
       },
     );

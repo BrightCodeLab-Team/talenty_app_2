@@ -27,8 +27,11 @@ class OtpScreen extends StatelessWidget {
       child: Consumer<OtpViewModel>(
         builder: (context, model, child) {
           return Scaffold(
-            floatingActionButton: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            bottomNavigationBar: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15.0,
+                vertical: 15,
+              ),
               child: CustomButton(
                 onTap: () {
                   if (model.validateOtp()) {
@@ -39,8 +42,7 @@ class OtpScreen extends StatelessWidget {
                 backgroundColor: model.isComplete ? primaryColor : greyColor,
               ),
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
+
             //
             // BODY
             //

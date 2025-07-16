@@ -16,13 +16,11 @@ class AvailabilityScreenThree extends StatefulWidget {
 }
 
 class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
-  // State variables for each checkbox
   bool _agregaHorariosChecked = false;
   bool _empresasAgendarChecked = false;
   bool _recibeConfirmacionesChecked = false;
   bool _editaDisponibilidadChecked = false;
 
-  // Helper to check if all checkboxes are selected
   bool get _areAllCheckboxesSelected =>
       _agregaHorariosChecked &&
       _empresasAgendarChecked &&
@@ -54,9 +52,7 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
             20.verticalSpace,
             Text(
               'Gestiona tus horarios y conecta con empresas sin complicaciones.',
-              style: style20B.copyWith(
-                color: blackColor,
-              ), // Adjust as per your design
+              style: style20B.copyWith(color: blackColor),
             ),
             20.verticalSpace,
             Center(
@@ -68,9 +64,7 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
             20.verticalSpace,
             Text(
               '¿Cómo funciona?'.tr,
-              style: style20B.copyWith(
-                color: blackColor,
-              ), // Adjust as per your design
+              style: style20B.copyWith(color: blackColor),
             ),
             10.verticalSpace,
             _buildCheckboxRow(
@@ -122,10 +116,9 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
           onTap:
               _areAllCheckboxesSelected
                   ? () {
-                    // Handle button tap when all checkboxes are selected
                     print('Configuring availability...');
                   }
-                  : null, // Disable button if not all selected
+                  : null,
           backgroundColor: _areAllCheckboxesSelected ? brownColor : greyColor,
           textColor: _areAllCheckboxesSelected ? whiteColor : whiteColor,
         ),
@@ -143,37 +136,25 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-
         children: [
           Transform.scale(
             scale: 1,
             child: Checkbox(
               value: value,
               onChanged: onChanged,
-              activeColor: darkgreenColor, // Green background when checked
-              checkColor: whiteColor, // White checkmark color
+              activeColor: darkgreenColor,
+              checkColor: whiteColor,
               side: BorderSide(
-                color:
-                    value
-                        ? darkgreenColor
-                        : greyColor, // Border color based on state
+                color: value ? darkgreenColor : greyColor,
                 width: 2,
               ),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  4,
-                ), // Slightly rounded corners for the checkbox
+                borderRadius: BorderRadius.circular(4),
               ),
             ),
           ),
-
           Expanded(
-            child: Text(
-              text,
-              style: style14M.copyWith(
-                color: blackColor, // Adjust text color as needed
-              ),
-            ),
+            child: Text(text, style: style14M.copyWith(color: blackColor)),
           ),
         ],
       ),

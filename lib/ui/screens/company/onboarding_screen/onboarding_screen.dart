@@ -140,12 +140,14 @@ class _OnboardingCandidatoScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
-            floatingActionButton:
+
+            bottomNavigationBar:
                 currentPage == 3
                     ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0,
+                        vertical: 15,
+                      ),
                       child: CustomButton(
                         text: 'btn_continue'.tr,
                         onTap:

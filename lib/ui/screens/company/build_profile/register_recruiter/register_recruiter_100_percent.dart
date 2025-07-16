@@ -25,8 +25,8 @@ class RegisterRecruiter100PercentScreen extends StatelessWidget {
           //
           // Floating Button
           //
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
             child: CustomButton(
               text: 'btn_continue'.tr,
               onTap: () {
@@ -36,8 +36,7 @@ class RegisterRecruiter100PercentScreen extends StatelessWidget {
               backgroundColor: primaryColor,
             ),
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+
           //
           // BODY
           //

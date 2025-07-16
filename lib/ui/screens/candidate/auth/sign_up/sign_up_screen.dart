@@ -197,8 +197,11 @@ class CandidateSignUpScreen extends StatelessWidget {
             ///
             /// Floating Button
             ///
-            floatingActionButton: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            bottomNavigationBar: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15.0,
+                vertical: 15,
+              ),
               child: CustomButton(
                 onTap: () {
                   model.validateFormFields(); // <-- Set error flags true
@@ -215,8 +218,6 @@ class CandidateSignUpScreen extends StatelessWidget {
                 backgroundColor: model.canSubmitReg ? primaryColor : greyColor,
               ),
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
           );
         },
       ),
