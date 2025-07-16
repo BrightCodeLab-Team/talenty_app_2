@@ -5,6 +5,7 @@ import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/menu_reuse/menu_reuse.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_view_model.dart';
 
@@ -18,7 +19,27 @@ class CandidateProfileScreen extends StatelessWidget {
       child: Consumer(
         builder:
             (context, model, child) => Scaffold(
-              appBar: AppBar(backgroundColor: transparent),
+              appBar: AppBar(
+                backgroundColor: transparent,
+                leading: Padding(
+                  padding: EdgeInsetsGeometry.only(left: 15),
+                  child: CustomBackButton(),
+                ),
+                title: Image.asset(AppAssets.appLogo2, scale: 4),
+                centerTitle: true,
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: Row(
+                      children: [
+                        Image.asset(AppAssets.eyeIcon, scale: 4),
+                        4.horizontalSpace,
+                        Icon(Icons.file_copy, color: greyColor),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               body: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),

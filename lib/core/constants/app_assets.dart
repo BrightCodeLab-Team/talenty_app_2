@@ -22,7 +22,7 @@ class AppAssets {
   static String registerRecruiterImage =
       "$staticAssets/registerRecruiterImage.png";
   static String deleteAccountGif = "$staticAssets/deleteAccountGif.png";
-
+  static String tipsImg = "$dynamicAssets/office.png";
   /*    
 
       Icons Assets

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/ui/custom_widgets/divider.dart';
 
 class MenuReuse extends StatelessWidget {
   final Widget leading;
@@ -41,7 +42,7 @@ class MenuReuse extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     leading,
-                    5.horizontalSpace,
+                    4.horizontalSpace,
                     Text(title, style: textStyle ?? style14sourceblack),
                   ],
                 ),
@@ -54,14 +55,10 @@ class MenuReuse extends StatelessWidget {
               ],
             ),
             10.verticalSpace,
-            horizontaldiDivider(),
+            CustomDivider(),
           ],
         ),
       ),
     );
   }
-}
-
-Widget horizontaldiDivider() {
-  return Divider(color: dividerColor);
 }

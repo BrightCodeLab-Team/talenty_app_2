@@ -33,28 +33,6 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
       child: Consumer<MenuViewModel>(
         builder:
             (context, model, child) => Scaffold(
-              appBar: AppBar(
-                backgroundColor: transparent,
-                leading: Padding(
-                  padding: EdgeInsetsGeometry.only(left: 15),
-                  child: CustomBackButton(),
-                ),
-                title: Image.asset(AppAssets.appLogo2, scale: 4),
-                centerTitle: true,
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15.0),
-                    child: Row(
-                      children: [
-                        Image.asset(AppAssets.eyeIcon, scale: 4),
-                        4.horizontalSpace,
-                        Icon(Icons.file_copy, color: greyColor),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-
               ///
               /// Start Body
               ///
@@ -109,7 +87,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         ),
                         title: 'Disponibilidad Inmediata',
                         trailing: Container(
-                          constraints: const BoxConstraints(minWidth: 140),
+                          constraints: const BoxConstraints(minWidth: 120),
                           child: InkWell(
                             borderRadius: BorderRadius.circular(20),
                             onTap: () {
@@ -120,7 +98,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 300),
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
+                                horizontal: 10,
                                 vertical: 6,
                               ),
                               decoration: BoxDecoration(
@@ -165,6 +143,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         onTap: () {},
                         child: AnimatedContainer(duration: Duration()),
                       ),
+
                       10.verticalSpace,
                       MenuReuse(
                         leading: Image.asset(
