@@ -104,6 +104,83 @@ class MandatoryStudentRegViewModel extends BaseViewModel {
     'December',
   ];
 
+  ///
+  ///  data for drop down 4
+  ///
+  List<String> fourthDropdown = [
+    'Aguascalients',
+    'Baja California',
+    'Baja California Sur',
+    'Campeche',
+    'Chiapas',
+    'Chihuahua',
+    'Ciudad de Mexico',
+    'Coahuila',
+    'Colima',
+    'Durango',
+    'Estado de México',
+    'Guerrero',
+    'Hidalgo',
+    'Jalisco',
+    'Michoacan',
+    'Morlos',
+    'Nayarit',
+    'Noevo lèon',
+    'Oaxaca,',
+    'Puebla',
+    'Queretaro',
+    'Quintana Roo',
+    'San Luis Potosi',
+    'Sinaloa',
+    'Sonora',
+    'Tabasco',
+    'Tamaulipas',
+    'Tlaxcala',
+    'Veracruz',
+    'Yucatan',
+    'Zacatecas',
+  ];
+
+  ///
+  ///  data for drop down 5
+  ///
+  List<String> fifthDropdown = [
+    'Azcapotzalco',
+    'Coyoacán',
+    'Cuajimalpa de Morlos',
+
+    'Gustavo A, Medero',
+    'Iztacalco',
+    'Lamagdalena Contreras',
+    'Milpa Alta',
+    'Alvaro Obrigon',
+    'TláHuac',
+    'Tlalpan',
+    'Xochimilco',
+    'Benito juárez',
+    'Cuauhtémoc',
+    'Miguel Hidalgo',
+    'Venustiano Carranza',
+  ];
+
+  ///
+  ///  data for drop down 6
+  ///
+  List<String> sixthDropdown = [
+    'Arte y Dieseño',
+    'Programación y Technol0gía',
+    'Marketing y Publicidad',
+    'Recursos Humanos y Administración',
+    'Salud y Bienstar',
+    'Educación y Formación',
+    'Logísticat y Transporte',
+    'Ingeneiría y Construcción',
+    'Ventos y Atención al Cliente'
+        'Finanzas y Economía',
+    'Oficios y Trabajo Manual ',
+    'Alimentación y Hotelería',
+    'Cienciay Technología',
+  ];
   List<String> year = List.generate(
     DateTime.now().year - 1950 + 1,
     (index) => (1950 + index).toString(),

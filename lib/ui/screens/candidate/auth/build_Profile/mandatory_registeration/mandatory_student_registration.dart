@@ -282,7 +282,7 @@ class MandatoryStudentRegistration extends StatelessWidget {
                         model.dropDown4,
                         model.dropDown4Error,
                         model.dropDownText4,
-                        model.year,
+                        model.fourthDropdown,
                         toggle: () {
                           model.toggleDropDown4();
                         },
@@ -342,7 +342,7 @@ class MandatoryStudentRegistration extends StatelessWidget {
                         model.dropDown5,
                         model.dropDown5Error,
                         model.dropDownText5,
-                        model.year,
+                        model.sixthDropdown,
                         toggle: () {
                           model.toggleDropDown5();
                         },
