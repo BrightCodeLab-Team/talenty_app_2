@@ -1,8 +1,8 @@
-// ignore_for_file: body_might_complete_normally_catch_error
+// ignore_for_file: deprecated_member_use
 
-import 'package:dio/dio.dart' show Dio, LogInterceptor;
-import 'package:flutter/material.dart';
-
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:talenty_app/core/config/config.dart';
 import 'package:talenty_app/core/model/responses/base_response/request_response.dart';
 import 'package:talenty_app/core/services/local_storage_services.dart';
@@ -10,88 +10,94 @@ import 'package:talenty_app/locator.dart';
 
 class ApiServices {
   final _config = locator<Config>();
-  Future<Dio> launchDio() async {
-    String? accessToken = locator<LocalStorageService>().accessToken;
-    Dio dio = Dio();
-    dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
-    // dio.interceptors.add(
-    //     DioCacheManager(CacheConfig(baseUrl: EndPoint.baseUrl)).interceptor);
-    dio.options.headers['Content-Type'] = 'application/json';
-    dio.options.headers["accept"] = 'application/json';
-    dio.options.headers["Authorization"] = 'Bearer $accessToken';
 
-    dio.options.followRedirects = false;
-    dio.options.validateStatus = (s) {
-      if (s != null) {
-        return s < 500;
-      } else {
-        return false;
+  Future<Dio> _launchDio() async {
+    final String? accessToken = locator<LocalStorageService>().accessToken;
+    final dio = Dio();
+
+    dio.options
+      ..baseUrl = _config.baseUrl
+      ..headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        if (accessToken != null) 'Authorization': 'Bearer $accessToken',
       }
-    };
+      ..followRedirects = false
+      ..validateStatus = (status) => status != null && status < 500;
+
+    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+
     return dio;
   }
 
-  get({required String endPoint, params}) async {
-    Dio dio = await launchDio();
-    final response = await dio
-        .get('${_config.baseUrl}/$endPoint', queryParameters: params)
-        .catchError((e) {
-          debugPrint('Unexpected Error');
-        });
-    if (response.statusCode == 200) {
-      return RequestResponse.fromJson(response.data);
-    } else if (response.statusCode == 500) {
-      return RequestResponse(false, error: 'Server Error');
-    } else {
-      return RequestResponse(false, error: 'Network Error');
+  Future<RequestResponse> get({
+    required String endPoint,
+    Map<String, dynamic>? params,
+  }) async {
+    try {
+      final dio = await _launchDio();
+      final response = await dio.get(endPoint, queryParameters: params);
+      return _handleResponse(response);
+    } catch (e) {
+      return _handleError(e);
     }
   }
 
-  post({required String endPoint, data}) async {
-    Dio dio = await launchDio();
-    final response = await dio
-        .post('${_config.baseUrl}/$endPoint', data: data)
-        .catchError((e) {
-          debugPrint('Unexpected Error');
-        });
-    if (response.statusCode == 200) {
-      return RequestResponse.fromJson(response.data);
-    } else if (response.statusCode == 500) {
-      return RequestResponse(false, error: 'Server Error');
-    } else {
-      return RequestResponse(false, error: 'Network Error');
+  Future<RequestResponse> post({required String endPoint, dynamic data}) async {
+    try {
+      final dio = await _launchDio();
+      print('Making POST request to: ${dio.options.baseUrl}');
+      final response = await dio.post(endPoint, data: data);
+
+      return _handleResponse(response);
+    } catch (e) {
+      return _handleError(e);
     }
   }
 
-  put({required String endPoint, data}) async {
-    Dio dio = await launchDio();
-    final response = await dio
-        .put('${_config.baseUrl}/$endPoint', data: data)
-        .catchError((e) {
-          debugPrint('Unexpected Error');
-        });
-    if (response.statusCode == 200) {
-      return RequestResponse.fromJson(response.data);
-    } else if (response.statusCode == 500) {
-      return RequestResponse(false, error: 'Server Error');
-    } else {
-      return RequestResponse(false, error: 'Network Error');
+  Future<RequestResponse> put({required String endPoint, dynamic data}) async {
+    try {
+      final dio = await _launchDio();
+      final response = await dio.put(endPoint, data: data);
+      return _handleResponse(response);
+    } catch (e) {
+      return _handleError(e);
     }
   }
 
-  delete({required String endPoint, params}) async {
-    Dio dio = await launchDio();
-    final response = await dio
-        .delete('${_config.baseUrl}/$endPoint', queryParameters: params)
-        .catchError((e) {
-          debugPrint('Unexpected Error');
-        });
+  Future<RequestResponse> delete({
+    required String endPoint,
+    Map<String, dynamic>? params,
+  }) async {
+    try {
+      final dio = await _launchDio();
+      final response = await dio.delete(endPoint, queryParameters: params);
+      return _handleResponse(response);
+    } catch (e) {
+      return _handleError(e);
+    }
+  }
+
+  RequestResponse _handleResponse(Response response) {
     if (response.statusCode == 200) {
       return RequestResponse.fromJson(response.data);
-    } else if (response.statusCode == 500) {
-      return RequestResponse(false, error: 'Server Error');
     } else {
-      return RequestResponse(false, error: 'Network Error');
+      return RequestResponse(
+        false,
+        error: response.statusMessage ?? 'Unknown error',
+      );
+    }
+  }
+
+  RequestResponse _handleError(dynamic error) {
+    if (error is DioError) {
+      if (error.error is SocketException) {
+        return RequestResponse(false, error: "No internet connection.");
+      } else {
+        return RequestResponse(false, error: error.message);
+      }
+    } else {
+      return RequestResponse(false, error: "Unexpected error occurred.");
     }
   }
 }

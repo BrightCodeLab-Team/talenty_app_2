@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final languageProvider = Provider.of<LanThemeProvider>(context);
 
+<<<<<<< HEAD
     return DevicePreview(
       enabled: true, // Ensure this is true to enable DevicePreview
       builder:
@@ -47,6 +48,26 @@ class MyApp extends StatelessWidget {
               builder: (context, child) => SplashScreen(),
             ),
           ),
+=======
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: title,
+      translations: LocalizationService(),
+      // locale: DevicePreview.locale(context),
+      locale: Locale('en'),
+      // builder: DevicePreview.appBuilder,
+      defaultTransition: Transition.rightToLeft,
+      themeMode: languageProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      home: ScreenUtilInit(
+        designSize: const Size(
+          _designWidth,
+          _designHeight,
+        ), // Use your constants
+        builder: (context, child) => SplashScreen(),
+      ),
+>>>>>>> 2b4d7ef (integration start)
     );
   }
 }

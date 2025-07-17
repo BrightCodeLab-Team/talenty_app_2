@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talenty_app/core/enums/view_state.dart';
+import 'package:talenty_app/core/model/app_user.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
+import 'package:talenty_app/core/services/auth_services.dart';
+import 'package:talenty_app/locator.dart';
+import 'package:talenty_app/core/model/responses/base_response/request_response.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
 
 class CandidateSignUpViewModel extends BaseViewModel {
   final formKey = GlobalKey<FormState>();
+  final _authService = locator<AuthService>();
+
+  AppUser appUser = AppUser();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -23,15 +32,11 @@ class CandidateSignUpViewModel extends BaseViewModel {
   bool confirmPasswordErrorFlag = false;
 
   void _onFieldChanged() {
-    if (emailErrorFlag && validateEmail() == null) {
-      emailErrorFlag = false;
-    }
-    if (passwordErrorFlag && validatePassword() == null) {
+    if (emailErrorFlag && validateEmail() == null) emailErrorFlag = false;
+    if (passwordErrorFlag && validatePassword() == null)
       passwordErrorFlag = false;
-    }
-    if (confirmPasswordErrorFlag && validateConfirmPassword() == null) {
+    if (confirmPasswordErrorFlag && validateConfirmPassword() == null)
       confirmPasswordErrorFlag = false;
-    }
     notifyListeners();
   }
 
@@ -39,12 +44,11 @@ class CandidateSignUpViewModel extends BaseViewModel {
     emailErrorFlag = true;
     passwordErrorFlag = true;
     confirmPasswordErrorFlag = true;
-
-    // Trigger the validators
     formKey.currentState?.validate();
-
     notifyListeners();
   }
+
+  // ========== VALIDATION ==========
 
   String? validateEmail() {
     final email = emailController.text.trim();
@@ -67,39 +71,32 @@ class CandidateSignUpViewModel extends BaseViewModel {
     return null;
   }
 
-  bool get canSubmitReg =>
-      validateEmail() == null &&
-      validatePassword() == null &&
-      validateConfirmPassword() == null;
-
   final _emailRegEx = RegExp(r'^[\w\.\-]+@([\w\-]+\.)+[\w\-]{2,4}$');
-
-  String? get emailError => emailErrorFlag ? validateEmail() : null;
-
   final _securePasswordRegEx = RegExp(
     r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$',
   );
 
-  String? get passwordError => passwordErrorFlag ? validatePassword() : null;
+  // ========== GETTERS FOR UI ==========
 
+  String? get emailError => emailErrorFlag ? validateEmail() : null;
+  String? get passwordError => passwordErrorFlag ? validatePassword() : null;
   String? get confirmError =>
       confirmPasswordErrorFlag ? validateConfirmPassword() : null;
 
   bool get isEmailValid =>
       validateEmail() == null && emailController.text.isNotEmpty;
-
   bool get isPasswordValid =>
       validatePassword() == null && passwordController.text.isNotEmpty;
-
   bool get isConfirmValid =>
       validateConfirmPassword() == null &&
       confirmPasswordController.text.isNotEmpty;
 
   bool get canSubmit => isEmailValid && isPasswordValid && isConfirmValid;
 
+  // ========== PASSWORD TOGGLE ==========
+
   bool _isPasswordHidden = true;
   bool get isPasswordHidden => _isPasswordHidden;
-
   void toggleHidden() {
     _isPasswordHidden = !_isPasswordHidden;
     notifyListeners();
@@ -107,10 +104,43 @@ class CandidateSignUpViewModel extends BaseViewModel {
 
   bool _isConfirmPasswordHidden = true;
   bool get isConfirmPasswordHidden => _isConfirmPasswordHidden;
-
   void toggleConfirmPasswordHidden() {
     _isConfirmPasswordHidden = !_isConfirmPasswordHidden;
     notifyListeners();
+  }
+
+  // ========== REGISTER LOGIC ==========
+
+  Future<void> registerUser() async {
+    validateFormFields();
+
+    if (!canSubmit) return;
+
+    setState(ViewState.busy);
+
+    final RequestResponse response = await _authService.register(user: appUser);
+
+    print("response candidate ${response.toJson()}");
+
+    setState(ViewState.idle);
+
+    if (response.success) {
+      Get.to(() => CandidateOTPScreen(email: emailController.text));
+      Get.snackbar(
+        "Success",
+        response.message ?? "Registration successful",
+        snackPosition: SnackPosition.TOP,
+      );
+      // Navigate to OTP screen or home
+    } else {
+      Get.snackbar(
+        "Error",
+        response.message ?? "Something went wrong",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+      );
+    }
   }
 
   @override

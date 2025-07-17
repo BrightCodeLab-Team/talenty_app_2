@@ -1,10 +1,17 @@
 // ignore_for_file: unused_field
 
 import 'package:logger/logger.dart';
+import 'package:talenty_app/core/constants/end_point.dart';
+import 'package:talenty_app/core/model/app_user.dart';
+import 'package:talenty_app/core/model/responses/base_response/request_response.dart';
 import 'package:talenty_app/core/others/logger_customization/custom_logger.dart';
+import 'package:talenty_app/core/services/api_services.dart';
 import 'package:talenty_app/core/services/db_services.dart';
 import 'package:talenty_app/core/services/local_storage_services.dart';
 import 'package:talenty_app/locator.dart';
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 ///
 /// [AuthService] class contains all authentication related logic with following
@@ -28,8 +35,11 @@ class AuthService {
   late bool isLogin;
   final _localStorageService = locator<LocalStorageService>();
   final _dbService = locator<DatabaseService>();
+
   // UserProfile? userProfile;
+  final _apiService = ApiServices();
   String? fcmToken;
+  AppUser appUser = AppUser();
   static final Logger log = CustomLogger(className: 'AuthService');
 
   ///
@@ -49,56 +59,64 @@ class AuthService {
     }
   }
 
-  // _getUserProfile() async {
-  //   UserProfileResponse response = await _dbService.getUserProfile();
-  //   if (response.success) {
-  //     userProfile = response.profile;
-  //     log.d('Got User Data: ${userProfile?.toJson()}');
-  //   } else {
-  //     Get.dialog(AuthDialog(title: 'Title', message: response.error!));
-  //   }
-  // }
+  Future<RequestResponse> register({required AppUser user}) async {
+    try {
+      final response = await _apiService.post(
+        data: user.toJson(),
+        endPoint: EndPoints.registerUser,
+      );
 
-  ///
-  /// Updating FCM Token here...
-  ///
-  // _updateFcmToken() async {
-  //   final fcmToken = await locator<NotificationsService>().getFcmToken();
-  //   final deviceId = await DeviceInfoService().getDeviceId();
-  //   final response = await _dbService.updateFcmToken(deviceId, fcmToken!);
-  //   if (response.success) {
-  //     userProfile!.fcmToken = fcmToken;
-  //   }
-  // }
+      print("@AuthServices register ==> ${response.message.toString()}");
 
-  // signupWithEmailAndPassword(SignUpBody body) async {
-  //   late AuthResponse response;
-  //   response = await _dbService.createAccount(body);
-  //   if (response.success) {
-  //     userProfile = UserProfile.fromJson(body.toJson());
-  //     _localStorageService.accessToken = response.accessToken;
-  //     await _updateFcmToken();
-  //   }
-  //   return response;
-  // }
+      if (response.success) {
+        final userJson = response.data?['body'];
+        final registeredUser = AppUser.fromJson(userJson);
+        appUser = registeredUser;
 
-  // loginWithEmailAndPassword(LoginBody body) async {
-  //   late AuthResponse response;
-  //   response = await _dbService.loginWithEmailAndPassword(body);
-  //   if (response.success) {
-  //     _localStorageService.accessToken = response.accessToken;
-  //     await _getUserProfile();
-  //     _updateFcmToken();
-  //   }
-  //   return response;
-  // }
+        await _localStorageService.setUserId(registeredUser.id ?? '');
+        await _localStorageService.setUser(registeredUser);
 
-  // resetPassword(ResetPasswordBody body) async {
-  //   final AuthResponse response = await _dbService.resetPassword(body);
-  //   if (response.success) {
-  //     _localStorageService.accessToken = response.accessToken;
+        isLogin = false;
+
+        return RequestResponse(
+          true,
+          message: response.message,
+          data: registeredUser.toJson(),
+        );
+      } else {
+        return RequestResponse(
+          false,
+          error: response.message ?? response.error,
+        );
+      }
+    } catch (e) {
+      return RequestResponse(false, error: e.toString());
+    }
+  }
+
+  // testHttpPost(email, password, confirmPassword) async {
+  //   final url = Uri.parse(
+  //     'http://localhost:3000/users/register',
+  //   ); // Replace with your real API URL
+  //   final headers = {
+  //     'Content-Type': 'application/json',
+  //     'Accept': 'application/json',
+  //   };
+  //   final body = jsonEncode({
+  //     'email': "$email",
+  //     'password': '$password',
+  //     'confirmPassword': '$confirmPassword',
+  //     'role': 'candidate',
+  //   });
+
+  //   try {
+  //     final response = await http.post(url, headers: headers, body: body);
+
+  //     print('Status code: ${response.statusCode}');
+  //     print('Body: ${response.body}');
+  //   } catch (e) {
+  //     print('HTTP Error: $e');
   //   }
-  //   return response;
   // }
 
   signupWithApple() {}

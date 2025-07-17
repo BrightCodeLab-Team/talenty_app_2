@@ -9,6 +9,7 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/sign_up/sign_up_view_model.dart';
+import 'package:talenty_app/ui/screens/company/onboarding_screen/onboarding_view_model.dart';
 import '../../../../../core/constants/auth_field_decoration.dart';
 import '../../../../custom_widgets/buttons/custom_buttons.dart';
 import '../../../../custom_widgets/paddings_and_margins/custom_padding.dart';
@@ -63,6 +64,9 @@ class CandidateSignUpScreen extends StatelessWidget {
                           hintText: 'hint_email'.tr,
                           errorText: model.emailError,
                         ),
+                        onChanged: (value) {
+                          model.appUser.email = value;
+                        },
                         // validator: (_) => model.validateEmail(),
                         keyboardType: TextInputType.emailAddress,
                       ),
@@ -87,7 +91,11 @@ class CandidateSignUpScreen extends StatelessWidget {
                       TextFormField(
                         controller: model.passwordController,
                         keyboardType: TextInputType.visiblePassword,
+
                         // validator: (_) => model.validatePassword(),
+                        onChanged: (value) {
+                          model.appUser.password = value;
+                        },
                         decoration: authFieldDecoration.copyWith(
                           hintText: 'hint_password'.tr,
                           errorText: model.passwordError,
@@ -151,15 +159,19 @@ class CandidateSignUpScreen extends StatelessWidget {
                       4.verticalSpace,
                       TextFormField(
                         controller: model.confirmPasswordController,
-
+                        onChanged: (value) {
+                          model.appUser.confirmPassword = value;
+                        },
                         // validator: (_) => model.validateConfirmPassword(),
                         decoration: authFieldDecoration.copyWith(
                           hintText: 'register_company_confirm_password_hint'.tr,
                           errorText: model.confirmError,
+
                           suffixIcon: InkWell(
                             onTap: () {
                               model.toggleConfirmPasswordHidden();
                             },
+
                             child: AnimatedSwitcher(
                               duration: Duration(milliseconds: 300),
                               transitionBuilder: (child, animation) {
@@ -208,14 +220,12 @@ class CandidateSignUpScreen extends StatelessWidget {
                   final isValid =
                       model.formKey.currentState?.validate() ?? false;
                   if (isValid && model.canSubmit) {
-                    Get.to(
-                      () =>
-                          CandidateOTPScreen(email: model.emailController.text),
-                    );
+                    model.appUser.role = "candidate";
+                    model.registerUser();
                   }
                 },
                 text: 'btn_continue'.tr,
-                backgroundColor: model.canSubmitReg ? primaryColor : greyColor,
+                backgroundColor: model.canSubmit ? primaryColor : greyColor,
               ),
             ),
           );

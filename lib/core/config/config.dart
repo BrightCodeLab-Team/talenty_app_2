@@ -2,9 +2,9 @@ import '../enums/env.dart';
 
 class Config {
   final Env _env;
-  final String _devBaseUrl = '';
-  final String _testBaseUrl = '';
-  final String _productionBaseUrl = '';
+  final String _devBaseUrl = 'http://localhost:3000';
+  final String _testBaseUrl = 'http://localhost:3000';
+  final String _productionBaseUrl = 'http://localhost:3000';
   late String _baseUrl;
 
   /// Getters
