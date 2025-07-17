@@ -13,10 +13,17 @@ import 'package:talenty_app/ui/custom_widgets/drop_down/custom_drop_down_menu.da
 import 'package:talenty_app/ui/custom_widgets/drop_down/custom_drop_down_text_field.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_register_11_percent_view_model.dart';
 
-class CandidateRegister11PercentScreen extends StatelessWidget {
+class CandidateRegister11PercentScreen extends StatefulWidget {
   const CandidateRegister11PercentScreen({super.key});
 
   @override
+  State<CandidateRegister11PercentScreen> createState() =>
+      _CandidateRegister11PercentScreenState();
+}
+
+class _CandidateRegister11PercentScreenState
+    extends State<CandidateRegister11PercentScreen> {
+  bool _isChecked1 = false;
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => CandidateRegister11PercentViewModel(),
@@ -142,25 +149,266 @@ class CandidateRegister11PercentScreen extends StatelessWidget {
                       10.verticalSpace,
                       _buildDropdown(
                         context,
-                        model.dropDown5,
-                        model.dropDown5Error,
-                        model.dropDownText5,
+                        model.dropDown1,
+                        model.dropDown1Error,
+                        model.dropDownText1,
                         model.firstDropdown,
                         toggle: () {
-                          model.toggleDropDown5();
+                          model.toggleDropDown1();
                         },
                         onItemTap: (p0) {
-                          model.setDropDownText5(p0);
-                          model.toggleDropDown5();
-                          model.dropDown5Error = false;
+                          model.setDropDownText1(p0);
+                          model.toggleDropDown1();
+                          model.dropDown1Error = false;
                           model.notifyListeners();
                         },
                       ),
+                      10.verticalSpace,
+
+                      Row(
+                        children: [
+                          Checkbox(
+                            activeColor: darkgreenColor,
+                            value: model.isCheckboxChecked,
+                            onChanged: (value) {
+                              model.isCheckboxChecked = value ?? false;
+                              model.updateFormValidity();
+                            },
+                          ),
+
+                          Flexible(
+                            flex: 1,
+                            child: Text(
+                              "Actualmente lo sigo cursando",
+                              style: style14M.copyWith(
+                                color: textDarkGreyColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      2.verticalSpace,
+
+                      ///
+                      /// first row of two drop down
+                      ///
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Fecha de Inicio',
+                            style: style16B.copyWith(color: lightBlackColor),
+                          ),
+                          Text(
+                            '*obligatorio',
+                            style: style14M.copyWith(color: textGreyColor),
+                          ),
+                        ],
+                      ),
+                      10.verticalSpace,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Mes',
+                                  style: style16B.copyWith(color: blackColor),
+                                ),
+                                1.verticalSpace,
+                                _buildDateDropdown(
+                                  context,
+                                  model.dropDown2,
+                                  model.dropDown2Error,
+                                  model.dropDownText2 ?? " ",
+                                  model.day,
+
+                                  toggle: () {
+                                    model.toggleDropDown2();
+                                  },
+                                  onItemTap: (p0) {
+                                    model.setDropDownText2(p0);
+                                    model
+                                        .toggleDropDown2(); // close the dropdown
+                                    model.dropDown2Error = false;
+                                    model.notifyListeners(); // refresh UI
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          8.horizontalSpace,
+                          Flexible(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Año',
+                                  style: style16B.copyWith(color: blackColor),
+                                ),
+                                1.verticalSpace,
+                                _buildDateDropdown(
+                                  context,
+                                  model.dropDown3,
+                                  model.dropDown3Error,
+                                  model.dropDownText3,
+                                  model.month,
+
+                                  toggle: () {
+                                    model.toggleDropDown3();
+                                  },
+                                  onItemTap: (p0) {
+                                    model.setDropDownText3(p0);
+                                    model.toggleDropDown3();
+                                    model.dropDown3Error = false;
+                                    model.notifyListeners();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      ///
+                      ///. seconde row of two drop down
+                      ///
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Fecha de Finalización',
+                            style: style16B.copyWith(color: lightBlackColor),
+                          ),
+                          Text(
+                            '*obligatorio',
+                            style: style14M.copyWith(color: textGreyColor),
+                          ),
+                        ],
+                      ),
+                      10.verticalSpace,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Mes',
+                                  style: style16B.copyWith(color: blackColor),
+                                ),
+                                1.verticalSpace,
+                                _buildDateDropdown(
+                                  context,
+                                  model.dropDown4,
+                                  model.dropDown4Error,
+                                  model.dropDownText4 ?? " ",
+                                  model.day,
+
+                                  toggle: () {
+                                    model.toggleDropDown4();
+                                  },
+                                  onItemTap: (p0) {
+                                    model.setDropDownText4(p0);
+                                    model
+                                        .toggleDropDown4(); // close the dropdown
+                                    model.dropDown4Error = false;
+                                    model.notifyListeners(); // refresh UI
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          8.horizontalSpace,
+                          Flexible(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Año',
+                                  style: style16B.copyWith(color: blackColor),
+                                ),
+                                1.verticalSpace,
+                                _buildDateDropdown(
+                                  context,
+                                  model.dropDown5,
+                                  model.dropDown5Error,
+                                  model.dropDownText5,
+                                  model.month,
+
+                                  toggle: () {
+                                    model.toggleDropDown5();
+                                  },
+                                  onItemTap: (p0) {
+                                    model.setDropDownText5(p0);
+                                    model.toggleDropDown5();
+                                    model.dropDown5Error = false;
+                                    model.notifyListeners();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      50.verticalSpace,
                     ],
                   ),
                 ),
               ),
             ),
+      ),
+    );
+  }
+
+  ///
+  ///. check box
+  ///
+  Widget _buildCheckboxRow(
+    String text,
+    bool value,
+    ValueChanged<bool?> onChanged,
+  ) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 2.h),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Transform.scale(
+            scale: 1,
+            child: Checkbox(
+              value: value,
+              onChanged: onChanged,
+              activeColor: darkgreenColor,
+              checkColor: whiteColor,
+              side: BorderSide(
+                color: value ? darkgreenColor : greyColor,
+                width: 2,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            child: Text(
+              text,
+              style: style14M.copyWith(color: textLightGreyColor),
+            ),
+          ),
+        ],
       ),
     );
   }

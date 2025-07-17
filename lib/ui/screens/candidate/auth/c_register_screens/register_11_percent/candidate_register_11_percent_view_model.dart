@@ -33,10 +33,10 @@ class CandidateRegister11PercentViewModel extends BaseViewModel {
   ///
   String? get nameError => nameErrorFlag ? validateEmail() : null;
   String _dropDownText1 = '';
-  String _dropDownText2 = '';
-  String _dropDownText3 = '';
-  String _dropDownText4 = '';
-  String _dropDownText5 = '';
+  String _dropDownText2 = 'Selecciona';
+  String _dropDownText3 = 'Selecciona';
+  String _dropDownText4 = 'Selecciona';
+  String _dropDownText5 = 'Selecciona';
 
   String get dropDownText1 => _dropDownText1;
   String get dropDownText2 => _dropDownText2;

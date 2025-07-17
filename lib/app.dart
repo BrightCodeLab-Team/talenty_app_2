@@ -7,15 +7,10 @@ import 'package:provider/provider.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/add_photo_to_profile/add_photo_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/auth/add_photo_to_profile/candidate_profile_ready.dart';
-import 'package:talenty_app/ui/screens/candidate/auth/add_photo_to_profile/tips_to_add_phot0_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_11_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_register_11_percent_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/country_code/country_code_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/sign_up/sign_up_screen.dart';
 import 'package:talenty_app/ui/screens/common/splash_screen.dart';
-import 'package:talenty_app/ui/screens/company/build_profile/register_company/register_16_percent/register_company_16_screen.dart';
-import 'package:talenty_app/ui/screens/company/build_profile/register_company/register_company_0_percent_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
