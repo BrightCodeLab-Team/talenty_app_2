@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:talenty_app/core/constants/app_assets.dart';
+import 'package:talenty_app/core/constants/colors.dart';
+import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/ui/custom_widgets/back_button.dart';
+import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
+
+class CandidateProfileReadyScreen extends StatelessWidget {
+  const CandidateProfileReadyScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: Padding(
+        padding: EdgeInsetsGeometry.all(15),
+        child: CustomButton(
+          text: 'Completar mi currículum',
+          onTap: () {},
+          backgroundColor: primaryColor,
+        ),
+      ),
+      appBar: AppBar(
+        backgroundColor: transparent,
+        leading: Padding(
+          padding: EdgeInsetsGeometry.only(left: 15),
+          child: CustomBackButton(),
+        ),
+        centerTitle: true,
+        title: Image.asset(AppAssets.appLogo2, scale: 4),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '¡Tu perfil está casi listo!',
+                style: style24M.copyWith(color: blackColor),
+              ),
+              10.verticalSpace,
+              Text(
+                'Un currículum completo aumenta tus oportunidades de ser descubierto por el empleador ideal. Completa tu cuenta y destaca entre los mejores.',
+                style: style14M.copyWith(color: textGreyColor),
+                textAlign: TextAlign.start,
+              ),
+              10.verticalSpace,
+              Text(
+                '¡Completa por una última vez tu CV!',
+                style: style16B.copyWith(color: textDarkGreyColor),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

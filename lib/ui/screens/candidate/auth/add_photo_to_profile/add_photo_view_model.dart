@@ -14,23 +14,31 @@ class CandidateAddPhotoViewModel extends ChangeNotifier {
   File? get image3 => _image3;
 
   Future<void> pickImage(int index) async {
-    final XFile? pickedFile = await _picker.pickImage(
-      source: ImageSource.gallery,
-    );
+    try {
+      final XFile? pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+      );
 
-    if (pickedFile != null) {
-      switch (index) {
-        case 0:
-          _mainImage = File(pickedFile.path);
-          break;
-        case 1:
-          _image2 = File(pickedFile.path);
-          break;
-        case 2:
-          _image3 = File(pickedFile.path);
-          break;
+      if (pickedFile != null) {
+        final File imageFile = File(pickedFile.path);
+        if (await imageFile.exists()) {
+          // Verify file exists
+          switch (index) {
+            case 0:
+              _mainImage = imageFile;
+              break;
+            case 1:
+              _image2 = imageFile;
+              break;
+            case 2:
+              _image3 = imageFile;
+              break;
+          }
+          notifyListeners();
+        }
       }
-      notifyListeners(); // Notify listeners that the state has changed
+    } catch (e) {
+      debugPrint('Error picking image: $e');
     }
   }
 
@@ -53,6 +61,4 @@ class CandidateAddPhotoViewModel extends ChangeNotifier {
 
   bool get areAllImagesUploaded =>
       _mainImage != null && _image2 != null && _image3 != null;
-
-  // You can add more business logic here, e.g., validation, uploading to server.
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -7,18 +9,7 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/add_photo_to_profile/add_photo_view_model.dart';
-
-class PhotoGuidanceScreen extends StatelessWidget {
-  const PhotoGuidanceScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Photo Guidance')),
-      body: const Center(child: Text('This is the photo guidance screen.')),
-    );
-  }
-}
+import 'package:talenty_app/ui/screens/candidate/auth/add_photo_to_profile/tips_to_add_phot0_screen.dart';
 
 class CandidateAddPhotoScreen extends StatelessWidget {
   const CandidateAddPhotoScreen({super.key});
@@ -73,9 +64,17 @@ class CandidateAddPhotoScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                             image:
                                 viewModel.mainImage != null
-                                    ? DecorationImage(
-                                      image: FileImage(viewModel.mainImage!),
+                                    ? // In your CandidateAddPhotoScreen, update the DecorationImage parts like this:
+                                    DecorationImage(
+                                      image: FileImage(
+                                        File(viewModel.mainImage!.path),
+                                      ),
                                       fit: BoxFit.cover,
+                                      onError: (exception, stackTrace) {
+                                        debugPrint(
+                                          'Failed to load image: $exception',
+                                        );
+                                      },
                                     )
                                     : null,
                           ),
@@ -100,7 +99,7 @@ class CandidateAddPhotoScreen extends StatelessWidget {
                                                 MaterialPageRoute(
                                                   builder:
                                                       (context) =>
-                                                          const PhotoGuidanceScreen(),
+                                                          CandidateAddPhotoTipsScreen(),
                                                 ),
                                               );
                                             }

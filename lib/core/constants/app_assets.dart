@@ -105,6 +105,9 @@ class AppAssets {
   static String img = "$dynamicAssets/image.png";
   static String img2 = "$dynamicAssets/image2.png";
 
+  static String people = "$dynamicAssets/people.avif";
+  static String img3 = "$dynamicAssets/img3.png";
+
   ///
   ///.  candidate profile screen
   ///

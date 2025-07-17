@@ -1,0 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_register_11_percent_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_22_percent/register_22_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_44_percent/register_44_view_model.dart';
+
+class Candidate44PercentScreen extends StatelessWidget {
+  const Candidate44PercentScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => CandidateRegister44PercentViewModel(),
+      child: Consumer<CandidateRegister11PercentViewModel>(
+        builder: (context, model, child) => Scaffold(),
+      ),
+    );
+  }
+}
