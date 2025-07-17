@@ -23,6 +23,7 @@ class AppAssets {
       "$staticAssets/registerRecruiterImage.png";
   static String deleteAccountGif = "$staticAssets/deleteAccountGif.png";
   static String tipsImg = "$dynamicAssets/office.png";
+  static String cameraIcon2 = "$iconsAssets/cameraIcon2.png";
   /*    
 
       Icons Assets

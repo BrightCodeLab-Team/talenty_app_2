@@ -1,6 +1,55 @@
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
 
-class CountryCodeViewModel extends BaseViewModel {}
+class CountryCodeViewModel extends BaseViewModel {
+  final formKey = GlobalKey<FormState>();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController confirmPhoneNumberController = TextEditingController();
+  CountryCodeViewModel() {
+    phoneNumberController.addListener(_onFormChanged);
+    confirmPhoneNumberController.addListener(_onFormChanged);
+  }
+
+  void _onFormChanged() {
+    notifyListeners();
+  }
+
+  ///
+  /// validate phone number
+  ///
+  String? validatePhoneNumber(String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Please enter your phone number';
+    }
+    return null;
+  }
+
+  ///
+  ///  validate confirm phone number
+  ///
+  String? validateConfirmPhoneNumber(String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Please confirm your phone number';
+    } else if (phoneNumberController.text !=
+        confirmPhoneNumberController.text) {
+      return 'Phone numbers do not match';
+    }
+    return null;
+  }
+
+  ///
+  ///. validate button
+  ///
+  bool validateButton() {
+    final currentState = formKey.currentState;
+    if (currentState != null && currentState.validate()) {
+      return true;
+    }
+    return false;
+  }
+}
 
 // class CountryCode {
 //   final String name;

@@ -1,12 +1,16 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/auth_field_decoration.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/country_code/country_code_view_model.dart';
+import 'package:talenty_app/ui/screens/company/home/home_screen.dart';
 
 class CandidateRegistrationCountryCodeScreen extends StatefulWidget {
   const CandidateRegistrationCountryCodeScreen({Key? key}) : super(key: key);
@@ -18,21 +22,21 @@ class CandidateRegistrationCountryCodeScreen extends StatefulWidget {
 
 class _CandidateRegistrationCountryCodeScreenState
     extends State<CandidateRegistrationCountryCodeScreen> {
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _confirmPhoneNumberController =
-      TextEditingController();
+  // final TextEditingController _phoneNumberController = TextEditingController();
+  // final TextEditingController _confirmPhoneNumberController =
+  //     TextEditingController();
 
   CountryCode _selectedCountryCode = CountryCode(
     code: 'MX',
     dialCode: '+52',
   ); // Default to Mexico as per your image
 
-  @override
-  void dispose() {
-    _phoneNumberController.dispose();
-    _confirmPhoneNumberController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _phoneNumberController.dispose();
+  //   _confirmPhoneNumberController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,7 @@ class _CandidateRegistrationCountryCodeScreenState
       create: (context) => CountryCodeViewModel(),
       child: Consumer<CountryCodeViewModel>(
         builder:
-            (context, value, child) => Scaffold(
+            (context, model, child) => Scaffold(
               appBar: AppBar(
                 title: Image.asset(AppAssets.appLogo2, scale: 4),
                 centerTitle: true,
@@ -53,181 +57,221 @@ class _CandidateRegistrationCountryCodeScreenState
               body: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      30.verticalSpace,
-                      // First phone number input section
-                      Row(
-                        children: [
-                          Text(
-                            'Ingresa tu número celular',
-                            style: style16B.copyWith(color: blackColor),
-                          ),
-                          const Spacer(),
-                          Text(
-                            '*obligatorio',
-                            style: style14M.copyWith(color: textLightGreyColor),
-                          ),
-                        ],
-                      ),
-                      10.verticalSpace,
-                      Row(
-                        children: [
-                          // Country Code Picker Container with adjusted size and shadow
-                          Container(
-                            height: 50.h, // Smaller height
-                            decoration: BoxDecoration(
-                              border: Border.all(color: borderGreyColor),
-                              borderRadius: BorderRadius.circular(10.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(
-                                    0.1,
-                                  ), // Subtle shadow
-                                  spreadRadius: 1,
-                                  blurRadius: 3,
-                                  offset: const Offset(
-                                    0,
-                                    1,
-                                  ), // changes position of shadow
-                                ),
-                              ],
+                  child: Form(
+                    key: model.formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        30.verticalSpace,
+                        // First phone number input section
+                        Row(
+                          children: [
+                            Text(
+                              'Ingresa tu número celular',
+                              style: style16B.copyWith(color: blackColor),
                             ),
-                            child: CountryCodePicker(
-                              onChanged: (countryCode) {
-                                setState(() {
-                                  _selectedCountryCode = countryCode;
-                                });
-                              },
-                              initialSelection: _selectedCountryCode.code,
-                              favorite: const [
-                                '+52',
-                                'MX',
-                              ], // Example favorites
-                              showCountryOnly: false,
-                              showOnlyCountryWhenClosed: false,
-                              showDropDownButton: true,
-                              padding: EdgeInsets.zero,
-                              alignLeft: false,
-                              textStyle: style14M.copyWith(color: blackColor),
-                              dialogTextStyle: style14M.copyWith(
-                                color: blackColor,
+                            const Spacer(),
+                            Text(
+                              '*obligatorio',
+                              style: style14M.copyWith(
+                                color: textLightGreyColor,
                               ),
-                              searchStyle: style14M.copyWith(color: blackColor),
-                              boxDecoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.r),
+                            ),
+                          ],
+                        ),
+                        10.verticalSpace,
+                        Row(
+                          children: [
+                            // Country Code Picker Container with adjusted size and shadow
+                            Container(
+                              height: 40.h, // Smaller height
+                              width: 130,
+                              decoration: BoxDecoration(
+                                color: whiteColor,
                                 border: Border.all(color: borderGreyColor),
-                              ),
-                              dialogSize: Size(300.w, 400.h),
-                            ),
-                          ),
-                          10.horizontalSpace, // Small spacing between picker and text field
-                          // Flexible TextFormField
-                          Expanded(
-                            child: TextFormField(
-                              controller: _phoneNumberController,
-                              decoration: authFieldDecoration.copyWith(
-                                hintText: '55-00-000-000',
-                                // Removed suffixText as per image. If you want it for "obligatorio", put it back.
-                                // The "*obligatorio" is already displayed above the field.
-                                // suffixText: '*obligatorio',
-                                suffixStyle: style14M.copyWith(
-                                  color: borderGreyColor,
-                                ),
-                              ),
-                              keyboardType: TextInputType.phone,
-                            ),
-                          ),
-                        ],
-                      ),
-                      20.verticalSpace,
-                      // Second phone number confirmation section
-                      Row(
-                        children: [
-                          Text(
-                            'Confirma tu número celular',
-                            style: style16B.copyWith(color: blackColor),
-                          ),
-                          const Spacer(),
-                          Text(
-                            '*obligatorio',
-                            style: style14M.copyWith(color: textLightGreyColor),
-                          ),
-                        ],
-                      ),
-                      10.verticalSpace,
-                      Row(
-                        children: [
-                          // Country Code Picker Container with adjusted size and shadow
-                          Container(
-                            height: 50.h, // Smaller height
-                            decoration: BoxDecoration(
-                              border: Border.all(color: borderGreyColor),
-                              borderRadius: BorderRadius.circular(10.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(
-                                    0.1,
-                                  ), // Subtle shadow
-                                  spreadRadius: 1,
-                                  blurRadius: 3,
-                                  offset: const Offset(
-                                    0,
-                                    1,
-                                  ), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: CountryCodePicker(
-                              onChanged: (countryCode) {
-                                // You might want to update a separate state for the confirm field's country code,
-                                // or link it to the first one if they should always be the same.
-                                // For now, it simply updates nothing specific for the confirm field.
-                              },
-                              initialSelection: _selectedCountryCode.code,
-                              favorite: const ['+52', 'MX'],
-                              showCountryOnly: false,
-                              showOnlyCountryWhenClosed: false,
-                              showDropDownButton: true,
-                              padding: EdgeInsets.zero,
-                              alignLeft: false,
-                              textStyle: style14M.copyWith(color: blackColor),
-                              dialogTextStyle: style14M.copyWith(
-                                color: blackColor,
-                              ),
-                              searchStyle: style14M.copyWith(color: blackColor),
-                              boxDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
-                                border: Border.all(color: borderGreyColor),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: blackColor.withOpacity(
+                                      0.3,
+                                    ), // Subtle shadow
+                                    spreadRadius: 3,
+                                    blurRadius: 3,
+                                    offset: const Offset(
+                                      0,
+                                      4,
+                                    ), // changes position of shadow
+                                  ),
+                                ],
                               ),
-                              dialogSize: Size(300.w, 400.h),
-                            ),
-                          ),
-                          10.horizontalSpace,
-                          Expanded(
-                            child: TextFormField(
-                              controller: _confirmPhoneNumberController,
-                              decoration: authFieldDecoration.copyWith(
-                                hintText: '55-00-000-000',
-                                // Removed suffixText as per image.
-                                // suffixText: '*obligatorio',
-                                suffixStyle: style14M.copyWith(
-                                  color: borderGreyColor,
+                              child: CountryCodePicker(
+                                onChanged: (countryCode) {
+                                  setState(() {
+                                    _selectedCountryCode = countryCode;
+                                  });
+                                },
+                                initialSelection: _selectedCountryCode.code,
+                                favorite: const [
+                                  '+52',
+                                  'MX',
+                                ], // Example favorites
+                                showCountryOnly: false,
+                                showOnlyCountryWhenClosed: false,
+                                showDropDownButton: true,
+                                padding: EdgeInsets.zero,
+                                alignLeft: false,
+                                textStyle: style14M.copyWith(color: blackColor),
+                                dialogTextStyle: style14M.copyWith(
+                                  color: blackColor,
                                 ),
+                                searchStyle: style14M.copyWith(
+                                  color: blackColor,
+                                ),
+                                boxDecoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  border: Border.all(color: borderGreyColor),
+                                ),
+                                dialogSize: Size(300.w, 400.h),
                               ),
-                              keyboardType: TextInputType.phone,
                             ),
-                          ),
-                        ],
-                      ),
-                      30.verticalSpace,
-                      Text(
-                        'Tu número de celular será usado para que las empresas puedan contactarte y tener un trato directo contigo. En Talenty no compartimos tu información con otros usuarios.',
-                        style: style14M.copyWith(color: textLightGreyColor),
-                      ),
-                    ],
+                            10.horizontalSpace, // Small spacing between picker and text field
+                            // Flexible TextFormField
+                            Expanded(
+                              child: TextFormField(
+                                // controller: _phoneNumberController,
+                                controller: model.phoneNumberController,
+                                decoration: authFieldDecoration.copyWith(
+                                  hintText: '55-00-000-000',
+                                  // Removed suffixText as per image. If you want it for "obligatorio", put it back.
+                                  // The "*obligatorio" is already displayed above the field.
+                                  // suffixText: '*obligatorio',
+                                  suffixStyle: style14M.copyWith(
+                                    color: borderGreyColor,
+                                  ),
+                                ),
+                                keyboardType: TextInputType.phone,
+                                validator: model.validatePhoneNumber,
+                              ),
+                            ),
+                          ],
+                        ),
+                        20.verticalSpace,
+                        // Second phone number confirmation section
+                        Row(
+                          children: [
+                            Text(
+                              'Confirma tu número celular',
+                              style: style16B.copyWith(color: blackColor),
+                            ),
+                            const Spacer(),
+                            Text(
+                              '*obligatorio',
+                              style: style14M.copyWith(
+                                color: textLightGreyColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        10.verticalSpace,
+                        Row(
+                          children: [
+                            // Country Code Picker Container with adjusted size and shadow
+                            Container(
+                              height: 40.h, // Smaller height
+                              width: 130,
+                              decoration: BoxDecoration(
+                                color: whiteColor,
+                                border: Border.all(color: borderGreyColor),
+                                borderRadius: BorderRadius.circular(10.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: blackColor.withOpacity(
+                                      0.3,
+                                    ), // Subtle shadow
+                                    spreadRadius: 3,
+                                    blurRadius: 3,
+                                    offset: const Offset(
+                                      0,
+                                      4,
+                                    ), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: CountryCodePicker(
+                                onChanged: (countryCode) {
+                                  // You might want to update a separate state for the confirm field's country code,
+                                  // or link it to the first one if they should always be the same.
+                                  // For now, it simply updates nothing specific for the confirm field.
+                                },
+                                initialSelection: _selectedCountryCode.code,
+                                favorite: const ['+52', 'MX'],
+                                showCountryOnly: false,
+                                showOnlyCountryWhenClosed: false,
+                                showDropDownButton: true,
+                                padding: EdgeInsets.zero,
+                                alignLeft: false,
+                                textStyle: style14M.copyWith(color: blackColor),
+                                dialogTextStyle: style14M.copyWith(
+                                  color: blackColor,
+                                ),
+                                searchStyle: style14M.copyWith(
+                                  color: blackColor,
+                                ),
+                                boxDecoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  border: Border.all(color: borderGreyColor),
+                                ),
+                                dialogSize: Size(300.w, 400.h),
+                              ),
+                            ),
+                            10.horizontalSpace,
+                            Expanded(
+                              child: TextFormField(
+                                //  controller: _confirmPhoneNumberController,
+                                controller: model.confirmPhoneNumberController,
+                                decoration: authFieldDecoration.copyWith(
+                                  hintText: '55-00-000-000',
+                                  // Removed suffixText as per image.
+                                  // suffixText: '*obligatorio',
+                                  suffixStyle: style14M.copyWith(
+                                    color: borderGreyColor,
+                                  ),
+                                ),
+                                keyboardType: TextInputType.phone,
+                                validator: model.validateConfirmPhoneNumber,
+                              ),
+                            ),
+                          ],
+                        ),
+                        30.verticalSpace,
+                        Text(
+                          'Tu número de celular será usado para que las empresas puedan contactarte y tener un trato directo contigo. En Talenty no compartimos tu información con otros usuarios.',
+                          style: style14M.copyWith(color: textLightGreyColor),
+                        ),
+                      ],
+                    ),
                   ),
+                ),
+              ),
+              bottomNavigationBar: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15.0,
+                  vertical: 15,
+                ),
+                child: CustomButton(
+                  onTap: () {
+                    if (model.validateButton()) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => HomeScreen()),
+                      );
+                    } else {
+                      // Do nothing or show an error (optional)
+                    }
+                  },
+                  text: 'Continuar',
+                  backgroundColor:
+                      model.validateButton() ? primaryColor : greyColor,
                 ),
               ),
             ),
