@@ -6,11 +6,12 @@ import 'package:talenty_app/core/enums/view_state.dart';
 import 'package:talenty_app/core/model/otp_model.dart';
 import 'package:talenty_app/core/services/auth_services.dart';
 import 'package:talenty_app/locator.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/build_Profile/mandatory_registeration/mandatory_student_registration.dart';
 import 'package:talenty_app/ui/screens/company/build_profile/register_company/register_company_0_percent_screen.dart';
 
 import '../../../../../core/others/base_view_model.dart';
 
-class OtpViewModel extends BaseViewModel {
+class OtpViewModelCandidate extends BaseViewModel {
   final _auth = locator<AuthService>();
 
   OtpModel otpModel = OtpModel();
@@ -75,16 +76,16 @@ class OtpViewModel extends BaseViewModel {
 
   verify() async {
     setState(ViewState.busy);
+    otpModel.otp = otp;
     print("otp email==> ${otpModel.email}");
     print("otp otp==> ${otpModel.otp}");
-    Get.off(() => RegisterCompany0PercentScreen()); // 👈 navigate here
-    // final response = await _auth.verifyOtp(otpModel);
-    // if (response.success) {
-    //   Get.snackbar("Success", "OTP Verified");
-    //   Get.off(() => RegisterCompany0PercentScreen()); // 👈 navigate here
-    // } else {
-    //   Get.snackbar("Error", response.message ?? "Something went wrong");
-    // }
+    final response = await _auth.verifyOtp(otpModel);
+    if (response.success) {
+      Get.snackbar("Success", "OTP Verified");
+      Get.to(() => MandatoryStudentRegistration());
+    } else {
+      Get.snackbar("Error", response.message ?? "Something went wrong");
+    }
     setState(ViewState.idle);
   }
 

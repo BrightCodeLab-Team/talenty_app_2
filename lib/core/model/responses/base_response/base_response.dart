@@ -1,18 +1,15 @@
 class BaseResponse {
   late bool success;
-  String? error;
-
-  BaseResponse(this.success, {this.error});
-
-  BaseResponse.fromJson(json) {
+  String? message;
+  BaseResponse(this.success, {this.message});
+  BaseResponse.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    error = json['error'];
+    message = json['message'];
   }
-
-  toJson() {
-    return {
-      'success': success,
-      'error': error,
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    data['message'] = message;
+    return data;
   }
 }

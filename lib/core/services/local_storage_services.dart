@@ -7,50 +7,41 @@ class LocalStorageService {
   final log = CustomLogger(className: 'Local Storage Service');
   static SharedPreferences? _preferences;
 
-  ///
-  /// List of const keys
-  ///
-  static const String onboardingCountKey = 'onBoardingCount';
-  static const String notificationsCountKey = 'notificationsCount';
   static const String accessTokenKey = 'accessToken';
   static const String refreshTokenKey = 'refreshToken';
   static const String userIdKey = 'userId';
   static const String userKey = 'user';
+  static const String onboardingCountKey = 'onBoardingCount';
+  static const String notificationsCountKey = 'notificationsCount';
 
-  ///
-  /// Init SharedPreferences instance
-  ///
   Future<void> init() async {
     _preferences = await SharedPreferences.getInstance();
   }
 
-  ///
-  /// General Getters/Setters
-  ///
+  // Access Token
+  String? get accessToken => _getFromDisk(accessTokenKey);
+  Future<void> setAccessToken(String token) async =>
+      _saveToDisk(accessTokenKey, token);
+
+  // Refresh Token
+  String? get refreshToken => _getFromDisk(refreshTokenKey);
+  Future<void> setRefreshToken(String token) async =>
+      _saveToDisk(refreshTokenKey, token);
+
+  // Onboarding Page Count
   int get onBoardingPageCount => _getFromDisk(onboardingCountKey) ?? 0;
   set onBoardingPageCount(int count) => _saveToDisk(onboardingCountKey, count);
 
+  // Notifications Count
   int get setNotificationsCount => _getFromDisk(notificationsCountKey) ?? 0;
   set setNotificationsCount(int count) =>
       _saveToDisk(notificationsCountKey, count);
 
-  dynamic get accessToken => _getFromDisk(accessTokenKey);
-  set accessToken(token) => _saveToDisk(accessTokenKey, token);
-
-  dynamic get refreshToken => _getFromDisk(refreshTokenKey);
-
-  ///
-  /// Save and get userId
-  ///
-  Future<void> setUserId(String userId) async {
-    _saveToDisk(userIdKey, userId);
-  }
-
+  // User ID
+  Future<void> setUserId(String userId) async => _saveToDisk(userIdKey, userId);
   String? get userId => _getFromDisk(userIdKey);
 
-  ///
-  /// Save full AppUser as JSON
-  ///
+  // App User
   Future<void> setUser(AppUser user) async {
     final userJson = jsonEncode(user.toJson());
     _saveToDisk(userKey, userJson);
@@ -65,9 +56,7 @@ class LocalStorageService {
     return null;
   }
 
-  ///
-  /// Internal get/set methods
-  ///
+  // Internal Get/Set methods
   dynamic _getFromDisk(String key) {
     final value = _preferences?.get(key);
     log.d('@_getFromDisk. key: $key value: $value');
@@ -76,7 +65,6 @@ class LocalStorageService {
 
   void _saveToDisk<T>(String key, T? content) {
     log.d('@_saveToDisk. key: $key value: $content');
-
     if (content == null) {
       _preferences?.remove(key);
       return;

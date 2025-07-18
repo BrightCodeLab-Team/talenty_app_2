@@ -1,25 +1,25 @@
-class RequestResponse {
-  final bool success;
-  final String? error;
-  final String? message;
-  final Map<String, dynamic>? data;
+class RequestResponse<T> {
+  bool success;
+  String? message;
+  String? error;
+  T? data;
 
-  RequestResponse(this.success, {this.error, this.message, this.data});
+  RequestResponse(this.success, {this.message, this.error, this.data});
 
   factory RequestResponse.fromJson(Map<String, dynamic> json) {
     return RequestResponse(
       json['success'] ?? false,
       message: json['message'],
-      error: json['error'], // some APIs send `error`, some `message`
-      data: json['body'],
+      error: json['error'],
+      data: json['body'], // Keep this as-is for now
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'success': success,
-      'error': error,
       'message': message,
+      'error': error,
       'body': data,
     };
   }
