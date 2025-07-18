@@ -60,6 +60,7 @@ dependencies:
   fl_chart:
   table_calendar:
   country_code_picker: ^3.0.0
+  modal_progress_hud_nsn: ^0.5.1
   
 
   

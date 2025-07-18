@@ -1,17 +1,19 @@
+// ignore_for_file: strict_top_level_inference
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talenty_app/core/enums/view_state.dart';
 import 'package:talenty_app/core/model/app_user.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
 import 'package:talenty_app/core/services/auth_services.dart';
+import 'package:talenty_app/core/services/db_services.dart';
 import 'package:talenty_app/locator.dart';
-import 'package:talenty_app/core/model/responses/base_response/request_response.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
 
 class CandidateSignUpViewModel extends BaseViewModel {
   final formKey = GlobalKey<FormState>();
   final _authService = locator<AuthService>();
-
+  final _db = locator<DatabaseService>();
   AppUser appUser = AppUser();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -111,18 +113,16 @@ class CandidateSignUpViewModel extends BaseViewModel {
 
   // ========== REGISTER LOGIC ==========
 
-  Future<void> registerUser() async {
+  registerUser() async {
     validateFormFields();
 
     if (!canSubmit) return;
 
     setState(ViewState.busy);
 
-    final RequestResponse response = await _authService.register(user: appUser);
+    final response = await _authService.createUser(appUser);
 
-    print("response candidate ${response.toJson()}");
-
-    setState(ViewState.idle);
+    print("@SignUpViewModel RegisterViewModel==> ${response.toJson()}");
 
     if (response.success) {
       Get.to(() => CandidateOTPScreen(email: emailController.text));
@@ -133,14 +133,14 @@ class CandidateSignUpViewModel extends BaseViewModel {
       );
       // Navigate to OTP screen or home
     } else {
+      print("signupviewmodel===>  messsage ${response.message}");
       Get.snackbar(
         "Error",
         response.message ?? "Something went wrong",
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
         snackPosition: SnackPosition.TOP,
       );
     }
+    setState(ViewState.idle);
   }
 
   @override

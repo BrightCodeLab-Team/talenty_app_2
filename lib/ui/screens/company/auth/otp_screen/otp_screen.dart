@@ -9,8 +9,6 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
-import 'package:talenty_app/ui/screens/company/build_profile/register_company/register_company_0_percent_screen.dart';
-
 import '../../../../custom_widgets/paddings_and_margins/custom_padding.dart';
 import 'otp_view_model.dart';
 
@@ -35,7 +33,8 @@ class OtpScreen extends StatelessWidget {
               child: CustomButton(
                 onTap: () {
                   if (model.validateOtp()) {
-                    Get.to(() => RegisterCompany0PercentScreen());
+                    model.otpModel.email = email;
+                    model.verify();
                   }
                 },
                 text: 'btn_continue'.tr,
@@ -76,6 +75,9 @@ class OtpScreen extends StatelessWidget {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: OtpTextField(
+                        onCodeChanged: (value) {
+                          model.otpModel.otp = value;
+                        },
                         fieldWidth: 51.0,
                         numberOfFields: 6,
                         showFieldAsBox: true,
@@ -86,6 +88,7 @@ class OtpScreen extends StatelessWidget {
                         cursorColor: blackColor,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         borderRadius: BorderRadius.circular(8.r),
+                        handleControllers: (controllers) {},
                         onSubmit: (value) {
                           model.updateOtp(value);
                         },

@@ -7,12 +7,10 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/core/enums/view_state.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
-import 'package:talenty_app/ui/screens/candidate/auth/build_Profile/mandatory_registeration/mandatory_student_registration.dart';
-import 'package:talenty_app/ui/screens/company/auth/otp_screen/otp_view_model.dart';
-
-import '../../../../custom_widgets/paddings_and_margins/custom_padding.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_view_model.dart';
 
 class CandidateOTPScreen extends StatelessWidget {
   final String email;
@@ -23,8 +21,8 @@ class CandidateOTPScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => OtpViewModel(),
-      child: Consumer<OtpViewModel>(
+      create: (context) => OtpViewModelCandidate(),
+      child: Consumer<OtpViewModelCandidate>(
         builder: (context, model, child) {
           return Scaffold(
             bottomNavigationBar: Padding(
@@ -33,9 +31,11 @@ class CandidateOTPScreen extends StatelessWidget {
                 vertical: 15,
               ),
               child: CustomButton(
+                isLoading: model.state == ViewState.busy,
                 onTap: () {
                   if (model.validateOtp()) {
-                    Get.to(() => MandatoryStudentRegistration());
+                    model.otpModel.email = email;
+                    model.verify();
                   }
                 },
                 text: 'btn_continue'.tr,

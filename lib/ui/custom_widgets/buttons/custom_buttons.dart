@@ -17,7 +17,8 @@ class CustomButton extends StatelessWidget {
     this.textColor,
     this.borderColor,
     this.radius,
-    this.image, // ✅ NEW optional image
+    this.image,
+    this.isLoading = false, // 👈 New parameter
   });
 
   final String text;
@@ -30,15 +31,16 @@ class CustomButton extends StatelessWidget {
   final Color? borderColor;
   final double? radius;
   final VoidCallback? onTap;
-  final Widget? image; // ✅ NEW image widget
+  final Widget? image;
+  final bool isLoading; // 👈 New parameter
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: isLoading ? null : onTap,
       child: AnimatedContainer(
         alignment: Alignment.center,
-        duration: Duration(microseconds: 500),
+        duration: const Duration(milliseconds: 500),
         width: width ?? double.infinity,
         height: height ?? 54,
         padding: EdgeInsets.symmetric(
@@ -51,17 +53,29 @@ class CustomButton extends StatelessWidget {
           border: Border.all(color: borderColor ?? Colors.transparent),
         ),
         child: Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (image != null) ...[image!, 5.horizontalSpace],
-              Text(
-                text.tr,
-                style: style16M.copyWith(color: textColor ?? whiteColor),
-              ),
-            ],
-          ),
+          child:
+              isLoading
+                  ? SizedBox(
+                    height: 22,
+                    width: 22,
+                    child: CircularProgressIndicator(
+                      color: textColor ?? whiteColor,
+                      strokeWidth: 2.5,
+                    ),
+                  )
+                  : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (image != null) ...[image!, 5.horizontalSpace],
+                      Text(
+                        text.tr,
+                        style: style16M.copyWith(
+                          color: textColor ?? whiteColor,
+                        ),
+                      ),
+                    ],
+                  ),
         ),
       ),
     );

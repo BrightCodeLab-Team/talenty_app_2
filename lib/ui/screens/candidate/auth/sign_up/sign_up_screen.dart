@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/core/enums/view_state.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/sign_up/sign_up_view_model.dart';
@@ -215,6 +216,7 @@ class CandidateSignUpScreen extends StatelessWidget {
                 vertical: 15,
               ),
               child: CustomButton(
+                isLoading: model.state == ViewState.busy,
                 onTap: () {
                   model.validateFormFields(); // <-- Set error flags true
                   final isValid =

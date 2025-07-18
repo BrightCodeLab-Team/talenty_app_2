@@ -1,17 +1,13 @@
 // ignore_for_file: unused_field
-
 import 'package:logger/logger.dart';
-import 'package:talenty_app/core/constants/end_point.dart';
 import 'package:talenty_app/core/model/app_user.dart';
-import 'package:talenty_app/core/model/responses/base_response/request_response.dart';
+import 'package:talenty_app/core/model/otp_model.dart';
+import 'package:talenty_app/core/model/responses/auth_response.dart';
+import 'package:talenty_app/core/model/responses/otp_response.dart';
 import 'package:talenty_app/core/others/logger_customization/custom_logger.dart';
-import 'package:talenty_app/core/services/api_services.dart';
 import 'package:talenty_app/core/services/db_services.dart';
 import 'package:talenty_app/core/services/local_storage_services.dart';
 import 'package:talenty_app/locator.dart';
-
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 ///
 /// [AuthService] class contains all authentication related logic with following
@@ -35,11 +31,8 @@ class AuthService {
   late bool isLogin;
   final _localStorageService = locator<LocalStorageService>();
   final _dbService = locator<DatabaseService>();
-
   // UserProfile? userProfile;
-  final _apiService = ApiServices();
   String? fcmToken;
-  AppUser appUser = AppUser();
   static final Logger log = CustomLogger(className: 'AuthService');
 
   ///
@@ -59,64 +52,77 @@ class AuthService {
     }
   }
 
-  Future<RequestResponse> register({required AppUser user}) async {
-    try {
-      final response = await _apiService.post(
-        data: user.toJson(),
-        endPoint: EndPoints.registerUser,
-      );
-
-      print("@AuthServices register ==> ${response.message.toString()}");
-
-      if (response.success) {
-        final userJson = response.data?['body'];
-        final registeredUser = AppUser.fromJson(userJson);
-        appUser = registeredUser;
-
-        await _localStorageService.setUserId(registeredUser.id ?? '');
-        await _localStorageService.setUser(registeredUser);
-
-        isLogin = false;
-
-        return RequestResponse(
-          true,
-          message: response.message,
-          data: registeredUser.toJson(),
-        );
-      } else {
-        return RequestResponse(
-          false,
-          error: response.message ?? response.error,
-        );
-      }
-    } catch (e) {
-      return RequestResponse(false, error: e.toString());
+  Future<AuthResponse> createUser(AppUser user) async {
+    print("@AuthResponse  ${user.toJson()}");
+    final response = await _dbService.createUserAccount(user);
+    if (response.success) {
+      // _localStorageService. = response.message;
+      print("Sucess ==> ${response.toJson()}");
     }
+    print("@AuthResponse 2 ${response.toString()}");
+    return response;
   }
 
-  // testHttpPost(email, password, confirmPassword) async {
-  //   final url = Uri.parse(
-  //     'http://localhost:3000/users/register',
-  //   ); // Replace with your real API URL
-  //   final headers = {
-  //     'Content-Type': 'application/json',
-  //     'Accept': 'application/json',
-  //   };
-  //   final body = jsonEncode({
-  //     'email': "$email",
-  //     'password': '$password',
-  //     'confirmPassword': '$confirmPassword',
-  //     'role': 'candidate',
-  //   });
+  Future<OtpResponse> verifyOtp(OtpModel otpModel) async {
+    final otpResponse = await _dbService.verifyOtp(otpModel);
 
-  //   try {
-  //     final response = await http.post(url, headers: headers, body: body);
+    if (otpResponse.success && otpResponse.token != null) {
+      await _localStorageService.setAccessToken(otpResponse.token!);
+      print("OTP verified, token saved! ${_localStorageService.accessToken}");
+    }
+    return otpResponse;
+  }
 
-  //     print('Status code: ${response.statusCode}');
-  //     print('Body: ${response.body}');
-  //   } catch (e) {
-  //     print('HTTP Error: $e');
+  // _getUserProfile() async {
+  //   UserProfileResponse response = await _dbService.getUserProfile();
+  //   if (response.success) {
+  //     userProfile = response.profile;
+  //     log.d('Got User Data: ${userProfile?.toJson()}');
+  //   } else {
+  //     Get.dialog(AuthDialog(title: 'Title', message: response.error!));
   //   }
+  // }
+
+  ///
+  /// Updating FCM Token here...
+  ///
+  // _updateFcmToken() async {
+  //   final fcmToken = await locator<NotificationsService>().getFcmToken();
+  //   final deviceId = await DeviceInfoService().getDeviceId();
+  //   final response = await _dbService.updateFcmToken(deviceId, fcmToken!);
+  //   if (response.success) {
+  //     userProfile!.fcmToken = fcmToken;
+  //   }
+  // }
+
+  // signupWithEmailAndPassword(SignUpBody body) async {
+  //   late AuthResponse response;
+  //   response = await _dbService.createAccount(body);
+  //   if (response.success) {
+  //     userProfile = UserProfile.fromJson(body.toJson());
+  //     _localStorageService.accessToken = response.accessToken;
+  //     await _updateFcmToken();
+  //   }
+  //   return response;
+  // }
+
+  // loginWithEmailAndPassword(LoginBody body) async {
+  //   late AuthResponse response;
+  //   response = await _dbService.loginWithEmailAndPassword(body);
+  //   if (response.success) {
+  //     _localStorageService.accessToken = response.accessToken;
+  //     await _getUserProfile();
+  //     _updateFcmToken();
+  //   }
+  //   return response;
+  // }
+
+  // resetPassword(ResetPasswordBody body) async {
+  //   final AuthResponse response = await _dbService.resetPassword(body);
+  //   if (response.success) {
+  //     _localStorageService.accessToken = response.accessToken;
+  //   }
+  //   return response;
   // }
 
   signupWithApple() {}
@@ -129,6 +135,6 @@ class AuthService {
     isLogin = false;
     // userProfile = null;
     // await _dbService.clearFcmToken(await DeviceInfoService().getDeviceId());
-    _localStorageService.accessToken = null;
+    // _localStorageService. = null;
   }
 }
