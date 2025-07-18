@@ -95,7 +95,7 @@ class AppAssets {
   static String vacancies = "$bottomAssets/vacancies.png";
   static String menu = "$bottomAssets/menu.png";
   static String tips = '$iconsAssets/tips.png';
-
+  static String deleteIcon = "$iconsAssets/deleteIcon.png";
   /*    
 
       Dynamic Assets

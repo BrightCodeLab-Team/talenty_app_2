@@ -23,7 +23,6 @@ class CandidateRegister11PercentScreen extends StatefulWidget {
 
 class _CandidateRegister11PercentScreenState
     extends State<CandidateRegister11PercentScreen> {
-  bool _isChecked1 = false;
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => CandidateRegister11PercentViewModel(),
@@ -163,7 +162,7 @@ class _CandidateRegister11PercentScreenState
                           model.notifyListeners();
                         },
                       ),
-                      10.verticalSpace,
+                      5.verticalSpace,
 
                       Row(
                         children: [
@@ -226,7 +225,7 @@ class _CandidateRegister11PercentScreenState
                                   model.dropDown2,
                                   model.dropDown2Error,
                                   model.dropDownText2 ?? " ",
-                                  model.day,
+                                  model.secondDropDown,
 
                                   toggle: () {
                                     model.toggleDropDown2();
@@ -258,7 +257,7 @@ class _CandidateRegister11PercentScreenState
                                   model.dropDown3,
                                   model.dropDown3Error,
                                   model.dropDownText3,
-                                  model.month,
+                                  model.thirdDropDown,
 
                                   toggle: () {
                                     model.toggleDropDown3();
@@ -312,7 +311,7 @@ class _CandidateRegister11PercentScreenState
                                   model.dropDown4,
                                   model.dropDown4Error,
                                   model.dropDownText4 ?? " ",
-                                  model.day,
+                                  model.secondDropDown,
 
                                   toggle: () {
                                     model.toggleDropDown4();
@@ -344,7 +343,7 @@ class _CandidateRegister11PercentScreenState
                                   model.dropDown5,
                                   model.dropDown5Error,
                                   model.dropDownText5,
-                                  model.month,
+                                  model.thirdDropDown,
 
                                   toggle: () {
                                     model.toggleDropDown5();
@@ -361,54 +360,79 @@ class _CandidateRegister11PercentScreenState
                           ),
                         ],
                       ),
+                      5.verticalSpace,
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              //. add repetition logic this UI will appear only 3 time
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.r),
+                                color: whiteColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: blackColor.withOpacity(0.2),
+                                    offset: Offset(1, 1),
+                                    blurRadius: 2,
+                                    spreadRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsGeometry.symmetric(
+                                  horizontal: 8,
+                                  vertical: 5,
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Agregar otra experiencia',
+                                      style: style16M.copyWith(
+                                        color: lightBlackColor,
+                                      ),
+                                    ),
+                                    2.horizontalSpace,
+                                    Icon(
+                                      Icons.add,
+                                      color: lightBlackColor,
+                                      size: 25,
+                                      weight: 300,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              // add logic to delete
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(AppAssets.deleteIcon, scale: 4),
+                                2.horizontalSpace,
+                                Text(
+                                  'Borrar estudio',
+                                  style: style16M.copyWith(
+                                    color: lightBlackColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                       50.verticalSpace,
                     ],
                   ),
                 ),
               ),
             ),
-      ),
-    );
-  }
-
-  ///
-  ///. check box
-  ///
-  Widget _buildCheckboxRow(
-    String text,
-    bool value,
-    ValueChanged<bool?> onChanged,
-  ) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 2.h),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Transform.scale(
-            scale: 1,
-            child: Checkbox(
-              value: value,
-              onChanged: onChanged,
-              activeColor: darkgreenColor,
-              checkColor: whiteColor,
-              side: BorderSide(
-                color: value ? darkgreenColor : greyColor,
-                width: 2,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-          ),
-          Flexible(
-            flex: 1,
-            child: Text(
-              text,
-              style: style14M.copyWith(color: textLightGreyColor),
-            ),
-          ),
-        ],
       ),
     );
   }

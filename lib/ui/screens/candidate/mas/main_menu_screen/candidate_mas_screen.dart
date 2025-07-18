@@ -210,7 +210,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       18.verticalSpace,
 
                       MenuReuse(
-                        leading: Icon(Icons.delete, color: primaryColor),
+                        leading: Image.asset(AppAssets.deleteIcon, scale: 4),
                         title: 'Eliminar cuenta',
                         onTap: () {
                           Get.to(CandidateDeleteAccountScreen());
