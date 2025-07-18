@@ -1,8 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
+
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/auth_field_decoration.dart';
@@ -11,7 +10,6 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/add_photo_to_profile/add_photo_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/country_code/country_code_view_model.dart';
-import 'package:talenty_app/ui/screens/company/home/home_screen.dart';
 
 class CandidateRegistrationCountryCodeScreen extends StatefulWidget {
   const CandidateRegistrationCountryCodeScreen({Key? key}) : super(key: key);

@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
+
 import 'package:talenty_app/core/others/base_view_model.dart';
 
 class CountryCodeViewModel extends BaseViewModel {

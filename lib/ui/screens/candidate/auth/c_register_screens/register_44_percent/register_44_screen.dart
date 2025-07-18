@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
-import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_register_11_percent_view_model.dart';
-import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_22_percent/register_22_view_model.dart';
+
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_44_percent/register_44_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_55_percent/register_55_screen.dart';
 
