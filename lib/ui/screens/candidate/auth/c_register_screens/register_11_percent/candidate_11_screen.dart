@@ -12,6 +12,7 @@ import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/drop_down/custom_drop_down_menu.dart';
 import 'package:talenty_app/ui/custom_widgets/drop_down/custom_drop_down_text_field.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_register_11_percent_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_22_percent/register_22_screen.dart';
 
 class CandidateRegister11PercentScreen extends StatefulWidget {
   const CandidateRegister11PercentScreen({super.key});
@@ -31,7 +32,12 @@ class _CandidateRegister11PercentScreenState
             (context, model, child) => Scaffold(
               bottomNavigationBar: Padding(
                 padding: EdgeInsetsGeometry.all(15),
-                child: CustomButton(text: 'Continuar', onTap: () {}),
+                child: CustomButton(
+                  text: 'Continuar',
+                  onTap: () {
+                    Get.to(Candidate22PercentScreen());
+                  },
+                ),
               ),
               appBar: AppBar(
                 backgroundColor: transparent,

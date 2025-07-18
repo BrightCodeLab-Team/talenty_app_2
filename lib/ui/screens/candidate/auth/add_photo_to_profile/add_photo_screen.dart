@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -9,6 +11,7 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/add_photo_to_profile/add_photo_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/add_photo_to_profile/candidate_profile_ready.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/add_photo_to_profile/tips_to_add_phot0_screen.dart';
 
 class CandidateAddPhotoScreen extends StatelessWidget {
@@ -221,7 +224,9 @@ class CandidateAddPhotoScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: CustomButton(
             text: 'Continuar',
-            onTap: () {},
+            onTap: () {
+              Get.to(CandidateProfileReadyScreen());
+            },
             textColor: whiteColor,
             backgroundColor: primaryColor,
           ),

@@ -9,6 +9,7 @@ import 'package:talenty_app/core/constants/auth_field_decoration.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/add_photo_to_profile/add_photo_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/country_code/country_code_view_model.dart';
 import 'package:talenty_app/ui/screens/company/home/home_screen.dart';
 
@@ -263,7 +264,9 @@ class _CandidateRegistrationCountryCodeScreenState
                     if (model.validateButton()) {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => HomeScreen()),
+                        MaterialPageRoute(
+                          builder: (_) => CandidateAddPhotoScreen(),
+                        ),
                       );
                     } else {
                       // Do nothing or show an error (optional)

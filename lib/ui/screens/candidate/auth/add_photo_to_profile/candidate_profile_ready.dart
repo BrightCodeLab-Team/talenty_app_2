@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_11_screen.dart';
 
 class CandidateProfileReadyScreen extends StatelessWidget {
   const CandidateProfileReadyScreen({super.key});
@@ -16,7 +19,9 @@ class CandidateProfileReadyScreen extends StatelessWidget {
         padding: EdgeInsetsGeometry.all(15),
         child: CustomButton(
           text: 'Completar mi currículum',
-          onTap: () {},
+          onTap: () {
+            Get.to(CandidateRegister11PercentScreen());
+          },
           backgroundColor: primaryColor,
         ),
       ),
