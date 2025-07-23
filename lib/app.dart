@@ -6,9 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
-
+import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_11_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/country_code/country_code_screen.dart';
-
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
