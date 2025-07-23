@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, unnecessary_null_comparison
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

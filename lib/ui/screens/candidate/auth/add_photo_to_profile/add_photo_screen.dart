@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -81,64 +83,55 @@ class CandidateAddPhotoScreen extends StatelessWidget {
                                     )
                                     : null,
                           ),
-                          child:
-                              viewModel.mainImage == null
-                                  ? Stack(
-                                    children: [
-                                      Center(
-                                        child: Image.asset(
-                                          AppAssets.cameraIcon2,
-                                          scale: 4,
-                                        ),
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Image.asset(
+                                  AppAssets.cameraIcon2,
+                                  scale: 4,
+                                ),
+                              ),
+                              Positioned(
+                                left: 10.0,
+                                bottom: 10.0,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) =>
+                                                CandidateAddPhotoTipsScreen(),
                                       ),
-                                      Positioned(
-                                        left: 10.0,
-                                        bottom: 10.0,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            if (viewModel.mainImage == null) {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder:
-                                                      (context) =>
-                                                          CandidateAddPhotoTipsScreen(),
-                                                ),
-                                              );
-                                            }
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 10,
-                                              vertical: 10,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black
-                                                      .withOpacity(0.1),
-                                                  blurRadius: 4,
-                                                  offset: Offset(0, 2),
-                                                ),
-                                              ],
-                                              color: Colors.white.withOpacity(
-                                                0.8,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                            ),
-                                            child: Text(
-                                              'Foto principal',
-                                              style: style14M.copyWith(
-                                                color: textGreyColor,
-                                              ),
-                                            ),
-                                          ),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 10,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: blackColor.withOpacity(0.25),
+                                          blurRadius: 4,
+                                          offset: Offset(0, 2),
                                         ),
+                                      ],
+                                      color: Color(0xffFFFFFF),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      'Foto principal',
+                                      style: style14M.copyWith(
+                                        color: borderGreyColor,
                                       ),
-                                    ],
-                                  )
-                                  : null,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -162,15 +155,12 @@ class CandidateAddPhotoScreen extends StatelessWidget {
                                         )
                                         : null,
                               ),
-                              child:
-                                  viewModel.image2 == null
-                                      ? Center(
-                                        child: Image.asset(
-                                          AppAssets.cameraIcon2,
-                                          scale: 4,
-                                        ),
-                                      )
-                                      : null,
+                              child: Center(
+                                child: Image.asset(
+                                  AppAssets.cameraIcon2,
+                                  scale: 4,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -192,15 +182,12 @@ class CandidateAddPhotoScreen extends StatelessWidget {
                                         )
                                         : null,
                               ),
-                              child:
-                                  viewModel.image3 == null
-                                      ? Center(
-                                        child: Image.asset(
-                                          AppAssets.cameraIcon2,
-                                          scale: 4,
-                                        ),
-                                      )
-                                      : null,
+                              child: Center(
+                                child: Image.asset(
+                                  AppAssets.cameraIcon2,
+                                  scale: 4,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -221,7 +208,7 @@ class CandidateAddPhotoScreen extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          padding: EdgeInsets.only(left: 15.0, right: 15, bottom: 30),
           child: CustomButton(
             text: 'Continuar',
             onTap: () {

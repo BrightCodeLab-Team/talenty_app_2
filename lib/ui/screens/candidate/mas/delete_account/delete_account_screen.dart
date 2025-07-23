@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
-import 'package:talenty_app/core/model/compnay_model/company_model.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/delete_account/candidate_delete_account_view_model.dart';

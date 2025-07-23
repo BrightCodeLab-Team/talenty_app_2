@@ -1,7 +1,6 @@
 // lib/viewmodels/blocked_companies_viewmodel.dart
 import 'package:get/get.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
-import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/model/compnay_model/company_model.dart';
 
 class BlockedCompaniesViewModel extends GetxController {

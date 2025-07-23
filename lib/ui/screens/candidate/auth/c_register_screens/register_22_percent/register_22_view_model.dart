@@ -1,80 +1,27 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
 
 class CandidateRegister22PercentViewModel extends BaseViewModel {
-  TextEditingController nameController = TextEditingController();
-
-  ///
-  /// Bool
-  ///
-  bool nameErrorFlag = false;
-  bool dropDown1Error = false;
-  bool dropDown2Error = false;
-  bool dropDown3Error = false;
-  bool dropDown4Error = false;
-  bool dropDown5Error = false;
+  List<WorkExperienceEntry> workExperienceEntries = [WorkExperienceEntry()];
   bool isFormValid = false;
-  bool isCheckboxChecked1 = false;
-  bool isCheckboxChecked2 = false;
-  bool isCheckboxChecked3 = false;
-  bool _dropDown1 = false;
-  bool _dropDown2 = false;
-  bool _dropDown3 = false;
-  bool _dropDown4 = false;
-  bool _dropDown5 = false;
 
-  bool get dropDown1 => _dropDown1;
-  bool get dropDown2 => _dropDown2;
-  bool get dropDown3 => _dropDown3;
-  bool get dropDown4 => _dropDown4;
-  bool get dropDown5 => _dropDown5;
+  // Add to CandidateRegister22PercentViewModel
+  bool _skipExperience = false;
 
-  ///
-  /// String
-  ///
-  String? get nameError => nameErrorFlag ? validateEmail() : null;
-  String _dropDownText1 = '';
-  String _dropDownText2 = 'Selecciona';
-  String _dropDownText3 = 'Selecciona';
-  String _dropDownText4 = 'Selecciona';
-  String _dropDownText5 = 'Selecciona';
+  bool get skipExperience => _skipExperience;
 
-  String get dropDownText1 => _dropDownText1;
-  String get dropDownText2 => _dropDownText2;
-  String get dropDownText3 => _dropDownText3;
-  String get dropDownText4 => _dropDownText4;
-  String get dropDownText5 => _dropDownText5;
-
-  String? validateEmail() {
-    final name = nameController.text.trim();
-    if (name.isEmpty) return 'enterValidEmail'.tr;
-
-    return null;
+  void setSkipExperience(bool value) {
+    _skipExperience = value;
+    // If skipping experience, mark form as valid
+    if (value) {
+      isFormValid = true;
+    } else {
+      validateAllEntries();
+    }
+    notifyListeners();
   }
 
-  MandatoryStudentRegViewModel() {
-    init();
-  }
-
-  ///
-  ///  data for drop down 1
-  ///
-  List<String> firstDropdown = [
-    'Primaria',
-    'Secudaria',
-    'Preparatoria/Baachillerota',
-    'Licenciatura',
-    'Especialidad',
-    'Maestría',
-    'Doctorado',
-    'Postdoctorado',
-  ];
-
-  ///
-  ///  data for drop down 1
-  ///
-  List<String> secondDropDown = [
+  // Dropdown options
+  final List<String> secondDropDown = [
     'Enero',
     'Febrero',
     'Marzo',
@@ -82,226 +29,199 @@ class CandidateRegister22PercentViewModel extends BaseViewModel {
     'Mayo',
     'Junio',
     'Julio',
-    'Augosto',
+    'Agosto',
     'Septiembre',
-    'Ocyubre',
+    'Octubre',
     'Noviembre',
-    'Deciembre',
+    'Diciembre',
   ];
 
-  ///
-  ///  data for drop down 1
-  ///
-  List<String> thirdDropDown = [
-    '1915',
-    '1916',
-    '1917',
-    '1918',
-    '1919',
-    '1920',
-    '1921',
-    '1922',
-    '1923',
-    '1924',
-    '1925',
-    '1926',
-    '1927',
-    '1928',
-    '1929',
-    '1930',
-    '1931',
-    '1932',
-    '1933',
-    '1934',
-    '1935',
-    '1936',
-    '1937',
-    '1938',
-    '1939',
-    '1940',
-    '1941',
-    '1942',
-    '1943',
-    '1944',
-    '1945',
-    '1946',
-    '1947',
-    '1948',
-    '1949',
-    '1950',
-    '1951',
-    '1952',
-    '1953',
-    '1954',
-    '1955',
-    '1956',
-    '1957',
-    '1958',
-    '1959',
-    '1960',
-    '1961',
-    '1962',
-    '1963',
-    '1964',
-    '1965',
-    '1966',
-    '1967',
-    '1968',
-    '1969',
-    '1970',
-    '1971',
-    '1972',
-    '1973',
-    '1974',
-    '1975',
-    '1976',
-    '1977',
-    '1978',
-    '1979',
-    '1980',
-    '1981',
-    '1982',
-    '1983',
-    '1984',
-    '1985',
-    '1986',
-    '1987',
-    '1988',
-    '1989',
-    '1990',
-    '1991',
-    '1992',
-    '1993',
-    '1994',
-    '1995',
-    '1996',
-    '1997',
-    '1998',
-    '1999',
-    '2000',
-    '2001',
-    '2002',
-    '2003',
-    '2004',
-    '2005',
-    '2006',
-    '2007',
-    '2008',
-    '2009',
-    '2010',
-    '2011',
-    '2012',
-    '2013',
-    '2014',
-    '2015',
-    '2016',
-    '2017',
-    '2018',
-    '2019',
-    '2020',
-    '2021',
-    '2022',
-    '2023',
-    '2024',
-    '2025',
-  ];
+  final List<String> thirdDropDown = List<String>.generate(
+    50,
+    (index) => (DateTime.now().year - index).toString(),
+  );
 
-  // List<String> year = List.generate(
-  //   DateTime.now().year - 1950 + 1,
-  //   (index) => (1950 + index).toString(),
-  // );
-
-  toggleDropDown1() {
-    _dropDown1 = !_dropDown1;
+  // Methods for dropdown toggles
+  void toggleDropDown1(int index) {
+    workExperienceEntries[index].dropDown1Open =
+        !workExperienceEntries[index].dropDown1Open;
     notifyListeners();
   }
 
-  toggleDropDown2() {
-    _dropDown2 = !_dropDown2;
+  void toggleDropDown2(int index) {
+    workExperienceEntries[index].dropDown2Open =
+        !workExperienceEntries[index].dropDown2Open;
     notifyListeners();
   }
 
-  toggleDropDown3() {
-    _dropDown3 = !_dropDown3;
+  void toggleDropDown3(int index) {
+    workExperienceEntries[index].dropDown3Open =
+        !workExperienceEntries[index].dropDown3Open;
     notifyListeners();
   }
 
-  toggleDropDown4() {
-    _dropDown4 = !_dropDown4;
+  void toggleDropDown4(int index) {
+    workExperienceEntries[index].dropDown4Open =
+        !workExperienceEntries[index].dropDown4Open;
     notifyListeners();
   }
 
-  toggleDropDown5() {
-    _dropDown5 = !_dropDown5;
+  void toggleDropDown5(int index) {
+    workExperienceEntries[index].dropDown5Open =
+        !workExperienceEntries[index].dropDown5Open;
     notifyListeners();
   }
 
-  setDropDownText1(String value) {
-    _dropDownText1 = value;
+  // Methods for setting dates
+  void setStartMonth(String value, int index) {
+    workExperienceEntries[index].startMonth = value;
+    workExperienceEntries[index].startMonthError = false;
     notifyListeners();
   }
 
-  setDropDownText2(String value) {
-    _dropDownText2 = value;
+  void setStartYear(String value, int index) {
+    workExperienceEntries[index].startYear = value;
+    workExperienceEntries[index].startYearError = false;
     notifyListeners();
   }
 
-  setDropDownText3(String value) {
-    _dropDownText3 = value;
+  void setEndMonth(String value, int index) {
+    workExperienceEntries[index].endMonth = value;
+    workExperienceEntries[index].endMonthError = false;
     notifyListeners();
   }
 
-  setDropDownText4(String value) {
-    _dropDownText4 = value;
+  void setEndYear(String value, int index) {
+    workExperienceEntries[index].endYear = value;
+    workExperienceEntries[index].endYearError = false;
     notifyListeners();
   }
 
-  setDropDownText5(String value) {
-    _dropDownText5 = value;
+  // Existing methods...
+  void addWorkExperienceEntry() {
+    workExperienceEntries.add(WorkExperienceEntry());
+    validateAllEntries();
     notifyListeners();
   }
 
-  ///
-  ///
-  ///
-  void validateDropdowns() {
-    dropDown1Error = dropDownText1.trim().isEmpty;
-    dropDown2Error = dropDownText2.trim().isEmpty;
-    dropDown3Error = dropDownText3.trim().isEmpty;
-    dropDown4Error = dropDownText4.trim().isEmpty;
-    dropDown5Error = dropDownText5.trim().isEmpty;
-    notifyListeners();
-  }
-
-  init() {
-    nameController.addListener(_onFieldChanged);
-  }
-
-  ///
-  ///
-  ///
-  void updateFormValidity() {
-    isFormValid =
-        nameController.text.trim().isNotEmpty &&
-        dropDownText1.isNotEmpty &&
-        dropDownText2.isNotEmpty &&
-        dropDownText3.isNotEmpty &&
-        dropDownText4.isNotEmpty &&
-        dropDownText5.isNotEmpty &&
-        isCheckboxChecked1 &&
-        isCheckboxChecked2 &&
-        isCheckboxChecked3;
-    notifyListeners();
-  }
-
-  ///
-  ///
-  ///
-  void _onFieldChanged() {
-    if (nameErrorFlag && validateEmail() == null) {
-      nameErrorFlag = false;
+  void removeWorkExperienceEntry(int index) {
+    if (workExperienceEntries.length > 1) {
+      workExperienceEntries.removeAt(index);
     }
-    updateFormValidity(); // <-- add this
+    validateAllEntries();
     notifyListeners();
   }
+
+  void setPosition(String value, int index) {
+    workExperienceEntries[index].position = value;
+    workExperienceEntries[index].positionError = false;
+    notifyListeners();
+  }
+
+  void setCompany(String value, int index) {
+    workExperienceEntries[index].company = value;
+    workExperienceEntries[index].companyError = false;
+    notifyListeners();
+  }
+
+  void setLocation(String value, int index) {
+    workExperienceEntries[index].location = value;
+    workExperienceEntries[index].locationError = false;
+    notifyListeners();
+  }
+
+  void setIsRemote(bool value, int index) {
+    workExperienceEntries[index].isRemote = value;
+    if (value) {
+      workExperienceEntries[index].location = null;
+      workExperienceEntries[index].locationError = false;
+    }
+    notifyListeners();
+  }
+
+  void setIsCurrent(bool value, int index) {
+    workExperienceEntries[index].isCurrent = value;
+    if (value) {
+      workExperienceEntries[index].endMonth = null;
+      workExperienceEntries[index].endYear = null;
+    }
+    notifyListeners();
+  }
+
+  void validateAllEntries() {
+    bool allValid = true;
+
+    for (var entry in workExperienceEntries) {
+      // Validate position
+      if (entry.position == null || entry.position!.isEmpty) {
+        entry.positionError = true;
+        allValid = false;
+      }
+      // Only validate location if not remote
+      if (!entry.isRemote &&
+          (entry.location == null || entry.location!.isEmpty)) {
+        entry.locationError = true;
+        allValid = false;
+      }
+      // Validate company
+      if (entry.company == null || entry.company!.isEmpty) {
+        entry.companyError = true;
+        allValid = false;
+      }
+
+      // Validate start month
+      if (entry.startMonth == null || entry.startMonth!.isEmpty) {
+        entry.startMonthError = true;
+        allValid = false;
+      }
+
+      // Validate start year
+      if (entry.startYear == null || entry.startYear!.isEmpty) {
+        entry.startYearError = true;
+        allValid = false;
+      }
+
+      // Validate end month/year (only if not current)
+      if (!entry.isCurrent) {
+        if (entry.endMonth == null || entry.endMonth!.isEmpty) {
+          entry.endMonthError = true;
+          allValid = false;
+        }
+        if (entry.endYear == null || entry.endYear!.isEmpty) {
+          entry.endYearError = true;
+          allValid = false;
+        }
+      }
+    }
+
+    isFormValid = allValid;
+    notifyListeners();
+  }
+}
+
+class WorkExperienceEntry {
+  String? position;
+  String? company;
+  String? location;
+  bool isRemote = false;
+  bool isCurrent = false;
+
+  String? startMonth;
+  String? startYear;
+  String? endMonth;
+  String? endYear;
+
+  bool positionError = false;
+  bool companyError = false;
+  bool locationError = false;
+  bool startMonthError = false;
+  bool startYearError = false;
+  bool endMonthError = false;
+  bool endYearError = false;
+
+  bool dropDown1Open = false;
+  bool dropDown2Open = false;
+  bool dropDown3Open = false;
+  bool dropDown4Open = false;
+  bool dropDown5Open = false;
 }

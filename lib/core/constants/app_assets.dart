@@ -80,6 +80,9 @@ class AppAssets {
   static String AvailabilityScreenThreeImage =
       "$staticAssets/AvailabilityScreenThreeImage.png";
   static String blockCompaniesImg = "$staticAssets/blockCompainiesImg.png";
+
+  static String dividerImage = "$iconsAssets/separador.png";
+
   /*    
 
       Bottom Navigator Bar Assets

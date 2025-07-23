@@ -1,9 +1,97 @@
+// ignore_for_file: strict_top_level_inference, prefer_final_fields, prefer_is_empty
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_11_screen.dart';
 
 class CandidateRegister11PercentViewModel extends BaseViewModel {
   TextEditingController nameController = TextEditingController();
+
+  UniversityModel? selectedUniversityModel; // <-- Add this to your ViewModel
+  TextEditingController universityController = TextEditingController();
+  bool isUniversitySelected = false;
+
+  List<UniversityEntry> universityEntries = [UniversityEntry()];
+
+  void addUniversityEntry() {
+    universityEntries.add(UniversityEntry());
+    validateAllEntries(); // Add this line
+    notifyListeners();
+  }
+
+  void removeUniversityEntry(int index) {
+    if (universityEntries.length > 1) {
+      universityEntries.removeAt(index);
+    }
+    validateAllEntries(); // Add this line
+    notifyListeners();
+  }
+
+  void selectUniversity(UniversityModel university, int index) {
+    universityEntries[index].selectedUniversity = university;
+    universityEntries[index].universityController.text = university.name;
+    universityEntries[index].isUniversitySelected = true;
+    notifyListeners();
+  }
+
+  void clearSelectedUniversity(int index) {
+    universityEntries[index].selectedUniversity = null;
+    universityEntries[index].universityController.clear();
+    universityEntries[index].isUniversitySelected = false;
+    notifyListeners();
+  }
+
+  // Add all the toggle/set methods with index parameter
+  void toggleDropDown1(int index) {
+    universityEntries[index].dropDown1Open =
+        !universityEntries[index].dropDown1Open;
+    notifyListeners();
+  }
+
+  void setDegree(String value, int index) {
+    universityEntries[index].degree = value;
+    notifyListeners();
+  }
+
+  void setIsCurrent(bool value, int index) {
+    universityEntries[index].isCurrent = value;
+    notifyListeners();
+  }
+
+  void setStartMonth(String value, int index) {
+    universityEntries[index].startMonth = value;
+    notifyListeners();
+  }
+
+  void setEndMonth(String value, int index) {
+    universityEntries[index].endMonth = value;
+    notifyListeners();
+  }
+
+  void setStartYear(String value, int index) {
+    universityEntries[index].startYear = value;
+    notifyListeners();
+  }
+
+  void setEndYear(String value, int index) {
+    universityEntries[index].endYear = value;
+    notifyListeners();
+  }
+  // Add similar methods for all other fields...
+
+  // Error handling methods
+  void setDropDown1Error(bool value, int index) {
+    universityEntries[index].dropDown1Error = value;
+    notifyListeners();
+  }
+
+  // Add method to set career
+  void setCareer(String value, int index) {
+    universityEntries[index].career = value;
+    universityEntries[index].careerError = false;
+    notifyListeners();
+  }
 
   ///
   /// Bool
@@ -51,9 +139,27 @@ class CandidateRegister11PercentViewModel extends BaseViewModel {
     return null;
   }
 
-  MandatoryStudentRegViewModel() {
+  CandidateRegister11PercentViewModel() {
     init();
   }
+
+  List<UniversityModel> universityList = [
+    UniversityModel(
+      name: 'Universidad Nacional Autónoma de México',
+      logoUrl:
+          'https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/092020/unam_azul.png?NjLgPWqC_ROp.uig6Qyl44l1e02tEsDB&itok=04fU54oB',
+    ),
+    UniversityModel(
+      name: 'Tecnológico de Monterrey',
+      logoUrl:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Logo_del_ITESM.svg/2085px-Logo_del_ITESM.svg.png',
+    ),
+    UniversityModel(
+      name: 'Universidad de Guadalajara',
+      logoUrl:
+          'https://lh6.googleusercontent.com/proxy/UWGColDExCy8WdECAcrKF3d_L69vJW362AiXmPuWdVt-nPX2t6KkJWRDTfiBdf4Lo-JqrE_KSMiWLR9Rp5K6PHAErkPJTtHROhWz67zzFD3R09dD7xIlbdQaLoObpdt6Rs3zzcwe',
+    ),
+  ];
 
   ///
   ///  data for drop down 1
@@ -204,38 +310,52 @@ class CandidateRegister11PercentViewModel extends BaseViewModel {
     '2025',
   ];
 
-  // List<String> year = List.generate(
-  //   DateTime.now().year - 1950 + 1,
-  //   (index) => (1950 + index).toString(),
-  // );
-
-  toggleDropDown1() {
-    _dropDown1 = !_dropDown1;
+  void toggleDropDown2(int index) {
+    universityEntries[index].dropDown2Open =
+        !universityEntries[index].dropDown2Open;
     notifyListeners();
   }
 
-  toggleDropDown2() {
-    _dropDown2 = !_dropDown2;
+  void toggleDropDown3(int index) {
+    universityEntries[index].dropDown3Open =
+        !universityEntries[index].dropDown3Open;
     notifyListeners();
   }
 
-  toggleDropDown3() {
-    _dropDown3 = !_dropDown3;
+  void toggleDropDown4(int index) {
+    universityEntries[index].dropDown4Open =
+        !universityEntries[index].dropDown4Open;
     notifyListeners();
   }
 
-  toggleDropDown4() {
-    _dropDown4 = !_dropDown4;
-    notifyListeners();
-  }
-
-  toggleDropDown5() {
-    _dropDown5 = !_dropDown5;
+  void toggleDropDown5(int index) {
+    universityEntries[index].dropDown5Open =
+        !universityEntries[index].dropDown5Open;
     notifyListeners();
   }
 
   setDropDownText1(String value) {
     _dropDownText1 = value;
+    notifyListeners();
+  }
+
+  void setDropDown2Error(bool value, int index) {
+    universityEntries[index].dropDown2Error = value;
+    notifyListeners();
+  }
+
+  void setDropDown3Error(bool value, int index) {
+    universityEntries[index].dropDown3Error = value;
+    notifyListeners();
+  }
+
+  void setDropDown4Error(bool value, int index) {
+    universityEntries[index].dropDown4Error = value;
+    notifyListeners();
+  }
+
+  void setDropDown5Error(bool value, int index) {
+    universityEntries[index].dropDown5Error = value;
     notifyListeners();
   }
 
@@ -275,18 +395,111 @@ class CandidateRegister11PercentViewModel extends BaseViewModel {
     nameController.addListener(_onFieldChanged);
   }
 
-  ///
-  ///
-  ///
+  // In CandidateRegister11PercentViewModel
+
+  // Update the isAllEntriesValid method to include validation checks
+  // In CandidateRegister11PercentViewModel
+
+  // Add this comprehensive validation method
+  validateAllEntries() {
+    bool allValid = true;
+
+    for (var i = 0; i < universityEntries.length; i++) {
+      final entry = universityEntries[i];
+
+      if (entry.isCurrent) {
+        // If currently studying, end date is not required
+        entry.dropDown4Error = false;
+        entry.dropDown5Error = false;
+      } else {
+        // If not currently studying, validate end date
+        if (entry.endMonth == null || entry.endMonth!.isEmpty) {
+          entry.dropDown4Error = true;
+          allValid = false;
+        }
+        if (entry.endYear == null || entry.endYear!.isEmpty) {
+          entry.dropDown5Error = true;
+          allValid = false;
+        }
+      }
+
+      // Validate career field
+      if (entry.career == null || entry.career!.isEmpty) {
+        entry.careerError = true;
+        allValid = false;
+      } else {
+        entry.careerError = false;
+      }
+
+      // Validate university selection
+      if (entry.selectedUniversity == null) {
+        allValid = false;
+      }
+
+      // Validate degree
+      if (entry.degree == null || entry.degree!.isEmpty) {
+        entry.dropDown1Error = true;
+        allValid = false;
+      } else {
+        entry.dropDown1Error = false;
+      }
+
+      // Validate start month
+      if (entry.startMonth == null || entry.startMonth!.isEmpty) {
+        entry.dropDown2Error = true;
+        allValid = false;
+      } else {
+        entry.dropDown2Error = false;
+      }
+
+      // Validate start year
+      if (entry.startYear == null || entry.startYear!.isEmpty) {
+        entry.dropDown3Error = true;
+        allValid = false;
+      } else {
+        entry.dropDown3Error = false;
+      }
+
+      // Validate end month (unless currently studying)
+      if (!entry.isCurrent &&
+          (entry.endMonth == null || entry.endMonth!.isEmpty)) {
+        entry.dropDown4Error = true;
+        allValid = false;
+      } else {
+        entry.dropDown4Error = false;
+      }
+
+      // Validate end year (unless currently studying)
+      if (!entry.isCurrent &&
+          (entry.endYear == null || entry.endYear!.isEmpty)) {
+        entry.dropDown5Error = true;
+        allValid = false;
+      } else {
+        entry.dropDown5Error = false;
+      }
+    }
+
+    isFormValid = allValid;
+    notifyListeners();
+  }
+
+  // Add this method to validate a specific entry
+  validateEntry(int index) {
+    final entry = universityEntries[index];
+
+    entry.dropDown1Error = entry.degree == null || entry.degree!.isEmpty;
+    entry.dropDown2Error =
+        entry.startMonth == null || entry.startMonth!.isEmpty;
+    entry.dropDown3Error = entry.startYear == null || entry.startYear!.isEmpty;
+    entry.dropDown4Error = entry.endMonth == null || entry.endMonth!.isEmpty;
+    entry.dropDown5Error = entry.endYear == null || entry.endYear!.isEmpty;
+
+    notifyListeners();
+  }
+
+  // Update the updateFormValidity method
   void updateFormValidity() {
-    isFormValid =
-        nameController.text.trim().isNotEmpty &&
-        dropDownText1.isNotEmpty &&
-        dropDownText2.isNotEmpty &&
-        dropDownText3.isNotEmpty &&
-        dropDownText4.isNotEmpty &&
-        dropDownText5.isNotEmpty &&
-        isCheckboxChecked;
+    isFormValid = validateAllEntries();
     notifyListeners();
   }
 
@@ -300,4 +513,32 @@ class CandidateRegister11PercentViewModel extends BaseViewModel {
     updateFormValidity(); // <-- add this
     notifyListeners();
   }
+}
+
+class UniversityEntry {
+  String? career; // Add this field
+  UniversityModel? selectedUniversity;
+  bool careerError = false; // Add error state
+  TextEditingController universityController = TextEditingController();
+  FocusNode universityFocusNode = FocusNode();
+  bool isUniversitySelected = false;
+
+  String? degree;
+  String? startMonth;
+  String? startYear;
+  String? endMonth;
+  String? endYear;
+  bool isCurrent = false;
+
+  bool dropDown1Open = false;
+  bool dropDown2Open = false;
+  bool dropDown3Open = false;
+  bool dropDown4Open = false;
+  bool dropDown5Open = false;
+
+  bool dropDown1Error = false;
+  bool dropDown2Error = false;
+  bool dropDown3Error = false;
+  bool dropDown4Error = false;
+  bool dropDown5Error = false;
 }

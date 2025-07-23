@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,7 +8,6 @@ import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
-import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/menu_reuse/menu_reuse.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/availability_screen_3/availability_screen_3.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/block_companies/block_companies_screen.dart';
@@ -215,7 +216,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         onTap: () {
                           Get.to(CandidateDeleteAccountScreen());
                         },
-                        textStyle: style14sourceblack?.copyWith(
+                        textStyle: style14sourceblack.copyWith(
                           color: primaryColor,
                         ),
                         child: AnimatedContainer(duration: Duration()),
@@ -229,7 +230,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                           Get.offAll(Splash2Screen());
                         },
                         child: AnimatedContainer(duration: Duration()),
-                        textStyle: style14sourceblack?.copyWith(
+                        textStyle: style14sourceblack.copyWith(
                           color: primaryColor,
                         ),
                         trailingIconColor: primaryColor,
