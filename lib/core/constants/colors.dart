@@ -38,3 +38,4 @@ const Color lightgreyColor = Color(0xffD4D4D8);
 const Color dividerColor = Color(0xffEBEBEB);
 const Color lightPurpleColor = arrowColor;
 const Color darkBlueColor = Color(0xff007BFF);
+const Color lightBlackColor2 = Color(0xff686868);

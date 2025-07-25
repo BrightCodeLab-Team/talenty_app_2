@@ -1,3 +1,5 @@
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -240,16 +242,26 @@ class Candidate33PercentScreen extends StatelessWidget {
                             child: TextFormField(
                               decoration: authFieldDecoration.copyWith(
                                 hintText: 'Busca más habilidades',
-                                hintStyle: style16M.copyWith(color: blackColor),
+                                hintStyle: style16M.copyWith(
+                                  color: blackColor,
+                                  fontFamily: GoogleFonts.inter().fontFamily,
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                  size: 25,
+                                  color: blackColor,
+                                ),
+
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 errorBorder: InputBorder.none,
                                 focusedErrorBorder: InputBorder.none,
                                 disabledBorder: InputBorder.none,
-                                contentPadding:
-                                    EdgeInsets
-                                        .zero, // Remove default content padding from TextFormField)
+                                contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                  vertical: 10.h,
+                                ), // Adjust padding as needed
                               ),
                             ),
                           ),

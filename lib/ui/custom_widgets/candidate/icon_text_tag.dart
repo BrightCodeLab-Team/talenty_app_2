@@ -66,8 +66,8 @@ class ShadowTagItem {
 // 2. Create the custom widget
 class CustomShadowIconTextTag extends StatelessWidget {
   final ShadowTagItem item;
-
-  const CustomShadowIconTextTag({Key? key, required this.item})
+  bool? isShowAddIcon = true;
+  CustomShadowIconTextTag({Key? key, required this.item, this.isShowAddIcon})
     : super(key: key);
 
   @override
@@ -103,7 +103,9 @@ class CustomShadowIconTextTag extends StatelessWidget {
               ),
             ),
             SizedBox(width: 2.w),
-            Icon(Icons.add, color: textGreyColor),
+            isShowAddIcon == true
+                ? Icon(Icons.add, color: textGreyColor)
+                : Text(''),
           ],
         ),
       ),

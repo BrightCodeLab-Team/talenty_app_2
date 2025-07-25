@@ -19,11 +19,14 @@ class AppAssets {
   static String obReclutador4 = "$staticAssets/obReclutador4.png";
   static String selectionScreenGif = "$staticAssets/selectionScreenGif.gif";
   static String registerCompanyImage = "$staticAssets/registerCompanyImage.png";
+  static String Star44 = "$staticAssets/Star.png";
   static String registerRecruiterImage =
       "$staticAssets/registerRecruiterImage.png";
   static String deleteAccountGif = "$staticAssets/deleteAccountGif.png";
   static String tipsImg = "$dynamicAssets/office.png";
   static String cameraIcon2 = "$iconsAssets/cameraIcon2.png";
+  static String shareIcon = "$iconsAssets/shareIcon.png";
+
   /*    
 
       Icons Assets
@@ -52,6 +55,16 @@ class AppAssets {
   static String BlockedCompaniesIcon = "$iconsAssets/Blocked CompaniesIcon.png";
   static String profileIcon = "$iconsAssets/profileIcon.png";
   static String watchIcon = "$iconsAssets/watchIcon.png";
+  static String charityIcon = "$iconsAssets/charityIcon.png";
+  static String idkIcon = "$iconsAssets/idkIcon.png";
+  static String laughEmojiIcon = "$iconsAssets/laughEmojiIcon.png";
+  static String likeIcon = "$iconsAssets/likeIcon.png";
+  static String sadEmojiIcon = "$iconsAssets/sadEmojiIcon.png";
+  static String searchIcon44 = "$iconsAssets/searchIcon44.png";
+  static String speakIcon = "$iconsAssets/speakIcon.png";
+  static String toolsIcon = "$iconsAssets/toolsIcon.png";
+  static String trophyIcon = "$iconsAssets/trophyIcon.png";
+  static String worldIcon = "$iconsAssets/worldIcon.png";
 
   ///
   /// Home SCREEN

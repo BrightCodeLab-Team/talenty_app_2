@@ -1,12 +1,13 @@
 // ignore_for_file: use_super_parameters
 
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_11_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_22_percent/register_22_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_88_percent/register_88_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
@@ -22,24 +23,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final languageProvider = Provider.of<LanThemeProvider>(context);
 
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: title,
-      translations: LocalizationService(),
-      // locale: DevicePreview.locale(context),
-      locale: Locale('en'),
-      // builder: DevicePreview.appBuilder,
-      defaultTransition: Transition.rightToLeft,
-      themeMode: languageProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      home: ScreenUtilInit(
-        designSize: const Size(
-          _designWidth,
-          _designHeight,
-        ), // Use your constants
-        builder: (context, child) => Candidate22PercentScreen(),
-      ),
+    return DevicePreview(
+      enabled: true, // Ensure this is true to enable DevicePreview
+      builder:
+          (context) => GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: title,
+            translations: LocalizationService(),
+            // locale: DevicePreview.locale(context),
+            locale: Locale('en'),
+            builder: DevicePreview.appBuilder,
+            defaultTransition: Transition.rightToLeft,
+            themeMode:
+                languageProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            home: ScreenUtilInit(
+              designSize: const Size(
+                _designWidth,
+                _designHeight,
+              ), // Use your constants
+              builder: (context, child) => Candidate88PercentScreen(),
+            ),
+          ),
     );
   }
 }
