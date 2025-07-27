@@ -239,11 +239,9 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                 setState(() {
                   _swipeOffset += details.delta.dx;
                   if (_swipeOffset > 50) {
-                    _swipeImage =
-                        AppAssets.meGustaImg; // Right swipe - "NO ME GUSTA"
+                    _swipeImage = AppAssets.meGustaImg;
                   } else if (_swipeOffset < -50) {
-                    _swipeImage =
-                        AppAssets.noMeGustImg; // Left swipe - "ME GUSTA"
+                    _swipeImage = AppAssets.noMeGustImg;
                   } else {
                     _swipeImage = '';
                   }
@@ -252,16 +250,12 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
               onHorizontalDragEnd: (details) {
                 if (!_isSwiping) return;
 
-                // Check if swipe was strong enough
                 if (details.primaryVelocity! > 300 || _swipeOffset > 100) {
-                  // Right swipe - reject
                   _handleSwipe(true);
                 } else if (details.primaryVelocity! < -300 ||
                     _swipeOffset < -100) {
-                  // Left swipe - like
                   _handleSwipe(false);
                 } else {
-                  // Return to original position
                   setState(() {
                     _isSwiping = false;
                     _swipeOffset = 0.0;
@@ -275,6 +269,31 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                 builder: (context, child) {
                   return Stack(
                     children: [
+                      // Next Job Card in Background (only visible during swipe)
+                      if (_isSwiping)
+                        Positioned.fill(
+                          child: Center(
+                            child: Transform.scale(
+                              scale: 1,
+                              child: Opacity(
+                                opacity: 0.7,
+                                child: _buildJobDetailContent(
+                                  context,
+                                  model,
+                                  _swipeOffset > 0
+                                      ? (currentIndex > 0
+                                          ? currentIndex - 1
+                                          : model.vacancies.length - 1)
+                                      : (currentIndex <
+                                              model.vacancies.length - 1
+                                          ? currentIndex + 1
+                                          : 0),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+
                       // Main Job Card Content
                       Transform.translate(
                         offset: Offset(_isSwiping ? _swipeOffset * 0.7 : 0, 0),
@@ -528,7 +547,9 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
+                        onTap: () {
+                          // same above logic when i click on close container then card swipe to left side .............
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             color: pinkColor,
@@ -563,7 +584,9 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
+                        onTap: () {
+                          // same above logic when i click on heart container then card swipe to right side .............
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             color: greenColor,
