@@ -182,7 +182,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
     bool _isSwiping = false;
     double _swipeOffset = 0.0;
 
-    void _handleSwipe(bool isRightSwipe) {
+    void _handleSwipe(bool isRightSwipe, StateSetter setState) {
       if (!_swipeController.isAnimating) {
         _swipeController.forward().then((_) {
           Future.delayed(const Duration(milliseconds: 300), () {
@@ -201,12 +201,25 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                 }
                 _isSwiping = false;
                 _swipeOffset = 0.0;
+                _swipeImage = '';
                 _swipeController.reset();
               });
             }
           });
         });
       }
+    }
+
+    void _triggerSwipe(bool isRightSwipe, StateSetter setState) {
+      setState(() {
+        _isSwiping = true;
+        _swipeOffset = isRightSwipe ? 150.0 : -150.0;
+        _swipeImage =
+            isRightSwipe ? AppAssets.meGustaImg : AppAssets.noMeGustImg;
+      });
+      Future.delayed(const Duration(milliseconds: 100), () {
+        _handleSwipe(isRightSwipe, setState);
+      });
     }
 
     showGeneralDialog(
@@ -244,10 +257,10 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                 if (!_isSwiping) return;
 
                 if (details.primaryVelocity! > 300 || _swipeOffset > 100) {
-                  _handleSwipe(true);
+                  _handleSwipe(true, setState);
                 } else if (details.primaryVelocity! < -300 ||
                     _swipeOffset < -100) {
-                  _handleSwipe(false);
+                  _handleSwipe(false, setState);
                 } else {
                   setState(() {
                     _isSwiping = false;
@@ -268,7 +281,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             child: Transform.scale(
                               scale: 1,
                               child: Opacity(
-                                opacity: 0.7,
+                                opacity: 1.0,
                                 child: _buildJobDetailContent(
                                   context,
                                   model,
@@ -280,6 +293,12 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                               model.vacancies.length - 1
                                           ? currentIndex + 1
                                           : 0),
+                                  onSwipeLeft: () {
+                                    _triggerSwipe(false, setState);
+                                  },
+                                  onSwipeRight: () {
+                                    _triggerSwipe(true, setState);
+                                  },
                                 ),
                               ),
                             ),
@@ -304,6 +323,12 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                               context,
                               model,
                               currentIndex,
+                              onSwipeLeft: () {
+                                _triggerSwipe(false, setState);
+                              },
+                              onSwipeRight: () {
+                                _triggerSwipe(true, setState);
+                              },
                             ),
                           ),
                         ),
@@ -346,8 +371,10 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   Widget _buildJobDetailContent(
     BuildContext context,
     CandidateHomeViewModel model,
-    int index,
-  ) {
+    int index, {
+    VoidCallback? onSwipeLeft,
+    VoidCallback? onSwipeRight,
+  }) {
     if (index < 0 || index >= model.vacancies.length) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -545,7 +572,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          // same above logic when i click on close container then card swipe to left side
+                          if (onSwipeLeft != null) onSwipeLeft();
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -587,7 +614,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          // same above logic when i click on heart container then card swipe to right side
+                          if (onSwipeRight != null) onSwipeRight();
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -661,6 +688,11 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
       ],
     );
   }
+
+  ///
+  ///
+  ///.    filter bottom sheet
+  ///
 
   void _showFilterBottomSheet(CandidateHomeViewModel model) {
     showModalBottomSheet(
