@@ -116,7 +116,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                         style: style16M,
                       ),
                       10.verticalSpace,
-                      model.vacancies.isNotEmpty && model.vacancies != null
+                      model.vacancies.isNotEmpty
                           ? _categories(model: model)
                           : SizedBox(),
                       10.verticalSpace,
@@ -147,9 +147,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                     context,
                                     model,
                                     model.filtersApplied
-                                        ? model.vacancies.indexOf(
-                                          vacancy,
-                                        ) // Get original index
+                                        ? model.vacancies.indexOf(vacancy)
                                         : index,
                                   );
                                 },
@@ -160,7 +158,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           : model.categorySelect == 1
                           ? Text('2')
                           : Text('3'),
-                      // Consider replacing this with a relevant widget for other categories
                       20.verticalSpace,
                     ],
                   ),
@@ -170,10 +167,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
       ),
     );
   }
-
-  ///
-  ///. dialogue box
-  ///
 
   void _showCustomJobDetailDialog(
     BuildContext context,
@@ -185,7 +178,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
       duration: const Duration(milliseconds: 300),
       vsync: Navigator.of(context),
     );
-    String _swipeImage = '';
+    String _swipeImage = AppAssets.meGustaImg; // Initialize with default
     bool _isSwiping = false;
     double _swipeOffset = 0.0;
 
@@ -269,7 +262,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                 builder: (context, child) {
                   return Stack(
                     children: [
-                      // Next Job Card in Background (only visible during swipe)
                       if (_isSwiping)
                         Positioned.fill(
                           child: Center(
@@ -293,8 +285,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             ),
                           ),
                         ),
-
-                      // Main Job Card Content
                       Transform.translate(
                         offset: Offset(_isSwiping ? _swipeOffset * 0.7 : 0, 0),
                         child: Transform.rotate(
@@ -318,9 +308,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           ),
                         ),
                       ),
-
-                      // Feedback Overlay
-                      if (_isSwiping)
+                      if (_isSwiping && _swipeImage.isNotEmpty)
                         IgnorePointer(
                           child: Container(
                             color: Colors.black.withOpacity(
@@ -336,6 +324,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                   _swipeImage,
                                   scale: 4,
                                   fit: BoxFit.contain,
+                                  errorBuilder: (_, __, ___) => SizedBox(),
                                 ),
                               ),
                             ),
@@ -398,7 +387,11 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           top: Radius.circular(20.0),
                         ),
                         image: DecorationImage(
-                          image: AssetImage(vacancy.imageUrl ?? ''),
+                          image:
+                              vacancy.imageUrl != null &&
+                                      vacancy.imageUrl!.isNotEmpty
+                                  ? AssetImage(vacancy.imageUrl!)
+                                  : AssetImage(''),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -490,9 +483,13 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Image.asset(
-                                    vacancy.imageUrl ?? '',
+                                    vacancy.imageUrl?.isNotEmpty == true
+                                        ? vacancy.imageUrl!
+                                        : '',
                                     height: 30,
                                     width: 30,
+                                    errorBuilder:
+                                        (_, __, ___) => Icon(Icons.business),
                                   ),
                                   const SizedBox(width: 8),
                                   Column(
@@ -548,7 +545,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          // same above logic when i click on close container then card swipe to left side .............
+                          // same above logic when i click on close container then card swipe to left side
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -566,7 +563,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                       GestureDetector(
                         onTap: () {
                           Get.to(
-                            CompanyJobDetailScreen(
+                            () => CompanyJobDetailScreen(
                               jobVacancyModel: vacancy,
                               index: index,
                             ),
@@ -579,13 +576,18 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           ),
                           padding: const EdgeInsets.all(15),
                           child: Center(
-                            child: Image.asset(AppAssets.eyeIcon, scale: 4),
+                            child: Image.asset(
+                              AppAssets.eyeIcon,
+                              scale: 4,
+                              errorBuilder:
+                                  (_, __, ___) => Icon(Icons.remove_red_eye),
+                            ),
                           ),
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
-                          // same above logic when i click on heart container then card swipe to right side .............
+                          // same above logic when i click on heart container then card swipe to right side
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -611,19 +613,19 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
     );
   }
 
-  ///
-  ///. header
-  ///
   _header(CandidateHomeViewModel model) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.asset(AppAssets.appLogo2, scale: 6),
+        Image.asset(
+          AppAssets.appLogo2,
+          scale: 6,
+          errorBuilder: (_, __, ___) => Icon(Icons.home),
+        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            //   Image.asset(AppAssets.filter, height: 24, width: 24),
             GestureDetector(
               onTap: () {
                 _showFilterBottomSheet(model);
@@ -636,13 +638,23 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                   () => CandidateSearchScreen(allVacancies: model.vacancies),
                 );
               },
-              child: Image.asset(AppAssets.searchIcon, height: 46, width: 46),
+              child: Image.asset(
+                AppAssets.searchIcon,
+                height: 46,
+                width: 46,
+                errorBuilder: (_, __, ___) => Icon(Icons.search),
+              ),
             ),
             GestureDetector(
               onTap: () {
                 Get.to(() => NotificationScreen());
               },
-              child: Image.asset(AppAssets.notifIcon, height: 24, width: 24),
+              child: Image.asset(
+                AppAssets.notifIcon,
+                height: 24,
+                width: 24,
+                errorBuilder: (_, __, ___) => Icon(Icons.notifications),
+              ),
             ),
           ],
         ),
@@ -650,10 +662,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
     );
   }
 
-  ///
-  ///. bottom sheet
-  ///
-  // Method to show the filter bottom sheet
   void _showFilterBottomSheet(CandidateHomeViewModel model) {
     showModalBottomSheet(
       context: context,
@@ -719,7 +727,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             ],
                           ),
                           const SizedBox(height: 20),
-
                           Text(
                             'Categoría que deseas',
                             style: style16B.copyWith(),
@@ -733,7 +740,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                 vertical: 8.h,
                               ),
                             ),
-                            value: selectedCategory, // Use the state variable
+                            value: selectedCategory,
                             items:
                                 categories.map((String category) {
                                   return DropdownMenuItem<String>(
@@ -743,13 +750,11 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                 }).toList(),
                             onChanged: (String? newValue) {
                               setModalState(() {
-                                // Update state
                                 selectedCategory = newValue;
                               });
                             },
                           ),
                           const SizedBox(height: 20),
-
                           Text(
                             'Rango de sueldo deseado',
                             style: style16B.copyWith(color: blackColor),
@@ -759,8 +764,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             children: [
                               Expanded(
                                 child: TextField(
-                                  controller:
-                                      _salaryMinController, // Assign controller
+                                  controller: _salaryMinController,
                                   decoration: authFieldDecoration.copyWith(
                                     hintText: 'De:',
                                     contentPadding: EdgeInsets.symmetric(
@@ -774,8 +778,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                               const SizedBox(width: 10),
                               Expanded(
                                 child: TextField(
-                                  controller:
-                                      _salaryMaxController, // Assign controller
+                                  controller: _salaryMaxController,
                                   decoration: authFieldDecoration.copyWith(
                                     hintText: 'A:',
                                     contentPadding: EdgeInsets.symmetric(
@@ -796,7 +799,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             ),
                           ),
                           const SizedBox(height: 20),
-
                           Text(
                             'Entidad Federativa',
                             style: style16B.copyWith(color: blackColor),
@@ -810,8 +812,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                 vertical: 8.h,
                               ),
                             ),
-                            value:
-                                selectedFederalEntity, // Use the state variable
+                            value: selectedFederalEntity,
                             items:
                                 federalEntities.map((String entity) {
                                   return DropdownMenuItem<String>(
@@ -821,13 +822,11 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                 }).toList(),
                             onChanged: (String? newValue) {
                               setModalState(() {
-                                // Update state
                                 selectedFederalEntity = newValue;
                               });
                             },
                           ),
                           const SizedBox(height: 20),
-
                           Text(
                             'Alcaldía o municipio',
                             style: style16B.copyWith(color: blackColor),
@@ -841,8 +840,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                 vertical: 8.h,
                               ),
                             ),
-                            value:
-                                selectedMunicipality, // Use the state variable
+                            value: selectedMunicipality,
                             items:
                                 municipalities.map((String municipality) {
                                   return DropdownMenuItem<String>(
@@ -852,13 +850,11 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                 }).toList(),
                             onChanged: (String? newValue) {
                               setModalState(() {
-                                // Update state
                                 selectedMunicipality = newValue;
                               });
                             },
                           ),
                           const SizedBox(height: 20),
-
                           Text(
                             'Modalidad de trabajo',
                             style: style16B.copyWith(color: blackColor),
@@ -903,7 +899,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                                   ? Colors.white
                                                   : Colors.black,
                                         ),
-
                                         side: BorderSide(
                                           color:
                                               isSelected
@@ -918,10 +913,8 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                             6,
                                           ),
                                         ),
-                                        showCheckmark:
-                                            false, // Removed checkmark
+                                        showCheckmark: false,
                                         elevation: 5.0,
-                                        // ADJUSTED shadowColor opacity
                                         shadowColor: blackColor.withOpacity(
                                           0.4,
                                         ),
@@ -936,7 +929,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             ),
                           ),
                           const SizedBox(height: 20),
-
                           Text(
                             'Filtrar por habilidades',
                             style: style16B.copyWith(color: blackColor),
@@ -967,7 +959,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                                       : Colors.black,
                                               size: 18,
                                             ),
-
                                             const SizedBox(width: 4),
                                             Text(skill),
                                           ],
@@ -995,10 +986,8 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                             6,
                                           ),
                                         ),
-                                        showCheckmark:
-                                            false, // Removed checkmark
+                                        showCheckmark: false,
                                         elevation: 5.0,
-                                        // ADJUSTED shadowColor opacity
                                         shadowColor: blackColor.withOpacity(
                                           0.4,
                                         ),
@@ -1011,31 +1000,23 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             ),
                           ),
                           const SizedBox(height: 30),
-
                           Row(
                             children: [
                               Expanded(
                                 child: OutlinedButton(
                                   onPressed: () {
                                     setModalState(() {
-                                      // Reset chip selections
                                       selectedWorkModality =
                                           workModalities.isNotEmpty
                                               ? workModalities[0]
                                               : null;
                                       selectedSkill = null;
-
-                                      // Reset dropdowns to their initial/default values
                                       selectedCategory = null;
                                       selectedFederalEntity =
                                           federalEntities[0];
                                       selectedMunicipality = municipalities[0];
-
-                                      // Clear text fields
                                       _salaryMinController.clear();
                                       _salaryMaxController.clear();
-
-                                      // Reset skill order (if they were manipulated)
                                       skills = [
                                         'Diseño web',
                                         'Diseño gráfico',
@@ -1044,7 +1025,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                         'Back-end',
                                         'Mobile Development',
                                       ];
-                                      // Reset work modality order if it was manipulated
                                       workModalities = [
                                         'Híbrido',
                                         'Presencial',
@@ -1073,8 +1053,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                               Expanded(
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    // Apply filters
-
                                     model.applyFilters(
                                       category: selectedCategory,
                                       minSalary: _salaryMinController.text,
@@ -1084,7 +1062,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                       workModality: selectedWorkModality,
                                       skill: selectedSkill,
                                     );
-
                                     Navigator.pop(context);
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -1116,11 +1093,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
       },
     );
   }
-
-  ///
-  ///
-  ///
-  ///
 }
 
 _categories({required CandidateHomeViewModel model}) {
