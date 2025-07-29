@@ -39,27 +39,33 @@ class CandidateRootScreenViewModel extends BaseViewModel {
 
   final List<Map<String, String>> onboardingSteps = [
     {
-      'title': 'Crear Vacante',
+      'title': 'Filtrados',
       'description':
-          'Crea una vacante en pocos pasos y encuentra al candidato ideal para tu empresa.',
-      'icon': '$iconsAssets/polygon.png',
-    },
-    {
-      'title': 'Buscador',
-      'description':
-          'Utiliza el buscador para encontrar rápidamente tus vacantes creadas.',
+          'Aquí podrás personalizar tus resultados de búsqueda con filtros como tu localidad, habilidades o preferencias. Encuentra vacantes que realmente se adapten a ti.',
       'icon': '$iconsAssets/polygon.png',
     },
     {
       'title': 'Notificaciones',
       'description':
-          '¡Tienes una nueva notificación! Revisa los detalles en la app y mantente al tanto de las actualizaciones',
+          'Mantente al día con nuevas ofertas, matches y actualizaciones importantes. Revisa esta sección para no perder oportunidades clave.',
       'icon': '$iconsAssets/polygon.png',
     },
     {
-      'title': 'Buscador',
+      'title': 'Búsqueda',
       'description':
-          'Utiliza el buscador para encontrar rápidamente tus vacantes creadas.',
+          'Utiliza palabras clave para encontrar vacantes específicas. Ideal si ya sabes qué tipo de trabajo estás buscando.',
+      'icon': '$iconsAssets/polygon.png',
+    },
+    {
+      'title': 'Explora con la barra de búsqueda',
+      'description':
+          'Desde aquí podrás navegar fácilmente por la app: accede a tips para mejorar tu perfil, revisa tus matches con empresas, chatea con reclutadores y actualiza tu información en el perfil. Todo lo que necesitas dentro de la app.',
+      'icon': '$iconsAssets/polygon2.png',
+    },
+    {
+      'title': 'Categorías',
+      'description':
+          'Explora ofertas laborales organizadas por áreas o industrias. Filtrar por categoría te ahorra tiempo y mejora la precisión de tu búsqueda.',
       'icon': '$iconsAssets/polygon2.png',
     },
   ];

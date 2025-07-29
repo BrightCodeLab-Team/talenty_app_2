@@ -11,6 +11,8 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/home_widget.dart'
     show CustomCandidateHomeVacancyWidget;
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
+import 'package:talenty_app/ui/screens/candidate/candidat_root/candidate_root_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/candidat_root/candidate_root_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_search/candidate_search.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
@@ -87,9 +89,9 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => CandidateHomeViewModel(),
-      child: Consumer<CandidateHomeViewModel>(
+      child: Consumer2<CandidateHomeViewModel, CandidateRootScreenViewModel>(
         builder:
-            (context, model, child) => Scaffold(
+            (context, model, rootModel, child) => Scaffold(
               body: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.only(left: 20.0, top: 40, right: 20),
@@ -1116,8 +1118,23 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
     "Marketing y Ventas",
   ];
 
+  ///
+  ///
+  ///
+  ///
+  ///
+  // rootModel will be initialized in the build method
+
+  ///
+  ///
+  ///
+
   @override
   Widget build(BuildContext context) {
+    final rootModel = Provider.of<CandidateRootScreenViewModel>(
+      context,
+      listen: false,
+    );
     return SizedBox(
       height: 38,
       child: ListView.builder(
@@ -1157,6 +1174,7 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
             child: GestureDetector(
               key: ValueKey('${categories[displayIndex]}_$isSelected'),
               onTap: () {
+                // rootModel.nextStep();
                 widget.model.onClickCategory(displayIndex);
                 setState(() {}); // triggers instant rebuild
               },
@@ -1196,6 +1214,28 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
                       ),
                       if (isSelected) const SizedBox(width: 8),
                       Text(categories[displayIndex]),
+                      // rootModel.currentStep == 4
+                      //     ? Positioned(
+                      //       bottom: 200, // adjust based on your UI
+                      //       left: 16,
+                      //       right: 16,
+                      //       child: CustomOnboardingTooltip(
+                      //         onNext: rootModel.nextStep,
+                      //         onClose: rootModel.closeTooltip,
+                      //         currentIndex: rootModel.currentStep,
+                      //         totalSteps: rootModel.onboardingSteps.length,
+                      //         title:
+                      //             rootModel.onboardingSteps[rootModel
+                      //                 .currentStep]['title']!,
+                      //         description:
+                      //             rootModel.onboardingSteps[rootModel
+                      //                 .currentStep]['description']!,
+                      //         iconPath:
+                      //             rootModel.onboardingSteps[rootModel
+                      //                 .currentStep]['icon']!,
+                      //       ),
+                      //     )
+                      //     : SizedBox(),
                     ],
                   ),
                 ),

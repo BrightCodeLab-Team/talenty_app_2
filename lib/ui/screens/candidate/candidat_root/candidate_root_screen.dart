@@ -109,18 +109,18 @@ class CandidateRootScreen extends StatelessWidget {
                                             : textGreyColor,
                                   ),
                                   Image.asset(
-                                    AppAssets.searchIcon,
-                                    height: 46,
-                                    width: 46,
+                                    AppAssets.notifIcon,
+                                    height: 24,
+                                    width: 24,
                                     color:
                                         model.currentStep == 1
                                             ? primaryColor
                                             : textGreyColor,
                                   ),
                                   Image.asset(
-                                    AppAssets.notifIcon,
-                                    height: 24,
-                                    width: 24,
+                                    AppAssets.searchIcon,
+                                    height: 46,
+                                    width: 46,
                                     color:
                                         model.currentStep == 2
                                             ? primaryColor
