@@ -111,13 +111,19 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                         style: style14M.copyWith(color: textDarkGreyColor),
                       ),
                       20.verticalSpace,
-                      Text(
-                        "Categorías que podrían interesarte",
-                        style: style16M,
+                      Row(
+                        children: [
+                          Text(
+                            "Categorías que podrían interesarte",
+                            style: style16M,
+                          ),
+                          Spacer(),
+                          // show badge when it is index >0 of _categories list other wise show empty text
+                        ],
                       ),
                       10.verticalSpace,
                       model.vacancies.isNotEmpty
-                          ? _categories(model: model)
+                          ? _CategoriesAnimated(model: model)
                           : SizedBox(),
                       10.verticalSpace,
                       model.categorySelect == 0
@@ -155,10 +161,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                               );
                             },
                           )
-                          : model.categorySelect == 1
-                          ? Text('2')
-                          : Text('3'),
-                      20.verticalSpace,
+                          : 20.verticalSpace,
                     ],
                   ),
                 ),
@@ -689,11 +692,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
     );
   }
 
-  ///
-  ///
-  ///.    filter bottom sheet
-  ///
-
   void _showFilterBottomSheet(CandidateHomeViewModel model) {
     showModalBottomSheet(
       context: context,
@@ -1127,56 +1125,97 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   }
 }
 
-_categories({required CandidateHomeViewModel model}) {
-  List<String> categries = [
+class _CategoriesAnimated extends StatefulWidget {
+  final CandidateHomeViewModel model;
+
+  const _CategoriesAnimated({required this.model});
+
+  @override
+  State<_CategoriesAnimated> createState() => _CategoriesAnimatedState();
+}
+
+class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
+  List<String> categories = [
     "Todos",
     "Arte y Diseño",
     "Programación y Tecnología",
   ];
-  return SizedBox(
-    height: 38,
-    child: ListView.builder(
-      scrollDirection: Axis.horizontal,
-      shrinkWrap: true,
-      itemCount: categries.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            model.onClickCategory(index);
-          },
-          child: Container(
-            margin: EdgeInsets.only(left: 5),
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            height: 34,
-            decoration: BoxDecoration(
-              color:
-                  model.categorySelect == index
-                      ? brownColor
-                      : Colors.transparent,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(width: 1.0, color: brownColor),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                model.categorySelect == index
-                    ? Icon(Icons.cancel_outlined, color: whiteColor, size: 20)
-                    : SizedBox(),
-                model.categorySelect == index ? 3.horizontalSpace : SizedBox(),
-                Text(
-                  categries[index],
-                  style: style12M.copyWith(
-                    color:
-                        model.categorySelect == index
-                            ? whiteColor
-                            : lightBlackColor,
-                  ),
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 38,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 400),
+        switchInCurve: Curves.easeInOut,
+        switchOutCurve: Curves.easeInOut,
+        layoutBuilder: (currentChild, previousChildren) {
+          return Stack(
+            alignment: Alignment.centerLeft,
+            children: [
+              ...previousChildren,
+              if (currentChild != null) currentChild,
+            ],
+          );
+        },
+        transitionBuilder: (child, animation) {
+          return SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0.3, 0), // slide in from right
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          );
+        },
+        child: ListView.builder(
+          key: ValueKey(widget.model.categorySelect),
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            int displayIndex = index;
+            if (widget.model.categorySelect != 0 && index == 0) {
+              displayIndex = widget.model.categorySelect;
+            } else if (widget.model.categorySelect != 0 &&
+                index <= widget.model.categorySelect) {
+              displayIndex = index - 1;
+            }
+
+            final isSelected = widget.model.categorySelect == displayIndex;
+
+            return GestureDetector(
+              onTap: () {
+                widget.model.onClickCategory(displayIndex);
+                setState(() {});
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: index == 0 ? 0 : 5),
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                height: 34,
+                decoration: BoxDecoration(
+                  color: isSelected ? brownColor : Colors.transparent,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(width: 1.0, color: brownColor),
                 ),
-              ],
-            ),
-          ),
-        );
-      },
-    ),
-  );
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (isSelected)
+                      Icon(Icons.cancel_outlined, color: whiteColor, size: 20),
+                    if (isSelected) const SizedBox(width: 3),
+                    Text(
+                      categories[displayIndex],
+                      style: style12M.copyWith(
+                        color: isSelected ? whiteColor : lightBlackColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
 }

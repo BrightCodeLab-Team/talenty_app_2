@@ -775,11 +775,11 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
       duration: const Duration(milliseconds: 300),
       vsync: Navigator.of(context),
     );
-    String _swipeImage = '';
+    String _swipeImage = AppAssets.meGustaImg; // Initialize with default
     bool _isSwiping = false;
     double _swipeOffset = 0.0;
 
-    void _handleSwipe(bool isRightSwipe) {
+    void _handleSwipe(bool isRightSwipe, StateSetter setState) {
       if (!_swipeController.isAnimating) {
         _swipeController.forward().then((_) {
           Future.delayed(const Duration(milliseconds: 300), () {
@@ -798,12 +798,25 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                 }
                 _isSwiping = false;
                 _swipeOffset = 0.0;
+                _swipeImage = '';
                 _swipeController.reset();
               });
             }
           });
         });
       }
+    }
+
+    void _triggerSwipe(bool isRightSwipe, StateSetter setState) {
+      setState(() {
+        _isSwiping = true;
+        _swipeOffset = isRightSwipe ? 150.0 : -150.0;
+        _swipeImage =
+            isRightSwipe ? AppAssets.meGustaImg : AppAssets.noMeGustImg;
+      });
+      Future.delayed(const Duration(milliseconds: 100), () {
+        _handleSwipe(isRightSwipe, setState);
+      });
     }
 
     showGeneralDialog(
@@ -829,11 +842,9 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                 setState(() {
                   _swipeOffset += details.delta.dx;
                   if (_swipeOffset > 50) {
-                    _swipeImage =
-                        AppAssets.noMeGustImg; // Right swipe - "NO ME GUSTA"
+                    _swipeImage = AppAssets.meGustaImg;
                   } else if (_swipeOffset < -50) {
-                    _swipeImage =
-                        AppAssets.meGustaImg; // Left swipe - "ME GUSTA"
+                    _swipeImage = AppAssets.noMeGustImg;
                   } else {
                     _swipeImage = '';
                   }
@@ -842,16 +853,12 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
               onHorizontalDragEnd: (details) {
                 if (!_isSwiping) return;
 
-                // Check if swipe was strong enough
                 if (details.primaryVelocity! > 300 || _swipeOffset > 100) {
-                  // Right swipe - reject
-                  _handleSwipe(true);
+                  _handleSwipe(true, setState);
                 } else if (details.primaryVelocity! < -300 ||
                     _swipeOffset < -100) {
-                  // Left swipe - like
-                  _handleSwipe(false);
+                  _handleSwipe(false, setState);
                 } else {
-                  // Return to original position
                   setState(() {
                     _isSwiping = false;
                     _swipeOffset = 0.0;
@@ -865,7 +872,35 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                 builder: (context, child) {
                   return Stack(
                     children: [
-                      // Main Job Card Content
+                      if (_isSwiping)
+                        Positioned.fill(
+                          child: Center(
+                            child: Transform.scale(
+                              scale: 1,
+                              child: Opacity(
+                                opacity: 1.0,
+                                child: _buildJobDetailContent(
+                                  context,
+                                  model,
+                                  _swipeOffset > 0
+                                      ? (currentIndex > 0
+                                          ? currentIndex - 1
+                                          : model.vacancies.length - 1)
+                                      : (currentIndex <
+                                              model.vacancies.length - 1
+                                          ? currentIndex + 1
+                                          : 0),
+                                  onSwipeLeft: () {
+                                    _triggerSwipe(false, setState);
+                                  },
+                                  onSwipeRight: () {
+                                    _triggerSwipe(true, setState);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       Transform.translate(
                         offset: Offset(_isSwiping ? _swipeOffset * 0.7 : 0, 0),
                         child: Transform.rotate(
@@ -885,13 +920,17 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                               context,
                               model,
                               currentIndex,
+                              onSwipeLeft: () {
+                                _triggerSwipe(false, setState);
+                              },
+                              onSwipeRight: () {
+                                _triggerSwipe(true, setState);
+                              },
                             ),
                           ),
                         ),
                       ),
-
-                      // Feedback Overlay
-                      if (_isSwiping)
+                      if (_isSwiping && _swipeImage.isNotEmpty)
                         IgnorePointer(
                           child: Container(
                             color: Colors.black.withOpacity(
@@ -907,6 +946,7 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                                   _swipeImage,
                                   scale: 4,
                                   fit: BoxFit.contain,
+                                  errorBuilder: (_, __, ___) => SizedBox(),
                                 ),
                               ),
                             ),
@@ -928,8 +968,10 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
   Widget _buildJobDetailContent(
     BuildContext context,
     CandidateHomeViewModel model,
-    int index,
-  ) {
+    int index, {
+    VoidCallback? onSwipeLeft,
+    VoidCallback? onSwipeRight,
+  }) {
     if (index < 0 || index >= model.vacancies.length) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -969,7 +1011,11 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                           top: Radius.circular(20.0),
                         ),
                         image: DecorationImage(
-                          image: AssetImage(vacancy.imageUrl ?? ''),
+                          image:
+                              vacancy.imageUrl != null &&
+                                      vacancy.imageUrl!.isNotEmpty
+                                  ? AssetImage(vacancy.imageUrl!)
+                                  : AssetImage(''),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -1061,9 +1107,13 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Image.asset(
-                                    vacancy.imageUrl ?? '',
+                                    vacancy.imageUrl?.isNotEmpty == true
+                                        ? vacancy.imageUrl!
+                                        : '',
                                     height: 30,
                                     width: 30,
+                                    errorBuilder:
+                                        (_, __, ___) => Icon(Icons.business),
                                   ),
                                   const SizedBox(width: 8),
                                   Column(
@@ -1118,7 +1168,9 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
+                        onTap: () {
+                          if (onSwipeLeft != null) onSwipeLeft();
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             color: pinkColor,
@@ -1135,7 +1187,7 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                       GestureDetector(
                         onTap: () {
                           Get.to(
-                            CompanyJobDetailScreen(
+                            () => CompanyJobDetailScreen(
                               jobVacancyModel: vacancy,
                               index: index,
                             ),
@@ -1148,12 +1200,19 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                           ),
                           padding: const EdgeInsets.all(15),
                           child: Center(
-                            child: Image.asset(AppAssets.eyeIcon, scale: 4),
+                            child: Image.asset(
+                              AppAssets.eyeIcon,
+                              scale: 4,
+                              errorBuilder:
+                                  (_, __, ___) => Icon(Icons.remove_red_eye),
+                            ),
                           ),
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
+                        onTap: () {
+                          if (onSwipeRight != null) onSwipeRight();
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             color: greenColor,

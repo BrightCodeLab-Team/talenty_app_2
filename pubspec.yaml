@@ -30,9 +30,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   logger: ^2.5.0
   shared_preferences: ^2.5.3
@@ -46,7 +43,6 @@ dependencies:
   flutter_screenutil: ^5.9.3
   provider: ^6.1.5
   animated_icon:
-  # easy_localization: ^3.0.7+1
   flutter_localizations:
     sdk: flutter
   flutter_localization: ^0.3.2
@@ -61,6 +57,10 @@ dependencies:
   table_calendar:
   country_code_picker: ^3.0.0
   modal_progress_hud_nsn: ^0.5.1
+
+  # ✅ Add this line here
+  implicitly_animated_reorderable_list: ^0.4.0
+
   
 
   
