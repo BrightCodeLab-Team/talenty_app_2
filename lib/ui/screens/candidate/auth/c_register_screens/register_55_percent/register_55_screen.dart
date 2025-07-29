@@ -222,10 +222,6 @@ class Candidate55PercentScreen extends StatelessWidget {
                       ),
 
                       50.verticalSpace,
-
-                      ///
-                      ///
-                      ///
                     ],
                   ),
                 ),

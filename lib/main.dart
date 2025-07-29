@@ -21,14 +21,7 @@ void main() async {
     await setupLocator(Env.dev);
 
     runApp(
-      MultiProvider(
-        providers: providerPath,
-        child: MyApp(title: 'Talenty'),
-        // child: DevicePreview(
-        //   enabled: !kReleaseMode,
-        //   builder: (context) => MyApp(title: 'Talenty'),
-        // ),
-      ),
+      MultiProvider(providers: providerPath, child: MyApp(title: 'Talenty')),
     );
   } catch (e) {
     log.e("Error in main(): $e");
