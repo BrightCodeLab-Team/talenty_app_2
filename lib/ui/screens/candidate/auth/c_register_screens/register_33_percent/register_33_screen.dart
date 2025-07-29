@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 
@@ -31,9 +30,14 @@ class Candidate33PercentScreen extends StatelessWidget {
                 padding: EdgeInsetsGeometry.all(15),
                 child: CustomButton(
                   text: 'Continuar',
-                  onTap: () {
-                    Get.to(Candidate33PercentScreen2());
-                  },
+                  onTap:
+                      model.hasMinSelections
+                          ? () {
+                            Get.to(Candidate33PercentScreen2());
+                          }
+                          : null,
+                  backgroundColor:
+                      model.hasMinSelections ? primaryColor : greyColor,
                 ),
               ),
               appBar: AppBar(
@@ -81,7 +85,7 @@ class Candidate33PercentScreen extends StatelessWidget {
                           boxShadow: [
                             BoxShadow(
                               color: blackColor,
-                              offset: Offset(-1.w, 2.w),
+                              offset: Offset(-4, 4),
                               blurRadius: 0,
                               spreadRadius: 0,
                             ),
@@ -125,7 +129,7 @@ class Candidate33PercentScreen extends StatelessWidget {
                       ),
 
                       ///
-                      ///
+                      /// Button
                       ///
                       5.verticalSpace,
                       Text(
@@ -139,78 +143,60 @@ class Candidate33PercentScreen extends StatelessWidget {
                       ///
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          1.horizontalSpace,
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: whiteColor,
-                                borderRadius: BorderRadius.circular(28.r),
-                                border: Border.all(
-                                  color: blackColor,
-                                  width: 2.w,
+                        children: List.generate(2, (index) {
+                          final isSelected =
+                              model.selectedCategoryIndex == index;
+                          final label =
+                              index == 0
+                                  ? 'Habilidades humanas'
+                                  : 'Habilidades técnicas';
+
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                model.selectCategory(index);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  left: index == 1 ? 5.w : 0,
                                 ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: blackColor,
-                                    offset: Offset(-1.w, 2.w),
-                                    blurRadius: 0,
-                                    spreadRadius: 0,
+                                decoration: BoxDecoration(
+                                  color: whiteColor,
+                                  borderRadius: BorderRadius.circular(28.r),
+                                  border: Border.all(
+                                    color: isSelected ? Colors.red : blackColor,
+                                    width: 2.w,
                                   ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsGeometry.symmetric(
-                                  horizontal: 8,
-                                  vertical: 6,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: blackColor,
+                                      offset: Offset(-6, 4),
+                                      blurRadius: 0,
+                                      spreadRadius: 0,
+                                    ),
+                                  ],
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    'Habilidades humanas ',
-                                    style: style16M.copyWith(
-                                      color: textGreyColor,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 6,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      label,
+                                      style: style16M.copyWith(
+                                        color:
+                                            isSelected
+                                                ? Colors.red
+                                                : textGreyColor,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          5.horizontalSpace,
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: whiteColor,
-                                borderRadius: BorderRadius.circular(28.r),
-                                border: Border.all(
-                                  color: blackColor,
-                                  width: 2.w,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: blackColor,
-                                    offset: Offset(-1.w, 2.w),
-                                    blurRadius: 0,
-                                    spreadRadius: 0,
-                                  ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsGeometry.symmetric(
-                                  horizontal: 8,
-                                  vertical: 6,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'Habilidades técnicas ',
-                                    style: style16M.copyWith(
-                                      color: textGreyColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                          );
+                        }),
                       ),
 
                       ///
@@ -240,6 +226,7 @@ class Candidate33PercentScreen extends StatelessWidget {
                               vertical: 6,
                             ),
                             child: TextFormField(
+                              onChanged: model.filterBySearch,
                               decoration: authFieldDecoration.copyWith(
                                 hintText: 'Busca más habilidades',
                                 hintStyle: style16M.copyWith(
@@ -251,7 +238,6 @@ class Candidate33PercentScreen extends StatelessWidget {
                                   size: 25,
                                   color: blackColor,
                                 ),
-
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
@@ -261,7 +247,7 @@ class Candidate33PercentScreen extends StatelessWidget {
                                 contentPadding: EdgeInsets.symmetric(
                                   horizontal: 5,
                                   vertical: 10.h,
-                                ), // Adjust padding as needed
+                                ),
                               ),
                             ),
                           ),
@@ -271,14 +257,25 @@ class Candidate33PercentScreen extends StatelessWidget {
                       Wrap(
                         spacing: 4.w,
                         runSpacing: 5.h,
-                        children: List.generate(model.tagItemsList.length, (
+                        children: List.generate(model.displayedItems.length, (
                           index,
                         ) {
                           return CustomShadowIconTextTag(
-                            item: model.tagItemsList[index],
+                            item: model.displayedItems[index],
+                            isSelected: model.selectedTags.contains(
+                              model.displayedItems[index],
+                            ),
+                            onTap:
+                                () => model.toggleSelection(
+                                  model.displayedItems[index],
+                                ),
+                            isShowAddIcon: model.selectedTags.contains(
+                              model.displayedItems[index],
+                            ),
                           );
                         }),
                       ),
+
                       50.verticalSpace,
                     ],
                   ),
@@ -290,35 +287,70 @@ class Candidate33PercentScreen extends StatelessWidget {
   }
 }
 
-class Candidate33PercentScreen2 extends StatelessWidget {
+class Candidate33PercentScreen2 extends StatefulWidget {
   const Candidate33PercentScreen2({super.key});
 
   @override
+  State<Candidate33PercentScreen2> createState() =>
+      _Candidate33PercentScreen2State();
+}
+
+class _Candidate33PercentScreen2State extends State<Candidate33PercentScreen2> {
+  final TextEditingController _aboutMeController = TextEditingController();
+  bool isButtonEnabled = false;
+  int maxChars = 500;
+
+  @override
+  void initState() {
+    super.initState();
+    _aboutMeController.addListener(_validateInput);
+  }
+
+  void _validateInput() {
+    final text = _aboutMeController.text.trim();
+    setState(() {
+      isButtonEnabled = text.isNotEmpty && text.length <= maxChars;
+    });
+  }
+
+  @override
+  void dispose() {
+    _aboutMeController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final textLength = _aboutMeController.text.length;
+    final isOverLimit = textLength > maxChars;
+
     return Scaffold(
       bottomNavigationBar: Padding(
-        padding: EdgeInsetsGeometry.all(15),
+        padding: const EdgeInsets.all(15),
         child: CustomButton(
           text: 'Continuar',
-          onTap: () {
-            Get.to(Candidate44PercentScreen());
-          },
+          onTap:
+              isButtonEnabled
+                  ? () {
+                    Get.to(Candidate44PercentScreen());
+                  }
+                  : null,
+          backgroundColor: isButtonEnabled ? Colors.red : Colors.grey,
         ),
       ),
       appBar: AppBar(
         backgroundColor: transparent,
-        leading: Padding(
-          padding: EdgeInsetsGeometry.only(left: 15),
+        leading: const Padding(
+          padding: EdgeInsets.only(left: 15),
           child: CustomBackButton(),
         ),
         centerTitle: true,
         title: Image.asset(AppAssets.appLogo2, scale: 4),
       ),
       body: Padding(
-        padding: EdgeInsetsGeometry.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             20.verticalSpace,
             Center(
@@ -327,18 +359,10 @@ class Candidate33PercentScreen2 extends StatelessWidget {
                 style: style16M.copyWith(color: lightBlackColor),
               ),
             ),
-
-            ///
-            ///
-            ///
             4.verticalSpace,
             ProgressContainer(
               progressWidth: MediaQuery.of(context).size.width * 0.33,
             ),
-
-            ///
-            ///
-            ///
             20.verticalSpace,
             Container(
               width: double.infinity,
@@ -359,7 +383,6 @@ class Candidate33PercentScreen2 extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 16.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       'Cuéntanos más de tus habilidades',
@@ -368,16 +391,14 @@ class Candidate33PercentScreen2 extends StatelessWidget {
                     8.verticalSpace,
                     Text(
                       'Este espacio es para que nos compartas tus habilidades blandas y técnicas de forma libre. Describe tus capacidades en formato de lista.',
-                      style: style14M.copyWith(
-                        color: textGreyColor,
-                      ), // textGreyColor for the description
+                      style: style14M.copyWith(color: textGreyColor),
                       textAlign: TextAlign.start,
                     ),
                     8.verticalSpace,
                     Row(
                       children: [
-                        Text(''),
-                        Spacer(),
+                        const Text(''),
+                        const Spacer(),
                         Text(
                           'Máximo 500 caracteres',
                           style: style16B.copyWith(color: blackColor),
@@ -388,10 +409,6 @@ class Candidate33PercentScreen2 extends StatelessWidget {
                 ),
               ),
             ),
-
-            ///
-            ///
-            ///
             20.verticalSpace,
             Row(
               children: [
@@ -399,25 +416,34 @@ class Candidate33PercentScreen2 extends StatelessWidget {
                   'Acerca de mí',
                   style: style16B.copyWith(color: textDarkGreyColor),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
-                  '0/500 caracteres',
-                  style: style14M.copyWith(color: blackColor),
+                  '$textLength/500 caracteres',
+                  style: style14M.copyWith(
+                    color: isOverLimit ? Colors.red : blackColor,
+                  ),
                 ),
               ],
             ),
             10.verticalSpace,
             TextFormField(
+              controller: _aboutMeController,
+              maxLines: 7,
+
               decoration: authFieldDecoration.copyWith(
-                hintMaxLines: 20,
                 hintText:
                     'Ej:¨• Creatividad para campañas digitales  • Gestión de redes sociales (Instagram, TikTok, LinkedIn)  • Edición básica de video y diseño gráfico con Canva  • Conocimientos en Google Ads y Meta Business Suite  • Estrategias de posicionamiento y branding  • Facilidad para comunicar ideas y trabajar en equipo.¨',
               ),
             ),
-            30.verticalSpace,
-            Text(
-              'Máximo 500 caracteres',
-              style: style14M.copyWith(color: textGreyColor),
+            10.verticalSpace,
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Text(
+                'Máximo 500 caracteres',
+                style: style14M.copyWith(
+                  color: isOverLimit ? Colors.red : textGreyColor,
+                ),
+              ),
             ),
           ],
         ),

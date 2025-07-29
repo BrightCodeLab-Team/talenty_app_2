@@ -13,6 +13,7 @@ import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/drop_down/custom_drop_down_menu.dart';
 import 'package:talenty_app/ui/custom_widgets/drop_down/custom_drop_down_text_field.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
+import 'package:talenty_app/ui/custom_widgets/paddings_and_margins/custom_padding.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_22_percent/register_22_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_33_percent/register_33_screen.dart';
 
@@ -27,9 +28,8 @@ class Candidate22PercentScreen extends StatelessWidget {
         builder:
             (context, model, child) => Scaffold(
               body: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 40.h),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
+                padding: EdgeInsets.only(bottom: 40.h, left: 0.0, right: 0.0),
+                child: CustomPadding(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +52,7 @@ class Candidate22PercentScreen extends StatelessWidget {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: whiteColor,
-                          borderRadius: BorderRadius.circular(8.r),
+                          borderRadius: BorderRadius.circular(8),
                           border: Border.all(color: blackColor, width: 1),
                           boxShadow: [
                             BoxShadow(
@@ -65,8 +65,8 @@ class Candidate22PercentScreen extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 16.h,
+                            horizontal: 8,
+                            vertical: 16,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

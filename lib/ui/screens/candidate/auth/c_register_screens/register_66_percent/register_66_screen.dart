@@ -11,6 +11,7 @@ import 'package:talenty_app/ui/custom_widgets/Containers/progress_container.dart
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
+import 'package:talenty_app/ui/custom_widgets/custom_snack_bar/custom_snack_bar.dart';
 
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_66_percent/register_66_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_77_percent/register_77_scren.dart';
@@ -38,8 +39,19 @@ class Candidate66PercentScreen extends StatelessWidget {
                 padding: EdgeInsetsGeometry.all(15),
                 child: CustomButton(
                   text: 'Continuar',
+                  backgroundColor:
+                      model.selectedTags.isEmpty ? greyColor : primaryColor,
                   onTap: () {
-                    Get.to(Candidate77PercentScreen());
+                    if (model.selectedTags.isEmpty) {
+                      CustomSnackbar.show(
+                        backgroundColor: primaryColor,
+                        title: "Selecciona un idioma",
+                        message:
+                            "Por favor selecciona al menos un idioma para continuar.",
+                      );
+                    } else {
+                      Get.to(Candidate77PercentScreen());
+                    }
                   },
                 ),
               ),
@@ -149,6 +161,7 @@ class Candidate66PercentScreen extends StatelessWidget {
                               vertical: 6,
                             ),
                             child: TextFormField(
+                              onChanged: model.searchTags,
                               decoration: authFieldDecoration.copyWith(
                                 hintText: 'Busca más habilidades',
                                 hintStyle: style16M.copyWith(
@@ -160,7 +173,6 @@ class Candidate66PercentScreen extends StatelessWidget {
                                   size: 25,
                                   color: blackColor,
                                 ),
-
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
@@ -170,7 +182,7 @@ class Candidate66PercentScreen extends StatelessWidget {
                                 contentPadding: EdgeInsets.symmetric(
                                   horizontal: 5,
                                   vertical: 10.h,
-                                ), // Adjust padding as needed
+                                ),
                               ),
                             ),
                           ),
@@ -181,21 +193,21 @@ class Candidate66PercentScreen extends StatelessWidget {
                         child: Wrap(
                           spacing: 5.w,
                           runSpacing: 10.h,
-                          children: List.generate(model.tagItemsList.length, (
+                          children: List.generate(model.filteredTags.length, (
                             index,
                           ) {
-                            return CustomShadowIconTextTag(
+                            final item = model.filteredTags[index];
+                            return CustomShadowIconTextTagWithoutIcon(
                               isShowAddIcon: false,
-                              item: model.tagItemsList[index],
+                              isSelected: model.isSelected(item),
+                              item: item,
+                              onTap: () => model.toggleSelection(item),
                             );
                           }),
                         ),
                       ),
-                      50.verticalSpace,
 
-                      ///
-                      ///
-                      ///
+                      50.verticalSpace,
                     ],
                   ),
                 ),
