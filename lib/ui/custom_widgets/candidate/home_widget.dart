@@ -38,18 +38,16 @@ class CustomCandidateHomeVacancyWidget extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 20.0),
+
               decoration: BoxDecoration(
-                color: Color(0xFF28407B),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
               ),
               child: Column(
                 children: [
                   // If the image is large, you might want to constrain its height or wrap it in Flexible
                   Image.asset(
-                    vacancyModel.imageUrl ?? AppAssets.menulogo,
-                    height: 186, // Example fixed height, adjust as needed
-                    fit: BoxFit.contain,
+                    vacancyModel.imageUrl ?? AppAssets.cImg1,
+                    fit: BoxFit.cover,
                   ),
                 ],
               ),

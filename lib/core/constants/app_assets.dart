@@ -27,11 +27,12 @@ class AppAssets {
   static String cameraIcon2 = "$iconsAssets/cameraIcon2.png";
   static String shareIcon = "$iconsAssets/shareIcon.png";
 
-  /*    
+  ////    dynamic Assets
 
-      Icons Assets
-  
-  */
+  static String cImg1 = "$dynamicAssets/img1.png";
+  static String cImg2 = "$dynamicAssets/img2.png";
+  static String cImg03 = "$dynamicAssets/img03.png";
+  static String cImg4 = "$dynamicAssets/img4.png";
 
   ///
   /// SELECTION SCREEN

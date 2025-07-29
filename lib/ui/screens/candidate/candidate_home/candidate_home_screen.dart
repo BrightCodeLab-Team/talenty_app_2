@@ -89,9 +89,9 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => CandidateHomeViewModel(),
-      child: Consumer2<CandidateHomeViewModel, CandidateRootScreenViewModel>(
+      child: Consumer<CandidateHomeViewModel>(
         builder:
-            (context, model, rootModel, child) => Scaffold(
+            (context, model, child) => Scaffold(
               body: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.only(left: 20.0, top: 40, right: 20),
@@ -136,7 +136,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                   crossAxisCount: 2,
                                   mainAxisSpacing: 10.0,
                                   crossAxisSpacing: 10.0,
-                                  childAspectRatio: 0.37,
+                                  childAspectRatio: 0.43,
                                 ),
                             itemCount:
                                 model.filtersApplied
@@ -1131,10 +1131,10 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
 
   @override
   Widget build(BuildContext context) {
-    final rootModel = Provider.of<CandidateRootScreenViewModel>(
-      context,
-      listen: false,
-    );
+    // final rootModel = Provider.of<CandidateRootScreenViewModel>(
+    //   context,
+    //   listen: false,
+    // );
     return SizedBox(
       height: 38,
       child: ListView.builder(

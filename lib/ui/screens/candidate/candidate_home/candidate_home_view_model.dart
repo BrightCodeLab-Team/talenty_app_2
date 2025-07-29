@@ -103,7 +103,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     JobVacancyModel(
       jobTitle: 'Flutter Developer',
       jobSubTitle: 'Mobile Specialist',
-      imageUrl: AppAssets.img,
+      imageUrl: AppAssets.cImg1,
       state: 'California',
       municipality: 'San Francisco',
       neighborhood: 'SOMA',
@@ -133,7 +133,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     JobVacancyModel(
       jobTitle: 'Graphic Designer',
       jobSubTitle: 'Visual Artist',
-      imageUrl: AppAssets.menulogo,
+      imageUrl: AppAssets.cImg2,
       state: 'New York',
       municipality: 'Brooklyn',
       neighborhood: 'Williamsburg',
@@ -163,7 +163,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     JobVacancyModel(
       jobTitle: 'Data Analyst',
       jobSubTitle: 'Business Intelligence',
-      imageUrl: AppAssets.img2,
+      imageUrl: AppAssets.cImg03,
       state: 'Texas',
       municipality: 'Austin',
       neighborhood: 'Downtown',
@@ -194,7 +194,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     JobVacancyModel(
       jobTitle: 'Digital Marketing Specialist',
       jobSubTitle: 'Social Media',
-      imageUrl: AppAssets.img2,
+      imageUrl: AppAssets.cImg4,
       state: 'Jalisco',
       municipality: 'Guadalajara',
       neighborhood: 'Centro',
@@ -224,7 +224,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     JobVacancyModel(
       jobTitle: 'Frontend Developer',
       jobSubTitle: 'React Specialist',
-      imageUrl: AppAssets.img,
+      imageUrl: AppAssets.cImg1,
       state: 'Nuevo León',
       municipality: 'Monterrey',
       neighborhood: 'San Pedro',
@@ -254,7 +254,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     JobVacancyModel(
       jobTitle: 'Backend Developer',
       jobSubTitle: 'Node.js Expert',
-      imageUrl: AppAssets.menulogo,
+      imageUrl: AppAssets.cImg2,
       state: 'Ciudad de México',
       municipality: 'Benito Juárez',
       neighborhood: 'Nápoles',
