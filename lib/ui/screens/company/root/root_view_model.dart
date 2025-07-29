@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, strict_top_level_inference
 
 import 'package:flutter/material.dart';
 import 'package:talenty_app/core/constants/strings.dart';
