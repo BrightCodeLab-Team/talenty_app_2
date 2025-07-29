@@ -46,8 +46,8 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   String? selectedWorkModality;
 
   List<String> skills = [
-    'Diseño web',
-    'Diseño gráfico',
+    '🌐 Diseño web',
+    '🎨 Diseño gráfico',
     'UI/UX',
     'Front-end',
     'Back-end',
@@ -750,17 +750,12 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                               ),
                               IconButton(
                                 icon: const Icon(Icons.close),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
+                                onPressed: () => Navigator.pop(context),
                               ),
                             ],
                           ),
                           const SizedBox(height: 20),
-                          Text(
-                            'Categoría que deseas',
-                            style: style16B.copyWith(),
-                          ),
+                          Text('Categoría que deseas', style: style16B),
                           const SizedBox(height: 8),
                           DropdownButtonFormField<String>(
                             decoration: authFieldDecoration.copyWith(
@@ -778,18 +773,17 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                     child: Text(category),
                                   );
                                 }).toList(),
-                            onChanged: (String? newValue) {
-                              setModalState(() {
-                                selectedCategory = newValue;
-                              });
-                            },
+                            onChanged:
+                                (String? newValue) => setModalState(
+                                  () => selectedCategory = newValue,
+                                ),
                           ),
                           const SizedBox(height: 20),
                           Text(
                             'Rango de sueldo deseado',
                             style: style16B.copyWith(color: blackColor),
                           ),
-                          const SizedBox(height: 8),
+
                           Row(
                             children: [
                               Expanded(
@@ -850,11 +844,10 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                     child: Text(entity),
                                   );
                                 }).toList(),
-                            onChanged: (String? newValue) {
-                              setModalState(() {
-                                selectedFederalEntity = newValue;
-                              });
-                            },
+                            onChanged:
+                                (String? newValue) => setModalState(
+                                  () => selectedFederalEntity = newValue,
+                                ),
                           ),
                           const SizedBox(height: 20),
                           Text(
@@ -878,11 +871,10 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                     child: Text(municipality),
                                   );
                                 }).toList(),
-                            onChanged: (String? newValue) {
-                              setModalState(() {
-                                selectedMunicipality = newValue;
-                              });
-                            },
+                            onChanged:
+                                (String? newValue) => setModalState(
+                                  () => selectedMunicipality = newValue,
+                                ),
                           ),
                           const SizedBox(height: 20),
                           Text(
@@ -933,25 +925,24 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                           color:
                                               isSelected
                                                   ? Colors.transparent
-                                                  : Colors.grey.shade400,
+                                                  : brownColor,
                                         ),
                                         avatarBorder: Border.all(
                                           color: primaryColor,
                                         ),
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
-                                            6,
+                                            10,
                                           ),
                                         ),
                                         showCheckmark: false,
-                                        elevation: 5.0,
-                                        shadowColor: blackColor.withOpacity(
-                                          0.4,
-                                        ),
+                                        //elevation: 5.0,
+                                        // shadowColor: blackColor.withOpacity(
+                                        //   0.4,
+                                        //),
                                         onSelected: (bool selected) {
-                                          if (selected) {
+                                          if (selected)
                                             _selectWorkModality(modality);
-                                          }
                                         },
                                       ),
                                     );
@@ -966,70 +957,66 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           const SizedBox(height: 8),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children:
-                                  skills.map((skill) {
-                                    final isSelected = selectedSkill == skill;
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: 8.0,
-                                      ),
-                                      child: ChoiceChip(
-                                        label: Row(
-                                          children: [
-                                            Icon(
-                                              skill == 'Diseño web'
-                                                  ? Icons.public
-                                                  : skill == 'Diseño gráfico'
-                                                  ? Icons.palette
-                                                  : Icons.lightbulb_outline,
+                            child: SizedBox(
+                              height: 50,
+                              child: Row(
+                                children:
+                                    skills.map((skill) {
+                                      final isSelected = selectedSkill == skill;
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                          right: 8.0,
+                                        ),
+                                        child: ChoiceChip(
+                                          label: Text(
+                                            skill,
+                                            style: TextStyle(
                                               color:
                                                   isSelected
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                              size: 18,
+                                                      ? blackColor
+                                                      : lightBlackColor,
                                             ),
-                                            const SizedBox(width: 4),
-                                            Text(skill),
-                                          ],
-                                        ),
-                                        selected: isSelected,
-                                        selectedColor: primaryColor,
-                                        backgroundColor: Colors.white,
-                                        labelStyle: TextStyle(
-                                          color:
-                                              isSelected
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                        ),
-                                        side: BorderSide(
-                                          color:
-                                              isSelected
-                                                  ? Colors.transparent
-                                                  : Colors.grey.shade400,
-                                        ),
-                                        avatarBorder: Border.all(
-                                          color: primaryColor,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            6,
                                           ),
+                                          selected: isSelected,
+                                          selectedColor: brownColor.withOpacity(
+                                            0.2,
+                                          ),
+                                          backgroundColor: Colors.white,
+                                          labelStyle: TextStyle(
+                                            color:
+                                                isSelected
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                          ),
+                                          side: BorderSide(
+                                            color:
+                                                isSelected
+                                                    ? brownColor
+                                                    : transparent,
+                                          ),
+                                          avatarBorder: Border.all(
+                                            color: primaryColor,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              10,
+                                            ),
+                                          ),
+                                          showCheckmark: false,
+                                          elevation: 5.0,
+                                          shadowColor: blackColor.withOpacity(
+                                            0.4,
+                                          ),
+                                          onSelected:
+                                              (bool selected) =>
+                                                  _selectSkill(skill),
                                         ),
-                                        showCheckmark: false,
-                                        elevation: 5.0,
-                                        shadowColor: blackColor.withOpacity(
-                                          0.4,
-                                        ),
-                                        onSelected: (bool selected) {
-                                          _selectSkill(skill);
-                                        },
-                                      ),
-                                    );
-                                  }).toList(),
+                                      );
+                                    }).toList(),
+                              ),
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          20.verticalSpace,
                           Row(
                             children: [
                               Expanded(
@@ -1047,19 +1034,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                       selectedMunicipality = municipalities[0];
                                       _salaryMinController.clear();
                                       _salaryMaxController.clear();
-                                      skills = [
-                                        'Diseño web',
-                                        'Diseño gráfico',
-                                        'UI/UX',
-                                        'Front-end',
-                                        'Back-end',
-                                        'Mobile Development',
-                                      ];
-                                      workModalities = [
-                                        'Híbrido',
-                                        'Presencial',
-                                        'Remoto',
-                                      ];
                                     });
                                   },
                                   style: OutlinedButton.styleFrom(
@@ -1139,82 +1113,96 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
     "Todos",
     "Arte y Diseño",
     "Programación y Tecnología",
+    "Marketing y Ventas",
   ];
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 38,
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 400),
-        switchInCurve: Curves.easeInOut,
-        switchOutCurve: Curves.easeInOut,
-        layoutBuilder: (currentChild, previousChildren) {
-          return Stack(
-            alignment: Alignment.centerLeft,
-            children: [
-              ...previousChildren,
-              if (currentChild != null) currentChild,
-            ],
-          );
-        },
-        transitionBuilder: (child, animation) {
-          return SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0.3, 0), // slide in from right
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          );
-        },
-        child: ListView.builder(
-          key: ValueKey(widget.model.categorySelect),
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            int displayIndex = index;
-            if (widget.model.categorySelect != 0 && index == 0) {
-              displayIndex = widget.model.categorySelect;
-            } else if (widget.model.categorySelect != 0 &&
-                index <= widget.model.categorySelect) {
-              displayIndex = index - 1;
-            }
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          // Determine actual index considering selected item is moved to position 0
+          int displayIndex = index;
+          if (widget.model.categorySelect != 0 && index == 0) {
+            displayIndex = widget.model.categorySelect;
+          } else if (widget.model.categorySelect != 0 &&
+              index <= widget.model.categorySelect) {
+            displayIndex = index - 1;
+          }
 
-            final isSelected = widget.model.categorySelect == displayIndex;
+          final isSelected = widget.model.categorySelect == displayIndex;
+          final isFirstTab = index == 0;
+          final isSwappingTab = isSelected || isFirstTab;
 
-            return GestureDetector(
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            transitionBuilder: (child, animation) {
+              if (isSwappingTab) {
+                return SlideTransition(
+                  position: Tween<Offset>(
+                    begin: Offset(isSelected ? 1.0 : -1.0, 0),
+                    end: Offset.zero,
+                  ).animate(
+                    CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+                  ),
+                  child: child,
+                );
+              }
+              return child;
+            },
+            child: GestureDetector(
+              key: ValueKey('${categories[displayIndex]}_$isSelected'),
               onTap: () {
                 widget.model.onClickCategory(displayIndex);
-                setState(() {});
+                setState(() {}); // triggers instant rebuild
               },
               child: Container(
                 margin: EdgeInsets.only(left: index == 0 ? 0 : 5),
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
                 height: 34,
                 decoration: BoxDecoration(
                   color: isSelected ? brownColor : Colors.transparent,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(width: 1.0, color: brownColor),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (isSelected)
-                      Icon(Icons.cancel_outlined, color: whiteColor, size: 20),
-                    if (isSelected) const SizedBox(width: 3),
-                    Text(
-                      categories[displayIndex],
-                      style: style12M.copyWith(
-                        color: isSelected ? whiteColor : lightBlackColor,
+                child: DefaultTextStyle(
+                  style: style12M.copyWith(
+                    color: isSelected ? whiteColor : lightBlackColor,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 200),
+                        transitionBuilder: (child, animation) {
+                          return ScaleTransition(
+                            scale: animation,
+                            child: child,
+                          );
+                        },
+                        child:
+                            isSelected
+                                ? Icon(
+                                  Icons.cancel_outlined,
+                                  key: ValueKey('cancel_icon_$displayIndex'),
+                                  color: whiteColor,
+                                  size: 15,
+                                )
+                                : const SizedBox(width: 0),
                       ),
-                    ),
-                  ],
+                      if (isSelected) const SizedBox(width: 8),
+                      Text(categories[displayIndex]),
+                    ],
+                  ),
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

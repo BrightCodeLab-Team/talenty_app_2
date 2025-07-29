@@ -47,17 +47,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
       }
     });
   }
-  ////
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
 
-  ///
-  //   onPressed: () => _filterJobs(_searchController.text),
-  //  onSubmitted: (value) => _filterJobs(value),
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -65,50 +55,13 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
       child: Consumer<CandidateHomeViewModel>(
         builder:
             (context, model, child) => Scaffold(
-              // appBar: AppBar(
-              //   backgroundColor: whiteColor,
-              //   titleSpacing: 0.0, // Remove default title spacing
-              //   centerTitle: false,
-              //   title: Padding(
-              //     padding: EdgeInsets.symmetric(
-              //       horizontal: 16.w,
-              //     ), // Add some horizontal padding
-              //     child: SizedBox(
-              //       height: 40.h,
-              //       width: double.infinity,
-              //       child: TextFormField(
-              //         onFieldSubmitted: (value) => _filterJobs(value),
-              //         controller: _searchController,
-              //         onTap: () => _filterJobs(_searchController.text),
-              //         decoration: authFieldDecoration.copyWith(
-              //           suffixIcon: IconButton(
-              //             // Using IconButton for better tap area for suffix
-              //             icon: Icon(Icons.close),
-              //             onPressed: () {
-              //               navigator!.pop();
-              //             },
-              //           ),
-              //           hintText: 'Search...',
-              //           hintStyle: style16M.copyWith(color: blackColor),
-              //           prefixIcon: Image.asset(AppAssets.searchIcon, scale: 4),
-              //           contentPadding: EdgeInsets.symmetric(
-              //             vertical: 8.h,
-              //             horizontal: 10.w,
-              //           ), // Adjust content padding
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       10.verticalSpace,
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10.w,
-                        ), // Add some horizontal padding
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: SizedBox(
                           height: 40.h,
                           width: double.infinity,
@@ -118,7 +71,6 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                             onTap: () => _filterJobs(_searchController.text),
                             decoration: authFieldDecoration.copyWith(
                               suffixIcon: IconButton(
-                                // Using IconButton for better tap area for suffix
                                 icon: Icon(Icons.close),
                                 onPressed: () {
                                   navigator!.pop();
@@ -133,7 +85,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                               contentPadding: EdgeInsets.symmetric(
                                 vertical: 8.h,
                                 horizontal: 10.w,
-                              ), // Adjust content padding
+                              ),
                             ),
                           ),
                         ),
@@ -217,130 +169,329 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
   void _showCustomJobDetailDialog(
     BuildContext context,
     CandidateHomeViewModel model,
-    int index,
+    int initialIndex,
   ) {
-    final job = filteredVacancies[index]; // Use the filtered list instead
+    int currentIndex = initialIndex;
+    final AnimationController _swipeController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: Navigator.of(context),
+    );
+    String _swipeImage = AppAssets.meGustaImg;
+    bool _isSwiping = false;
+    double _swipeOffset = 0.0;
+
+    void _handleSwipe(bool isRightSwipe, StateSetter setState) {
+      if (!_swipeController.isAnimating) {
+        _swipeController.forward().then((_) {
+          Future.delayed(const Duration(milliseconds: 300), () {
+            if (mounted) {
+              setState(() {
+                if (isRightSwipe) {
+                  currentIndex =
+                      currentIndex > 0
+                          ? currentIndex - 1
+                          : filteredVacancies.length - 1;
+                } else {
+                  currentIndex =
+                      currentIndex < filteredVacancies.length - 1
+                          ? currentIndex + 1
+                          : 0;
+                }
+                _isSwiping = false;
+                _swipeOffset = 0.0;
+                _swipeImage = '';
+                _swipeController.reset();
+              });
+            }
+          });
+        });
+      }
+    }
+
+    void _triggerSwipe(bool isRightSwipe, StateSetter setState) {
+      setState(() {
+        _isSwiping = true;
+        _swipeOffset = isRightSwipe ? 150.0 : -150.0;
+        _swipeImage =
+            isRightSwipe ? AppAssets.meGustaImg : AppAssets.noMeGustImg;
+      });
+      Future.delayed(const Duration(milliseconds: 100), () {
+        _handleSwipe(isRightSwipe, setState);
+      });
+    }
 
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       barrierColor: Colors.black54,
-      transitionDuration: const Duration(milliseconds: 200),
-      pageBuilder: (
-        BuildContext buildContext,
-        Animation animation,
-        Animation secondaryAnimation,
-      ) {
-        return Center(
-          child: Material(
-            type: MaterialType.transparency,
-            child: Container(
-              height: MediaQuery.of(buildContext).size.height * 0.9,
-              width: MediaQuery.of(buildContext).size.width * 0.98,
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 3,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                  ),
-                ],
+      transitionDuration: const Duration(milliseconds: 100),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onHorizontalDragStart: (details) {
+                setState(() {
+                  _isSwiping = true;
+                  _swipeOffset = 0.0;
+                  _swipeController.reset();
+                });
+              },
+              onHorizontalDragUpdate: (details) {
+                if (!_isSwiping) return;
+                setState(() {
+                  _swipeOffset += details.delta.dx;
+                  if (_swipeOffset > 50) {
+                    _swipeImage = AppAssets.meGustaImg;
+                  } else if (_swipeOffset < -50) {
+                    _swipeImage = AppAssets.noMeGustImg;
+                  } else {
+                    _swipeImage = '';
+                  }
+                });
+              },
+              onHorizontalDragEnd: (details) {
+                if (!_isSwiping) return;
+
+                if (details.primaryVelocity! > 300 || _swipeOffset > 100) {
+                  _handleSwipe(true, setState);
+                } else if (details.primaryVelocity! < -300 ||
+                    _swipeOffset < -100) {
+                  _handleSwipe(false, setState);
+                } else {
+                  setState(() {
+                    _isSwiping = false;
+                    _swipeOffset = 0.0;
+                    _swipeImage = '';
+                    _swipeController.reset();
+                  });
+                }
+              },
+              child: AnimatedBuilder(
+                animation: _swipeController,
+                builder: (context, child) {
+                  return Stack(
+                    children: [
+                      if (_isSwiping)
+                        Positioned.fill(
+                          child: Center(
+                            child: Transform.scale(
+                              scale: 1,
+                              child: Opacity(
+                                opacity: 1.0,
+                                child: _buildJobDetailContent(
+                                  context,
+                                  model,
+                                  _swipeOffset > 0
+                                      ? (currentIndex > 0
+                                          ? currentIndex - 1
+                                          : filteredVacancies.length - 1)
+                                      : (currentIndex <
+                                              filteredVacancies.length - 1
+                                          ? currentIndex + 1
+                                          : 0),
+                                  onSwipeLeft: () {
+                                    _triggerSwipe(false, setState);
+                                  },
+                                  onSwipeRight: () {
+                                    _triggerSwipe(true, setState);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      Transform.translate(
+                        offset: Offset(_isSwiping ? _swipeOffset * 0.7 : 0, 0),
+                        child: Transform.rotate(
+                          angle: _isSwiping ? _swipeOffset * 0.0008 : 0,
+                          child: Opacity(
+                            opacity:
+                                _isSwiping
+                                    ? (1 -
+                                            ((_swipeOffset.abs() /
+                                                    MediaQuery.of(
+                                                      context,
+                                                    ).size.width) *
+                                                0.8))
+                                        .clamp(0.3, 1.0)
+                                    : 1.0,
+                            child: _buildJobDetailContent(
+                              context,
+                              model,
+                              currentIndex,
+                              onSwipeLeft: () {
+                                _triggerSwipe(false, setState);
+                              },
+                              onSwipeRight: () {
+                                _triggerSwipe(true, setState);
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (_isSwiping && _swipeImage.isNotEmpty)
+                        IgnorePointer(
+                          child: Container(
+                            color: Colors.black.withOpacity(
+                              0.5 * (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
+                            ),
+                            child: Center(
+                              child: Opacity(
+                                opacity: (_swipeOffset.abs() / 100).clamp(
+                                  0.0,
+                                  1.0,
+                                ),
+                                child: Image.asset(
+                                  _swipeImage,
+                                  scale: 4,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (_, __, ___) => SizedBox(),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                },
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            );
+          },
+        );
+      },
+    ).then((_) {
+      _swipeController.dispose();
+    });
+  }
+
+  Widget _buildJobDetailContent(
+    BuildContext context,
+    CandidateHomeViewModel model,
+    int index, {
+    VoidCallback? onSwipeLeft,
+    VoidCallback? onSwipeRight,
+  }) {
+    if (index < 0 || index >= filteredVacancies.length) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    final vacancy = filteredVacancies[index];
+    return Center(
+      child: Material(
+        type: MaterialType.transparency,
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.9,
+          width: MediaQuery.of(context).size.width * 0.98,
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 3,
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
                   children: [
-                    Stack(
-                      children: [
-                        Container(
-                          height: 180,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF28407B),
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(20.0),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage(job.imageUrl ?? ''),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'VIAJES',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    ' | ',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    'PREMIUM®',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
+                    Container(
+                      height: 180,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF28407B),
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(20.0),
+                        ),
+                        image: DecorationImage(
+                          image:
+                              vacancy.imageUrl != null &&
+                                      vacancy.imageUrl!.isNotEmpty
+                                  ? AssetImage(vacancy.imageUrl!)
+                                  : AssetImage(''),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                'VIAJES',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
+                              Text(
+                                ' | ',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'PREMIUM®',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Positioned(
-                          top: 10,
-                          left: 10,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(buildContext).pop();
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.3),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                Icons.arrow_back,
-                                color: Colors.white,
-                                size: 24,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          15.verticalSpace,
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(CompanyProfileScreen());
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
+                    Positioned(
+                      top: 10,
+                      left: 10,
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Container(
+                          padding: const EdgeInsets.all(8.2),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 15),
+                      GestureDetector(
+                        onTap: () => Get.to(CompanyProfileScreen()),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
@@ -349,7 +500,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                                     color: blackColor.withOpacity(0.2),
                                     spreadRadius: 1,
                                     blurRadius: 5,
-                                    offset: Offset(0, 3),
+                                    offset: const Offset(0, 3),
                                   ),
                                 ],
                               ),
@@ -357,11 +508,15 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Image.asset(
-                                    job.imageUrl ?? '',
+                                    vacancy.imageUrl?.isNotEmpty == true
+                                        ? vacancy.imageUrl!
+                                        : '',
                                     height: 30,
                                     width: 30,
+                                    errorBuilder:
+                                        (_, __, ___) => Icon(Icons.business),
                                   ),
-                                  SizedBox(width: 8),
+                                  const SizedBox(width: 8),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -381,125 +536,105 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                                 ],
                               ),
                             ),
-                          ),
-                          15.verticalSpace,
-                          Text('${job.jobTitle}', style: style24B.copyWith()),
-                          SizedBox(height: 4),
-                          Text(
-                            "${job.location ?? 'set location'} •${job.state ?? 'set state'}",
-                            style: style14M.copyWith(),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            "\$${job.minSalary ?? 'set min salary'}-\$${job.maxSalary ?? 'set max salary'}",
-                            style: style20B,
-                          ),
-                          SizedBox(height: 16),
-                          Wrap(
-                            spacing: 8.w,
-                            runSpacing: 8.h,
-                            children: List.generate(model.tagItemsList.length, (
-                              index,
-                            ) {
-                              return CustomIconTextTag(
-                                item: model.tagItemsList[index],
-                              );
-                            }),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 24),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 24.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(buildContext).pop();
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: pinkColor,
-                                shape: BoxShape.circle,
-                              ),
-                              padding: EdgeInsets.all(15),
-                              child: Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(
-                                CompanyJobDetailScreen(
-                                  jobVacancyModel: job, // Use the filtered job
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  ///
-                                  index: index,
-                                ),
-                              );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: blackColor),
-                                shape: BoxShape.circle,
-                              ),
-                              padding: EdgeInsets.all(15),
-                              child: Center(
-                                child: Image.asset(AppAssets.eyeIcon, scale: 4),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(buildContext).pop();
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: greenColor,
-                                shape: BoxShape.circle,
-                              ),
-                              padding: EdgeInsets.all(15),
-                              child: Icon(
-                                Icons.favorite,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                        ],
+                      const SizedBox(height: 15),
+                      Text('${vacancy.jobTitle}', style: style24B.copyWith()),
+                      const SizedBox(height: 4),
+                      Text(
+                        "${vacancy.location ?? 'set location'} •${vacancy.state ?? 'set state'}",
+                        style: style14M.copyWith(),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 8),
+                      Text(
+                        "\$${vacancy.minSalary ?? 'set min salary'}-\$${vacancy.maxSalary ?? 'set max salary'}",
+                        style: style20B,
+                      ),
+                      const SizedBox(height: 16),
+                      Wrap(
+                        spacing: 8.w,
+                        runSpacing: 8.h,
+                        children: List.generate(model.tagItemsList.length, (i) {
+                          return CustomIconTextTag(item: model.tagItemsList[i]);
+                        }),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 24.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          if (onSwipeLeft != null) onSwipeLeft();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: pinkColor,
+                            shape: BoxShape.circle,
+                          ),
+                          padding: const EdgeInsets.all(15),
+                          child: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            () => CompanyJobDetailScreen(
+                              jobVacancyModel: vacancy,
+                              index: index,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: blackColor),
+                            shape: BoxShape.circle,
+                          ),
+                          padding: const EdgeInsets.all(15),
+                          child: Center(
+                            child: Image.asset(
+                              AppAssets.eyeIcon,
+                              scale: 4,
+                              errorBuilder:
+                                  (_, __, ___) => Icon(Icons.remove_red_eye),
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          if (onSwipeRight != null) onSwipeRight();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: greenColor,
+                            shape: BoxShape.circle,
+                          ),
+                          padding: const EdgeInsets.all(15),
+                          child: const Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
