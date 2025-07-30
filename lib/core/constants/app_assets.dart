@@ -97,6 +97,8 @@ class AppAssets {
 
   static String dividerImage = "$iconsAssets/separador.png";
 
+  static String closeIcon = "$iconsAssets/close.png";
+
   /*    
 
       Bottom Navigator Bar Assets
