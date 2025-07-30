@@ -88,12 +88,12 @@ class TipsScreen extends StatelessWidget {
                       height: 300,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        itemCount: model.tipsList.length,
+                        itemCount: model.tipsList1.length,
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         separatorBuilder:
                             (context, index) => const SizedBox(width: 16),
                         itemBuilder: (context, index) {
-                          final tip = model.tipsList[index];
+                          final tip = model.tipsList1[index];
                           return Container(
                             width: 270,
                             decoration: BoxDecoration(
@@ -178,25 +178,27 @@ class TipsScreen extends StatelessWidget {
                                         color: greyColor,
                                       ),
                                     ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(
-                                          Icons.touch_app_outlined,
-                                          size: 18,
-                                          color: lightBlackColor,
-                                        ),
-                                        SizedBox(width: 8),
-                                        Text(
-                                          'Conoce más',
-                                          style: GoogleFonts.roboto(
-                                            textStyle: style16M.copyWith(
-                                              fontWeight: FontWeight.w400,
-                                              color: lightBlackColor,
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.touch_app_outlined,
+                                            size: 18,
+                                            color: lightBlackColor,
+                                          ),
+                                          SizedBox(width: 8),
+                                          Text(
+                                            'Conoce más',
+                                            style: GoogleFonts.roboto(
+                                              textStyle: style16M.copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                color: lightBlackColor,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -224,12 +226,12 @@ class TipsScreen extends StatelessWidget {
                       height: 300,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        itemCount: model.tipsList.length,
+                        itemCount: model.tipsList2.length,
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         separatorBuilder:
                             (context, index) => const SizedBox(width: 16),
                         itemBuilder: (context, index) {
-                          final tip = model.tipsList[index];
+                          final tip = model.tipsList2[index];
                           return Container(
                             width: 270,
                             decoration: BoxDecoration(
@@ -285,39 +287,60 @@ class TipsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 const Spacer(),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 5,
-                                  ),
-                                  margin: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    color: whiteColor,
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                      width: 1,
-                                      color: greyColor,
+                                GestureDetector(
+                                  onTap: () async {
+                                    final url = Uri.parse(
+                                      'https://viajespremium.com.mx/',
+                                    );
+                                    if (await canLaunchUrl(url)) {
+                                      await launchUrl(
+                                        url,
+                                        mode: LaunchMode.externalApplication,
+                                      );
+                                    } else {
+                                      // Optionally handle the error
+                                      print('Could not launch $url');
+                                      // You might want to show a snackbar or alert to the user here
+                                    }
+                                  },
+
+                                  child: Container(
+                                    width: double.infinity,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 5,
                                     ),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.touch_app_outlined,
-                                        size: 18,
-                                        color: lightBlackColor,
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: whiteColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        width: 1,
+                                        color: greyColor,
                                       ),
-                                      SizedBox(width: 8),
-                                      Text(
-                                        'Conoce más',
-                                        style: GoogleFonts.roboto(
-                                          textStyle: style16M.copyWith(
-                                            fontWeight: FontWeight.w400,
+                                    ),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.touch_app_outlined,
+                                            size: 18,
                                             color: lightBlackColor,
                                           ),
-                                        ),
+                                          SizedBox(width: 8),
+                                          Text(
+                                            'Conoce más',
+                                            style: GoogleFonts.roboto(
+                                              textStyle: style16M.copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                color: lightBlackColor,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -326,6 +349,288 @@ class TipsScreen extends StatelessWidget {
                         },
                       ),
                     ),
+                    const SizedBox(height: 16),
+
+                    ///
+                    ///
+                    ///
+                    ///
+                    ///
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                        height: 260,
+                        margin: EdgeInsets.symmetric(
+                          vertical: 10,
+                        ), // Add some vertical spacing
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: greyColor, width: 1.2),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: ClipRRect(
+                                borderRadius: BorderRadiusGeometry.circular(10),
+
+                                child: Image.asset(
+                                  AppAssets.cImg03,
+                                  scale: 3,
+                                  height: 250,
+                                  width: 210,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 16),
+                            Padding(
+                              padding: EdgeInsets.only(top: 10, right: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Prepárate para tu\npróxima entrevista',
+                                    style: style24B,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    'Con esta da videos tendras un exito\nasegurado en tu próxima entrevista de trabajo.',
+                                    style: style14sourceblack.copyWith(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  SizedBox(height: 30),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      final url = Uri.parse(
+                                        'https://viajespremium.com.mx/',
+                                      );
+                                      if (await canLaunchUrl(url)) {
+                                        await launchUrl(
+                                          url,
+                                          mode: LaunchMode.externalApplication,
+                                        );
+                                      }
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 60,
+                                        vertical: 5,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: whiteColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: greyColor,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.touch_app_outlined,
+                                            size: 18,
+                                            color: lightBlackColor,
+                                          ),
+                                          SizedBox(width: 8),
+                                          Text(
+                                            'Conoce más',
+                                            style: GoogleFonts.roboto(
+                                              textStyle: style16M.copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                color: lightBlackColor,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  10.verticalSpace,
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.video_call_outlined,
+                                          color: blackColor,
+                                          size: 20,
+                                        ),
+                                        2.horizontalSpace,
+                                        Text('10 Videos'),
+                                        10.horizontalSpace,
+                                        Icon(
+                                          Icons.watch_later_outlined,
+                                          color: blackColor,
+                                          size: 20,
+                                        ),
+                                        2.horizontalSpace,
+                                        Text('25 mins'),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    ///
+                    ///
+                    ///
+                    ///
+                    ///
+                    Text(
+                      'Elabura tu CV como un profesional',
+                      style: GoogleFonts.sourceSans3(
+                        textStyle: style16M.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: blackColor,
+                        ),
+                      ),
+                    ),
+
+                    12.verticalSpace,
+
+                    const SizedBox(height: 12),
+
+                    SizedBox(
+                      height: 320,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: model.tipsList3.length,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        separatorBuilder:
+                            (context, index) => const SizedBox(width: 16),
+                        itemBuilder: (context, index) {
+                          final tip = model.tipsList3[index];
+                          return Container(
+                            width: 270,
+                            decoration: BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: greyColor, width: 1.2),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.network(
+                                      tip.imageUrl ?? '',
+                                      height: 130,
+                                      width: double.infinity,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                  ),
+                                  child: Text(
+                                    tip.title ?? '',
+                                    style: GoogleFonts.roboto(
+                                      textStyle: style18M.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: blackColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                  ),
+                                  child: Text(
+                                    tip.description ?? '',
+                                    style: GoogleFonts.roboto(
+                                      textStyle: style16M.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: greyColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const Spacer(),
+                                GestureDetector(
+                                  onTap: () async {
+                                    final url = Uri.parse(
+                                      'https://viajespremium.com.mx/',
+                                    );
+                                    if (await canLaunchUrl(url)) {
+                                      await launchUrl(
+                                        url,
+                                        mode: LaunchMode.externalApplication,
+                                      );
+                                    } else {
+                                      // Optionally handle the error
+                                      print('Could not launch $url');
+                                      // You might want to show a snackbar or alert to the user here
+                                    }
+                                  },
+
+                                  child: Container(
+                                    width: double.infinity,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 5,
+                                    ),
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: whiteColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        width: 1,
+                                        color: greyColor,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.touch_app_outlined,
+                                            size: 18,
+                                            color: lightBlackColor,
+                                          ),
+                                          SizedBox(width: 8),
+                                          Text(
+                                            'Conoce más',
+                                            style: GoogleFonts.roboto(
+                                              textStyle: style16M.copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                color: lightBlackColor,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    50.verticalSpace,
                   ],
                 ),
               ),

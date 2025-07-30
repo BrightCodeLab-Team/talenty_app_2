@@ -50,7 +50,6 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       _profile(),
                       20.verticalSpace,
                       Divider(color: dividerColor, thickness: 1),
-                      20.verticalSpace,
 
                       ///
                       /// Title
@@ -58,7 +57,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       ///
                       30.verticalSpace,
                       MenuReuse(
-                        leading: Image.asset(AppAssets.profileIcon, scale: 4.5),
+                        leading: Image.asset(AppAssets.profileIcon, scale: 3),
                         title: 'Visibilidad para las empresas',
                         onTap: () {
                           Get.to(() => DeactivateVisibilityScreen());
@@ -83,7 +82,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       MenuReuse(
                         leading: Image.asset(
                           AppAssets.menuCameraIcon,
-                          scale: 4,
+                          scale: 3,
                         ),
                         title: 'Disponibilidad Inmediata',
                         trailing: Container(
@@ -148,7 +147,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       MenuReuse(
                         leading: Image.asset(
                           '$iconsAssets/calender.png',
-                          scale: 4.5,
+                          scale: 3,
                         ),
                         title: 'Mi calendario',
                         onTap: () {
@@ -158,7 +157,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       ),
                       10.verticalSpace,
                       MenuReuse(
-                        leading: Image.asset(AppAssets.watchIcon, scale: 4.5),
+                        leading: Image.asset(AppAssets.watchIcon, scale: 3),
                         title: 'Mi disponibilidad',
                         onTap: () {
                           Get.to(AvailabilityScreenThree());
@@ -175,7 +174,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       MenuReuse(
                         leading: Image.asset(
                           AppAssets.BlockedCompaniesIcon,
-                          scale: 4,
+                          scale: 3,
                         ),
                         title: 'Empresas bloqueadas',
                         onTap: () {
@@ -188,7 +187,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       MenuReuse(
                         leading: Image.asset(
                           '$iconsAssets/shield.png',
-                          scale: 4.5,
+                          scale: 3,
                         ),
                         title: 'Aviso de privacidad',
                         onTap: () {},
@@ -198,7 +197,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       MenuReuse(
                         leading: Image.asset(
                           AppAssets.BlockedCompaniesIcon,
-                          scale: 4.5,
+                          scale: 3,
                         ),
                         title: 'tèrminos Condiciones',
                         onTap: () {},
@@ -210,7 +209,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                       18.verticalSpace,
 
                       MenuReuse(
-                        leading: Image.asset(AppAssets.deleteIcon, scale: 4),
+                        leading: Image.asset(AppAssets.deleteIcon, scale: 3),
                         title: 'Eliminar cuenta',
                         onTap: () {
                           Get.to(CandidateDeleteAccountScreen());

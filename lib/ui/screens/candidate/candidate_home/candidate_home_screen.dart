@@ -11,8 +11,6 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/home_widget.dart'
     show CustomCandidateHomeVacancyWidget;
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
-import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_search/candidate_search.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
@@ -119,7 +117,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             "Categorías que podrían interesarte",
                             style: style16M,
                           ),
-                          Spacer(),
+                          30.verticalSpace,
                           // show badge when it is index >0 of _categories list other wise show empty text
                         ],
                       ),
@@ -164,6 +162,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             },
                           )
                           : 20.verticalSpace,
+                      50.verticalSpace,
                     ],
                   ),
                 ),
@@ -425,41 +424,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                   ? AssetImage(vacancy.imageUrl!)
                                   : AssetImage(''),
                           fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text(
-                                'VIAJES',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                ' | ',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                'PREMIUM®',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
                         ),
                       ),
                     ),
@@ -915,7 +879,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                           ],
                                         ),
                                         selected: isSelected,
-                                        selectedColor: primaryColor,
+                                        selectedColor: brownColor,
                                         backgroundColor: Colors.white,
                                         labelStyle: TextStyle(
                                           color:
@@ -976,7 +940,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                               color:
                                                   isSelected
                                                       ? blackColor
-                                                      : lightBlackColor,
+                                                      : greyColor,
                                             ),
                                           ),
                                           selected: isSelected,
@@ -1071,7 +1035,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                     Navigator.pop(context);
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: primaryColor,
+                                    backgroundColor: brownColor,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
                                     ),

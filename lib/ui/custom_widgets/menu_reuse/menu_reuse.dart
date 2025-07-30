@@ -31,6 +31,8 @@ class MenuReuse extends StatelessWidget {
           title: Text(
             title,
             style: textStyle ?? style14sourceblack.copyWith(fontSize: 16),
+            maxLines: 1, // Ensures the text is limited to one line
+            overflow: TextOverflow.ellipsis, // Adds "..." if text overflows
           ),
           trailing:
               trailing ??
@@ -44,7 +46,6 @@ class MenuReuse extends StatelessWidget {
             horizontal: 2.0.w,
           ), // Apply horizontal padding
         ),
-
         CustomDivider(),
       ],
     );

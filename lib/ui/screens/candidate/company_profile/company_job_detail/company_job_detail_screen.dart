@@ -74,7 +74,9 @@ class CompanyJobDetailScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: const Color(0xFF28407B),
                             image: DecorationImage(
-                              image: AssetImage(AppAssets.menulogo),
+                              image: AssetImage(
+                                "${model.vacancies[index].imageUrl}",
+                              ),
                               fit: BoxFit.cover,
                             ),
                           ),

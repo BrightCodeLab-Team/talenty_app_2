@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
-import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_matches/candidate_matches_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
+
 import 'package:talenty_app/ui/screens/candidate/mas/main_menu_screen/candidate_mas_screen.dart';
+import 'package:talenty_app/ui/screens/common/tips/tips_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
@@ -38,14 +41,21 @@ class MyApp extends StatelessWidget {
             defaultTransition: Transition.rightToLeft,
             themeMode:
                 languageProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            theme: AppTheme.lightTheme,
+            theme: ThemeData(
+              appBarTheme: AppBarTheme(
+                backgroundColor: transparent,
+                surfaceTintColor: transparent,
+                shadowColor: transparent,
+              ),
+              scaffoldBackgroundColor: whiteColor,
+            ),
             darkTheme: AppTheme.darkTheme,
             home: ScreenUtilInit(
               designSize: const Size(
                 _designWidth,
                 _designHeight,
               ), // Use your constants
-              builder: (context, child) => CandidateMasScreen(),
+              builder: (context, child) => TipsScreen(),
             ),
           ),
     );
