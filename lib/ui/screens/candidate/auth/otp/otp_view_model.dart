@@ -7,7 +7,6 @@ import 'package:talenty_app/core/model/otp_model.dart';
 import 'package:talenty_app/core/services/auth_services.dart';
 import 'package:talenty_app/locator.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/build_Profile/mandatory_registeration/mandatory_student_registration.dart';
-import 'package:talenty_app/ui/screens/company/build_profile/register_company/register_company_0_percent_screen.dart';
 
 import '../../../../../core/others/base_view_model.dart';
 

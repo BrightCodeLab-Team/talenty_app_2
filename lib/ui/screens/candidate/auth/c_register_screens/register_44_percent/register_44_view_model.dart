@@ -1,6 +1,7 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
-import 'package:flutter/material.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_44_percent/register_44_screen.dart';
 
 class CandidateRegister44PercentViewModel extends BaseViewModel {
