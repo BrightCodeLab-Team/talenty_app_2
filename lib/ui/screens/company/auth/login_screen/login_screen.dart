@@ -10,7 +10,7 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/sign_up/sign_up_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/candidat_root/candidate_root_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
 import 'package:talenty_app/ui/screens/company/root/root_screen.dart';
 import '../../../../custom_widgets/paddings_and_margins/custom_padding.dart';
 import '../resgister_screen/register_screen.dart';

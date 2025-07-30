@@ -63,7 +63,6 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         onTap: () {
                           Get.to(() => DeactivateVisibilityScreen());
                         },
-                        child: AnimatedContainer(duration: Duration()),
                       ),
                       isDisponible
                           ? Text(
@@ -142,7 +141,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                           ),
                         ),
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
+                        // child: AnimatedContainer(duration: Duration()),
                       ),
 
                       10.verticalSpace,
@@ -155,7 +154,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         onTap: () {
                           Get.to(() => CandidateMasCalendarScreen());
                         },
-                        child: AnimatedContainer(duration: Duration()),
+                        //child: AnimatedContainer(duration: Duration()),
                       ),
                       10.verticalSpace,
                       MenuReuse(
@@ -164,7 +163,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         onTap: () {
                           Get.to(AvailabilityScreenThree());
                         },
-                        child: AnimatedContainer(duration: Duration()),
+                        // child: AnimatedContainer(duration: Duration()),
                       ),
 
                       20.verticalSpace,
@@ -182,7 +181,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         onTap: () {
                           Get.to(BlockedCompaniesScreen());
                         },
-                        child: AnimatedContainer(duration: Duration()),
+                        //child: AnimatedContainer(duration: Duration()),
                       ),
                       10.verticalSpace,
                       //
@@ -193,7 +192,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         ),
                         title: 'Aviso de privacidad',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
+                        // child: AnimatedContainer(duration: Duration()),
                       ),
                       10.verticalSpace,
                       MenuReuse(
@@ -203,7 +202,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         ),
                         title: 'tèrminos Condiciones',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
+                        // child: AnimatedContainer(duration: Duration()),
                       ),
                       20.verticalSpace,
 
@@ -219,7 +218,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         textStyle: style14sourceblack.copyWith(
                           color: primaryColor,
                         ),
-                        child: AnimatedContainer(duration: Duration()),
+                        // child: AnimatedContainer(duration: Duration()),
                         trailingIconColor: primaryColor,
                       ),
                       10.verticalSpace,
@@ -229,7 +228,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         onTap: () {
                           Get.offAll(Splash2Screen());
                         },
-                        child: AnimatedContainer(duration: Duration()),
+                        //child: AnimatedContainer(duration: Duration()),
                         textStyle: style14sourceblack.copyWith(
                           color: primaryColor,
                         ),

@@ -56,9 +56,8 @@ class CandidateProfileScreen extends StatelessWidget {
                         leading: Icon(Icons.photo),
                         title: 'Mis fotografías',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
                       ),
-                      10.verticalSpace,
+
                       MenuReuse(
                         leading: Image.asset(
                           "$iconsAssets/vector.png",
@@ -66,51 +65,44 @@ class CandidateProfileScreen extends StatelessWidget {
                         ),
                         title: 'Datos Personales',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
                       ),
-                      10.verticalSpace,
+
                       MenuReuse(
                         leading: Image.asset(AppAssets.cp3, scale: 4),
                         title: 'Estudios',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
                       ),
-                      10.verticalSpace,
+
                       MenuReuse(
                         leading: Image.asset(AppAssets.cp4, scale: 4),
                         title: 'Experiencia Laboral',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
                       ),
-                      10.verticalSpace,
+
                       MenuReuse(
                         leading: Image.asset(AppAssets.cp5, scale: 4),
                         title: 'Habilidades',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
                       ),
-                      10.verticalSpace,
+
                       MenuReuse(
                         leading: Image.asset(AppAssets.cp6, scale: 4),
                         title: 'Talentos',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
                       ),
-                      10.verticalSpace,
+
                       MenuReuse(
                         leading: Image.asset(AppAssets.cp7, scale: 4),
                         title: 'Hobbies',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
                       ),
-                      10.verticalSpace,
+
                       MenuReuse(
                         leading: Image.asset(AppAssets.cp8, scale: 4),
                         title: 'Idiomas',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
                       ),
-                      10.verticalSpace,
+
                       MenuReuse(
                         leading: Icon(
                           Icons.workspace_premium_rounded,
@@ -118,9 +110,8 @@ class CandidateProfileScreen extends StatelessWidget {
                         ),
                         title: 'Certificaciones y Curosos',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
                       ),
-                      10.verticalSpace,
+
                       MenuReuse(
                         leading: Image.asset(
                           AppAssets.candidatoIcon,
@@ -129,9 +120,7 @@ class CandidateProfileScreen extends StatelessWidget {
                         ),
                         title: 'Sobre mí',
                         onTap: () {},
-                        child: AnimatedContainer(duration: Duration()),
                       ),
-                      10.verticalSpace,
                     ],
                   ),
                 ),

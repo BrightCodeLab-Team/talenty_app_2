@@ -10,14 +10,13 @@ class MenuReuse extends StatelessWidget {
   final VoidCallback onTap;
   final Widget? trailing;
   final TextStyle? textStyle;
-  final Color? trailingIconColor; // NEW: optional color for trailing icon
+  final Color? trailingIconColor;
 
-  // ignore: use_key_in_widget_constructors
   const MenuReuse({
+    super.key,
     required this.leading,
     required this.title,
     required this.onTap,
-    required AnimatedContainer child,
     this.trailing,
     this.textStyle,
     this.trailingIconColor,
@@ -25,40 +24,29 @@ class MenuReuse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 2.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    leading,
-                    4.horizontalSpace,
-                    Text(title, style: textStyle ?? style14sourceblack),
-                  ],
-                ),
-                trailing ??
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      size: 20,
-                      color: trailingIconColor ?? lightBlackColor,
-                    ),
-              ],
-            ),
-            10.verticalSpace,
-            CustomDivider(),
-          ],
+    return Column(
+      children: [
+        ListTile(
+          leading: leading,
+          title: Text(
+            title,
+            style: textStyle ?? style14sourceblack.copyWith(fontSize: 16),
+          ),
+          trailing:
+              trailing ??
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 20,
+                color: trailingIconColor ?? lightBlackColor,
+              ),
+          onTap: onTap,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 2.0.w,
+          ), // Apply horizontal padding
         ),
-      ),
+
+        CustomDivider(),
+      ],
     );
   }
 }

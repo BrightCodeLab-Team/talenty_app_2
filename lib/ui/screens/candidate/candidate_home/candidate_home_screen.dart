@@ -11,8 +11,8 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/home_widget.dart'
     show CustomCandidateHomeVacancyWidget;
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
-import 'package:talenty_app/ui/screens/candidate/candidat_root/candidate_root_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/candidat_root/candidate_root_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_search/candidate_search.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';

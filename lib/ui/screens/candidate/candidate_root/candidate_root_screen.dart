@@ -8,7 +8,7 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/bottom_bar/bottom_navigation_bar.dart';
-import 'package:talenty_app/ui/screens/candidate/candidat_root/candidate_root_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_view_model.dart';
 
 class CandidateRootScreen extends StatelessWidget {
   final int? selectedScreen;

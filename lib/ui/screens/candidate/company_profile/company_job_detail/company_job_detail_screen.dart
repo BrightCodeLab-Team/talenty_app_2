@@ -85,7 +85,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
                     if (fromFirstTab)
                       Padding(
                         padding: const EdgeInsets.only(
-                          top: 20,
+                          top: 30,
                           left: 20.0,
                           right: 20,
                         ),

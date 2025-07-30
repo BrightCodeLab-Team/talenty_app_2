@@ -8,6 +8,7 @@ import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
+import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_view_model.dart';
@@ -77,16 +78,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
                           Positioned(
                             top: 8,
                             left: 8,
-                            child: IconButton(
-                              icon: const Icon(
-                                Icons.arrow_back,
-                                color: Colors.white,
-                                size: 28,
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
+                            child: CustomBackButton(),
                           ),
                         ],
                       ),

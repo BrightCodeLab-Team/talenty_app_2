@@ -18,7 +18,7 @@ class CustomBackButton extends StatelessWidget {
           onPressed: () {
             navigator!.pop();
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: whiteColor),
         ),
       ),
     );
