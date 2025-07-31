@@ -48,7 +48,7 @@ class CandidateAddPhotoScreen extends StatelessWidget {
                     10.verticalSpace,
                     Text(
                       'Agrega fotos a tu perfil',
-                      style: style24.copyWith(color: blackColor),
+                      style: style24.copyWith(color: darkPurpleColor),
                     ),
                     20.verticalSpace,
                     Text(
@@ -113,7 +113,9 @@ class CandidateAddPhotoScreen extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
-                                          color: blackColor.withOpacity(0.25),
+                                          color: darkPurpleColor.withOpacity(
+                                            0.25,
+                                          ),
                                           blurRadius: 4,
                                           offset: Offset(0, 2),
                                         ),

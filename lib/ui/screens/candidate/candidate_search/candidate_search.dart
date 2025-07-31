@@ -77,7 +77,9 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                                 },
                               ),
                               hintText: 'Search...',
-                              hintStyle: style16M.copyWith(color: blackColor),
+                              hintStyle: style16M.copyWith(
+                                color: darkPurpleColor,
+                              ),
                               prefixIcon: Image.asset(
                                 AppAssets.searchIcon,
                                 scale: 4,
@@ -497,7 +499,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: blackColor.withOpacity(0.2),
+                                    color: darkPurpleColor.withOpacity(0.2),
                                     spreadRadius: 1,
                                     blurRadius: 5,
                                     offset: const Offset(0, 3),
@@ -596,7 +598,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: blackColor),
+                            border: Border.all(color: darkPurpleColor),
                             shape: BoxShape.circle,
                           ),
                           padding: const EdgeInsets.all(15),

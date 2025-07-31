@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'login_title'.tr,
-                            style: style24M.copyWith(color: blackColor),
+                            style: style24M.copyWith(color: darkPurpleColor),
                           ),
                         ),
                         17.verticalSpace,
@@ -125,7 +125,7 @@ class LoginScreen extends StatelessWidget {
                               'label_email'.tr,
                               style: style16M.copyWith(
                                 fontWeight: FontWeight.w600,
-                                color: blackColor,
+                                color: darkPurpleColor,
                               ),
                             ),
                             Text(
@@ -159,7 +159,7 @@ class LoginScreen extends StatelessWidget {
                               'label_password'.tr,
                               style: style16M.copyWith(
                                 fontWeight: FontWeight.w600,
-                                color: blackColor,
+                                color: darkPurpleColor,
                               ),
                             ),
                             Text(

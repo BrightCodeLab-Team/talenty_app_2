@@ -147,7 +147,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                    color: blackColor.withOpacity(0.2),
+                    color: darkPurpleColor.withOpacity(0.2),
                     spreadRadius: 1,
                     blurRadius: 5,
                     offset: Offset(0, 3),
@@ -178,24 +178,24 @@ class CompanyJobDetailScreen extends StatelessWidget {
           Text(
             // '${model.companyJobsVacancyList[index].jobTitle}',
             '${model.vacancies[index].jobTitle}',
-            style: style24B.copyWith(color: blackColor),
+            style: style24B.copyWith(color: darkPurpleColor),
           ),
           5.verticalSpace,
           Text(
             // '\$${model.companyJobsVacancyList[index].minSalary}-\$${model.companyJobsVacancyList[index].maxSalary}',
             '\$${model.vacancies[index].minSalary}-\$${model.vacancies[index].maxSalary}',
-            style: style20B.copyWith(color: blackColor),
+            style: style20B.copyWith(color: darkPurpleColor),
           ),
           5.verticalSpace,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(AppAssets.location, scale: 4, color: blackColor),
+              Image.asset(AppAssets.location, scale: 4, color: darkPurpleColor),
               3.horizontalSpace,
               Text(
                 // "${model.companyJobsVacancyList[index].location}",
                 "${model.vacancies[index].location}",
-                style: style14M.copyWith(color: blackColor),
+                style: style14M.copyWith(color: darkPurpleColor),
               ),
             ],
           ),
@@ -208,7 +208,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
               Text(
                 // '${model.companyJobsVacancyList[index].jobType},  Turno de ${model.companyJobsVacancyList[index].workingHours} horas',
                 '${model.vacancies[index].jobType},  Turno de ${model.vacancies[index].workingHours} horas',
-                style: style14M.copyWith(color: blackColor),
+                style: style14M.copyWith(color: darkPurpleColor),
               ),
             ],
           ),
@@ -276,7 +276,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
           10.verticalSpace,
           Text(
             'Descripción de la vacante',
-            style: style20B.copyWith(color: blackColor),
+            style: style20B.copyWith(color: darkPurpleColor),
           ),
           5.verticalSpace,
           Text(
@@ -304,7 +304,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
           10.verticalSpace,
           Text(
             'Habilidades requeridas',
-            style: style20B.copyWith(color: blackColor),
+            style: style20B.copyWith(color: darkPurpleColor),
           ),
           5.verticalSpace,
           Wrap(
@@ -335,7 +335,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
           10.verticalSpace,
           Text(
             'Beneficiou y prestaciones',
-            style: style20B.copyWith(color: blackColor),
+            style: style20B.copyWith(color: darkPurpleColor),
           ),
           Padding(
             padding: EdgeInsets.only(left: 15),
@@ -403,7 +403,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           10.verticalSpace,
-          Text('Requisitos', style: style20B.copyWith(color: blackColor)),
+          Text('Requisitos', style: style20B.copyWith(color: darkPurpleColor)),
           Padding(
             padding: EdgeInsets.only(left: 15),
             child: Column(
@@ -467,7 +467,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
           10.verticalSpace,
           Text(
             'Especificaciones del horaio',
-            style: style20B.copyWith(color: blackColor),
+            style: style20B.copyWith(color: darkPurpleColor),
           ),
           5.verticalSpace,
           Text(
@@ -541,14 +541,14 @@ class CompanyJobDetailScreen extends StatelessWidget {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: blackColor),
+                        border: Border.all(color: darkPurpleColor),
                         shape: BoxShape.circle,
                       ),
                       padding: EdgeInsets.all(15),
                       child: Center(
                         child: Icon(
                           Icons.arrow_upward,
-                          color: blackColor,
+                          color: darkPurpleColor,
 
                           size: 20,
                         ),
@@ -607,7 +607,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
                 Text(
                   '¿Seguro que quieres rechazar éste match?',
                   textAlign: TextAlign.center,
-                  style: style16B.copyWith(color: blackColor),
+                  style: style16B.copyWith(color: darkPurpleColor),
                 ),
                 const SizedBox(height: 15),
 
@@ -615,7 +615,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
                 Text(
                   'Al rechazar el match, ya no podrás conversar con esta empresa y se eliminará la conexión de forma permanente.',
                   textAlign: TextAlign.center,
-                  style: style16M.copyWith(color: blackColor),
+                  style: style16M.copyWith(color: darkPurpleColor),
                 ),
                 const SizedBox(height: 30),
 
@@ -634,13 +634,13 @@ class CompanyJobDetailScreen extends StatelessWidget {
 
                 // "Cancelar" button
                 CustomButton(
-                  borderColor: blackColor,
+                  borderColor: darkPurpleColor,
                   text: 'Cancelar',
                   onTap: () {
                     Navigator.of(context).pop(false);
                   },
                   backgroundColor: whiteColor,
-                  textColor: blackColor,
+                  textColor: darkPurpleColor,
                 ),
               ],
             ),

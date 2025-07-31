@@ -77,7 +77,7 @@ class TipsScreen extends StatelessWidget {
                       style: GoogleFonts.sourceSans3(
                         textStyle: style16M.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: blackColor,
+                          color: darkPurpleColor,
                         ),
                       ),
                     ),
@@ -125,7 +125,7 @@ class TipsScreen extends StatelessWidget {
                                     style: GoogleFonts.roboto(
                                       textStyle: style18M.copyWith(
                                         fontWeight: FontWeight.w500,
-                                        color: blackColor,
+                                        color: darkPurpleColor,
                                       ),
                                     ),
                                   ),
@@ -215,7 +215,7 @@ class TipsScreen extends StatelessWidget {
                       style: GoogleFonts.sourceSans3(
                         textStyle: style16M.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: blackColor,
+                          color: darkPurpleColor,
                         ),
                       ),
                     ),
@@ -266,7 +266,7 @@ class TipsScreen extends StatelessWidget {
                                     style: GoogleFonts.roboto(
                                       textStyle: style18M.copyWith(
                                         fontWeight: FontWeight.w500,
-                                        color: blackColor,
+                                        color: darkPurpleColor,
                                       ),
                                     ),
                                   ),
@@ -461,7 +461,7 @@ class TipsScreen extends StatelessWidget {
                                       children: [
                                         Icon(
                                           Icons.video_call_outlined,
-                                          color: blackColor,
+                                          color: darkPurpleColor,
                                           size: 20,
                                         ),
                                         2.horizontalSpace,
@@ -469,7 +469,7 @@ class TipsScreen extends StatelessWidget {
                                         10.horizontalSpace,
                                         Icon(
                                           Icons.watch_later_outlined,
-                                          color: blackColor,
+                                          color: darkPurpleColor,
                                           size: 20,
                                         ),
                                         2.horizontalSpace,
@@ -495,7 +495,7 @@ class TipsScreen extends StatelessWidget {
                       style: GoogleFonts.sourceSans3(
                         textStyle: style16M.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: blackColor,
+                          color: darkPurpleColor,
                         ),
                       ),
                     ),
@@ -545,7 +545,7 @@ class TipsScreen extends StatelessWidget {
                                     style: GoogleFonts.roboto(
                                       textStyle: style18M.copyWith(
                                         fontWeight: FontWeight.w500,
-                                        color: blackColor,
+                                        color: darkPurpleColor,
                                       ),
                                     ),
                                   ),

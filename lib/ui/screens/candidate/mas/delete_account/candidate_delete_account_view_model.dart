@@ -53,7 +53,7 @@ class DeletingAccountProgressDialog extends StatelessWidget {
             8.horizontalSpace,
             Text(
               'Cerrando Sesión',
-              style: style16M.copyWith(color: blackColor),
+              style: style16M.copyWith(color: darkPurpleColor),
             ),
           ],
         ),

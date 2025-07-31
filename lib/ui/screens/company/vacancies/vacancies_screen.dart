@@ -75,7 +75,7 @@ Widget _vacanciesCard(VacancyModel vacancy) {
       borderRadius: BorderRadius.circular(10),
       boxShadow: [
         BoxShadow(
-          color: blackColor.withOpacity(0.10),
+          color: darkPurpleColor.withOpacity(0.10),
           blurRadius: 8,
           offset: Offset(0, 4),
         ),
@@ -138,7 +138,7 @@ Widget _vacanciesCard(VacancyModel vacancy) {
                   color:
                       vacancy.status == "Vacante Activa"
                           ? darkgreenColor
-                          : yelloBrownColor1,
+                          : yellowBrownColor1,
                 ),
               ),
             ),

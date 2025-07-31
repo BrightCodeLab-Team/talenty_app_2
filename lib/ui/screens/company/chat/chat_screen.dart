@@ -35,7 +35,7 @@ class ChatScreen extends StatelessWidget {
                         Text(
                           "Chats",
                           style: GoogleFonts.lora(
-                            color: blackColor,
+                            color: darkPurpleColor,
                             fontSize: 24,
                             fontWeight: FontWeight.w400,
                           ),

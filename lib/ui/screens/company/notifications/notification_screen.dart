@@ -127,7 +127,7 @@ class NotficationCard extends StatelessWidget {
                 style: GoogleFonts.sourceSans3(
                   textStyle: style16M.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: blackColor,
+                    color: darkPurpleColor,
                   ),
                 ),
               ),

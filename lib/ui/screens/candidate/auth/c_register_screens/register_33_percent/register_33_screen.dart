@@ -81,10 +81,13 @@ class Candidate33PercentScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: whiteColor,
                           borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(color: blackColor, width: 1.w),
+                          border: Border.all(
+                            color: darkPurpleColor,
+                            width: 1.w,
+                          ),
                           boxShadow: [
                             BoxShadow(
-                              color: blackColor,
+                              color: darkPurpleColor,
                               offset: Offset(-4, 4),
                               blurRadius: 0,
                               spreadRadius: 0,
@@ -102,7 +105,9 @@ class Candidate33PercentScreen extends StatelessWidget {
                             children: [
                               Text(
                                 'Habilidades',
-                                style: style20B.copyWith(color: blackColor),
+                                style: style20B.copyWith(
+                                  color: darkPurpleColor,
+                                ),
                               ),
                               8.verticalSpace,
                               Text(
@@ -119,7 +124,9 @@ class Candidate33PercentScreen extends StatelessWidget {
                                   Spacer(),
                                   Text(
                                     '0 de 10',
-                                    style: style16B.copyWith(color: blackColor),
+                                    style: style16B.copyWith(
+                                      color: darkPurpleColor,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -164,12 +171,15 @@ class Candidate33PercentScreen extends StatelessWidget {
                                   color: whiteColor,
                                   borderRadius: BorderRadius.circular(28.r),
                                   border: Border.all(
-                                    color: isSelected ? Colors.red : blackColor,
+                                    color:
+                                        isSelected
+                                            ? Colors.red
+                                            : darkPurpleColor,
                                     width: 2.w,
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: blackColor,
+                                      color: darkPurpleColor,
                                       offset: Offset(-6, 4),
                                       blurRadius: 0,
                                       spreadRadius: 0,
@@ -210,10 +220,13 @@ class Candidate33PercentScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: whiteColor,
                             borderRadius: BorderRadius.circular(28.r),
-                            border: Border.all(color: blackColor, width: 2.w),
+                            border: Border.all(
+                              color: darkPurpleColor,
+                              width: 2.w,
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: blackColor,
+                                color: darkPurpleColor,
                                 offset: Offset(-1.w, 2.w),
                                 blurRadius: 0,
                                 spreadRadius: 0,
@@ -230,13 +243,13 @@ class Candidate33PercentScreen extends StatelessWidget {
                               decoration: authFieldDecoration.copyWith(
                                 hintText: 'Busca más habilidades',
                                 hintStyle: style16M.copyWith(
-                                  color: blackColor,
+                                  color: darkPurpleColor,
                                   fontFamily: GoogleFonts.inter().fontFamily,
                                 ),
                                 prefixIcon: Icon(
                                   Icons.search,
                                   size: 25,
-                                  color: blackColor,
+                                  color: darkPurpleColor,
                                 ),
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,
@@ -369,10 +382,10 @@ class _Candidate33PercentScreen2State extends State<Candidate33PercentScreen2> {
               decoration: BoxDecoration(
                 color: whiteColor,
                 borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(color: blackColor, width: 1.w),
+                border: Border.all(color: darkPurpleColor, width: 1.w),
                 boxShadow: [
                   BoxShadow(
-                    color: blackColor,
+                    color: darkPurpleColor,
                     offset: Offset(-1.w, 2.w),
                     blurRadius: 0,
                     spreadRadius: 0,
@@ -386,7 +399,7 @@ class _Candidate33PercentScreen2State extends State<Candidate33PercentScreen2> {
                   children: [
                     Text(
                       'Cuéntanos más de tus habilidades',
-                      style: style20B.copyWith(color: blackColor),
+                      style: style20B.copyWith(color: darkPurpleColor),
                     ),
                     8.verticalSpace,
                     Text(
@@ -401,7 +414,7 @@ class _Candidate33PercentScreen2State extends State<Candidate33PercentScreen2> {
                         const Spacer(),
                         Text(
                           'Máximo 500 caracteres',
-                          style: style16B.copyWith(color: blackColor),
+                          style: style16B.copyWith(color: darkPurpleColor),
                         ),
                       ],
                     ),
@@ -420,7 +433,7 @@ class _Candidate33PercentScreen2State extends State<Candidate33PercentScreen2> {
                 Text(
                   '$textLength/500 caracteres',
                   style: style14M.copyWith(
-                    color: isOverLimit ? Colors.red : blackColor,
+                    color: isOverLimit ? Colors.red : darkPurpleColor,
                   ),
                 ),
               ],

@@ -67,7 +67,7 @@ class CandidateAddPhotoTipsScreen extends StatelessWidget {
               30.verticalSpace,
               Text(
                 'Tips para una foto de perfil profesional', // Tips for your photos
-                style: style24.copyWith(color: blackColor),
+                style: style24.copyWith(color: darkPurpleColor),
               ),
               20.verticalSpace,
               SizedBox(

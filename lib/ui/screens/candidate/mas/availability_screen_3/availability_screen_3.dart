@@ -6,6 +6,7 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
+import 'package:talenty_app/ui/custom_widgets/divider.dart';
 
 class AvailabilityScreenThree extends StatefulWidget {
   const AvailabilityScreenThree({super.key});
@@ -31,6 +32,7 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 100,
         foregroundColor: transparent,
         leading: Padding(
           padding: const EdgeInsets.only(left: 15.0),
@@ -49,9 +51,8 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            20.verticalSpace,
             Text(
-              'Gestiona tus horarios y conecta con empresas sin complicaciones.',
+              '                                                                                       Gestiona tus horarios y conecta con empresas sin complicaciones.',
               style: style20B.copyWith(color: blackColor),
             ),
             20.verticalSpace,
@@ -64,7 +65,7 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
             20.verticalSpace,
             Text(
               '¿Cómo funciona?'.tr,
-              style: style20B.copyWith(color: blackColor),
+              style: style20B.copyWith(color: darkPurpleColor),
             ),
             10.verticalSpace,
             _buildCheckboxRow(
@@ -110,7 +111,7 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(10.w),
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 15, vertical: 40),
         child: CustomButton(
           text: 'Configurar mi disponibilidad',
           onTap:
@@ -131,33 +132,30 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
     bool value,
     ValueChanged<bool?> onChanged,
   ) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 2.h),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Transform.scale(
-            scale: 1,
-            child: Checkbox(
-              value: value,
-              onChanged: onChanged,
-              activeColor: darkgreenColor,
-              checkColor: whiteColor,
-              side: BorderSide(
-                color: value ? darkgreenColor : greyColor,
-                width: 2,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Transform.scale(
+          scale: 1,
+          child: Checkbox(
+            value: value,
+            onChanged: onChanged,
+            activeColor: darkgreenColor,
+            checkColor: whiteColor,
+            side: BorderSide(
+              color: value ? darkgreenColor : blackColor,
+              width: 1,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
             ),
           ),
-          Expanded(
-            child: Text(text, style: style14M.copyWith(color: blackColor)),
-          ),
-        ],
-      ),
+        ),
+        Expanded(
+          child: Text(text, style: style14M.copyWith(color: blackColor)),
+        ),
+      ],
     );
   }
 }

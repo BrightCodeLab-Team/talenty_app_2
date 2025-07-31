@@ -59,7 +59,10 @@ class SelectionScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: whiteColor,
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(width: 2, color: blackColor),
+                                border: Border.all(
+                                  width: 2,
+                                  color: darkPurpleColor,
+                                ),
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +95,10 @@ class SelectionScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: whiteColor,
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(width: 2, color: blackColor),
+                                border: Border.all(
+                                  width: 2,
+                                  color: darkPurpleColor,
+                                ),
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,

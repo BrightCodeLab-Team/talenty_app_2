@@ -14,7 +14,7 @@ final authFieldDecoration = InputDecoration(
   ),
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: blackColor, width: 1.2),
+    borderSide: BorderSide(color: darkPurpleColor, width: 1.2),
   ),
   disabledBorder: UnderlineInputBorder(
     borderSide: BorderSide(color: borderGreyColor),

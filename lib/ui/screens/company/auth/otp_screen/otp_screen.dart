@@ -85,7 +85,7 @@ class OtpScreen extends StatelessWidget {
                             model.hasError ? primaryColor : lightBlackColor,
                         enabledBorderColor:
                             model.hasError ? primaryColor : lightBlackColor,
-                        cursorColor: blackColor,
+                        cursorColor: darkPurpleColor,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         borderRadius: BorderRadius.circular(8.r),
                         handleControllers: (controllers) {},

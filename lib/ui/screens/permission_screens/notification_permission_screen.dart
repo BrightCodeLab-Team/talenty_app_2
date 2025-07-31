@@ -67,8 +67,8 @@ class NotificationPermissionScreen extends StatelessWidget {
                     },
 
                     backgroundColor: Colors.transparent,
-                    borderColor: blackColor,
-                    textColor: blackColor,
+                    borderColor: darkPurpleColor,
+                    textColor: darkPurpleColor,
                   ),
                 ],
               ),

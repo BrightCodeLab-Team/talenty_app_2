@@ -10,38 +10,38 @@ import 'colors.dart';
 final style24B = TextStyle(
   fontFamily: GoogleFonts.lora().fontFamily,
   fontSize: 24,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.bold,
 );
 final style24 = TextStyle(
   fontFamily: 'loraregular',
   fontSize: 24,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.w400,
 );
 
 final style20B = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 20,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.bold,
 );
 final style18B = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 18,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.bold,
 );
 final style16B = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 16,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.bold,
 );
 final style14B = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 16,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.bold,
 );
 
@@ -51,26 +51,26 @@ final style14B = TextStyle(
 final style24N = TextStyle(
   fontFamily: GoogleFonts.lora().fontFamily,
   fontSize: 24,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.normal,
 );
 final style20N = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 20,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.normal,
 );
 
 final style18N = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 18,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.normal,
 );
 final style16N = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 16,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.normal,
 );
 
@@ -81,26 +81,26 @@ final style16N = TextStyle(
 final style24M = TextStyle(
   fontFamily: GoogleFonts.lora().fontFamily,
   fontSize: 24,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.w400,
 );
 final style20M = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 20,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.w400,
 );
 
 final style18M = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 18,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.w400,
 );
 final style16M = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 16,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.w400,
 );
 final style16cart = TextStyle(
@@ -112,7 +112,7 @@ final style16cart = TextStyle(
 final style16MW = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 16,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.w600,
 );
 final style16source = TextStyle(
@@ -125,7 +125,7 @@ final style16source = TextStyle(
 final style14M = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 14,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.w400,
 );
 final style14source = TextStyle(
@@ -137,7 +137,7 @@ final style14source = TextStyle(
 final style14sourceblack = TextStyle(
   fontFamily: 'sourcesans3regular',
   fontSize: 14,
-  color: blackColor,
+  color: darkPurpleColor,
   fontWeight: FontWeight.w400,
 );
 
@@ -151,6 +151,6 @@ final style12M = TextStyle(
 final style10 = TextStyle(
   fontFamily: GoogleFonts.sourceSans3().fontFamily,
   fontSize: 10,
-  color: cartnameColor,
+  color: cartNameColor,
   fontWeight: FontWeight.w600,
 );

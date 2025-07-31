@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 
 class CustomBackButton extends StatelessWidget {
-  const CustomBackButton({super.key});
+  final Color? backgroundColor;
+  final Color? iconColor;
+  final double? size;
+  final EdgeInsetsGeometry? padding;
+
+  const CustomBackButton({
+    super.key,
+    this.backgroundColor = lightBlackColor,
+    this.iconColor = Colors.white,
+    this.size = 15,
+    this.padding,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 10,
-      left: 10,
+    return Padding(
+      padding: padding ?? EdgeInsets.only(top: 10.h, left: 10.w),
       child: CircleAvatar(
-        radius: 17.r,
-        backgroundColor: lightBlackColor,
+        radius: size?.r,
+        backgroundColor: backgroundColor,
         child: IconButton(
-          onPressed: () {
-            navigator!.pop();
-          },
-          icon: Icon(Icons.arrow_back, color: whiteColor),
+          padding: EdgeInsets.zero,
+          onPressed: Get.back,
+          icon: Icon(Icons.arrow_back, color: iconColor),
         ),
       ),
     );

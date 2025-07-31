@@ -75,10 +75,13 @@ class Candidate77PercentScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: whiteColor,
                           borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(color: blackColor, width: 1.w),
+                          border: Border.all(
+                            color: darkPurpleColor,
+                            width: 1.w,
+                          ),
                           boxShadow: [
                             BoxShadow(
-                              color: blackColor,
+                              color: darkPurpleColor,
                               offset: Offset(-1.w, 2.w),
                               blurRadius: 0,
                               spreadRadius: 0,
@@ -96,7 +99,9 @@ class Candidate77PercentScreen extends StatelessWidget {
                             children: [
                               Text(
                                 '¿Qué tanto los hablas?',
-                                style: style20B.copyWith(color: blackColor),
+                                style: style20B.copyWith(
+                                  color: darkPurpleColor,
+                                ),
                               ),
                               8.verticalSpace,
                               Text(

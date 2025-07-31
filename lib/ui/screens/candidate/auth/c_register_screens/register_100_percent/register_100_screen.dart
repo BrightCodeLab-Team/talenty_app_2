@@ -99,10 +99,10 @@ class _Candidate100PercentScreenState extends State<Candidate100PercentScreen> {
                       decoration: BoxDecoration(
                         color: whiteColor,
                         borderRadius: BorderRadius.circular(8.r),
-                        border: Border.all(color: blackColor, width: 1.w),
+                        border: Border.all(color: darkPurpleColor, width: 1.w),
                         boxShadow: [
                           BoxShadow(
-                            color: blackColor,
+                            color: darkPurpleColor,
                             offset: Offset(-1.w, 2.w),
                             blurRadius: 0,
                             spreadRadius: 0,
@@ -119,7 +119,7 @@ class _Candidate100PercentScreenState extends State<Candidate100PercentScreen> {
                           children: [
                             Text(
                               'Cuéntanos más de tus habilidades',
-                              style: style20B.copyWith(color: blackColor),
+                              style: style20B.copyWith(color: darkPurpleColor),
                             ),
                             8.verticalSpace,
                             Text(
@@ -134,7 +134,9 @@ class _Candidate100PercentScreenState extends State<Candidate100PercentScreen> {
                                 const Spacer(),
                                 Text(
                                   'Máximo 500 caracteres',
-                                  style: style16B.copyWith(color: blackColor),
+                                  style: style16B.copyWith(
+                                    color: darkPurpleColor,
+                                  ),
                                 ),
                               ],
                             ),
@@ -153,7 +155,7 @@ class _Candidate100PercentScreenState extends State<Candidate100PercentScreen> {
                         Text(
                           '$textLength/500 caracteres',
                           style: style14M.copyWith(
-                            color: isOverLimit ? Colors.red : blackColor,
+                            color: isOverLimit ? Colors.red : darkPurpleColor,
                           ),
                         ),
                       ],

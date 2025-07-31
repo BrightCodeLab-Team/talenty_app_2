@@ -73,10 +73,10 @@ class Candidate44PercentScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: whiteColor,
                         borderRadius: BorderRadius.circular(8.r),
-                        border: Border.all(color: blackColor, width: 1.w),
+                        border: Border.all(color: darkPurpleColor, width: 1.w),
                         boxShadow: [
                           BoxShadow(
-                            color: blackColor,
+                            color: darkPurpleColor,
                             offset: Offset(-1.w, 2.w),
                             blurRadius: 0,
                             spreadRadius: 0,
@@ -94,7 +94,7 @@ class Candidate44PercentScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Talentos',
-                              style: style20B.copyWith(color: blackColor),
+                              style: style20B.copyWith(color: darkPurpleColor),
                             ),
                             8.verticalSpace,
                             Text(
@@ -109,7 +109,9 @@ class Candidate44PercentScreen extends StatelessWidget {
                                 const Spacer(),
                                 Text(
                                   '${model.selectedTalents.length} de 10',
-                                  style: style16B.copyWith(color: blackColor),
+                                  style: style16B.copyWith(
+                                    color: darkPurpleColor,
+                                  ),
                                 ),
                               ],
                             ),
@@ -224,7 +226,7 @@ class TalentCircleWidget extends StatelessWidget {
                   8.verticalSpace,
                   Text(
                     talent.name,
-                    style: style14B.copyWith(color: blackColor),
+                    style: style14B.copyWith(color: darkPurpleColor),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -257,7 +259,7 @@ class TalentCircleWidget extends StatelessWidget {
                   8.verticalSpace,
                   Text(
                     talent.name,
-                    style: style14M.copyWith(color: blackColor),
+                    style: style14M.copyWith(color: darkPurpleColor),
                     textAlign: TextAlign.center,
                   ),
                 ],

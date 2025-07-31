@@ -92,10 +92,13 @@ class Candidate55PercentScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: whiteColor,
                           borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(color: blackColor, width: 1.w),
+                          border: Border.all(
+                            color: darkPurpleColor,
+                            width: 1.w,
+                          ),
                           boxShadow: [
                             BoxShadow(
-                              color: blackColor,
+                              color: darkPurpleColor,
                               offset: Offset(-1.w, 2.w),
                               blurRadius: 0,
                               spreadRadius: 0,
@@ -113,7 +116,9 @@ class Candidate55PercentScreen extends StatelessWidget {
                             children: [
                               Text(
                                 'Cuéntanos de tus hobbies',
-                                style: style20B.copyWith(color: blackColor),
+                                style: style20B.copyWith(
+                                  color: darkPurpleColor,
+                                ),
                               ),
                               8.verticalSpace,
                               Text(
@@ -130,7 +135,9 @@ class Candidate55PercentScreen extends StatelessWidget {
                                   Spacer(),
                                   Text(
                                     '0 de 10',
-                                    style: style16B.copyWith(color: blackColor),
+                                    style: style16B.copyWith(
+                                      color: darkPurpleColor,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -150,10 +157,13 @@ class Candidate55PercentScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: whiteColor,
                             borderRadius: BorderRadius.circular(28.r),
-                            border: Border.all(color: blackColor, width: 2.w),
+                            border: Border.all(
+                              color: darkPurpleColor,
+                              width: 2.w,
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: blackColor,
+                                color: darkPurpleColor,
                                 offset: Offset(-1.w, 2.w),
                                 blurRadius: 0,
                                 spreadRadius: 0,
@@ -170,13 +180,13 @@ class Candidate55PercentScreen extends StatelessWidget {
                               decoration: authFieldDecoration.copyWith(
                                 hintText: 'Busca más habilidades',
                                 hintStyle: style16M.copyWith(
-                                  color: blackColor,
+                                  color: darkPurpleColor,
                                   fontFamily: GoogleFonts.inter().fontFamily,
                                 ),
                                 prefixIcon: Icon(
                                   Icons.search,
                                   size: 25,
-                                  color: blackColor,
+                                  color: darkPurpleColor,
                                 ),
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,

@@ -142,7 +142,10 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
       children: [
         Row(
           children: [
-            Text('Mis matches', style: style24M.copyWith(color: blackColor)),
+            Text(
+              'Mis matches',
+              style: style24M.copyWith(color: darkPurpleColor),
+            ),
             Spacer(),
             Image.asset(AppAssets.badgeIcon, scale: 4),
           ],
@@ -190,7 +193,10 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
       children: [
         Row(
           children: [
-            Text('Les matches', style: style24M.copyWith(color: blackColor)),
+            Text(
+              'Les matches',
+              style: style24M.copyWith(color: darkPurpleColor),
+            ),
             Spacer(),
             Image.asset(AppAssets.badgeIcon, scale: 4),
           ],
@@ -692,7 +698,7 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: blackColor.withOpacity(0.2),
+                                    color: darkPurpleColor.withOpacity(0.2),
                                     spreadRadius: 1,
                                     blurRadius: 5,
                                     offset: const Offset(0, 3),
@@ -791,7 +797,7 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: blackColor),
+                            border: Border.all(color: darkPurpleColor),
                             shape: BoxShape.circle,
                           ),
                           padding: const EdgeInsets.all(15),

@@ -23,7 +23,7 @@ class BlockedCompaniesViewModel extends GetxController {
         companyName: 'Talenty',
         location: 'Colombia',
         status: 'Bloqueada',
-        logoUrl: AppAssets.menulogo,
+        logoUrl: AppAssets.cImg03,
       ),
       CompanyProfileModel(
         state: 'CDMX',
@@ -31,7 +31,7 @@ class BlockedCompaniesViewModel extends GetxController {
         companyName: 'Rappi food',
         location: 'México',
         status: 'Bloqueada',
-        logoUrl: AppAssets.menulogo,
+        logoUrl: AppAssets.cImg2,
       ),
       // Add more dummy companies as needed
     ];

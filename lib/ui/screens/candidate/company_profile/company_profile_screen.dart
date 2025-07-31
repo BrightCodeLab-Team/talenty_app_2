@@ -319,7 +319,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Text(
               'Omega 306, Romero de Terreros, Coyoacán, 04310 Ciudad de México, CDMX',
-              style: style14M.copyWith(color: blackColor),
+              style: style14M.copyWith(color: darkPurpleColor),
             ),
           ),
           10.verticalSpace,
@@ -332,7 +332,10 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
           10.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Text('Privado', style: style14M.copyWith(color: blackColor)),
+            child: Text(
+              'Privado',
+              style: style14M.copyWith(color: darkPurpleColor),
+            ),
           ),
           10.verticalSpace,
           CustomDivider(),
@@ -344,7 +347,10 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
           10.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Text('14000', style: style14M.copyWith(color: blackColor)),
+            child: Text(
+              '14000',
+              style: style14M.copyWith(color: darkPurpleColor),
+            ),
           ),
         ],
       ),
@@ -382,11 +388,11 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
                 ),
                 title: Text(
                   'Jesús Arellano',
-                  style: style18B.copyWith(color: blackColor),
+                  style: style18B.copyWith(color: darkPurpleColor),
                 ),
                 subtitle: Text(
                   'Recursos Humanos',
-                  style: style14M.copyWith(color: blackColor),
+                  style: style14M.copyWith(color: darkPurpleColor),
                 ),
               ),
             ),
@@ -421,7 +427,7 @@ class CustomJobVacancyCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: blackColor.withOpacity(0.2),
+              color: darkPurpleColor.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 3,
               offset: const Offset(0, 0),
@@ -456,7 +462,7 @@ class CustomJobVacancyCard extends StatelessWidget {
                         children: [
                           Text(
                             jobVacancyModel.jobTitle ?? 'Job Title',
-                            style: style16B.copyWith(color: blackColor),
+                            style: style16B.copyWith(color: darkPurpleColor),
                           ),
                           Spacer(),
                           Container(
@@ -503,7 +509,7 @@ class CustomJobVacancyCard extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               jobVacancyModel.jobDescription ?? 'No description provided.',
-              style: style14M.copyWith(color: blackColor),
+              style: style14M.copyWith(color: darkPurpleColor),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),

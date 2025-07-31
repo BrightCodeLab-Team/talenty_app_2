@@ -53,10 +53,10 @@ class Candidate22PercentScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: whiteColor,
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: blackColor, width: 1),
+                          border: Border.all(color: darkPurpleColor, width: 1),
                           boxShadow: [
                             BoxShadow(
-                              color: blackColor,
+                              color: darkPurpleColor,
                               offset: Offset(-4, 4),
                               blurRadius: 0,
                               spreadRadius: 0,
@@ -73,7 +73,9 @@ class Candidate22PercentScreen extends StatelessWidget {
                             children: [
                               Text(
                                 'Experiencia laboral',
-                                style: style20B.copyWith(color: blackColor),
+                                style: style20B.copyWith(
+                                  color: darkPurpleColor,
+                                ),
                               ),
                               8.verticalSpace,
                               Text(
@@ -87,7 +89,9 @@ class Candidate22PercentScreen extends StatelessWidget {
                                   Spacer(),
                                   Text(
                                     'Máximo 3',
-                                    style: style16B.copyWith(color: blackColor),
+                                    style: style16B.copyWith(
+                                      color: darkPurpleColor,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -327,7 +331,7 @@ class WorkExperienceEntryWidget extends StatelessWidget {
 
         // Date fields
         10.verticalSpace,
-        Text('Periodo', style: style16B.copyWith(color: blackColor)),
+        Text('Periodo', style: style16B.copyWith(color: darkPurpleColor)),
         10.verticalSpace,
 
         // Start date
@@ -354,7 +358,7 @@ class WorkExperienceEntryWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Mes', style: style16B.copyWith(color: blackColor)),
+                  Text('Mes', style: style16B.copyWith(color: darkPurpleColor)),
                   1.verticalSpace,
                   _buildDateDropdown(
                     context,
@@ -376,7 +380,7 @@ class WorkExperienceEntryWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('Año', style: style16B.copyWith(color: blackColor)),
+                  Text('Año', style: style16B.copyWith(color: darkPurpleColor)),
                   1.verticalSpace,
                   _buildDateDropdown(
                     context,
@@ -448,7 +452,10 @@ class WorkExperienceEntryWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Mes', style: style16B.copyWith(color: blackColor)),
+                    Text(
+                      'Mes',
+                      style: style16B.copyWith(color: darkPurpleColor),
+                    ),
                     1.verticalSpace,
                     _buildDateDropdown(
                       context,
@@ -470,7 +477,10 @@ class WorkExperienceEntryWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Año', style: style16B.copyWith(color: blackColor)),
+                    Text(
+                      'Año',
+                      style: style16B.copyWith(color: darkPurpleColor),
+                    ),
                     1.verticalSpace,
                     _buildDateDropdown(
                       context,
@@ -507,7 +517,7 @@ class WorkExperienceEntryWidget extends StatelessWidget {
                     color: whiteColor,
                     boxShadow: [
                       BoxShadow(
-                        color: blackColor.withOpacity(0.25),
+                        color: darkPurpleColor.withOpacity(0.25),
                         offset: Offset(0, 2),
                         blurRadius: 4,
                         spreadRadius: 0,
@@ -541,7 +551,7 @@ class WorkExperienceEntryWidget extends StatelessWidget {
                     10.horizontalSpace,
                     Text(
                       'Borrar experiencia',
-                      style: style14M.copyWith(color: blackColor),
+                      style: style14M.copyWith(color: darkPurpleColor),
                     ),
                   ],
                 ),
@@ -558,7 +568,7 @@ class WorkExperienceEntryWidget extends StatelessWidget {
                 10.horizontalSpace,
                 Text(
                   'Borrar experiencia',
-                  style: style16M.copyWith(color: blackColor),
+                  style: style16M.copyWith(color: darkPurpleColor),
                 ),
               ],
             ),

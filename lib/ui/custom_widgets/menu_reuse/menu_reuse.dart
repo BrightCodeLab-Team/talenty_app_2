@@ -30,7 +30,9 @@ class MenuReuse extends StatelessWidget {
           leading: leading,
           title: Text(
             title,
-            style: textStyle ?? style14sourceblack.copyWith(fontSize: 16),
+            style:
+                textStyle ??
+                style14sourceblack.copyWith(color: menuReuseTextColor),
             maxLines: 1, // Ensures the text is limited to one line
             overflow: TextOverflow.ellipsis, // Adds "..." if text overflows
           ),
@@ -38,7 +40,7 @@ class MenuReuse extends StatelessWidget {
               trailing ??
               Icon(
                 Icons.arrow_forward_ios,
-                size: 20,
+                size: 17,
                 color: trailingIconColor ?? lightBlackColor,
               ),
           onTap: onTap,

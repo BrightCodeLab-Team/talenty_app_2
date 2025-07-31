@@ -263,7 +263,10 @@ class CustomOnboardingTooltip extends StatelessWidget {
             color: whiteColor,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
-              BoxShadow(color: blackColor.withOpacity(0.20), blurRadius: 10),
+              BoxShadow(
+                color: darkPurpleColor.withOpacity(0.20),
+                blurRadius: 10,
+              ),
             ],
           ),
           width: double.infinity,

@@ -131,8 +131,8 @@ class ImagePreviewScreen extends StatelessWidget {
                         },
                         width: 312.w,
                         backgroundColor: Colors.transparent,
-                        borderColor: blackColor,
-                        textColor: blackColor,
+                        borderColor: darkPurpleColor,
+                        textColor: darkPurpleColor,
                       ),
                       46.verticalSpace,
                     ],
@@ -141,7 +141,7 @@ class ImagePreviewScreen extends StatelessWidget {
                 if (model.isLoading)
                   Positioned.fill(
                     child: Container(
-                      color: blackColor.withOpacity(0.5),
+                      color: darkPurpleColor.withOpacity(0.5),
                       child: Center(
                         child: Container(
                           width: 145.w,

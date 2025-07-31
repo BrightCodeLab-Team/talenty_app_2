@@ -86,7 +86,9 @@ class AppAssets {
   ///
   static String match = "$iconsAssets/match.png";
   static String payments = "$iconsAssets/payments.png";
+  static String payments2 = "$iconsAssets/payments2.png";
   static String location = "$iconsAssets/location.png";
+  static String location2 = "$iconsAssets/location2.png";
   static String transferOutline = "$iconsAssets/transfer-outline.png";
   static String eyeIcon = "$iconsAssets/eyeIcon.png";
   static String meGustaImg = "$staticAssets/meGustaImg.png";
@@ -98,6 +100,9 @@ class AppAssets {
   static String dividerImage = "$iconsAssets/separador.png";
 
   static String closeIcon = "$iconsAssets/close.png";
+
+  static String noDispCamera = "$iconsAssets/noDispCamera.png";
+  static String dispoCamera = "$iconsAssets/dispoCamera.png";
 
   /*    
 

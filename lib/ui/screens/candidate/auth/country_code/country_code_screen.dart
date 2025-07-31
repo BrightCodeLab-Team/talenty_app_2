@@ -43,7 +43,7 @@ class CandidateRegistrationCountryCodeScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Ingresa tu número celular',
-                              style: style16B.copyWith(color: blackColor),
+                              style: style16B.copyWith(color: darkPurpleColor),
                             ),
                             const Spacer(),
                             Text(
@@ -67,7 +67,7 @@ class CandidateRegistrationCountryCodeScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10.r),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: blackColor.withOpacity(
+                                    color: darkPurpleColor.withOpacity(
                                       0.3,
                                     ), // Subtle shadow
                                     spreadRadius: 3,
@@ -94,12 +94,14 @@ class CandidateRegistrationCountryCodeScreen extends StatelessWidget {
                                 showDropDownButton: true,
                                 padding: EdgeInsets.zero,
                                 alignLeft: false,
-                                textStyle: style14M.copyWith(color: blackColor),
+                                textStyle: style14M.copyWith(
+                                  color: darkPurpleColor,
+                                ),
                                 dialogTextStyle: style14M.copyWith(
-                                  color: blackColor,
+                                  color: darkPurpleColor,
                                 ),
                                 searchStyle: style14M.copyWith(
-                                  color: blackColor,
+                                  color: darkPurpleColor,
                                 ),
                                 boxDecoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.r),
@@ -133,7 +135,7 @@ class CandidateRegistrationCountryCodeScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Confirma tu número celular',
-                              style: style16B.copyWith(color: blackColor),
+                              style: style16B.copyWith(color: darkPurpleColor),
                             ),
                             const Spacer(),
                             Text(
@@ -157,7 +159,7 @@ class CandidateRegistrationCountryCodeScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10.r),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: blackColor.withOpacity(
+                                    color: darkPurpleColor.withOpacity(
                                       0.3,
                                     ), // Subtle shadow
                                     spreadRadius: 3,
@@ -181,12 +183,14 @@ class CandidateRegistrationCountryCodeScreen extends StatelessWidget {
                                 showDropDownButton: true,
                                 padding: EdgeInsets.zero,
                                 alignLeft: false,
-                                textStyle: style14M.copyWith(color: blackColor),
+                                textStyle: style14M.copyWith(
+                                  color: darkPurpleColor,
+                                ),
                                 dialogTextStyle: style14M.copyWith(
-                                  color: blackColor,
+                                  color: darkPurpleColor,
                                 ),
                                 searchStyle: style14M.copyWith(
-                                  color: blackColor,
+                                  color: darkPurpleColor,
                                 ),
                                 boxDecoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.r),

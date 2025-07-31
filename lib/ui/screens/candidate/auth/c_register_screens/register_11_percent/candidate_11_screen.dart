@@ -52,10 +52,10 @@ class CandidateRegister11PercentScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: whiteColor,
                           borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(color: blackColor, width: 1),
+                          border: Border.all(color: darkPurpleColor, width: 1),
                           boxShadow: [
                             BoxShadow(
-                              color: blackColor,
+                              color: darkPurpleColor,
                               offset: Offset(-4, 4),
                               blurRadius: 0,
                               spreadRadius: 0,
@@ -73,7 +73,9 @@ class CandidateRegister11PercentScreen extends StatelessWidget {
                             children: [
                               Text(
                                 '¿Cuáles son tus estudios?',
-                                style: style20B.copyWith(color: blackColor),
+                                style: style20B.copyWith(
+                                  color: darkPurpleColor,
+                                ),
                               ),
                               8.verticalSpace,
                               Text(
@@ -425,7 +427,10 @@ class UniversityEntryWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Mes', style: style16B.copyWith(color: blackColor)),
+                    Text(
+                      'Mes',
+                      style: style16B.copyWith(color: darkPurpleColor),
+                    ),
                     1.verticalSpace,
                     _buildDateDropdown(
                       context,
@@ -452,7 +457,10 @@ class UniversityEntryWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Año', style: style16B.copyWith(color: blackColor)),
+                    Text(
+                      'Año',
+                      style: style16B.copyWith(color: darkPurpleColor),
+                    ),
                     1.verticalSpace,
                     _buildDateDropdown(
                       context,
@@ -502,7 +510,10 @@ class UniversityEntryWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Mes', style: style16B.copyWith(color: blackColor)),
+                    Text(
+                      'Mes',
+                      style: style16B.copyWith(color: darkPurpleColor),
+                    ),
                     1.verticalSpace,
                     _buildDateDropdown(
                       context,
@@ -529,7 +540,10 @@ class UniversityEntryWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Año', style: style16B.copyWith(color: blackColor)),
+                    Text(
+                      'Año',
+                      style: style16B.copyWith(color: darkPurpleColor),
+                    ),
                     1.verticalSpace,
                     _buildDateDropdown(
                       context,
@@ -565,11 +579,11 @@ class UniversityEntryWidget extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6.r),
-                      border: Border.all(color: blackColor, width: 2),
+                      border: Border.all(color: darkPurpleColor, width: 2),
                       color: whiteColor,
                       boxShadow: [
                         BoxShadow(
-                          color: blackColor.withOpacity(0.25),
+                          color: darkPurpleColor.withOpacity(0.25),
                           offset: Offset(0, 2),
                           blurRadius: 4,
                           spreadRadius: 0,
@@ -612,7 +626,7 @@ class UniversityEntryWidget extends StatelessWidget {
                       10.horizontalSpace,
                       Text(
                         'Borrar estudio',
-                        style: style16M.copyWith(color: blackColor),
+                        style: style16M.copyWith(color: darkPurpleColor),
                       ),
                     ],
                   ),
@@ -632,7 +646,7 @@ class UniversityEntryWidget extends StatelessWidget {
                   10.horizontalSpace,
                   Text(
                     'Borrar estudio',
-                    style: style16M.copyWith(color: blackColor),
+                    style: style16M.copyWith(color: darkPurpleColor),
                   ),
                 ],
               ),

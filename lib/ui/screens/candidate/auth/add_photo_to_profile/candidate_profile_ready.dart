@@ -42,7 +42,7 @@ class CandidateProfileReadyScreen extends StatelessWidget {
             children: [
               Text(
                 '¡Tu perfil está casi listo!',
-                style: style24M.copyWith(color: blackColor),
+                style: style24M.copyWith(color: darkPurpleColor),
               ),
               10.verticalSpace,
               Text(

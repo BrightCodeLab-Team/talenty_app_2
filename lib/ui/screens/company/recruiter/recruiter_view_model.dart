@@ -52,7 +52,7 @@ class RecruiterViewModel extends ChangeNotifier {
           label: "Pausada",
           value: "pausada",
           count: 2,
-          color: yelloBrownColor,
+          color: yellowBrownColor,
         ),
         TagModel(
           label: "Finalizada",
@@ -81,7 +81,7 @@ class RecruiterViewModel extends ChangeNotifier {
           label: "Pausada",
           value: "pausada",
           count: 2,
-          color: yelloBrownColor,
+          color: yellowBrownColor,
         ),
         TagModel(
           label: "Finalizada",

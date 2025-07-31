@@ -468,7 +468,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: blackColor.withOpacity(0.2),
+                                    color: darkPurpleColor.withOpacity(0.2),
                                     spreadRadius: 1,
                                     blurRadius: 5,
                                     offset: const Offset(0, 3),
@@ -567,7 +567,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: blackColor),
+                            border: Border.all(color: darkPurpleColor),
                             shape: BoxShape.circle,
                           ),
                           padding: const EdgeInsets.all(15),
@@ -712,7 +712,9 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             children: [
                               Text(
                                 'Filtrar por',
-                                style: style24M.copyWith(color: blackColor),
+                                style: style24M.copyWith(
+                                  color: darkPurpleColor,
+                                ),
                               ),
                               IconButton(
                                 icon: const Icon(Icons.close),
@@ -747,7 +749,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           const SizedBox(height: 20),
                           Text(
                             'Rango de sueldo deseado',
-                            style: style16B.copyWith(color: blackColor),
+                            style: style16B.copyWith(color: darkPurpleColor),
                           ),
 
                           Row(
@@ -791,7 +793,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           const SizedBox(height: 20),
                           Text(
                             'Entidad Federativa',
-                            style: style16B.copyWith(color: blackColor),
+                            style: style16B.copyWith(color: darkPurpleColor),
                           ),
                           const SizedBox(height: 8),
                           DropdownButtonFormField<String>(
@@ -818,7 +820,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           const SizedBox(height: 20),
                           Text(
                             'Alcaldía o municipio',
-                            style: style16B.copyWith(color: blackColor),
+                            style: style16B.copyWith(color: darkPurpleColor),
                           ),
                           const SizedBox(height: 8),
                           DropdownButtonFormField<String>(
@@ -845,7 +847,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           const SizedBox(height: 20),
                           Text(
                             'Modalidad de trabajo',
-                            style: style16B.copyWith(color: blackColor),
+                            style: style16B.copyWith(color: darkPurpleColor),
                           ),
                           const SizedBox(height: 8),
                           SingleChildScrollView(
@@ -918,7 +920,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           const SizedBox(height: 20),
                           Text(
                             'Filtrar por habilidades',
-                            style: style16B.copyWith(color: blackColor),
+                            style: style16B.copyWith(color: darkPurpleColor),
                           ),
                           const SizedBox(height: 8),
                           SingleChildScrollView(
@@ -939,7 +941,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                             style: TextStyle(
                                               color:
                                                   isSelected
-                                                      ? blackColor
+                                                      ? darkPurpleColor
                                                       : greyColor,
                                             ),
                                           ),
@@ -970,9 +972,8 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                           ),
                                           showCheckmark: false,
                                           elevation: 5.0,
-                                          shadowColor: blackColor.withOpacity(
-                                            0.4,
-                                          ),
+                                          shadowColor: darkPurpleColor
+                                              .withOpacity(0.4),
                                           onSelected:
                                               (bool selected) =>
                                                   _selectSkill(skill),

@@ -43,7 +43,7 @@ class BlockedCompaniesScreen extends StatelessWidget {
                   Text(
                     'No tienes empresas bloqueadas en este momento.',
                     textAlign: TextAlign.center,
-                    style: style16M.copyWith(color: blackColor),
+                    style: style16M.copyWith(color: darkPurpleColor),
                   ),
                 ],
               ),
@@ -63,27 +63,21 @@ class BlockedCompaniesScreen extends StatelessWidget {
                     10.verticalSpace,
                     Text(
                       'Empresas bloqueadas',
-                      style: style24M.copyWith(color: blackColor),
+                      style: style24M.copyWith(color: darkPurpleColor),
                     ),
-                    20.verticalSpace,
+
                     Center(
                       child: Image.asset(
                         AppAssets.blockCompaniesImg,
-                        scale: 4,
-                        // errorBuilder: (context, error, stackTrace) {
-                        //   return Icon(
-                        //     Icons.block,
-                        //     size: 80.h,
-                        //     color: greyColor,
-                        //   );
-                        // },
+                        height: 168.h,
+                        width: 134.w,
                       ),
                     ),
-                    10.verticalSpace,
+
                     Text(
                       'En esta sección encontrarás las empresas que has bloqueado previamente. Si las desbloqueas, una vez desbloqueadas, podrás ver nuevamente sus ofertas de trabajo y tener la opción de hacer match si lo deseas.'
                           .tr,
-                      style: style14B.copyWith(color: blackColor),
+                      style: style14B.copyWith(color: lightBlackColor),
                     ),
                     30.verticalSpace,
                   ],
@@ -154,7 +148,7 @@ class CompanyBlockedCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
         boxShadow: [
           BoxShadow(
-            color: blackColor.withOpacity(0.2),
+            color: darkPurpleColor.withOpacity(0.2),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, 3), // changes position of shadow
@@ -175,7 +169,7 @@ class CompanyBlockedCard extends StatelessWidget {
                   child:
                       company.logoUrl.isNotEmpty
                           ? ClipOval(
-                            child: Image.network(
+                            child: Image.asset(
                               company.logoUrl,
                               fit: BoxFit.cover,
 
@@ -200,7 +194,7 @@ class CompanyBlockedCard extends StatelessWidget {
                             company.companyName,
                             style: style16B.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: blackColor,
+                              color: lightBlackColor,
                             ), // Assuming blackColor
                           ),
                           Spacer(),
@@ -210,18 +204,20 @@ class CompanyBlockedCard extends StatelessWidget {
                               vertical: 2.h,
                             ), // Added padding
                             decoration: BoxDecoration(
-                              color: primaryColor.withOpacity(
-                                0.2,
-                              ), // Assuming redColor
+                              color: lightbrownColor,
                               borderRadius: BorderRadius.circular(3.r),
                             ),
-                            child: Text(
-                              company
-                                  .status
-                                  .tr, // Use .tr for localization if needed
-                              style: style12M.copyWith(
-                                color: primaryColor,
-                              ), // Assuming style12R
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                company
+                                    .status
+                                    .tr, // Use .tr for localization if needed
+                                style: style12M.copyWith(
+                                  fontSize: 11.sp,
+                                  color: brownColor2,
+                                ), // Assuming style12R
+                              ),
                             ),
                           ),
                         ],
@@ -254,7 +250,7 @@ class CompanyBlockedCard extends StatelessWidget {
             child: CustomButton(
               text: 'Desbloquear',
               onTap: onUnblockPressed,
-              backgroundColor: primaryColor, // Assuming redColor
+              backgroundColor: brownColor2, // Assuming redColor
               textColor: whiteColor,
               radius: 8.r,
             ),
@@ -302,26 +298,21 @@ class UnblockConfirmationDialog extends StatelessWidget {
               ],
             ),
             // Header with Talenty logo/text, similar to your app bar
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // You might have a specific logo/icon here
-                Image.asset(AppAssets.menulogo, height: 24.h),
-                SizedBox(width: 8.w),
-                Text(
-                  'Talenty',
-                  style: style16M.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: blackColor,
-                  ),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsetsGeometry.symmetric(vertical: 10.0),
+              child: Image.asset(
+                AppAssets.appLogo2,
+                height: 40.h,
+                width: 134.w,
+              ),
             ),
+            SizedBox(width: 8.w),
+
             16.verticalSpace,
             Text(
               '¿Está seguro de que quiere desbloquear a esta empresa?',
               textAlign: TextAlign.center,
-              style: style14B.copyWith(color: blackColor),
+              style: style14B.copyWith(color: darkPurpleColor),
             ),
             10.verticalSpace,
             Text(
@@ -336,7 +327,7 @@ class UnblockConfirmationDialog extends StatelessWidget {
                 Get.back(); // Pop the dialog first
                 onConfirmUnblock(); // Then execute the unblock logic
               },
-              backgroundColor: primaryColor,
+              backgroundColor: brownColor2,
               textColor: whiteColor,
               radius: 14.r,
             ),
@@ -347,8 +338,8 @@ class UnblockConfirmationDialog extends StatelessWidget {
                 Get.back(); // Just close the dialog
               },
               backgroundColor: Colors.transparent, // Transparent background
-              textColor: blackColor, // Text color for cancel
-              borderColor: blackColor, // Light border
+              textColor: darkPurpleColor, // Text color for cancel
+              borderColor: darkPurpleColor, // Light border
               radius: 14.r,
             ),
           ],

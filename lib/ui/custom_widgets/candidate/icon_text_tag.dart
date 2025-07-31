@@ -94,7 +94,7 @@ class CustomShadowIconTextTag extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: blackColor.withOpacity(0.25),
+                color: darkPurpleColor.withOpacity(0.25),
                 offset: Offset(0, 4),
                 blurRadius: 4,
                 spreadRadius: 0,
@@ -110,7 +110,7 @@ class CustomShadowIconTextTag extends StatelessWidget {
                 child: Text(
                   item.text,
                   style: style16M.copyWith(
-                    color: isSelected ? blackColor : textGreyColor,
+                    color: isSelected ? darkPurpleColor : textGreyColor,
                   ),
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
@@ -162,7 +162,7 @@ class CustomShadowIconTextTagWithoutIcon extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: blackColor.withOpacity(0.25),
+                color: darkPurpleColor.withOpacity(0.25),
                 offset: Offset(0, 4),
                 blurRadius: 4,
                 spreadRadius: 0,
@@ -178,7 +178,7 @@ class CustomShadowIconTextTagWithoutIcon extends StatelessWidget {
                 child: Text(
                   item.text,
                   style: style16M.copyWith(
-                    color: isSelected ? blackColor : textGreyColor,
+                    color: isSelected ? darkPurpleColor : textGreyColor,
                   ),
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,

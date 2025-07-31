@@ -53,18 +53,21 @@ class CustomCandidateHomeVacancyWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 10,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     vacancyModel.jobTitle ?? 'Job Title Null',
                     style: style14M.copyWith(
-                      color: blackColor,
+                      color: darkPurpleColor,
                       fontWeight: FontWeight.w600,
                     ),
                     maxLines:
-                        1, // Prevent text from taking too much vertical space
+                        2, // Prevent text from taking too much vertical space
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 8),
@@ -76,11 +79,12 @@ class CustomCandidateHomeVacancyWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(
-                        AppAssets.payments,
+                        AppAssets.payments2,
                         scale: 4,
-                        color: blackColor,
+                        color: darkPurpleColor,
                       ),
                       SizedBox(width: 8),
                       Flexible(
@@ -98,9 +102,9 @@ class CustomCandidateHomeVacancyWidget extends StatelessWidget {
                   Row(
                     children: [
                       Image.asset(
-                        AppAssets.location,
+                        AppAssets.location2,
                         scale: 4,
-                        color: blackColor,
+                        color: darkPurpleColor,
                       ),
                       SizedBox(width: 8),
                       Flexible(

@@ -17,7 +17,7 @@ class AppTheme {
       titleLarge: TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.bold,
-        color: blackColor,
+        color: darkPurpleColor,
       ),
       bodyMedium: TextStyle(fontSize: 16, color: lightBlackColor),
       labelLarge: TextStyle(fontSize: 14, color: brownColor),
@@ -50,7 +50,7 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    scaffoldBackgroundColor: blackColor,
+    scaffoldBackgroundColor: darkPurpleColor,
     primaryColor: primaryColor,
     appBarTheme: const AppBarTheme(
       backgroundColor: primaryColor,
