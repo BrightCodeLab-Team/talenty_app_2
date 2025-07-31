@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, unnecessary_null_comparison
+// ignore_for_file: use_key_in_widget_constructors, unnecessary_null_comparison, unnecessary_underscores, no_leading_underscores_for_local_identifiers, deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,9 +8,11 @@ import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/auth_field_decoration.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/ui/custom_widgets/bottom_bar/bottom_navigation_bar.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/home_widget.dart'
     show CustomCandidateHomeVacancyWidget;
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_search/candidate_search.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
@@ -87,85 +89,96 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => CandidateHomeViewModel(),
-      child: Consumer<CandidateHomeViewModel>(
+      child: Consumer2<CandidateHomeViewModel, CandidateRootScreenViewModel>(
         builder:
-            (context, model, child) => Scaffold(
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 20.0, top: 40, right: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _header(model),
-                      10.verticalSpace,
-                      Text(
-                        "Vacantes para ti",
-                        style: style24M.copyWith(
-                          fontFamily: GoogleFonts.lora().fontFamily,
-                        ),
-                      ),
-                      10.verticalSpace,
-                      Text(
-                        "Con base en tu experiencia, habilidades y preferencias, hemos seleccionado las vacantes que podrían ser ideales para ti. ",
-                        style: style14M.copyWith(color: textDarkGreyColor),
-                      ),
-                      20.verticalSpace,
-                      Row(
+            (context, model, rootModel, child) => Scaffold(
+              ///
+              /// App Bar
+              ///
+              appBar: _appBar(model),
+
+              ///
+              /// Start Body
+              ///
+              body: Stack(
+                alignment: Alignment.topRight,
+                children: [
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 20.0, right: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text(
+                            "Vacantes para ti",
+                            style: style24M.copyWith(
+                              fontFamily: GoogleFonts.lora().fontFamily,
+                            ),
+                          ),
+                          10.verticalSpace,
+                          Text(
+                            "Con base en tu experiencia, habilidades y preferencias, hemos seleccionado las vacantes que podrían ser ideales para ti. ",
+                            style: style14M.copyWith(color: textDarkGreyColor),
+                          ),
+                          20.verticalSpace,
                           Text(
                             "Categorías que podrían interesarte",
                             style: style16M,
                           ),
                           30.verticalSpace,
-                          // show badge when it is index >0 of _categories list other wise show empty text
-                        ],
-                      ),
-                      10.verticalSpace,
-                      model.vacancies.isNotEmpty
-                          ? _CategoriesAnimated(model: model)
-                          : SizedBox(),
-                      10.verticalSpace,
-                      model.categorySelect == 0
-                          ? GridView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: 10.0,
-                                  crossAxisSpacing: 10.0,
-                                  childAspectRatio: 0.43,
-                                ),
-                            itemCount:
-                                model.filtersApplied
-                                    ? model.filteredVacancies.length
-                                    : model.vacancies.length,
-                            shrinkWrap: true,
-                            itemBuilder: (BuildContext context, int index) {
-                              final vacancy =
-                                  model.filtersApplied
-                                      ? model.filteredVacancies[index]
-                                      : model.vacancies[index];
-
-                              return CustomCandidateHomeVacancyWidget(
-                                onTap: () {
-                                  _showCustomJobDetailDialog(
-                                    context,
-                                    model,
+                          10.verticalSpace,
+                          model.vacancies.isNotEmpty
+                              ? _CategoriesAnimated(model: model)
+                              : SizedBox(),
+                          10.verticalSpace,
+                          model.categorySelect == 0
+                              ? GridView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 10.0,
+                                      crossAxisSpacing: 10.0,
+                                      childAspectRatio: 0.40,
+                                    ),
+                                itemCount:
                                     model.filtersApplied
-                                        ? model.vacancies.indexOf(vacancy)
-                                        : index,
+                                        ? model.filteredVacancies.length
+                                        : model.vacancies.length,
+                                shrinkWrap: true,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final vacancy =
+                                      model.filtersApplied
+                                          ? model.filteredVacancies[index]
+                                          : model.vacancies[index];
+
+                                  return CustomCandidateHomeVacancyWidget(
+                                    onTap: () {
+                                      _showCustomJobDetailDialog(
+                                        context,
+                                        model,
+                                        rootModel,
+                                        model.filtersApplied
+                                            ? model.vacancies.indexOf(vacancy)
+                                            : index,
+                                      );
+                                    },
+                                    vacancyModel: vacancy,
                                   );
                                 },
-                                vacancyModel: vacancy,
-                              );
-                            },
-                          )
-                          : 20.verticalSpace,
-                      50.verticalSpace,
-                    ],
+                              )
+                              : 20.verticalSpace,
+                          50.verticalSpace,
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0, top: 90),
+                    child: Image.asset(AppAssets.badgeIcon, scale: 4),
+                  ),
+                ],
               ),
             ),
       ),
@@ -175,6 +188,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   void _showCustomJobDetailDialog(
     BuildContext context,
     CandidateHomeViewModel model,
+    CandidateRootScreenViewModel rootmodel,
     int initialIndex,
   ) {
     int currentIndex = initialIndex;
@@ -235,134 +249,189 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
       pageBuilder: (context, animation, secondaryAnimation) {
         return StatefulBuilder(
           builder: (context, setState) {
-            return GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onHorizontalDragStart: (details) {
-                setState(() {
-                  _isSwiping = true;
-                  _swipeOffset = 0.0;
-                  _swipeController.reset();
-                });
-              },
-              onHorizontalDragUpdate: (details) {
-                if (!_isSwiping) return;
-                setState(() {
-                  _swipeOffset += details.delta.dx;
-                  if (_swipeOffset > 50) {
-                    _swipeImage = AppAssets.meGustaImg;
-                  } else if (_swipeOffset < -50) {
-                    _swipeImage = AppAssets.noMeGustImg;
-                  } else {
-                    _swipeImage = '';
-                  }
-                });
-              },
-              onHorizontalDragEnd: (details) {
-                if (!_isSwiping) return;
-
-                if (details.primaryVelocity! > 300 || _swipeOffset > 100) {
-                  _handleSwipe(true, setState);
-                } else if (details.primaryVelocity! < -300 ||
-                    _swipeOffset < -100) {
-                  _handleSwipe(false, setState);
-                } else {
-                  setState(() {
-                    _isSwiping = false;
-                    _swipeOffset = 0.0;
-                    _swipeImage = '';
-                    _swipeController.reset();
-                  });
-                }
-              },
-              child: AnimatedBuilder(
-                animation: _swipeController,
-                builder: (context, child) {
-                  return Stack(
+            return Stack(
+              children: [
+                Scaffold(
+                  body: Stack(
                     children: [
-                      if (_isSwiping)
-                        Positioned.fill(
-                          child: Center(
-                            child: Transform.scale(
-                              scale: 1,
-                              child: Opacity(
-                                opacity: 1.0,
-                                child: _buildJobDetailContent(
-                                  context,
-                                  model,
-                                  _swipeOffset > 0
-                                      ? (currentIndex > 0
-                                          ? currentIndex - 1
-                                          : model.vacancies.length - 1)
-                                      : (currentIndex <
-                                              model.vacancies.length - 1
-                                          ? currentIndex + 1
-                                          : 0),
-                                  onSwipeLeft: () {
-                                    _triggerSwipe(false, setState);
-                                  },
-                                  onSwipeRight: () {
-                                    _triggerSwipe(true, setState);
-                                  },
-                                ),
+                      Column(
+                        children: [
+                          // Fixed logo at the top (not swipable)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Center(
+                              child: Image.asset(
+                                AppAssets.appLogo2,
+                                scale: 8,
+                                color: candidatoPrimaryColor,
                               ),
                             ),
                           ),
-                        ),
-                      Transform.translate(
-                        offset: Offset(_isSwiping ? _swipeOffset * 0.7 : 0, 0),
-                        child: Transform.rotate(
-                          angle: _isSwiping ? _swipeOffset * 0.0008 : 0,
-                          child: Opacity(
-                            opacity:
-                                _isSwiping
-                                    ? (1 -
-                                            ((_swipeOffset.abs() /
-                                                    MediaQuery.of(
-                                                      context,
-                                                    ).size.width) *
-                                                0.8))
-                                        .clamp(0.3, 1.0)
-                                    : 1.0,
-                            child: _buildJobDetailContent(
-                              context,
-                              model,
-                              currentIndex,
-                              onSwipeLeft: () {
-                                _triggerSwipe(false, setState);
+                          Expanded(
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onHorizontalDragStart: (details) {
+                                setState(() {
+                                  _isSwiping = true;
+                                  _swipeOffset = 0.0;
+                                  _swipeController.reset();
+                                });
                               },
-                              onSwipeRight: () {
-                                _triggerSwipe(true, setState);
+                              onHorizontalDragUpdate: (details) {
+                                if (!_isSwiping) return;
+                                setState(() {
+                                  _swipeOffset += details.delta.dx;
+                                  if (_swipeOffset > 50) {
+                                    _swipeImage = AppAssets.meGustaImg;
+                                  } else if (_swipeOffset < -50) {
+                                    _swipeImage = AppAssets.noMeGustImg;
+                                  } else {
+                                    _swipeImage = '';
+                                  }
+                                });
                               },
+                              onHorizontalDragEnd: (details) {
+                                if (!_isSwiping) return;
+
+                                if (details.primaryVelocity! > 300 ||
+                                    _swipeOffset > 100) {
+                                  _handleSwipe(true, setState);
+                                } else if (details.primaryVelocity! < -300 ||
+                                    _swipeOffset < -100) {
+                                  _handleSwipe(false, setState);
+                                } else {
+                                  setState(() {
+                                    _isSwiping = false;
+                                    _swipeOffset = 0.0;
+                                    _swipeImage = '';
+                                    _swipeController.reset();
+                                  });
+                                }
+                              },
+                              child: AnimatedBuilder(
+                                animation: _swipeController,
+                                builder: (context, child) {
+                                  return Stack(
+                                    children: [
+                                      if (_isSwiping)
+                                        _buildJobDetailContent(
+                                          context,
+                                          model,
+                                          _swipeOffset > 0
+                                              ? (currentIndex > 0
+                                                  ? currentIndex - 1
+                                                  : model.vacancies.length - 1)
+                                              : (currentIndex <
+                                                      model.vacancies.length - 1
+                                                  ? currentIndex + 1
+                                                  : 0),
+                                          onSwipeLeft: () {
+                                            _triggerSwipe(false, setState);
+                                          },
+                                          onSwipeRight: () {
+                                            _triggerSwipe(true, setState);
+                                          },
+                                        ),
+                                      Transform.translate(
+                                        offset: Offset(
+                                          _isSwiping ? _swipeOffset * 0.7 : 0,
+                                          0,
+                                        ),
+                                        child: Transform.rotate(
+                                          angle:
+                                              _isSwiping
+                                                  ? _swipeOffset * 0.0008
+                                                  : 0,
+                                          child: Opacity(
+                                            opacity:
+                                                _isSwiping
+                                                    ? (1 -
+                                                            ((_swipeOffset
+                                                                        .abs() /
+                                                                    MediaQuery.of(
+                                                                      context,
+                                                                    ).size.width) *
+                                                                0.8))
+                                                        .clamp(0.3, 1.0)
+                                                    : 1.0,
+                                            child: _buildJobDetailContent(
+                                              context,
+                                              model,
+                                              currentIndex,
+                                              onSwipeLeft: () {
+                                                _triggerSwipe(false, setState);
+                                              },
+                                              onSwipeRight: () {
+                                                _triggerSwipe(true, setState);
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
+
+                      // This is the overlay that should appear over the swipable content
                       if (_isSwiping && _swipeImage.isNotEmpty)
-                        IgnorePointer(
-                          child: Container(
-                            color: Colors.black.withOpacity(
-                              0.5 * (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
-                            ),
-                            child: Center(
-                              child: Opacity(
-                                opacity: (_swipeOffset.abs() / 100).clamp(
-                                  0.0,
-                                  1.0,
-                                ),
-                                child: Image.asset(
-                                  _swipeImage,
-                                  scale: 4,
-                                  fit: BoxFit.contain,
-                                  errorBuilder: (_, __, ___) => SizedBox(),
+                        Positioned.fill(
+                          child: IgnorePointer(
+                            child: Container(
+                              color: Colors.black.withOpacity(
+                                0.5 *
+                                    (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
+                              ),
+                              child: Center(
+                                child: Opacity(
+                                  opacity: (_swipeOffset.abs() / 100).clamp(
+                                    0.0,
+                                    1.0,
+                                  ),
+                                  child: Image.asset(
+                                    _swipeImage,
+                                    scale: 4,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (_, __, ___) => SizedBox(),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
                     ],
-                  );
-                },
-              ),
+                  ),
+                  bottomNavigationBar: // This is the overlay that should appear over the swipable content
+                      bottomBar(rootmodel),
+                ),
+
+                // This is the overlay that should appear over the swipable content
+                if (_isSwiping && _swipeImage.isNotEmpty)
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: Container(
+                        color: Colors.black.withOpacity(
+                          0.5 * (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
+                        ),
+                        child: Center(
+                          child: Opacity(
+                            opacity: (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
+                            child: Image.asset(
+                              _swipeImage,
+                              scale: 4,
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) => SizedBox(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             );
           },
         );
@@ -384,275 +453,267 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
     }
 
     final vacancy = model.vacancies[index];
-    return Center(
-      child: Material(
-        type: MaterialType.transparency,
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.9,
-          width: MediaQuery.of(context).size.width * 0.98,
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 3,
-                blurRadius: 10,
-                offset: const Offset(0, 5),
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        color: whiteColor,
+        boxShadow: [
+          BoxShadow(
+            color: blackColor.withOpacity(0.10),
+            spreadRadius: 0,
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        physics: AlwaysScrollableScrollPhysics(),
+        children: [
+          Stack(
+            children: [
+              Container(
+                height: 296,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF28407B),
+                  borderRadius: BorderRadius.circular(20.0),
+                  image: DecorationImage(
+                    image:
+                        vacancy.imageUrl != null && vacancy.imageUrl!.isNotEmpty
+                            ? AssetImage(vacancy.imageUrl!)
+                            : AssetImage(''),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 10,
+                left: 10,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Color(0xff4E4E4E),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
-          child: SingleChildScrollView(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: 180,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF28407B),
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(20.0),
-                        ),
-                        image: DecorationImage(
-                          image:
-                              vacancy.imageUrl != null &&
-                                      vacancy.imageUrl!.isNotEmpty
-                                  ? AssetImage(vacancy.imageUrl!)
-                                  : AssetImage(''),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 10,
-                      left: 10,
-                      child: GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Container(
-                          padding: const EdgeInsets.all(8.2),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.3),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                            size: 24,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(height: 15),
+                GestureDetector(
+                  onTap: () => Get.to(CompanyProfileScreen()),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const SizedBox(height: 15),
-                      GestureDetector(
-                        onTap: () => Get.to(CompanyProfileScreen()),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: blackColor.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: darkPurpleColor.withOpacity(0.2),
-                                    spreadRadius: 1,
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
+                            Image.asset(
+                              vacancy.imageUrl?.isNotEmpty == true
+                                  ? vacancy.imageUrl!
+                                  : '',
+                              height: 30,
+                              width: 30,
+                              errorBuilder:
+                                  (_, __, ___) => Icon(Icons.business),
+                            ),
+                            const SizedBox(width: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Viajes Premium',
+                                  style: style14M.copyWith(
+                                    decoration: TextDecoration.none,
                                   ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Image.asset(
-                                    vacancy.imageUrl?.isNotEmpty == true
-                                        ? vacancy.imageUrl!
-                                        : '',
-                                    height: 30,
-                                    width: 30,
-                                    errorBuilder:
-                                        (_, __, ___) => Icon(Icons.business),
+                                ),
+                                Text(
+                                  'Ver Perfil →',
+                                  style: style12M.copyWith(
+                                    color: textGreyColor,
+                                    decoration: TextDecoration.none,
                                   ),
-                                  const SizedBox(width: 8),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Viajes Premium',
-                                        style: style14M.copyWith(),
-                                      ),
-                                      Text(
-                                        'Ver Perfil →',
-                                        style: style12M.copyWith(
-                                          color: textGreyColor,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 15),
-                      Text('${vacancy.jobTitle}', style: style24B.copyWith()),
-                      const SizedBox(height: 4),
-                      Text(
-                        "${vacancy.location ?? 'set location'} •${vacancy.state ?? 'set state'}",
-                        style: style14M.copyWith(),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        "\$${vacancy.minSalary ?? 'set min salary'}-\$${vacancy.maxSalary ?? 'set max salary'}",
-                        style: style20B,
-                      ),
-                      const SizedBox(height: 16),
-                      Wrap(
-                        spacing: 8.w,
-                        runSpacing: 8.h,
-                        children: List.generate(model.tagItemsList.length, (i) {
-                          return CustomIconTextTag(item: model.tagItemsList[i]);
-                        }),
-                      ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 24.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          if (onSwipeLeft != null) onSwipeLeft();
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: pinkColor,
-                            shape: BoxShape.circle,
-                          ),
-                          padding: const EdgeInsets.all(15),
-                          child: const Icon(
-                            Icons.close,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
+                const SizedBox(height: 15),
+                Text(
+                  '${vacancy.jobTitle}',
+                  style: style24B.copyWith(decoration: TextDecoration.none),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "${vacancy.location ?? 'set location'} •${vacancy.state ?? 'set state'}",
+                  style: style14M.copyWith(decoration: TextDecoration.none),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "\$${vacancy.minSalary ?? 'set min salary'}-\$${vacancy.maxSalary ?? 'set max salary'}",
+                  style: style20B.copyWith(decoration: TextDecoration.none),
+                ),
+                const SizedBox(height: 16),
+                Wrap(
+                  spacing: 8.w,
+                  runSpacing: 8.h,
+                  children: List.generate(model.tagItemsList.length, (i) {
+                    return CustomIconTextTag(item: model.tagItemsList[i]);
+                  }),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 24.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if (onSwipeLeft != null) onSwipeLeft();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: pinkColor,
+                      shape: BoxShape.circle,
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    child: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(
+                      () => CompanyJobDetailScreen(
+                        jobVacancyModel: vacancy,
+                        index: index,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(
-                            () => CompanyJobDetailScreen(
-                              jobVacancyModel: vacancy,
-                              index: index,
-                            ),
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: darkPurpleColor),
-                            shape: BoxShape.circle,
-                          ),
-                          padding: const EdgeInsets.all(15),
-                          child: Center(
-                            child: Image.asset(
-                              AppAssets.eyeIcon,
-                              scale: 4,
-                              errorBuilder:
-                                  (_, __, ___) => Icon(Icons.remove_red_eye),
-                            ),
-                          ),
-                        ),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: blackColor),
+                      shape: BoxShape.circle,
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    child: Center(
+                      child: Image.asset(
+                        AppAssets.eyeIcon,
+                        scale: 4,
+                        errorBuilder:
+                            (_, __, ___) => Icon(Icons.remove_red_eye),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          if (onSwipeRight != null) onSwipeRight();
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: greenColor,
-                            shape: BoxShape.circle,
-                          ),
-                          padding: const EdgeInsets.all(15),
-                          child: const Icon(
-                            Icons.favorite,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    if (onSwipeRight != null) onSwipeRight();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: greenColor,
+                      shape: BoxShape.circle,
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    child: const Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                      size: 30,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }
 
-  _header(CandidateHomeViewModel model) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image.asset(
-          AppAssets.appLogo2,
-          scale: 6,
-          errorBuilder: (_, __, ___) => Icon(Icons.home),
+  AppBar _appBar(CandidateHomeViewModel model) {
+    return AppBar(
+      title: Image.asset(
+        AppAssets.appLogo2,
+        height: 40,
+        width: 114,
+        color: candidatoPrimaryColor,
+      ),
+      actionsPadding: EdgeInsets.only(right: 20),
+      actions: [
+        GestureDetector(
+          onTap: () {
+            _showFilterBottomSheet(model);
+          },
+          child: Image.asset(
+            AppAssets.filterIcon,
+            height: 17,
+            width: 16,
+            color: iconColor,
+          ),
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {
-                _showFilterBottomSheet(model);
-              },
-              child: Icon(Icons.filter_alt_rounded),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, right: 14.0),
+          child: GestureDetector(
+            onTap: () {
+              Get.to(() => NotificationScreen());
+            },
+            child: Image.asset(
+              AppAssets.notifIcon,
+              height: 24,
+              width: 24,
+              color: iconColor,
             ),
-            GestureDetector(
-              onTap: () {
-                Get.to(
-                  () => CandidateSearchScreen(allVacancies: model.vacancies),
-                );
-              },
-              child: Image.asset(
-                AppAssets.searchIcon,
-                height: 46,
-                width: 46,
-                errorBuilder: (_, __, ___) => Icon(Icons.search),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Get.to(() => NotificationScreen());
-              },
-              child: Image.asset(
-                AppAssets.notifIcon,
-                height: 24,
-                width: 24,
-                errorBuilder: (_, __, ___) => Icon(Icons.notifications),
-              ),
-            ),
-          ],
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Get.to(() => CandidateSearchScreen(allVacancies: model.vacancies));
+          },
+          child: Image.asset(
+            AppAssets.searchIcon,
+            height: 48,
+            width: 25,
+            color: iconColor,
+          ),
         ),
       ],
     );
@@ -1211,4 +1272,78 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
       ),
     );
   }
+}
+
+Widget bottomBar(CandidateRootScreenViewModel model) {
+  return Container(
+    height: 70,
+    decoration: BoxDecoration(
+      color: whiteColor,
+      boxShadow: [
+        BoxShadow(
+          color: Color(0xff9B9B9B).withOpacity(0.10),
+          offset: Offset(0, 0),
+          spreadRadius: 0,
+          blurRadius: 10,
+        ),
+      ],
+    ),
+
+    // surfaceTintColor: whiteColor,
+    // elevation: 0.0,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        CustomBottomNavigator(
+          currentIndex: model.selectedScreen,
+          indexNumber: 0,
+          image: model.selectedScreen == 0 ? AppAssets.home : AppAssets.home,
+          onPressed: () {
+            model.updatedScreen(0);
+          },
+          text: "Inicio",
+        ),
+        CustomBottomNavigator(
+          currentIndex: model.selectedScreen,
+          indexNumber: 1,
+          image: model.selectedScreen == 1 ? AppAssets.tips : AppAssets.tips,
+          onPressed: () {
+            model.updatedScreen(1);
+          },
+          text: 'Tips',
+        ),
+        CustomBottomNavigator(
+          currentIndex: model.selectedScreen,
+          indexNumber: 2,
+          image:
+              model.selectedScreen == 2
+                  ? AppAssets.vacancies
+                  : AppAssets.vacancies,
+          onPressed: () {
+            model.updatedScreen(2);
+          },
+          text: "Matches",
+        ),
+
+        CustomBottomNavigator(
+          currentIndex: model.selectedScreen,
+          indexNumber: 3,
+          image: model.selectedScreen == 3 ? AppAssets.chat : AppAssets.chat,
+          onPressed: () {
+            model.updatedScreen(3);
+          },
+          text: "Chats",
+        ),
+        CustomBottomNavigator(
+          currentIndex: model.selectedScreen,
+          indexNumber: 4,
+          image: model.selectedScreen == 4 ? AppAssets.menu : AppAssets.menu,
+          onPressed: () {
+            model.updatedScreen(4);
+          },
+          text: "Más",
+        ),
+      ],
+    ),
+  );
 }

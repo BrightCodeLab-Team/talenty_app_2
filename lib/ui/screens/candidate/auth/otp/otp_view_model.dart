@@ -34,7 +34,7 @@ class OtpViewModelCandidate extends BaseViewModel {
     return '$minutes:$seconds';
   }
 
-  OtpViewModel() {
+  OtpViewModelCandidate() {
     startTimer();
   }
 

@@ -1,14 +1,12 @@
 // ignore_for_file: use_super_parameters
 
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
-import 'package:talenty_app/ui/screens/candidate/mas/main_menu_screen/candidate_mas_screen.dart';
-import 'package:talenty_app/ui/screens/candidate/mas/mas_calendar_screen/calendar_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
@@ -28,9 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: title,
       translations: LocalizationService(),
-      // locale: DevicePreview.locale(context),
-      locale: Locale('en'),
-      builder: DevicePreview.appBuilder,
+      locale: Locale('es'),
       defaultTransition: Transition.rightToLeft,
       themeMode: languageProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeData(
@@ -47,7 +43,7 @@ class MyApp extends StatelessWidget {
           _designWidth,
           _designHeight,
         ), // Use your constants
-        builder: (context, child) => CandidateMasScreen(),
+        builder: (context, child) => CandidateRootScreen(),
       ),
     );
   }

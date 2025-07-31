@@ -58,7 +58,7 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
             20.verticalSpace,
             Center(
               child: Image.asset(
-                AppAssets.AvailabilityScreenThreeImage,
+                AppAssets.availabilityScreenThreeImage,
                 scale: 4,
               ),
             ),

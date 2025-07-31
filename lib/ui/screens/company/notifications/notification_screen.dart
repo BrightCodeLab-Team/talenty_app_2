@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, unnecessary_null_comparison
+// ignore_for_file: use_key_in_widget_constructors, unnecessary_null_comparison, sort_child_properties_last, unnecessary_underscores, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,76 +19,115 @@ class NotificationScreen extends StatelessWidget {
       child: Consumer<NotificationViewModel>(
         builder: (context, model, child) {
           return Scaffold(
-            backgroundColor: Colors.white,
-            body: Padding(
-              padding: const EdgeInsets.only(right: 16.0, left: 16.0, top: 40),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: CircleAvatar(
-                          backgroundColor: lightBlackColor,
-                          child: const Icon(
-                            Icons.arrow_back,
-                            color: whiteColor,
+            backgroundColor: whiteColor,
+            body: Stack(
+              children: [
+                ///
+                /// Main Content with AppBar
+                ///
+                Column(
+                  children: [
+                    ///
+                    /// Custom AppBar
+                    ///
+                    Container(
+                      height: kToolbarHeight + 40, // Extra space for overlap
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child: GestureDetector(
+                              onTap: () => Get.back(),
+                              child: CircleAvatar(
+                                radius: 16,
+                                backgroundColor: lightBlackColor,
+                                child: const Icon(
+                                  Icons.arrow_back,
+                                  color: whiteColor,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-
-                      Image.asset(AppAssets.appLogo2, scale: 6),
-                      Image.asset(AppAssets.badgeIcon, scale: 4),
-                    ],
-                  ),
-                  20.verticalSpace,
-                  Text(
-                    "Notificaciones",
-                    style: GoogleFonts.lora(
-                      textStyle: style16M.copyWith(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w400,
+                          Center(
+                            child: Image.asset(
+                              AppAssets.appLogo2,
+                              scale: 6,
+                              color: candidatoPrimaryColor,
+                            ),
+                          ),
+                          SizedBox(width: 40),
+                        ],
                       ),
                     ),
-                  ),
-                  8.verticalSpace,
 
-                  model.notifications.isNotEmpty && model.notifications != null
-                      ? Expanded(
-                        child: ListView.separated(
-                          itemCount: model.notifications.length,
-
-                          separatorBuilder:
-                              (_, __) => const Divider(
-                                height: 32,
-                                color: Color(0xFFE6E6E6),
+                    ///
+                    /// Body Below AppBar
+                    ///
+                    Expanded(
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            10.verticalSpace,
+                            Text(
+                              "Notificaciones",
+                              style: GoogleFonts.lora(
+                                textStyle: style16M.copyWith(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                          itemBuilder: (context, index) {
-                            final notification = model.notifications[index];
-                            return NotficationCard(
-                              notification: notification,
-                              onTap: () {
-                                model.removeNotification(index);
-                              },
-                            );
-                          },
-                        ),
-                      )
-                      : Expanded(
-                        child: Center(
-                          child: Text(
-                            "Aún no tienes notificaciones nuevas.",
-                            style: style20M,
-                          ),
+                            ),
+                            8.verticalSpace,
+
+                            model.notifications.isNotEmpty
+                                ? ListView.separated(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: model.notifications.length,
+                                  separatorBuilder:
+                                      (_, __) =>
+                                          Divider(color: Color(0xFFE6E6E6)),
+                                  itemBuilder: (context, index) {
+                                    final notification =
+                                        model.notifications[index];
+                                    return NotficationCard(
+                                      notification: notification,
+                                      onTap:
+                                          () => model.removeNotification(index),
+                                    );
+                                  },
+                                )
+                                : Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 100),
+                                    child: Text(
+                                      "Aún no tienes notificaciones nuevas.",
+                                      style: style20M,
+                                    ),
+                                  ),
+                                ),
+                          ],
                         ),
                       ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+
+                ///
+                /// Overlapping BadgeIcon
+                ///
+                Positioned(
+                  top: kToolbarHeight - 20,
+                  right: 16,
+                  child: Image.asset(AppAssets.badgeIcon, scale: 4),
+                ),
+              ],
             ),
           );
         },
@@ -110,34 +149,54 @@ class NotficationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const CircleAvatar(
-          backgroundColor: primaryColor,
-          radius: 22,
+        CircleAvatar(
+          backgroundColor: candidatoPrimaryColor,
+          radius: 18,
           child: Icon(Icons.notifications_none, color: whiteColor, size: 22),
         ),
-        3.horizontalSpace,
+        10.horizontalSpace,
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                notification.title,
-                style: GoogleFonts.sourceSans3(
-                  textStyle: style16M.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: darkPurpleColor,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.sizeOf(context).width * 0.6,
+                    child: Text(
+                      notification.title,
+                      style: GoogleFonts.sourceSans3(
+                        textStyle: style16M.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: blackColor,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: GestureDetector(
+                      child: Image.asset(AppAssets.closeIcon1, scale: 5),
+                      onTap: onTap,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 4),
-              Text(
-                notification.subtitle,
-                style: GoogleFonts.sourceSans3(
-                  textStyle: style14M.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: lightBlackColor,
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width * 0.6,
+                child: Text(
+                  notification.subtitle,
+                  style: GoogleFonts.sourceSans3(
+                    textStyle: style14M.copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: lightBlackColor,
+                    ),
                   ),
                 ),
               ),
@@ -153,10 +212,6 @@ class NotficationCard extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.close, size: 22, color: Colors.grey),
-          onPressed: onTap,
         ),
       ],
     );

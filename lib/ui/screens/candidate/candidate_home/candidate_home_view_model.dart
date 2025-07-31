@@ -1,3 +1,5 @@
+// ignore_for_file: strict_top_level_inference
+
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
@@ -12,16 +14,9 @@ class CandidateHomeViewModel extends BaseViewModel {
   }
 
   final List<TagItem> tagItemsList = [
-    TagItem('💪 Resiliencia'),
-    TagItem('💡 Pensamiento crítico'),
-    TagItem('🧠 Resolución de problemas'),
-    TagItem('🕊️ Empatía'),
-    TagItem('🗣️ Comunicación asertiva'),
-    TagItem('🧘‍️ Manejo del estrés'),
-    TagItem('🚀 Proactividad'),
-    TagItem('🤝 Trabajo en equipo'),
-    TagItem('💻 Uso de la Inteligencia Artificial'),
-    TagItem('⏰ Gestión del tiempo'),
+    TagItem('🖥️ Creación de contenido'),
+    TagItem('💻 Google Analytics'),
+    TagItem('💻 Marketing Digital'),
   ];
 
   ///
@@ -101,9 +96,9 @@ class CandidateHomeViewModel extends BaseViewModel {
   final List<JobVacancyModel> vacancies = [
     // Remote job in California with Flutter skills (matches first category)
     JobVacancyModel(
-      jobTitle: 'Flutter Developer',
-      jobSubTitle: 'Mobile Specialist',
-      imageUrl: AppAssets.cImg1,
+      jobTitle: 'Marketing intern',
+      jobSubTitle: 'Viajes Premium',
+      imageUrl: AppAssets.cImg06,
       state: 'California',
       municipality: 'San Francisco',
       neighborhood: 'SOMA',
@@ -129,10 +124,9 @@ class CandidateHomeViewModel extends BaseViewModel {
       matches: '90%',
     ),
 
-    // On-site Graphic Designer in New York (matches second category)
     JobVacancyModel(
-      jobTitle: 'Graphic Designer',
-      jobSubTitle: 'Visual Artist',
+      jobTitle: 'Coordinador de Marketing',
+      jobSubTitle: 'Rappi',
       imageUrl: AppAssets.cImg2,
       state: 'New York',
       municipality: 'Brooklyn',
@@ -158,11 +152,39 @@ class CandidateHomeViewModel extends BaseViewModel {
       jobPostedTime: '2025-06-25',
       matches: '85%',
     ),
+    JobVacancyModel(
+      jobTitle: 'Flutter Developer',
+      jobSubTitle: 'MVVM',
+      imageUrl: AppAssets.cImg07,
+      state: 'California',
+      municipality: 'San Francisco',
+      neighborhood: 'SOMA',
+      workingHours: '8',
+      jobType: 'Tiempo completo',
+      startDate: '2025-08-01',
+      endDate: '2025-12-31',
+      workMode: 'Remote',
+      workSchedule: 'Flexible',
+      canStartImmediately: 'Yes',
+      requiresExperience: '2+ Years',
+      workDays: 'Monday to Friday',
+      minSalary: '5000',
+      maxSalary: '8000',
+      paymentFrequency: 'Monthly',
+      benefits: 'Health Insurance, Remote Work',
+      softSkills: 'Teamwork, Communication',
+      technicalSkills: 'Flutter, Dart, Mobile Development',
+      maxSkillSelections: '5',
+      jobDescription: 'Flutter developer needed for mobile app development.',
+      location: 'Remote',
+      jobPostedTime: '2025-07-01',
+      matches: '90%',
+    ),
 
     // Hybrid Data Analyst in Texas (matches third category)
     JobVacancyModel(
-      jobTitle: 'Data Analyst',
-      jobSubTitle: 'Business Intelligence',
+      jobTitle: 'Especialista en Marketing Digital',
+      jobSubTitle: 'BBVA',
       imageUrl: AppAssets.cImg03,
       state: 'Texas',
       municipality: 'Austin',
@@ -192,8 +214,8 @@ class CandidateHomeViewModel extends BaseViewModel {
 
     // Digital Marketing in Jalisco (matches fourth category)
     JobVacancyModel(
-      jobTitle: 'Digital Marketing Specialist',
-      jobSubTitle: 'Social Media',
+      jobTitle: 'Empaquetador',
+      jobSubTitle: 'Pepsi',
       imageUrl: AppAssets.cImg4,
       state: 'Jalisco',
       municipality: 'Guadalajara',
@@ -254,7 +276,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     JobVacancyModel(
       jobTitle: 'Backend Developer',
       jobSubTitle: 'Node.js Expert',
-      imageUrl: AppAssets.cImg2,
+      imageUrl: AppAssets.cImg05,
       state: 'Ciudad de México',
       municipality: 'Benito Juárez',
       neighborhood: 'Nápoles',

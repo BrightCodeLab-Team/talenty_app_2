@@ -10,6 +10,7 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/enums/view_state.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/build_Profile/mandatory_registeration/mandatory_student_registration.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_view_model.dart';
 
 class CandidateOTPScreen extends StatelessWidget {
@@ -35,7 +36,8 @@ class CandidateOTPScreen extends StatelessWidget {
                 onTap: () {
                   if (model.validateOtp()) {
                     model.otpModel.email = email;
-                    model.verify();
+                    // model.verify();
+                    Get.to(() => MandatoryStudentRegistration());
                   }
                 },
                 text: 'btn_continue'.tr,

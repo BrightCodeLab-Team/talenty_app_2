@@ -23,31 +23,29 @@ class CustomIconTextTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxWidth: 150.w, // 💡 Limit the width per tag
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+      decoration: BoxDecoration(
+        border: Border.all(color: textGreyColor, width: 1),
+        borderRadius: BorderRadius.circular(8),
       ),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 6.h),
-        decoration: BoxDecoration(
-          border: Border.all(color: greyColor),
-          borderRadius: BorderRadius.circular(6.r),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Icon(item.icon, size: 16, color: Colors.grey[700]),
-            SizedBox(width: 4.w),
-            Flexible(
-              child: Text(
-                item.text,
-                style: style16M.copyWith(color: textGreyColor),
-                overflow: TextOverflow.ellipsis, // prevent overflow
-                softWrap: false,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Icon(item.icon, size: 16, color: Colors.grey[700]),
+          SizedBox(width: 4.w),
+          Flexible(
+            child: Text(
+              item.text,
+              style: style16M.copyWith(
+                color: textGreyColor,
+                decoration: TextDecoration.none,
               ),
+              overflow: TextOverflow.ellipsis, // prevent overflow
+              softWrap: false,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

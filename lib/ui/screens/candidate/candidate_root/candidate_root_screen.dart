@@ -2,6 +2,8 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -40,30 +42,24 @@ class CandidateRootScreen extends StatelessWidget {
                           Expanded(
                             child: model.allScreen[model.selectedScreen],
                           ),
-                          bottomBar(model), // move bottomBar inside body Stack
+                          bottomBar(model),
                         ],
                       ),
                   if (model.showTooltip) ...[
                     ClipRect(
-                      // <-- recommended to avoid overflow
                       child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
-                        child: Container(
-                          color: Colors.black.withOpacity(
-                            0.1,
-                          ), // lighter overlay
-                        ),
+                        filter: ImageFilter.blur(sigmaX: 0.7, sigmaY: 0.7),
+                        child: Container(color: blackColor.withOpacity(0.4)),
                       ),
                     ),
-
-                    model.currentStep == 3
+                    model.currentStep == 4
                         ? Positioned(
-                          bottom: 20, // adjust based on your UI
-                          left: 16,
-                          right: 16,
+                          bottom: 100,
+                          left: 40,
+                          right: 40,
                           child: CustomOnboardingTooltip(
                             onNext: model.nextStep,
-                            onClose: model.closeTooltip,
+                            // onClose: model.closeTooltip,
                             currentIndex: model.currentStep,
                             totalSteps: model.onboardingSteps.length,
                             title:
@@ -75,64 +71,40 @@ class CandidateRootScreen extends StatelessWidget {
                             iconPath:
                                 model.onboardingSteps[model
                                     .currentStep]['icon']!,
+                            number:
+                                model.onboardingSteps[model
+                                    .currentStep]['number']!,
+                          ),
+                        )
+                        : model.currentStep == 3
+                        ? Positioned(
+                          bottom: 60,
+                          left: -1,
+                          child: CustomOnboardingTooltip(
+                            onNext: model.nextStep,
+                            // onClose: model.closeTooltip,
+                            currentIndex: model.currentStep,
+                            totalSteps: model.onboardingSteps.length,
+                            title:
+                                model.onboardingSteps[model
+                                    .currentStep]['title']!,
+                            description:
+                                model.onboardingSteps[model
+                                    .currentStep]['description']!,
+                            iconPath:
+                                model.onboardingSteps[model
+                                    .currentStep]['icon']!,
+                            number:
+                                model.onboardingSteps[model
+                                    .currentStep]['number']!,
                           ),
                         )
                         : Column(
-                          // clipBehavior: Clip.none,
-                          // alignment: Alignment.topRight,
                           children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 5,
-                                horizontal: 10,
-                              ),
-                              margin: EdgeInsets.only(
-                                left: 20.0,
-                                right: 20.0,
-                                top: 40,
-                              ),
-                              decoration: BoxDecoration(
-                                color: whiteColor,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    AppAssets.userAddIcon,
-                                    height: 24,
-                                    width: 24,
-                                    color:
-                                        model.currentStep == 0
-                                            ? primaryColor
-                                            : textGreyColor,
-                                  ),
-                                  Image.asset(
-                                    AppAssets.notifIcon,
-                                    height: 24,
-                                    width: 24,
-                                    color:
-                                        model.currentStep == 1
-                                            ? primaryColor
-                                            : textGreyColor,
-                                  ),
-                                  Image.asset(
-                                    AppAssets.searchIcon,
-                                    height: 46,
-                                    width: 46,
-                                    color:
-                                        model.currentStep == 2
-                                            ? primaryColor
-                                            : textGreyColor,
-                                  ),
-                                ],
-                              ),
-                            ),
-
+                            60.verticalSpace,
                             CustomOnboardingTooltip(
                               onNext: model.nextStep,
-                              onClose: model.closeTooltip,
+                              // onClose: model.closeTooltip,
                               currentIndex: model.currentStep,
                               totalSteps: model.onboardingSteps.length,
                               title:
@@ -144,6 +116,9 @@ class CandidateRootScreen extends StatelessWidget {
                               iconPath:
                                   model.onboardingSteps[model
                                       .currentStep]['icon']!,
+                              number:
+                                  model.onboardingSteps[model
+                                      .currentStep]['number']!,
                             ),
                           ],
                         ),
@@ -156,20 +131,28 @@ class CandidateRootScreen extends StatelessWidget {
               ///
               bottomNavigationBar:
                   model.currentStep == 3 ? bottomBar(model) : SizedBox(),
-
-              ///
-              /// Right Drawer
-              ///
             ),
       ),
     );
   }
 
   Widget bottomBar(CandidateRootScreenViewModel model) {
-    return BottomAppBar(
-      color: whiteColor,
-      surfaceTintColor: whiteColor,
-      elevation: 0.0,
+    return Container(
+      height: 70,
+      decoration: BoxDecoration(
+        color: whiteColor,
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xff9B9B9B).withOpacity(0.10),
+            offset: Offset(0, 0),
+            spreadRadius: 0,
+            blurRadius: 10,
+          ),
+        ],
+      ),
+
+      // surfaceTintColor: whiteColor,
+      // elevation: 0.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -230,18 +213,20 @@ class CandidateRootScreen extends StatelessWidget {
 
 class CustomOnboardingTooltip extends StatelessWidget {
   final VoidCallback onNext;
-  final VoidCallback onClose;
+
   final int currentIndex;
   final int totalSteps;
   final String title;
+  final String number;
   final String description;
   final String iconPath;
 
   const CustomOnboardingTooltip({
     required this.onNext,
-    required this.onClose,
+
     required this.currentIndex,
     required this.totalSteps,
+    required this.number,
     required this.title,
     required this.description,
     required this.iconPath,
@@ -254,7 +239,11 @@ class CustomOnboardingTooltip extends StatelessWidget {
       alignment: Alignment.topRight,
       children: [
         Container(
-          margin: const EdgeInsets.only(top: 35, left: 16, right: 16),
+          margin: EdgeInsets.only(
+            top: 35,
+            left: 16,
+            right: currentIndex != 2 ? 16 : 4,
+          ),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: whiteColor,
@@ -266,28 +255,53 @@ class CustomOnboardingTooltip extends StatelessWidget {
               ),
             ],
           ),
-          width: double.infinity,
+          width: 303,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: Text(
-                      title,
-                      style: style16B.copyWith(fontWeight: FontWeight.w600),
+                  Flexible(
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 10),
+                          alignment: Alignment.center,
+                          height: 24,
+                          width: 24,
+                          decoration: BoxDecoration(
+                            color: Color(0xffF1F1F1),
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(width: 1, color: brownColor),
+                          ),
+
+                          child: Text(
+                            number,
+                            style: GoogleFonts.secularOne(
+                              textStyle: style14B.copyWith(color: brownColor),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            title,
+                            style: style16B.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: onClose,
-                    child: const Icon(Icons.close, size: 20),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              25.verticalSpace,
               Text(description, style: style14M),
-              const SizedBox(height: 16),
+              25.verticalSpace,
               Row(
                 children: List.generate(
                   totalSteps,
@@ -308,37 +322,48 @@ class CustomOnboardingTooltip extends StatelessWidget {
                 child: GestureDetector(
                   onTap: onNext,
                   child: Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: primaryColor,
+                      color: brownColor,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child:
                         currentIndex == 3
                             ? Image.asset("$iconsAssets/tick.png", scale: 3)
-                            : Icon(Icons.arrow_forward, color: whiteColor),
+                            : Image.asset(
+                              "$iconsAssets/circle_tick.png",
+                              scale: 3,
+                            ),
                   ),
                 ),
               ),
             ],
           ),
         ),
-        currentIndex != 3
+
+        currentIndex == 4
             ? Positioned(
-              top: 10,
+              bottom: -25,
+              left: 0.0,
+              right: 0.0,
+              child: Center(child: Image.asset(iconPath, scale: 4)),
+            )
+            : currentIndex != 3
+            ? Positioned(
+              top: 13,
               right:
                   currentIndex == 0
-                      ? 90
+                      ? 85
                       : currentIndex == 1
                       ? 50
                       : currentIndex == 2
-                      ? 20
+                      ? 8
                       : 0,
               child: Image.asset(iconPath, scale: 4),
             )
             : Positioned(
-              bottom: -15,
-              right: 140,
+              top: 10,
+              left: 40,
               child: Image.asset(iconPath, scale: 4),
             ),
       ],

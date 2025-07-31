@@ -223,7 +223,11 @@ class CandidateSignUpScreen extends StatelessWidget {
                       model.formKey.currentState?.validate() ?? false;
                   if (isValid && model.canSubmit) {
                     model.appUser.role = "candidate";
-                    model.registerUser();
+                    // model.registerUser();
+                    Get.to(
+                      () =>
+                          CandidateOTPScreen(email: model.emailController.text),
+                    );
                   }
                 },
                 text: 'btn_continue'.tr,

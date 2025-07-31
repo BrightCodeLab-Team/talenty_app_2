@@ -19,7 +19,7 @@ class AppAssets {
   static String obReclutador4 = "$staticAssets/obReclutador4.png";
   static String selectionScreenGif = "$staticAssets/selectionScreenGif.gif";
   static String registerCompanyImage = "$staticAssets/registerCompanyImage.png";
-  static String Star44 = "$staticAssets/Star.png";
+  static String star44 = "$staticAssets/Star.png";
   static String registerRecruiterImage =
       "$staticAssets/registerRecruiterImage.png";
   static String deleteAccountGif = "$staticAssets/deleteAccountGif.png";
@@ -33,6 +33,9 @@ class AppAssets {
   static String cImg2 = "$dynamicAssets/img2.png";
   static String cImg03 = "$dynamicAssets/img03.png";
   static String cImg4 = "$dynamicAssets/img4.png";
+  static String cImg05 = "$dynamicAssets/image5.png";
+  static String cImg06 = "$dynamicAssets/image6.png";
+  static String cImg07 = "$dynamicAssets/image7.png";
 
   ///
   /// SELECTION SCREEN
@@ -93,13 +96,18 @@ class AppAssets {
   static String eyeIcon = "$iconsAssets/eyeIcon.png";
   static String meGustaImg = "$staticAssets/meGustaImg.png";
   static String noMeGustImg = "$staticAssets/noMeGustImg.png";
-  static String AvailabilityScreenThreeImage =
+  static String availabilityScreenThreeImage =
       "$staticAssets/AvailabilityScreenThreeImage.png";
   static String blockCompaniesImg = "$staticAssets/blockCompainiesImg.png";
 
   static String dividerImage = "$iconsAssets/separador.png";
 
   static String closeIcon = "$iconsAssets/close.png";
+  static String closeIcon1 = "$iconsAssets/closeIcon.png";
+  static String tablerHandClick = "$iconsAssets/tabler_hand-click.png";
+  static String logoPartner = "$iconsAssets/logo_partner.png";
+
+  static String filterIcon = "$iconsAssets/filter.png";
 
   static String noDispCamera = "$iconsAssets/noDispCamera.png";
   static String dispoCamera = "$iconsAssets/dispoCamera.png";

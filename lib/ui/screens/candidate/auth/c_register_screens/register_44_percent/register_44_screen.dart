@@ -208,7 +208,7 @@ class TalentCircleWidget extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(AppAssets.Star44),
+                        image: AssetImage(AppAssets.star44),
                         scale: 4,
                       ),
                     ),
