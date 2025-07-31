@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, unnecessary_null_comparison, unnecessary_underscores, no_leading_underscores_for_local_identifiers, deprecated_member_use
+// ignore_for_file: use_key_in_widget_constructors, unnecessary_null_comparison, unnecessary_underscores, no_leading_underscores_for_local_identifiers, deprecated_member_use, invalid_use_of_visible_for_testing_member, use_super_parameters
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,6 +12,8 @@ import 'package:talenty_app/ui/custom_widgets/bottom_bar/bottom_navigation_bar.d
 import 'package:talenty_app/ui/custom_widgets/candidate/home_widget.dart'
     show CustomCandidateHomeVacancyWidget;
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
+import 'package:talenty_app/ui/custom_widgets/drop_down/custom_drop_down_menu.dart';
+import 'package:talenty_app/ui/custom_widgets/drop_down/custom_drop_down_text_field.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_search/candidate_search.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
@@ -32,13 +34,11 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
     'Marketing Digital',
   ];
   final List<String> federalEntities = [
-    '--Selecciona uno--',
     'Ciudad de México',
     'Jalisco',
     'Nuevo León',
   ];
   final List<String> municipalities = [
-    'Selecciona una opción',
     'Benito Juárez',
     'Guadalajara',
     'Monterrey',
@@ -382,7 +382,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                         Positioned.fill(
                           child: IgnorePointer(
                             child: Container(
-                              color: Colors.black.withOpacity(
+                              color: blackColor.withOpacity(
                                 0.5 *
                                     (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
                               ),
@@ -414,7 +414,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                   Positioned.fill(
                     child: IgnorePointer(
                       child: Container(
-                        color: Colors.black.withOpacity(
+                        color: blackColor.withOpacity(
                           0.5 * (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
                         ),
                         child: Center(
@@ -500,7 +500,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                     ),
                     child: const Icon(
                       Icons.arrow_back,
-                      color: Colors.white,
+                      color: whiteColor,
                       size: 20,
                     ),
                   ),
@@ -522,7 +522,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: whiteColor,
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
@@ -612,11 +612,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                       shape: BoxShape.circle,
                     ),
                     padding: const EdgeInsets.all(15),
-                    child: const Icon(
-                      Icons.close,
-                      color: Colors.white,
-                      size: 30,
-                    ),
+                    child: const Icon(Icons.close, color: whiteColor, size: 30),
                   ),
                 ),
                 GestureDetector(
@@ -656,7 +652,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                     padding: const EdgeInsets.all(15),
                     child: const Icon(
                       Icons.favorite,
-                      color: Colors.white,
+                      color: whiteColor,
                       size: 30,
                     ),
                   ),
@@ -671,6 +667,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
 
   AppBar _appBar(CandidateHomeViewModel model) {
     return AppBar(
+      automaticallyImplyLeading: false,
       title: Image.asset(
         AppAssets.appLogo2,
         height: 40,
@@ -720,6 +717,14 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
   }
 
   void _showFilterBottomSheet(CandidateHomeViewModel model) {
+    final filterState = FilterState(); // Create local state for filters
+
+    // Initialize filter state with default values
+    filterState.selectedFederalEntity = federalEntities[0];
+    filterState.selectedMunicipality = municipalities[0];
+    filterState.selectedWorkModality =
+        workModalities.isNotEmpty ? workModalities[0] : null;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -728,7 +733,8 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
           builder: (BuildContext context, StateSetter setModalState) {
             void _selectWorkModality(String modality) {
               setModalState(() {
-                selectedWorkModality = modality;
+                filterState.selectedWorkModality = modality;
+                // Reorder to show selected first
                 workModalities.remove(modality);
                 workModalities.insert(0, modality);
               });
@@ -736,12 +742,12 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
 
             void _selectSkill(String skill) {
               setModalState(() {
-                if (selectedSkill == skill) {
-                  selectedSkill = null;
+                if (filterState.selectedSkill == skill) {
+                  filterState.selectedSkill = null;
                   skills.remove(skill);
                   skills.add(skill);
                 } else {
-                  selectedSkill = skill;
+                  filterState.selectedSkill = skill;
                   skills.remove(skill);
                   skills.insert(0, skill);
                 }
@@ -756,7 +762,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
               builder: (_, scrollController) {
                 return Container(
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: whiteColor,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
                     ),
@@ -786,27 +792,51 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                           const SizedBox(height: 20),
                           Text('Categoría que deseas', style: style16B),
                           const SizedBox(height: 8),
-                          DropdownButtonFormField<String>(
-                            decoration: authFieldDecoration.copyWith(
-                              hintText: 'EJ: Diseño Web',
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 12.w,
-                                vertical: 8.h,
+
+                          // Updated dropdown using filterState
+                          CustomDropDownTextField(
+                            borderColor:
+                                filterState.dropDown1Error
+                                    ? primaryColor
+                                    : lightBlackColor,
+                            hasDroppedDown: filterState.dropDown1,
+                            onTap: () {
+                              setModalState(() {
+                                filterState.toggleDropDown1();
+                                filterState.dropDown1Error = false;
+                              });
+                            },
+                            text:
+                                filterState.dropDownText1.isEmpty
+                                    ? "Ej: Diseño Web"
+                                    : filterState.dropDownText1,
+                          ),
+                          if (filterState.dropDown1Error)
+                            Padding(
+                              padding: EdgeInsets.only(top: 4),
+                              child: Text(
+                                'field_required'.tr,
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
-                            value: selectedCategory,
-                            items:
-                                categories.map((String category) {
-                                  return DropdownMenuItem<String>(
-                                    value: category,
-                                    child: Text(category),
-                                  );
-                                }).toList(),
-                            onChanged:
-                                (String? newValue) => setModalState(
-                                  () => selectedCategory = newValue,
-                                ),
+                          10.verticalSpace,
+                          DropDownMenu(
+                            isDroppedDown: filterState.dropDown1,
+                            height: 180,
+                            options: model.categories,
+                            onItemTap: (val) {
+                              setModalState(() {
+                                filterState.setDropDownText1(val);
+                                filterState.selectedCategory = val;
+                                filterState.dropDown1Error = false;
+                                filterState.toggleDropDown1();
+                              });
+                            },
                           ),
+
                           const SizedBox(height: 20),
                           Text(
                             'Rango de sueldo deseado',
@@ -817,7 +847,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             children: [
                               Expanded(
                                 child: TextField(
-                                  controller: _salaryMinController,
+                                  controller: filterState.salaryMinController,
                                   decoration: authFieldDecoration.copyWith(
                                     hintText: 'De:',
                                     contentPadding: EdgeInsets.symmetric(
@@ -831,7 +861,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                               const SizedBox(width: 10),
                               Expanded(
                                 child: TextField(
-                                  controller: _salaryMaxController,
+                                  controller: filterState.salaryMaxController,
                                   decoration: authFieldDecoration.copyWith(
                                     hintText: 'A:',
                                     contentPadding: EdgeInsets.symmetric(
@@ -857,26 +887,49 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             style: style16B.copyWith(color: darkPurpleColor),
                           ),
                           const SizedBox(height: 8),
-                          DropdownButtonFormField<String>(
-                            decoration: authFieldDecoration.copyWith(
-                              hintText: '--Selecciona uno--',
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 12.w,
-                                vertical: 8.h,
+
+                          // Federal Entity Dropdown
+                          CustomDropDownTextField(
+                            borderColor:
+                                filterState.dropDown2Error
+                                    ? primaryColor
+                                    : lightBlackColor,
+                            hasDroppedDown: filterState.dropDown2,
+                            onTap: () {
+                              setModalState(() {
+                                filterState.toggleDropDown2();
+                                filterState.dropDown2Error = false;
+                              });
+                            },
+                            text:
+                                filterState.dropDownText2.isEmpty
+                                    ? "--Selecciona uno--"
+                                    : filterState.dropDownText2,
+                          ),
+                          if (filterState.dropDown2Error)
+                            Padding(
+                              padding: EdgeInsets.only(top: 4),
+                              child: Text(
+                                'field_required'.tr,
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
-                            value: selectedFederalEntity,
-                            items:
-                                federalEntities.map((String entity) {
-                                  return DropdownMenuItem<String>(
-                                    value: entity,
-                                    child: Text(entity),
-                                  );
-                                }).toList(),
-                            onChanged:
-                                (String? newValue) => setModalState(
-                                  () => selectedFederalEntity = newValue,
-                                ),
+                          10.verticalSpace,
+                          DropDownMenu(
+                            isDroppedDown: filterState.dropDown2,
+                            height: 180,
+                            options: federalEntities,
+                            onItemTap: (val) {
+                              setModalState(() {
+                                filterState.setDropDownText2(val);
+                                filterState.selectedFederalEntity = val;
+                                filterState.dropDown2Error = false;
+                                filterState.toggleDropDown2();
+                              });
+                            },
                           ),
                           const SizedBox(height: 20),
                           Text(
@@ -884,99 +937,81 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             style: style16B.copyWith(color: darkPurpleColor),
                           ),
                           const SizedBox(height: 8),
-                          DropdownButtonFormField<String>(
-                            decoration: authFieldDecoration.copyWith(
-                              hintText: 'Selecciona una opción',
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 12.w,
-                                vertical: 8.h,
+                          CustomDropDownTextField(
+                            borderColor:
+                                filterState.dropDown3Error
+                                    ? primaryColor
+                                    : lightBlackColor,
+                            hasDroppedDown: filterState.dropDown2,
+                            onTap: () {
+                              setModalState(() {
+                                filterState.toggleDropDown3();
+                                filterState.dropDown3Error = false;
+                              });
+                            },
+                            text:
+                                filterState.dropDownText3.isEmpty
+                                    ? "--Selecciona uno--"
+                                    : filterState.dropDownText3,
+                          ),
+                          if (filterState.dropDown3Error)
+                            Padding(
+                              padding: EdgeInsets.only(top: 4),
+                              child: Text(
+                                'field_required'.tr,
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
-                            value: selectedMunicipality,
-                            items:
-                                municipalities.map((String municipality) {
-                                  return DropdownMenuItem<String>(
-                                    value: municipality,
-                                    child: Text(municipality),
-                                  );
-                                }).toList(),
-                            onChanged:
-                                (String? newValue) => setModalState(
-                                  () => selectedMunicipality = newValue,
-                                ),
+                          10.verticalSpace,
+                          DropDownMenu(
+                            isDroppedDown: filterState.dropDown3,
+                            height: 180,
+                            options: municipalities,
+                            onItemTap: (val) {
+                              setModalState(() {
+                                filterState.setDropDownText3(val);
+                                filterState.selectedFederalEntity = val;
+                                filterState.dropDown3Error = false;
+                                filterState.toggleDropDown3();
+                              });
+                            },
                           ),
+
                           const SizedBox(height: 20),
                           Text(
                             'Modalidad de trabajo',
                             style: style16B.copyWith(color: darkPurpleColor),
                           ),
                           const SizedBox(height: 8),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children:
-                                  workModalities.map((modality) {
-                                    final isSelected =
-                                        selectedWorkModality == modality;
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: 8.0,
-                                      ),
-                                      child: ChoiceChip(
-                                        label: Row(
-                                          children: [
-                                            Icon(
-                                              modality == 'Híbrido'
-                                                  ? Icons.location_on
-                                                  : modality == 'Presencial'
-                                                  ? Icons.business_center
-                                                  : Icons.home_work,
-                                              color:
-                                                  isSelected
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                              size: 18,
-                                            ),
-                                            const SizedBox(width: 4),
-                                            Text(modality),
-                                          ],
-                                        ),
-                                        selected: isSelected,
-                                        selectedColor: brownColor,
-                                        backgroundColor: Colors.white,
-                                        labelStyle: TextStyle(
-                                          color:
-                                              isSelected
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                        ),
-                                        side: BorderSide(
-                                          color:
-                                              isSelected
-                                                  ? Colors.transparent
-                                                  : brownColor,
-                                        ),
-                                        avatarBorder: Border.all(
-                                          color: primaryColor,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            10,
-                                          ),
-                                        ),
-                                        showCheckmark: false,
-                                        //elevation: 5.0,
-                                        // shadowColor: blackColor.withOpacity(
-                                        //   0.4,
-                                        //),
-                                        onSelected: (bool selected) {
-                                          if (selected)
-                                            _selectWorkModality(modality);
-                                        },
-                                      ),
-                                    );
-                                  }).toList(),
-                            ),
+                          AnimatedChoiceChips<String>(
+                            items: workModalities,
+                            selectedItem: filterState.selectedWorkModality,
+                            onSelected: _selectWorkModality,
+                            labelBuilder: (modality) {
+                              final isSelected =
+                                  modality == filterState.selectedWorkModality;
+
+                              return Row(
+                                children: [
+                                  Image.asset(
+                                    AppAssets.location2,
+                                    scale: 3,
+                                    color: isSelected ? whiteColor : greyColor,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    modality,
+                                    style: style14M.copyWith(
+                                      color:
+                                          isSelected ? whiteColor : greyColor,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
                           const SizedBox(height: 20),
                           Text(
@@ -984,65 +1019,14 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                             style: style16B.copyWith(color: darkPurpleColor),
                           ),
                           const SizedBox(height: 8),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: SizedBox(
-                              height: 50,
-                              child: Row(
-                                children:
-                                    skills.map((skill) {
-                                      final isSelected = selectedSkill == skill;
-                                      return Padding(
-                                        padding: const EdgeInsets.only(
-                                          right: 8.0,
-                                        ),
-                                        child: ChoiceChip(
-                                          label: Text(
-                                            skill,
-                                            style: TextStyle(
-                                              color:
-                                                  isSelected
-                                                      ? darkPurpleColor
-                                                      : greyColor,
-                                            ),
-                                          ),
-                                          selected: isSelected,
-                                          selectedColor: brownColor.withOpacity(
-                                            0.2,
-                                          ),
-                                          backgroundColor: Colors.white,
-                                          labelStyle: TextStyle(
-                                            color:
-                                                isSelected
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                          ),
-                                          side: BorderSide(
-                                            color:
-                                                isSelected
-                                                    ? brownColor
-                                                    : transparent,
-                                          ),
-                                          avatarBorder: Border.all(
-                                            color: primaryColor,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              10,
-                                            ),
-                                          ),
-                                          showCheckmark: false,
-                                          elevation: 5.0,
-                                          shadowColor: darkPurpleColor
-                                              .withOpacity(0.4),
-                                          onSelected:
-                                              (bool selected) =>
-                                                  _selectSkill(skill),
-                                        ),
-                                      );
-                                    }).toList(),
-                              ),
-                            ),
+                          MultiSelectSkillsChips(
+                            skills: skills,
+                            selectedSkills: filterState.selectedSkills,
+                            onSelectionChanged: (updatedSelection) {
+                              setState(() {
+                                filterState.selectedSkills = updatedSelection;
+                              });
+                            },
                           ),
                           20.verticalSpace,
                           Row(
@@ -1051,17 +1035,18 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                 child: OutlinedButton(
                                   onPressed: () {
                                     setModalState(() {
-                                      selectedWorkModality =
+                                      filterState.selectedWorkModality =
                                           workModalities.isNotEmpty
                                               ? workModalities[0]
                                               : null;
-                                      selectedSkill = null;
-                                      selectedCategory = null;
-                                      selectedFederalEntity =
+                                      filterState.selectedSkill = null;
+                                      filterState.selectedCategory = null;
+                                      filterState.selectedFederalEntity =
                                           federalEntities[0];
-                                      selectedMunicipality = municipalities[0];
-                                      _salaryMinController.clear();
-                                      _salaryMaxController.clear();
+                                      filterState.selectedMunicipality =
+                                          municipalities[0];
+                                      filterState.salaryMinController.clear();
+                                      filterState.salaryMaxController.clear();
                                     });
                                   },
                                   style: OutlinedButton.styleFrom(
@@ -1086,13 +1071,18 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                 child: ElevatedButton(
                                   onPressed: () {
                                     model.applyFilters(
-                                      category: selectedCategory,
-                                      minSalary: _salaryMinController.text,
-                                      maxSalary: _salaryMaxController.text,
-                                      federalEntity: selectedFederalEntity,
-                                      municipality: selectedMunicipality,
-                                      workModality: selectedWorkModality,
-                                      skill: selectedSkill,
+                                      category: filterState.selectedCategory,
+                                      minSalary:
+                                          filterState.salaryMinController.text,
+                                      maxSalary:
+                                          filterState.salaryMaxController.text,
+                                      federalEntity:
+                                          filterState.selectedFederalEntity,
+                                      municipality:
+                                          filterState.selectedMunicipality,
+                                      workModality:
+                                          filterState.selectedWorkModality,
+                                      skill: filterState.selectedSkill,
                                     );
                                     Navigator.pop(context);
                                   },
@@ -1107,7 +1097,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                   ),
                                   child: const Text(
                                     'Aplicar filtros',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: whiteColor),
                                   ),
                                 ),
                               ),
@@ -1240,28 +1230,6 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
                       ),
                       if (isSelected) const SizedBox(width: 8),
                       Text(categories[displayIndex]),
-                      // rootModel.currentStep == 4
-                      //     ? Positioned(
-                      //       bottom: 200, // adjust based on your UI
-                      //       left: 16,
-                      //       right: 16,
-                      //       child: CustomOnboardingTooltip(
-                      //         onNext: rootModel.nextStep,
-                      //         onClose: rootModel.closeTooltip,
-                      //         currentIndex: rootModel.currentStep,
-                      //         totalSteps: rootModel.onboardingSteps.length,
-                      //         title:
-                      //             rootModel.onboardingSteps[rootModel
-                      //                 .currentStep]['title']!,
-                      //         description:
-                      //             rootModel.onboardingSteps[rootModel
-                      //                 .currentStep]['description']!,
-                      //         iconPath:
-                      //             rootModel.onboardingSteps[rootModel
-                      //                 .currentStep]['icon']!,
-                      //       ),
-                      //     )
-                      //     : SizedBox(),
                     ],
                   ),
                 ),
@@ -1346,4 +1314,191 @@ Widget bottomBar(CandidateRootScreenViewModel model) {
       ],
     ),
   );
+}
+
+class AnimatedChoiceChips<T> extends StatefulWidget {
+  final List<T> items;
+  final T? selectedItem;
+  final ValueChanged<T> onSelected;
+  final Widget Function(T) labelBuilder;
+  final Duration animationDuration;
+  final Color selectedColor;
+  final Color borderColor;
+  final Color selectedTextColor;
+  final Color unselectedTextColor;
+
+  const AnimatedChoiceChips({
+    Key? key,
+    required this.items,
+    required this.selectedItem,
+    required this.onSelected,
+    required this.labelBuilder,
+    this.animationDuration = const Duration(milliseconds: 300),
+    this.selectedColor = brownColor,
+    this.borderColor = brownColor,
+    this.selectedTextColor = whiteColor,
+    this.unselectedTextColor = blackColor,
+  }) : super(key: key);
+
+  @override
+  _AnimatedChoiceChipsState<T> createState() => _AnimatedChoiceChipsState<T>();
+}
+
+class _AnimatedChoiceChipsState<T> extends State<AnimatedChoiceChips<T>> {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children:
+            widget.items.map((item) {
+              final isSelected = widget.selectedItem == item;
+
+              return Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: AnimatedSwitcher(
+                  duration: widget.animationDuration,
+                  transitionBuilder: (child, animation) {
+                    return ScaleTransition(
+                      scale: animation,
+                      child: FadeTransition(opacity: animation, child: child),
+                    );
+                  },
+                  child: GestureDetector(
+                    key: ValueKey('$item\_$isSelected'),
+                    onTap: () => widget.onSelected(item),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: isSelected ? widget.selectedColor : whiteColor,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color:
+                              isSelected
+                                  ? Colors.transparent
+                                  : widget.borderColor,
+                          width: 1.0,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      child: DefaultTextStyle(
+                        style: TextStyle(
+                          color:
+                              isSelected
+                                  ? widget.selectedTextColor
+                                  : widget.unselectedTextColor,
+                        ),
+                        child: widget.labelBuilder(item),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+      ),
+    );
+  }
+}
+
+class MultiSelectSkillsChips extends StatefulWidget {
+  final List<String> skills;
+  final List<String> selectedSkills;
+  final ValueChanged<List<String>> onSelectionChanged;
+
+  const MultiSelectSkillsChips({
+    Key? key,
+    required this.skills,
+    required this.selectedSkills,
+    required this.onSelectionChanged,
+  }) : super(key: key);
+
+  @override
+  _MultiSelectSkillsChipsState createState() => _MultiSelectSkillsChipsState();
+}
+
+class _MultiSelectSkillsChipsState extends State<MultiSelectSkillsChips> {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: SizedBox(
+        height: 50,
+        child: Row(
+          children:
+              widget.skills.map((skill) {
+                final isSelected = widget.selectedSkills.contains(skill);
+
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (isSelected) {
+                        widget.selectedSkills.remove(skill);
+                      } else {
+                        widget.selectedSkills.add(skill);
+                      }
+                      widget.onSelectionChanged(widget.selectedSkills);
+                    });
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    margin: EdgeInsets.only(left: 8.0),
+                    decoration: BoxDecoration(
+                      color: isSelected ? lightbrownColor : whiteColor,
+                      borderRadius: BorderRadius.circular(6),
+                      boxShadow: [
+                        BoxShadow(
+                          color: blackColor.withOpacity(0.25),
+                          offset: Offset(0, 2),
+                          spreadRadius: 0,
+                          blurRadius: 4,
+                        ),
+                      ],
+                      border: Border.all(
+                        color: isSelected ? brownColor : Colors.transparent,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          skill,
+                          style: TextStyle(
+                            color: isSelected ? darkPurpleColor : greyColor,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 200),
+                          transitionBuilder: (child, animation) {
+                            return ScaleTransition(
+                              scale: animation,
+                              child: child,
+                            );
+                          },
+                          child:
+                              isSelected
+                                  ? Image.asset(AppAssets.closeIcon, scale: 3.5)
+                                  : Icon(
+                                    Icons.add,
+                                    key: ValueKey('add_$skill'),
+                                    color: greyColor,
+                                    size: 18,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+        ),
+      ),
+    );
+  }
 }

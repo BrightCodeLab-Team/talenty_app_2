@@ -78,7 +78,7 @@ class CandidateRootScreen extends StatelessWidget {
                         )
                         : model.currentStep == 3
                         ? Positioned(
-                          bottom: 60,
+                          bottom: 100,
                           left: -1,
                           child: CustomOnboardingTooltip(
                             onNext: model.nextStep,
@@ -101,7 +101,7 @@ class CandidateRootScreen extends StatelessWidget {
                         )
                         : Column(
                           children: [
-                            60.verticalSpace,
+                            70.verticalSpace,
                             CustomOnboardingTooltip(
                               onNext: model.nextStep,
                               // onClose: model.closeTooltip,
@@ -350,7 +350,7 @@ class CustomOnboardingTooltip extends StatelessWidget {
             )
             : currentIndex != 3
             ? Positioned(
-              top: 13,
+              top: 15,
               right:
                   currentIndex == 0
                       ? 85

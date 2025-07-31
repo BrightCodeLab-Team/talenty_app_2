@@ -102,7 +102,7 @@ class TipsScreen extends StatelessWidget {
                                       padding: const EdgeInsets.all(10.0),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(12),
-                                        child: Image.network(
+                                        child: Image.asset(
                                           tip.imageUrl ?? '',
                                           height: 130,
                                           width: double.infinity,
@@ -207,7 +207,7 @@ class TipsScreen extends StatelessWidget {
                         const SizedBox(height: 16),
 
                         Text(
-                          'Desarrolla tu networking:',
+                          'Desarrolla tu asseting:',
                           style: GoogleFonts.sourceSans3(
                             textStyle: style16M.copyWith(
                               fontWeight: FontWeight.w600,
@@ -245,7 +245,7 @@ class TipsScreen extends StatelessWidget {
                                       padding: const EdgeInsets.all(10.0),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(12),
-                                        child: Image.network(
+                                        child: Image.asset(
                                           tip.imageUrl ?? '',
                                           height: 130,
                                           width: double.infinity,
@@ -538,7 +538,7 @@ class TipsScreen extends StatelessWidget {
                                       padding: const EdgeInsets.all(10.0),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(12),
-                                        child: Image.network(
+                                        child: Image.asset(
                                           tip.imageUrl ?? '',
                                           height: 130,
                                           width: double.infinity,

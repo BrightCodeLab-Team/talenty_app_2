@@ -1,5 +1,6 @@
 // ignore_for_file: strict_top_level_inference
 
+import 'package:flutter/material.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
@@ -7,6 +8,56 @@ import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
 
 class CandidateHomeViewModel extends BaseViewModel {
   int categorySelect = 0;
+  bool dropDown1Error = false;
+  bool dropDown2Error = false;
+  bool dropDown3Error = false;
+
+  bool _dropDown1 = false;
+  bool _dropDown2 = false;
+  bool _dropDown3 = false;
+
+  bool get dropDown1 => _dropDown1;
+  bool get dropDown2 => _dropDown2;
+  bool get dropDown3 => _dropDown3;
+
+  String _dropDownText1 = '';
+  String _dropDownText2 = '';
+  String _dropDownText3 = '';
+  String _dropDownText4 = '';
+  String _dropDownText5 = '';
+
+  String get dropDownText1 => _dropDownText1;
+  String get dropDownText2 => _dropDownText2;
+  String get dropDownText3 => _dropDownText3;
+  String get dropDownText4 => _dropDownText4;
+  String get dropDownText5 => _dropDownText5;
+
+  List<String> categories = [
+    'Diseño Web',
+    'Diseño Gráfico',
+    'Desarrollo Mobile',
+    'Marketing Digital',
+  ];
+
+  toggleDropDown1() {
+    _dropDown1 = !_dropDown1;
+    notifyListeners();
+  }
+
+  toggleDropDown2() {
+    _dropDown2 = !_dropDown2;
+    notifyListeners();
+  }
+
+  toggleDropDown3() {
+    _dropDown3 = !_dropDown3;
+    notifyListeners();
+  }
+
+  setDropDownText1(String value) {
+    _dropDownText1 = value;
+    notifyListeners();
+  }
 
   onClickCategory(index) {
     categorySelect = index;
@@ -302,4 +353,52 @@ class CandidateHomeViewModel extends BaseViewModel {
       matches: '95%',
     ),
   ];
+}
+
+class FilterState {
+  bool dropDown1 = false; // For category
+  bool dropDown2 = false; // For federal entity
+  bool dropDown3 = false; // For municipality
+
+  bool dropDown1Error = false;
+
+  bool dropDown2Error = false;
+  bool dropDown3Error = false;
+  String dropDownText1 = '';
+  String dropDownText2 = '';
+  String dropDownText3 = '';
+
+  String? selectedCategory;
+  String? selectedFederalEntity;
+  String? selectedMunicipality;
+  String? selectedWorkModality;
+  String? selectedSkill;
+  List<String> selectedSkills = []; // New property for multiple selections
+
+  final TextEditingController salaryMinController = TextEditingController();
+  final TextEditingController salaryMaxController = TextEditingController();
+
+  void toggleDropDown1() {
+    dropDown1 = !dropDown1;
+  }
+
+  void toggleDropDown2() {
+    dropDown2 = !dropDown2;
+  }
+
+  void toggleDropDown3() {
+    dropDown3 = !dropDown3;
+  }
+
+  void setDropDownText1(String value) {
+    dropDownText1 = value;
+  }
+
+  void setDropDownText2(String value) {
+    dropDownText2 = value;
+  }
+
+  void setDropDownText3(String value) {
+    dropDownText3 = value;
+  }
 }
