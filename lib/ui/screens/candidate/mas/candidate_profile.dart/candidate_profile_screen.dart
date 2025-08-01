@@ -21,10 +21,7 @@ class CandidateProfileScreen extends StatelessWidget {
             (context, model, child) => Scaffold(
               appBar: AppBar(
                 backgroundColor: transparent,
-                leading: Padding(
-                  padding: EdgeInsetsGeometry.only(left: 15),
-                  child: CustomBackButton(),
-                ),
+                leading: CustomBackButton(),
                 title: Image.asset(AppAssets.appLogo2, scale: 4),
                 centerTitle: true,
                 actions: [

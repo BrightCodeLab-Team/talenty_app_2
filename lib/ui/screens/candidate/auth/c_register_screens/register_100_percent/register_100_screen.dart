@@ -70,10 +70,7 @@ class _Candidate100PercentScreenState extends State<Candidate100PercentScreen> {
               ),
               appBar: AppBar(
                 backgroundColor: transparent,
-                leading: const Padding(
-                  padding: EdgeInsets.only(left: 15),
-                  child: CustomBackButton(),
-                ),
+                leading: CustomBackButton(),
                 centerTitle: true,
                 title: Image.asset(AppAssets.appLogo2, scale: 4),
               ),

@@ -42,10 +42,7 @@ class Candidate33PercentScreen extends StatelessWidget {
               ),
               appBar: AppBar(
                 backgroundColor: transparent,
-                leading: Padding(
-                  padding: EdgeInsetsGeometry.only(left: 15),
-                  child: CustomBackButton(),
-                ),
+                leading: CustomBackButton(),
                 centerTitle: true,
                 title: Image.asset(AppAssets.appLogo2, scale: 4),
               ),
@@ -353,10 +350,7 @@ class _Candidate33PercentScreen2State extends State<Candidate33PercentScreen2> {
       ),
       appBar: AppBar(
         backgroundColor: transparent,
-        leading: const Padding(
-          padding: EdgeInsets.only(left: 15),
-          child: CustomBackButton(),
-        ),
+        leading: CustomBackButton(),
         centerTitle: true,
         title: Image.asset(AppAssets.appLogo2, scale: 4),
       ),
@@ -445,7 +439,7 @@ class _Candidate33PercentScreen2State extends State<Candidate33PercentScreen2> {
 
               decoration: authFieldDecoration.copyWith(
                 hintText:
-                    'Ej:¨• Creatividad para campañas digitales  • Gestión de redes sociales (Instagram, TikTok, LinkedIn)  • Edición básica de video y diseño gráfico con Canva  • Conocimientos en Google Ads y Meta Business Suite  • Estrategias de posicionamiento y branding  • Facilidad para comunicar ideas y trabajar en equipo.¨',
+                    'Ej:¨• Creatividad para campañas digitales • Gestión de redes sociales (Instagram, TikTok, LinkedIn) • Edición básica de video y diseño gráfico con Canva • Conocimientos en Google Ads y Meta Business Suite • Estrategias de posicionamiento y branding • Facilidad para comunicar ideas y trabajar en equipo.¨',
               ),
             ),
             10.verticalSpace,

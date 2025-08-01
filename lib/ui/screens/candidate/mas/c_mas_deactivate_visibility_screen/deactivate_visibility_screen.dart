@@ -23,10 +23,7 @@ class DeactivateVisibilityScreen extends StatelessWidget {
                 toolbarHeight: 80,
                 elevation: 0,
                 backgroundColor: Colors.white,
-                leading: Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: CustomBackButton(),
-                ),
+                leading: CustomBackButton(),
                 centerTitle: true,
                 title: Image.asset(
                   AppAssets.appLogo2,

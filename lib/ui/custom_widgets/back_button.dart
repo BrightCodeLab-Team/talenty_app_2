@@ -13,14 +13,14 @@ class CustomBackButton extends StatelessWidget {
     super.key,
     this.backgroundColor = lightBlackColor,
     this.iconColor = Colors.white,
-    this.size = 15,
+    this.size = 20,
     this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding ?? EdgeInsets.only(top: 10.h, left: 10.w),
+      padding: padding ?? EdgeInsets.only(top: 30.h, left: 15.w),
       child: CircleAvatar(
         radius: size?.r,
         backgroundColor: backgroundColor,

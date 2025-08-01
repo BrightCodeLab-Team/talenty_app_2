@@ -34,10 +34,7 @@ class _AvailabilityScreenThreeState extends State<AvailabilityScreenThree> {
       appBar: AppBar(
         toolbarHeight: 100,
         foregroundColor: transparent,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 15.0),
-          child: CustomBackButton(),
-        ),
+        leading: CustomBackButton(),
         title: Text(
           'Mi disponibilidad',
           style: style24M.copyWith(fontSize: 20),

@@ -26,10 +26,7 @@ class CandidateProfileReadyScreen extends StatelessWidget {
       ),
       appBar: AppBar(
         backgroundColor: transparent,
-        leading: Padding(
-          padding: EdgeInsetsGeometry.only(left: 15),
-          child: CustomBackButton(),
-        ),
+        leading: CustomBackButton(),
         centerTitle: true,
         title: Image.asset(AppAssets.appLogo2, scale: 4),
       ),

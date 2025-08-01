@@ -21,11 +21,8 @@ class BlockedCompaniesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: EdgeInsets.only(left: 15),
-          child: CustomBackButton(),
-        ),
-        title: Image.asset(AppAssets.appLogo2, scale: 4),
+        leading: CustomBackButton(padding: EdgeInsets.only(left: 15.w)),
+        title: Image.asset(AppAssets.appLogo2, height: 40.h, width: 134.w),
         centerTitle: true,
         backgroundColor: whiteColor,
         elevation: 0,
@@ -68,7 +65,7 @@ class BlockedCompaniesScreen extends StatelessWidget {
 
                     Center(
                       child: Image.asset(
-                        AppAssets.blockCompaniesImg,
+                        AppAssets.blockCompaniesImg2,
                         height: 168.h,
                         width: 134.w,
                       ),

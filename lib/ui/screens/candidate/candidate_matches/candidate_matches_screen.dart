@@ -219,6 +219,7 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                 child: Container(
                   //  height: MediaQuery.of(buildContext).size.height * 0.9,
                   width: double.infinity,
+
                   margin: EdgeInsets.symmetric(
                     vertical: 10,
                   ), // Add horizontal margin for spacing
@@ -240,7 +241,7 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          height: 180, // Adjust height to match the image
+                          height: 185, // Adjust height to match the image
                           decoration: BoxDecoration(
                             color: Color(0xFF28407B), // Dark blue background
                             borderRadius: BorderRadius.vertical(
@@ -267,20 +268,21 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                               //
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    _truncateWithEllipsis(
-                                      15,
+                                  Expanded(
+                                    child: Text(
                                       model.vacancies[index].jobTitle ?? '',
+                                      style:
+                                          style20B
+                                              .copyWith(), // Remove the double-dot `..`
+                                      overflow: TextOverflow.ellipsis,
+                                      softWrap: false,
+                                      maxLines: 2,
                                     ),
-                                    style:
-                                        style20B
-                                            .copyWith(), // Remove the double-dot `..`
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: false,
                                   ),
 
-                                  Spacer(),
                                   Container(
                                     color: darkgreenColor.withOpacity(0.1),
                                     child: Padding(
@@ -308,7 +310,8 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                               4.verticalSpace,
                               Row(
                                 children: [
-                                  Image.asset(AppAssets.location, scale: 4),
+                                  Image.asset(AppAssets.location2, scale: 4),
+                                  2.horizontalSpace,
                                   Text(
                                     "${model.vacancies[index].location ?? 'set location'} •${model.vacancies[index].state ?? 'set state'}",
                                     style: style14M.copyWith(
@@ -583,7 +586,7 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
       child: Material(
         type: MaterialType.transparency,
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.9,
+          height: MediaQuery.of(context).size.height * 0.8,
           width: MediaQuery.of(context).size.width * 0.98,
           margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
@@ -606,7 +609,7 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                 Stack(
                   children: [
                     Container(
-                      height: 180,
+                      height: 280.h,
                       decoration: BoxDecoration(
                         color: const Color(0xFF28407B),
                         borderRadius: const BorderRadius.vertical(
@@ -618,42 +621,8 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                                       vacancy.imageUrl!.isNotEmpty
                                   ? AssetImage(vacancy.imageUrl!)
                                   : AssetImage(''),
+
                           fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text(
-                                'VIAJES',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                ' | ',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                'PREMIUM®',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
                         ),
                       ),
                     ),
@@ -740,19 +709,19 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 15),
+                      const SizedBox(height: 10),
                       Text('${vacancy.jobTitle}', style: style24B.copyWith()),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 2),
                       Text(
                         "${vacancy.location ?? 'set location'} •${vacancy.state ?? 'set state'}",
                         style: style14M.copyWith(),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 5),
                       Text(
                         "\$${vacancy.minSalary ?? 'set min salary'}-\$${vacancy.maxSalary ?? 'set max salary'}",
                         style: style20B,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 8),
                       Wrap(
                         spacing: 8.w,
                         runSpacing: 8.h,
@@ -763,7 +732,7 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                20.verticalSpace,
                 Padding(
                   padding: const EdgeInsets.only(bottom: 24.0),
                   child: Row(

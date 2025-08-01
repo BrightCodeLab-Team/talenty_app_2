@@ -69,19 +69,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
                           fit: BoxFit.cover,
                         ),
                       ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          ///
-                          ///. back arrow on top left
-                          ///
-                          Positioned(
-                            top: 8,
-                            left: 8,
-                            child: CustomBackButton(),
-                          ),
-                        ],
-                      ),
+                      child: CustomBackButton(),
                     ),
                   ),
                   Positioned.fill(
@@ -459,12 +447,21 @@ class CustomJobVacancyCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            jobVacancyModel.jobTitle ?? 'Job Title',
-                            style: style16B.copyWith(color: darkPurpleColor),
+                          Expanded(
+                            child: Text(
+                              jobVacancyModel.jobTitle ?? 'Job Title',
+                              style: style16B.copyWith(color: darkPurpleColor),
+                              maxLines: 2,
+                              overflow:
+                                  TextOverflow
+                                      .ellipsis, // Adds "..." if text is too long
+                              softWrap:
+                                  false, // Prevents wrapping to the next line
+                            ),
                           ),
-                          Spacer(),
+
                           Container(
                             color: darkBlueColor.withOpacity(0.1),
                             child: Padding(

@@ -51,10 +51,7 @@ class CandidateAddPhotoTipsScreen extends StatelessWidget {
       ),
       appBar: AppBar(
         backgroundColor: transparent,
-        leading: const Padding(
-          padding: EdgeInsets.only(left: 15),
-          child: CustomBackButton(),
-        ),
+        leading: CustomBackButton(),
         title: Image.asset(AppAssets.appLogo2, scale: 4),
         centerTitle: true,
       ),

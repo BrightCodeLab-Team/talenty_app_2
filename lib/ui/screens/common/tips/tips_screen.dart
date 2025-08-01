@@ -76,7 +76,7 @@ class TipsScreen extends StatelessWidget {
                         const SizedBox(height: 12),
 
                         SizedBox(
-                          height: 300,
+                          height: 430.h,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: model.tipsList1.length,
@@ -104,8 +104,8 @@ class TipsScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(12),
                                         child: Image.asset(
                                           tip.imageUrl ?? '',
-                                          height: 130,
-                                          width: double.infinity,
+                                          height: 192.h,
+                                          width: 280.w,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -117,14 +117,14 @@ class TipsScreen extends StatelessWidget {
                                       child: Text(
                                         tip.title ?? '',
                                         style: GoogleFonts.roboto(
-                                          textStyle: style18M.copyWith(
+                                          textStyle: style20M.copyWith(
                                             fontWeight: FontWeight.w500,
                                             color: blackColor,
                                           ),
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(height: 4),
+                                    8.verticalSpace,
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 16,
@@ -133,8 +133,7 @@ class TipsScreen extends StatelessWidget {
                                         tip.description ?? '',
                                         style: GoogleFonts.roboto(
                                           textStyle: style16M.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: greyColor,
+                                            color: lightBlackColor2,
                                           ),
                                         ),
                                       ),
@@ -219,7 +218,7 @@ class TipsScreen extends StatelessWidget {
                         const SizedBox(height: 12),
 
                         SizedBox(
-                          height: 300,
+                          height: 430,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: model.tipsList2.length,
@@ -247,8 +246,8 @@ class TipsScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(12),
                                         child: Image.asset(
                                           tip.imageUrl ?? '',
-                                          height: 130,
-                                          width: double.infinity,
+                                          height: 192.h,
+                                          width: 280.w,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -267,7 +266,7 @@ class TipsScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(height: 4),
+                                    8.verticalSpace,
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 16,
@@ -277,7 +276,7 @@ class TipsScreen extends StatelessWidget {
                                         style: GoogleFonts.roboto(
                                           textStyle: style16M.copyWith(
                                             fontWeight: FontWeight.w400,
-                                            color: greyColor,
+                                            color: lightBlackColor2,
                                           ),
                                         ),
                                       ),
@@ -377,9 +376,9 @@ class TipsScreen extends StatelessWidget {
 
                                     child: Image.asset(
                                       AppAssets.cImg03,
-                                      scale: 3,
-                                      height: 250,
-                                      width: 210,
+
+                                      height: 250.h,
+                                      width: 230.w,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -512,7 +511,7 @@ class TipsScreen extends StatelessWidget {
                         const SizedBox(height: 12),
 
                         SizedBox(
-                          height: 320,
+                          height: 440,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: model.tipsList3.length,
@@ -540,8 +539,8 @@ class TipsScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(12),
                                         child: Image.asset(
                                           tip.imageUrl ?? '',
-                                          height: 130,
-                                          width: double.infinity,
+                                          height: 192.h,
+                                          width: 280.w,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -560,7 +559,7 @@ class TipsScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(height: 4),
+                                    8.verticalSpace,
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 16,
@@ -569,8 +568,7 @@ class TipsScreen extends StatelessWidget {
                                         tip.description ?? '',
                                         style: GoogleFonts.roboto(
                                           textStyle: style16M.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: greyColor,
+                                            color: lightBlackColor2,
                                           ),
                                         ),
                                       ),

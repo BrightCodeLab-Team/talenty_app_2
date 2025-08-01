@@ -20,11 +20,12 @@ class CandidateDeleteAccountScreen extends StatelessWidget {
         builder:
             (context, model, child) => Scaffold(
               appBar: AppBar(
-                leading: Padding(
-                  padding: EdgeInsets.only(left: 15),
-                  child: CustomBackButton(),
+                leading: CustomBackButton(),
+                title: Image.asset(
+                  AppAssets.appLogo2,
+                  height: 40.h,
+                  width: 134.w,
                 ),
-                title: Image.asset(AppAssets.appLogo2, scale: 4),
                 centerTitle: true,
                 backgroundColor: whiteColor,
                 elevation: 0,

@@ -184,7 +184,10 @@ class CompanyJobDetailScreen extends StatelessWidget {
           Text(
             // '\$${model.companyJobsVacancyList[index].minSalary}-\$${model.companyJobsVacancyList[index].maxSalary}',
             '\$${model.vacancies[index].minSalary}-\$${model.vacancies[index].maxSalary}',
-            style: style20B.copyWith(color: darkPurpleColor),
+            style: style20M.copyWith(
+              color: darkPurpleColor,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           5.verticalSpace,
           Row(

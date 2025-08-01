@@ -99,7 +99,7 @@ class AppAssets {
   static String availabilityScreenThreeImage =
       "$staticAssets/AvailabilityScreenThreeImage.png";
   static String blockCompaniesImg = "$staticAssets/blockCompainiesImg.png";
-
+  static String blockCompaniesImg2 = "$staticAssets/blockCompaniesimg2.png";
   static String dividerImage = "$iconsAssets/separador.png";
 
   static String closeIcon = "$iconsAssets/close.png";
