@@ -69,9 +69,15 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
                           fit: BoxFit.cover,
                         ),
                       ),
-                      child: CustomBackButton(),
+                      // child: Positioned(
+                      //   left: 15.w,
+                      //   top: 30.h,
+                      //   child: CustomBackButton(),
+                      // ),
                     ),
                   ),
+                  Positioned(left: 0, top: 0, child: CustomBackButton()),
+
                   Positioned.fill(
                     top: 230,
                     child: Container(
@@ -360,7 +366,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
         itemBuilder: (BuildContext context, int index) {
           return Container(
             width: double.infinity,
-            height: 70.h,
+
             margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             decoration: BoxDecoration(
               color: whiteColor,
