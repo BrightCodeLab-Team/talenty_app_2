@@ -9,13 +9,13 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/screens/company/onboarding_screen/onboarding_screen.dart';
 import 'package:talenty_app/ui/screens/company/onboarding_screen/onboarding_view_model.dart';
-
 import '../translation/translation_screen.dart';
 
 class SelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.to(() => TranslationScreen());

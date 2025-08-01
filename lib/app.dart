@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
           _designWidth,
           _designHeight,
         ), // Use your constants
-        builder: (context, child) => CandidateRootScreen(),
+        builder: (context, child) => SplashScreen(),
       ),
     );
   }
