@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
@@ -76,7 +75,7 @@ class TipsScreen extends StatelessWidget {
                         const SizedBox(height: 12),
 
                         SizedBox(
-                          height: 430.h,
+                          height: 440.h,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: model.tipsList1.length,
@@ -151,9 +150,16 @@ class TipsScreen extends StatelessWidget {
                                                 LaunchMode.externalApplication,
                                           );
                                         } else {
-                                          // Optionally handle the error
                                           print('Could not launch $url');
-                                          // You might want to show a snackbar or alert to the user here
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Could not open the link',
+                                              ),
+                                            ),
+                                          );
                                         }
                                       },
 
@@ -294,9 +300,16 @@ class TipsScreen extends StatelessWidget {
                                                 LaunchMode.externalApplication,
                                           );
                                         } else {
-                                          // Optionally handle the error
                                           print('Could not launch $url');
-                                          // You might want to show a snackbar or alert to the user here
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Could not open the link',
+                                              ),
+                                            ),
+                                          );
                                         }
                                       },
 
@@ -415,6 +428,17 @@ class TipsScreen extends StatelessWidget {
                                               mode:
                                                   LaunchMode
                                                       .externalApplication,
+                                            );
+                                          } else {
+                                            print('Could not launch $url');
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Could not open the link',
+                                                ),
+                                              ),
                                             );
                                           }
                                         },
@@ -586,9 +610,16 @@ class TipsScreen extends StatelessWidget {
                                                 LaunchMode.externalApplication,
                                           );
                                         } else {
-                                          // Optionally handle the error
                                           print('Could not launch $url');
-                                          // You might want to show a snackbar or alert to the user here
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Could not open the link',
+                                              ),
+                                            ),
+                                          );
                                         }
                                       },
 

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/core/enums/user_roles.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
 import '../auth/login_screen/login_screen.dart';

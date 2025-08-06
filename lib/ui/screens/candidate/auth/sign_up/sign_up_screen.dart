@@ -10,7 +10,6 @@ import 'package:talenty_app/core/enums/view_state.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/sign_up/sign_up_view_model.dart';
-import 'package:talenty_app/ui/screens/company/onboarding_screen/onboarding_view_model.dart';
 import '../../../../../core/constants/auth_field_decoration.dart';
 import '../../../../custom_widgets/buttons/custom_buttons.dart';
 import '../../../../custom_widgets/paddings_and_margins/custom_padding.dart';

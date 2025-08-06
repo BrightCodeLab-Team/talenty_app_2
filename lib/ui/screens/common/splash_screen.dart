@@ -1,5 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/ui/screens/permission_screens/notification_permission_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,8 +19,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 7), () {
-      Get.offAll(() => NotificationPermissionScreen());
+    Future.delayed(const Duration(seconds: 5), () {
+      Get.offAll(
+        () => NotificationPermissionScreen(),
+        transition: Transition.noTransition,
+      );
     });
   }
 
@@ -23,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox.expand(
-        child: Image.asset('assets/gif/salida1.gif', fit: BoxFit.cover),
+        child: Image.asset('$gifAssets/splash.gif', fit: BoxFit.cover),
       ),
     );
   }

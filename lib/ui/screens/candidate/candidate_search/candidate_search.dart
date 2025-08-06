@@ -9,6 +9,8 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/home_widget.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_matches/candidate_matches_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_view_model.dart';
@@ -50,11 +52,14 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CandidateHomeViewModel(),
-      child: Consumer<CandidateHomeViewModel>(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CandidateHomeViewModel()),
+        ChangeNotifierProvider(create: (_) => CandidateRootScreenViewModel(0)),
+      ],
+      child: Consumer2<CandidateHomeViewModel, CandidateRootScreenViewModel>(
         builder:
-            (context, model, child) => Scaffold(
+            (context, model, rootModel, child) => Scaffold(
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Column(
@@ -63,7 +68,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: SizedBox(
-                          height: 40.h,
+                          height: 60.h,
                           width: double.infinity,
                           child: TextFormField(
                             onFieldSubmitted: (value) => _filterJobs(value),
@@ -93,7 +98,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                         ),
                       ),
                       20.verticalSpace,
-                      Center(child: _buildSearchResults(model)),
+                      Center(child: _buildSearchResults(model, rootModel)),
                     ],
                   ),
                 ),
@@ -103,7 +108,10 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
     );
   }
 
-  Widget _buildSearchResults(CandidateHomeViewModel model) {
+  Widget _buildSearchResults(
+    CandidateHomeViewModel model,
+    CandidateRootScreenViewModel rootModel,
+  ) {
     if (_searchController.text.isEmpty) {
       return Center(
         child: Column(
@@ -160,7 +168,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
       itemBuilder: (BuildContext context, int index) {
         return CustomCandidateHomeVacancyWidget(
           onTap: () {
-            _showCustomJobDetailDialog(context, model, index);
+            _showCustomJobDetailDialog(context, model, rootModel, index);
           },
           vacancyModel: filteredVacancies[index],
         );
@@ -171,6 +179,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
   void _showCustomJobDetailDialog(
     BuildContext context,
     CandidateHomeViewModel model,
+    CandidateRootScreenViewModel rootmodel,
     int initialIndex,
   ) {
     int currentIndex = initialIndex;
@@ -178,7 +187,7 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
       duration: const Duration(milliseconds: 300),
       vsync: Navigator.of(context),
     );
-    String _swipeImage = AppAssets.meGustaImg;
+    String _swipeImage = AppAssets.meGustaImg; // Initialize with default
     bool _isSwiping = false;
     double _swipeOffset = 0.0;
 
@@ -192,10 +201,10 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
                   currentIndex =
                       currentIndex > 0
                           ? currentIndex - 1
-                          : filteredVacancies.length - 1;
+                          : model.vacancies.length - 1;
                 } else {
                   currentIndex =
-                      currentIndex < filteredVacancies.length - 1
+                      currentIndex < model.vacancies.length - 1
                           ? currentIndex + 1
                           : 0;
                 }
@@ -231,134 +240,186 @@ class _CandidateSearchScreenState extends State<CandidateSearchScreen> {
       pageBuilder: (context, animation, secondaryAnimation) {
         return StatefulBuilder(
           builder: (context, setState) {
-            return GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onHorizontalDragStart: (details) {
-                setState(() {
-                  _isSwiping = true;
-                  _swipeOffset = 0.0;
-                  _swipeController.reset();
-                });
-              },
-              onHorizontalDragUpdate: (details) {
-                if (!_isSwiping) return;
-                setState(() {
-                  _swipeOffset += details.delta.dx;
-                  if (_swipeOffset > 50) {
-                    _swipeImage = AppAssets.meGustaImg;
-                  } else if (_swipeOffset < -50) {
-                    _swipeImage = AppAssets.noMeGustImg;
-                  } else {
-                    _swipeImage = '';
-                  }
-                });
-              },
-              onHorizontalDragEnd: (details) {
-                if (!_isSwiping) return;
-
-                if (details.primaryVelocity! > 300 || _swipeOffset > 100) {
-                  _handleSwipe(true, setState);
-                } else if (details.primaryVelocity! < -300 ||
-                    _swipeOffset < -100) {
-                  _handleSwipe(false, setState);
-                } else {
-                  setState(() {
-                    _isSwiping = false;
-                    _swipeOffset = 0.0;
-                    _swipeImage = '';
-                    _swipeController.reset();
-                  });
-                }
-              },
-              child: AnimatedBuilder(
-                animation: _swipeController,
-                builder: (context, child) {
-                  return Stack(
+            return Stack(
+              children: [
+                Scaffold(
+                  body: Stack(
                     children: [
-                      if (_isSwiping)
-                        Positioned.fill(
-                          child: Center(
-                            child: Transform.scale(
-                              scale: 1,
-                              child: Opacity(
-                                opacity: 1.0,
-                                child: _buildJobDetailContent(
-                                  context,
-                                  model,
-                                  _swipeOffset > 0
-                                      ? (currentIndex > 0
-                                          ? currentIndex - 1
-                                          : filteredVacancies.length - 1)
-                                      : (currentIndex <
-                                              filteredVacancies.length - 1
-                                          ? currentIndex + 1
-                                          : 0),
-                                  onSwipeLeft: () {
-                                    _triggerSwipe(false, setState);
-                                  },
-                                  onSwipeRight: () {
-                                    _triggerSwipe(true, setState);
-                                  },
-                                ),
+                      Column(
+                        children: [
+                          // Fixed logo at the top (not swipable)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Center(
+                              child: Image.asset(
+                                AppAssets.appLogo2,
+                                scale: 8,
+                                color: candidatoPrimaryColor,
                               ),
                             ),
                           ),
-                        ),
-                      Transform.translate(
-                        offset: Offset(_isSwiping ? _swipeOffset * 0.7 : 0, 0),
-                        child: Transform.rotate(
-                          angle: _isSwiping ? _swipeOffset * 0.0008 : 0,
-                          child: Opacity(
-                            opacity:
-                                _isSwiping
-                                    ? (1 -
-                                            ((_swipeOffset.abs() /
-                                                    MediaQuery.of(
-                                                      context,
-                                                    ).size.width) *
-                                                0.8))
-                                        .clamp(0.3, 1.0)
-                                    : 1.0,
-                            child: _buildJobDetailContent(
-                              context,
-                              model,
-                              currentIndex,
-                              onSwipeLeft: () {
-                                _triggerSwipe(false, setState);
+                          Expanded(
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onHorizontalDragStart: (details) {
+                                setState(() {
+                                  _isSwiping = true;
+                                  _swipeOffset = 0.0;
+                                  _swipeController.reset();
+                                });
                               },
-                              onSwipeRight: () {
-                                _triggerSwipe(true, setState);
+                              onHorizontalDragUpdate: (details) {
+                                if (!_isSwiping) return;
+                                setState(() {
+                                  _swipeOffset += details.delta.dx;
+                                  if (_swipeOffset > 50) {
+                                    _swipeImage = AppAssets.meGustaImg;
+                                  } else if (_swipeOffset < -50) {
+                                    _swipeImage = AppAssets.noMeGustImg;
+                                  } else {
+                                    _swipeImage = '';
+                                  }
+                                });
                               },
+                              onHorizontalDragEnd: (details) {
+                                if (!_isSwiping) return;
+
+                                if (details.primaryVelocity! > 300 ||
+                                    _swipeOffset > 100) {
+                                  _handleSwipe(true, setState);
+                                } else if (details.primaryVelocity! < -300 ||
+                                    _swipeOffset < -100) {
+                                  _handleSwipe(false, setState);
+                                } else {
+                                  setState(() {
+                                    _isSwiping = false;
+                                    _swipeOffset = 0.0;
+                                    _swipeImage = '';
+                                    _swipeController.reset();
+                                  });
+                                }
+                              },
+                              child: AnimatedBuilder(
+                                animation: _swipeController,
+                                builder: (context, child) {
+                                  return Stack(
+                                    children: [
+                                      if (_isSwiping)
+                                        _buildJobDetailContent(
+                                          context,
+                                          model,
+                                          _swipeOffset > 0
+                                              ? (currentIndex > 0
+                                                  ? currentIndex - 1
+                                                  : model.vacancies.length - 1)
+                                              : (currentIndex <
+                                                      model.vacancies.length - 1
+                                                  ? currentIndex + 1
+                                                  : 0),
+                                          onSwipeLeft: () {
+                                            _triggerSwipe(false, setState);
+                                          },
+                                          onSwipeRight: () {
+                                            _triggerSwipe(true, setState);
+                                          },
+                                        ),
+                                      Transform.translate(
+                                        offset: Offset(
+                                          _isSwiping ? _swipeOffset * 0.7 : 0,
+                                          0,
+                                        ),
+                                        child: Transform.rotate(
+                                          angle:
+                                              _isSwiping
+                                                  ? _swipeOffset * 0.0008
+                                                  : 0,
+                                          child: Opacity(
+                                            opacity:
+                                                _isSwiping
+                                                    ? (1 -
+                                                            ((_swipeOffset
+                                                                        .abs() /
+                                                                    MediaQuery.of(
+                                                                      context,
+                                                                    ).size.width) *
+                                                                0.8))
+                                                        .clamp(0.3, 1.0)
+                                                    : 1.0,
+                                            child: _buildJobDetailContent(
+                                              context,
+                                              model,
+                                              currentIndex,
+                                              onSwipeLeft: () {
+                                                _triggerSwipe(false, setState);
+                                              },
+                                              onSwipeRight: () {
+                                                _triggerSwipe(true, setState);
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
+
+                      // This is the overlay that should appear over the swipable content
                       if (_isSwiping && _swipeImage.isNotEmpty)
-                        IgnorePointer(
-                          child: Container(
-                            color: Colors.black.withOpacity(
-                              0.5 * (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
-                            ),
-                            child: Center(
-                              child: Opacity(
-                                opacity: (_swipeOffset.abs() / 100).clamp(
-                                  0.0,
-                                  1.0,
-                                ),
-                                child: Image.asset(
-                                  _swipeImage,
-                                  scale: 4,
-                                  fit: BoxFit.contain,
-                                  errorBuilder: (_, __, ___) => SizedBox(),
+                        Positioned.fill(
+                          child: IgnorePointer(
+                            child: Container(
+                              color: blackColor.withOpacity(
+                                0.5 *
+                                    (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
+                              ),
+                              child: Center(
+                                child: Opacity(
+                                  opacity: (_swipeOffset.abs() / 100).clamp(
+                                    0.0,
+                                    1.0,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
                     ],
-                  );
-                },
-              ),
+                  ),
+
+                  ///
+                  /// bottom Navigation Bar
+                  ///
+                  bottomNavigationBar: bottomBar(rootmodel, setState),
+                ),
+
+                // This is the overlay that should appear over the swipable content
+                if (_isSwiping && _swipeImage.isNotEmpty)
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: Container(
+                        color: blackColor.withOpacity(
+                          0.5 * (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
+                        ),
+                        child: Center(
+                          child: Opacity(
+                            opacity: (_swipeOffset.abs() / 100).clamp(0.0, 1.0),
+                            child: Image.asset(
+                              _swipeImage,
+                              scale: 4,
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) => SizedBox(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             );
           },
         );

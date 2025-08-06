@@ -59,8 +59,21 @@ class CandidateHomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  onClickCategory(index) {
+  String get selectedCategory => categoryList[categorySelect];
+
+  void onClickCategory(int index) {
     categorySelect = index;
+
+    if (index == 0) {
+      filteredVacancies = vacancies;
+      filtersApplied = false;
+    } else {
+      final selected = categoryList[index];
+      filteredVacancies =
+          vacancies.where((job) => job.category == selected).toList();
+      filtersApplied = true;
+    }
+
     notifyListeners();
   }
 
@@ -141,6 +154,13 @@ class CandidateHomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  List<String> categoryList = [
+    "Todos",
+    "Arte y Diseño",
+    "Programación y Tecnología",
+    "Marketing y Ventas",
+  ];
+
   ///
   ///
   ///
@@ -149,6 +169,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     JobVacancyModel(
       jobTitle: 'Marketing intern',
       jobSubTitle: 'Viajes Premium',
+      category: 'Arte y Diseño', // ⬅️ MATCHES categoryList
       imageUrl: AppAssets.cImg06,
       state: 'California',
       municipality: 'San Francisco',
@@ -178,6 +199,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     JobVacancyModel(
       jobTitle: 'Coordinador de Marketing',
       jobSubTitle: 'Rappi',
+      category: 'Arte y Diseño', // ⬅️ MATCHES categoryList
       imageUrl: AppAssets.cImg2,
       state: 'New York',
       municipality: 'Brooklyn',
@@ -203,9 +225,11 @@ class CandidateHomeViewModel extends BaseViewModel {
       jobPostedTime: '2025-06-25',
       matches: '85%',
     ),
+
     JobVacancyModel(
       jobTitle: 'Flutter Developer',
       jobSubTitle: 'MVVM',
+      category: 'Programación y Tecnología',
       imageUrl: AppAssets.cImg07,
       state: 'California',
       municipality: 'San Francisco',
@@ -238,6 +262,7 @@ class CandidateHomeViewModel extends BaseViewModel {
       jobSubTitle: 'BBVA',
       imageUrl: AppAssets.cImg03,
       state: 'Texas',
+      category: 'Marketing y Ventas', // ⬅️ MATCHES categoryList
       municipality: 'Austin',
       neighborhood: 'Downtown',
       workingHours: '7',
@@ -268,6 +293,7 @@ class CandidateHomeViewModel extends BaseViewModel {
       jobTitle: 'Empaquetador',
       jobSubTitle: 'Pepsi',
       imageUrl: AppAssets.cImg4,
+      category: 'Programación y Tecnología',
       state: 'Jalisco',
       municipality: 'Guadalajara',
       neighborhood: 'Centro',
@@ -298,6 +324,7 @@ class CandidateHomeViewModel extends BaseViewModel {
       jobTitle: 'Frontend Developer',
       jobSubTitle: 'React Specialist',
       imageUrl: AppAssets.cImg1,
+      category: 'Programación y Tecnología',
       state: 'Nuevo León',
       municipality: 'Monterrey',
       neighborhood: 'San Pedro',
@@ -328,6 +355,7 @@ class CandidateHomeViewModel extends BaseViewModel {
       jobTitle: 'Backend Developer',
       jobSubTitle: 'Node.js Expert',
       imageUrl: AppAssets.cImg05,
+      category: 'Marketing y Ventas', // ⬅️ MATCHES categoryList
       state: 'Ciudad de México',
       municipality: 'Benito Juárez',
       neighborhood: 'Nápoles',
