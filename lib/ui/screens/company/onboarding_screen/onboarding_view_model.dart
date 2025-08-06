@@ -1,7 +1,6 @@
 import 'package:talenty_app/core/constants/app_assets.dart';
+import 'package:talenty_app/core/enums/user_roles.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
-
-enum UserRole { candidate, recruiter }
 
 class OnBoardingViewModel extends BaseViewModel {
   // Setting Role

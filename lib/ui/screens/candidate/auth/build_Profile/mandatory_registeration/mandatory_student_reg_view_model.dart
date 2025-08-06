@@ -1,3 +1,5 @@
+// ignore_for_file: strict_top_level_inference
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';

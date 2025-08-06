@@ -168,7 +168,7 @@ class MandatoryStudentRegistration extends StatelessWidget {
                               context,
                               model.dropDown1,
                               model.dropDown1Error,
-                              model.dropDownText1 ?? " ",
+                              model.dropDownText1 ?? "",
                               model.day,
 
                               toggle: () {

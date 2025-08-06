@@ -12,6 +12,7 @@ analyzer:
     library_private_types_in_public_api: ignore
     invalid_use_of_protected_member: ignore
     prefer_const_constructors_in_immutables: ignore
+    unused_element: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

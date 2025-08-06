@@ -14,6 +14,7 @@ import 'package:talenty_app/ui/custom_widgets/candidate/home_widget.dart'
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
 import 'package:talenty_app/ui/custom_widgets/drop_down/custom_drop_down_menu.dart';
 import 'package:talenty_app/ui/custom_widgets/drop_down/custom_drop_down_text_field.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_search/candidate_search.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
@@ -132,43 +133,42 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                               ? _CategoriesAnimated(model: model)
                               : SizedBox(),
                           10.verticalSpace,
-                          model.categorySelect == 0
-                              ? GridView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      mainAxisSpacing: 10.0,
-                                      crossAxisSpacing: 10.0,
-                                      childAspectRatio: 0.40,
-                                    ),
-                                itemCount:
-                                    model.filtersApplied
-                                        ? model.filteredVacancies.length
-                                        : model.vacancies.length,
-                                shrinkWrap: true,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final vacancy =
-                                      model.filtersApplied
-                                          ? model.filteredVacancies[index]
-                                          : model.vacancies[index];
 
-                                  return CustomCandidateHomeVacancyWidget(
-                                    onTap: () {
-                                      _showCustomJobDetailDialog(
-                                        context,
-                                        model,
-                                        rootModel,
-                                        model.filtersApplied
-                                            ? model.vacancies.indexOf(vacancy)
-                                            : index,
-                                      );
-                                    },
-                                    vacancyModel: vacancy,
+                          GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 10.0,
+                                  crossAxisSpacing: 10.0,
+                                  childAspectRatio: 0.40,
+                                ),
+                            itemCount:
+                                model.filtersApplied
+                                    ? model.filteredVacancies.length
+                                    : model.vacancies.length,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              final vacancy =
+                                  model.filtersApplied
+                                      ? model.filteredVacancies[index]
+                                      : model.vacancies[index];
+
+                              return CustomCandidateHomeVacancyWidget(
+                                onTap: () {
+                                  _showCustomJobDetailDialog(
+                                    context,
+                                    model,
+                                    rootModel,
+                                    model.filtersApplied
+                                        ? model.vacancies.indexOf(vacancy)
+                                        : index,
                                   );
                                 },
-                              )
-                              : 20.verticalSpace,
+                                vacancyModel: vacancy,
+                              );
+                            },
+                          ),
                           50.verticalSpace,
                         ],
                       ),
@@ -392,12 +392,6 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                                     0.0,
                                     1.0,
                                   ),
-                                  child: Image.asset(
-                                    _swipeImage,
-                                    scale: 4,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (_, __, ___) => SizedBox(),
-                                  ),
                                 ),
                               ),
                             ),
@@ -405,8 +399,11 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
                         ),
                     ],
                   ),
-                  bottomNavigationBar: // This is the overlay that should appear over the swipable content
-                      bottomBar(rootmodel),
+
+                  ///
+                  /// bottom Navigation Bar
+                  ///
+                  bottomNavigationBar: bottomBar(rootmodel, setState),
                 ),
 
                 // This is the overlay that should appear over the swipable content
@@ -703,7 +700,7 @@ class _CandidateHomeScreenState extends State<CandidateHomeScreen> {
         ),
         GestureDetector(
           onTap: () {
-            Get.to(() => CandidateSearchScreen(allVacancies: model.vacancies));
+            Get.to(CandidateSearchScreen(allVacancies: model.vacancies));
           },
           child: Image.asset(
             AppAssets.searchIcon,
@@ -1127,13 +1124,6 @@ class _CategoriesAnimated extends StatefulWidget {
 }
 
 class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
-  List<String> categories = [
-    "Todos",
-    "Arte y Diseño",
-    "Programación y Tecnología",
-    "Marketing y Ventas",
-  ];
-
   ///
   ///
   ///
@@ -1156,7 +1146,7 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: categories.length,
+        itemCount: widget.model.categoryList.length,
         itemBuilder: (context, index) {
           // Determine actual index considering selected item is moved to position 0
           int displayIndex = index;
@@ -1188,7 +1178,9 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
               return child;
             },
             child: GestureDetector(
-              key: ValueKey('${categories[displayIndex]}_$isSelected'),
+              key: ValueKey(
+                '${widget.model.categoryList[displayIndex]}_$isSelected',
+              ),
               onTap: () {
                 // rootModel.nextStep();
                 widget.model.onClickCategory(displayIndex);
@@ -1229,7 +1221,7 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
                                 : const SizedBox(width: 0),
                       ),
                       if (isSelected) const SizedBox(width: 8),
-                      Text(categories[displayIndex]),
+                      Text(widget.model.categoryList[displayIndex]),
                     ],
                   ),
                 ),
@@ -1242,7 +1234,10 @@ class _CategoriesAnimatedState extends State<_CategoriesAnimated> {
   }
 }
 
-Widget bottomBar(CandidateRootScreenViewModel model) {
+Widget bottomBar(
+  CandidateRootScreenViewModel model,
+  void Function(void Function()) setState,
+) {
   return Container(
     height: 70,
     decoration: BoxDecoration(
@@ -1267,7 +1262,14 @@ Widget bottomBar(CandidateRootScreenViewModel model) {
           indexNumber: 0,
           image: model.selectedScreen == 0 ? AppAssets.home : AppAssets.home,
           onPressed: () {
-            model.updatedScreen(0);
+            setState(() {
+              Get.offAll(
+                () => CandidateRootScreen(
+                  selectedScreen: 0,
+                  isDirectNavigation: true,
+                ),
+              );
+            });
           },
           text: "Inicio",
         ),
@@ -1276,7 +1278,14 @@ Widget bottomBar(CandidateRootScreenViewModel model) {
           indexNumber: 1,
           image: model.selectedScreen == 1 ? AppAssets.tips : AppAssets.tips,
           onPressed: () {
-            model.updatedScreen(1);
+            setState(() {
+              Get.offAll(
+                () => CandidateRootScreen(
+                  selectedScreen: 1,
+                  isDirectNavigation: true,
+                ),
+              );
+            });
           },
           text: 'Tips',
         ),
@@ -1288,7 +1297,14 @@ Widget bottomBar(CandidateRootScreenViewModel model) {
                   ? AppAssets.vacancies
                   : AppAssets.vacancies,
           onPressed: () {
-            model.updatedScreen(2);
+            setState(() {
+              Get.offAll(
+                () => CandidateRootScreen(
+                  selectedScreen: 2,
+                  isDirectNavigation: true,
+                ),
+              );
+            });
           },
           text: "Matches",
         ),
@@ -1298,7 +1314,14 @@ Widget bottomBar(CandidateRootScreenViewModel model) {
           indexNumber: 3,
           image: model.selectedScreen == 3 ? AppAssets.chat : AppAssets.chat,
           onPressed: () {
-            model.updatedScreen(3);
+            setState(() {
+              Get.offAll(
+                () => CandidateRootScreen(
+                  selectedScreen: 3,
+                  isDirectNavigation: true,
+                ),
+              );
+            });
           },
           text: "Chats",
         ),
@@ -1307,7 +1330,14 @@ Widget bottomBar(CandidateRootScreenViewModel model) {
           indexNumber: 4,
           image: model.selectedScreen == 4 ? AppAssets.menu : AppAssets.menu,
           onPressed: () {
-            model.updatedScreen(4);
+            setState(() {
+              Get.offAll(
+                () => CandidateRootScreen(
+                  selectedScreen: 4,
+                  isDirectNavigation: true,
+                ),
+              );
+            });
           },
           text: "Más",
         ),

@@ -1,6 +1,7 @@
 class VacancyModel {
   String? title;
   String? subtitle;
+
   String? role;
   String? imageUrl;
   String? description;
@@ -35,53 +36,55 @@ class VacancyModel {
 class JobVacancyModel {
   // 1. Basic Information (First Form)
 
-  final String? jobTitle;
-  final String? jobSubTitle;
-  final String? imageUrl;
-  final String? state;
-  final String? municipality;
-  final String? neighborhood;
-  final String? workingHours;
-  final String? jobType; // full time /part time
+  String? jobTitle;
+  String? jobSubTitle;
+  String? location;
+  String? imageUrl;
+  String? category;
+  String? state;
+  String? municipality;
+  String? neighborhood;
+  String? workingHours;
+  String? jobType; // full time /part time
 
   // 2. Job Information (Second Form)
-  final String? startDate;
-  final String? endDate;
-  final String? workMode;
-  final String? workSchedule;
+  String? startDate;
+  String? endDate;
+  String? workMode;
+  String? workSchedule;
 
   // 3. Employment Details (Third Form)
-  final String? canStartImmediately;
-  final String? requiresExperience;
-  final String? workDays;
+  String? canStartImmediately;
+  String? requiresExperience;
+  String? workDays;
 
   // 4. Salary & Benefits (Fourth Form)
-  final String? minSalary;
-  final String? maxSalary;
-  final String? paymentFrequency;
-  final String? benefits; // Or use enum if standardized
+  String? minSalary;
+  String? maxSalary;
+  String? paymentFrequency;
+  String? benefits; // Or use enum if standardized
 
   // 5. Required Skills (Fifth Form)
-  final String? softSkills;
-  final String? technicalSkills;
-  final String? maxSkillSelections;
+  String? softSkills;
+  String? technicalSkills;
+  String? maxSkillSelections;
 
   // 6. Position Description (Sixth Form)
-  final String? jobDescription;
-  final String? location;
+  String? jobDescription;
 
   ///
   ///
   ///
-  final String? jobPostedTime;
-  final String? matches;
+  String? jobPostedTime;
+  String? matches;
 
-  const JobVacancyModel({
+  JobVacancyModel({
     // Basic Info
     this.imageUrl,
     this.location,
     this.jobTitle,
     this.jobSubTitle,
+    this.category,
     this.state,
     this.municipality,
     this.neighborhood,

@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, strict_top_level_inference
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,18 +52,20 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
             (context, model, child) => Scaffold(
               body: Stack(
                 children: [
+                  ///
+                  ///. top image
+                  ///
                   Positioned(
                     top: 0,
                     left: 0,
                     right: 0,
                     child: Container(
+                      padding: EdgeInsets.all(16),
+                      alignment: Alignment.topLeft,
                       height: 250,
-
-                      ///
-                      ///. top image
-                      ///
                       decoration: BoxDecoration(
                         color: const Color(0xFF28407B),
+
                         image: DecorationImage(
                           image: AssetImage(AppAssets.menulogo),
                           fit: BoxFit.cover,
@@ -239,35 +241,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
               Get.to(
                 CompanyJobDetailScreen(
                   jobVacancyModel: JobVacancyModel(),
-
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///
                   index: index,
                 ),
               );
@@ -460,11 +433,8 @@ class CustomJobVacancyCard extends StatelessWidget {
                               jobVacancyModel.jobTitle ?? 'Job Title',
                               style: style16B.copyWith(color: darkPurpleColor),
                               maxLines: 2,
-                              overflow:
-                                  TextOverflow
-                                      .ellipsis, // Adds "..." if text is too long
-                              softWrap:
-                                  false, // Prevents wrapping to the next line
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: false,
                             ),
                           ),
 

@@ -1,3 +1,5 @@
+// ignore_for_file: strict_top_level_inference
+
 import 'package:get_it/get_it.dart';
 import 'package:talenty_app/core/config/config.dart';
 import 'package:talenty_app/core/enums/env.dart';
