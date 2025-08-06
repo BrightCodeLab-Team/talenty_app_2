@@ -48,3 +48,5 @@ const Color lightBlackColor2 = Color(0xff686868);
 const Color lightBrownColor2 = Color(0xffD13426);
 const Color lightGreyColor = Color(0xffDBDADA);
 const Color brownColor2 = Color(0xffB61A1F);
+const Color topChatContainerColor = Color(0xffFCFCFC);
+const Color topChatContainerBorderColor = Color(0xffEDF0F3);
