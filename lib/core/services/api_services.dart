@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_string_interpolations, strict_top_level_inference, avoid_print
+// ignore_for_file: unnecessary_string_interpolations, strict_top_level_inference, avoid_print, unnecessary_new, body_might_complete_normally_catch_error
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
