@@ -17,12 +17,17 @@ class AppAssets {
   static String obReclutador2 = "$staticAssets/obReclutador2.png";
   static String obReclutador3 = "$staticAssets/obReclutador3.png";
   static String obReclutador4 = "$staticAssets/obReclutador4.png";
+  static String chatHelpImg = "$staticAssets/chatHelpImg.png";
   static String selectionScreenGif = "$staticAssets/selectionScreenGif.gif";
   static String registerCompanyImage = "$staticAssets/registerCompanyImage.png";
   static String star44 = "$staticAssets/Star.png";
   static String registerRecruiterImage =
       "$staticAssets/registerRecruiterImage.png";
   static String deleteAccountGif = "$staticAssets/deleteAccountGif.png";
+  static String candidateChath1 = "$staticAssets/candidateChath1.png";
+  static String candidateChath2 = "$staticAssets/candidateChath2.png";
+  static String candidateChath3 = "$staticAssets/candidateChath3.png";
+  static String candidateChath4 = "$staticAssets/candidateChath4.png";
   static String tipsImg = "$dynamicAssets/office.png";
   static String cameraIcon2 = "$iconsAssets/cameraIcon2.png";
   static String shareIcon = "$iconsAssets/shareIcon.png";

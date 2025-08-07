@@ -35,7 +35,7 @@ class VacancyModel {
 
 class JobVacancyModel {
   // 1. Basic Information (First Form)
-
+  String? companyName;
   String? jobTitle;
   String? jobSubTitle;
   String? location;
@@ -80,6 +80,7 @@ class JobVacancyModel {
 
   JobVacancyModel({
     // Basic Info
+    this.companyName,
     this.imageUrl,
     this.location,
     this.jobTitle,
