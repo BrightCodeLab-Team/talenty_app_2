@@ -144,6 +144,8 @@ class AppAssets {
 
   static String people = "$dynamicAssets/people.avif";
   static String img3 = "$dynamicAssets/img3.png";
+  static String chatLeftCorner = '$staticAssets/chatLeftCornor.png';
+  static String chatRightCorner = '$staticAssets/chatRighCornor.png';
 
   ///
   ///.  candidate profile screen

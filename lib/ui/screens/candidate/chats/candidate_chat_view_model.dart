@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/model/company/chat_items.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
+import 'package:talenty_app/ui/screens/company/chat/chat_screen.dart';
 
 class CandidateChatViewModel extends BaseViewModel {
   final List<String> filters = [
@@ -16,7 +18,7 @@ class CandidateChatViewModel extends BaseViewModel {
   // Static list of all chats
   final List<CandidateChatItem> allChats = [
     CandidateChatItem(
-      name: 'Jorge Pérez',
+      name: 'Shayan ZAhid',
       role: 'Diseñador Web',
       preview: '¡Hola! soy Jorge Pérez diseñador web...',
       timestamp: '7:03 pm',
@@ -315,4 +317,9 @@ class CandidateChatViewModel extends BaseViewModel {
       matches: '95%',
     ),
   ];
+
+  ///
+  ///. fir one to one conversation
+  ///
+  // In your CandidateChatViewModel (or the UI part of the main chat list)
 }
