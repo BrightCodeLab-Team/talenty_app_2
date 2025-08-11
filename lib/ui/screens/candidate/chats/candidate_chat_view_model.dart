@@ -25,15 +25,19 @@ class CandidateChatViewModel extends BaseViewModel {
       unreadCount: 'En proceso',
       avatarUrl: AppAssets.img,
       isOnline: false,
+      companyName: 'Puma',
+      state: 'Coyoacán, CDMX',
     ),
     CandidateChatItem(
-      name: 'Jorge Pérez',
+      name: 'Sanan ZAhid',
       role: 'Becario en Programación',
       preview: '¡Hola! soy Jorge Pérez diseñador web...',
       timestamp: '7:03 pm',
       unreadCount: 'No seleccionado',
       avatarUrl: AppAssets.img2,
       isOnline: true,
+      companyName: 'Puma',
+      state: 'Coyoacán, CDMX',
     ),
     CandidateChatItem(
       name: 'Jorge Pérez',
@@ -43,6 +47,8 @@ class CandidateChatViewModel extends BaseViewModel {
       unreadCount: 'Seleccionado',
       avatarUrl: AppAssets.img,
       isOnline: false,
+      companyName: 'Puma',
+      state: 'Coyoacán, CDMX',
     ),
     CandidateChatItem(
       name: 'Jorge Pérez',
@@ -52,6 +58,8 @@ class CandidateChatViewModel extends BaseViewModel {
       unreadCount: 'En proceso',
       avatarUrl: AppAssets.img,
       isOnline: false,
+      companyName: 'Puma',
+      state: 'Coyoacán, CDMX',
     ),
     CandidateChatItem(
       name: 'Jorge Pérez',
@@ -61,6 +69,8 @@ class CandidateChatViewModel extends BaseViewModel {
       unreadCount: 'Seleccionado',
       avatarUrl: AppAssets.img2,
       isOnline: true,
+      companyName: 'Puma',
+      state: 'Coyoacán, CDMX',
     ),
     CandidateChatItem(
       name: 'Jorge Pérez',
@@ -70,6 +80,8 @@ class CandidateChatViewModel extends BaseViewModel {
       unreadCount: 'No seleccionado',
       avatarUrl: AppAssets.img2,
       isOnline: true,
+      companyName: 'Puma',
+      state: 'Coyoacán, CDMX',
     ),
   ];
 

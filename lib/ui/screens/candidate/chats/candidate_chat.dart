@@ -448,7 +448,12 @@ class _CandidateChatScreenState extends State<CandidateChatScreen> {
                                 //navigate to user chat screen accordingly
 
                                 () {
-                                  Get.to(ConversationScreen(chatItem: chat));
+                                  Get.to(
+                                    ConversationScreen(
+                                      chatItem: chat,
+                                      vacancy: JobVacancyModel(),
+                                    ),
+                                  );
                                 };
                               },
                               child: Row(
@@ -465,6 +470,7 @@ class _CandidateChatScreenState extends State<CandidateChatScreen> {
                                             Get.to(
                                               ConversationScreen(
                                                 chatItem: chat,
+                                                vacancy: JobVacancyModel(),
                                               ),
                                             );
                                           },

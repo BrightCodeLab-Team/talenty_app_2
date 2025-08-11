@@ -1,3 +1,7 @@
+import 'package:talenty_app/core/model/company/your_vacancies.dart';
+
+import 'your_vacancies.dart';
+
 class ChatItem {
   final String name;
   final String role;
@@ -18,7 +22,7 @@ class ChatItem {
   });
 }
 
-class CandidateChatItem {
+class CandidateChatItem extends JobVacancyModel {
   final String name;
   final String role;
   final String preview;
@@ -35,5 +39,7 @@ class CandidateChatItem {
     required this.unreadCount,
     required this.avatarUrl,
     required this.isOnline,
-  });
+    String? companyName,
+    String? state,
+  }) : super(companyName: companyName, state: state);
 }

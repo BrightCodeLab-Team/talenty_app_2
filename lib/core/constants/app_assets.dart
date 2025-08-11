@@ -157,4 +157,8 @@ class AppAssets {
   static String cp6 = "$iconsAssets/cp6.png";
   static String cp7 = "$iconsAssets/cp7.png";
   static String cp8 = "$iconsAssets/cp8.png";
+  static String pdfIcon = "$iconsAssets/pdfIcon.png";
+  static String settingIcon = "$iconsAssets/settingIcon.png";
+  static String helpIcon = "$iconsAssets/helpIcon.png";
+  static String supportIcon = "$iconsAssets/supportIcon.png";
 }
