@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -10,8 +9,8 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/model/company/chat_items.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
-import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/conversation/view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/mas/availability_screen_3/availability_screen_3.dart';
 
 class ConversationScreen extends StatefulWidget {
   final CandidateChatItem chatItem;
@@ -41,7 +40,7 @@ class _ConversationScreenState extends State<ConversationScreen>
     super.initState();
     _updateStatusColor(_currentStatus);
     _dropdownAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 100), // Increased duration
       vsync: this,
     );
     _dropdownAnimation = Tween<Offset>(
@@ -67,9 +66,9 @@ class _ConversationScreenState extends State<ConversationScreen>
       if (status == 'Ya no estoy interesado en la vacante') {
         _statusColor = brownColor;
       } else if (status == 'Por el momento no estoy disponible') {
-        _statusColor = yellowBrownColor;
+        _statusColor = Color(0xffFFCC4D);
       } else if (status == 'Estoy interesado en la vacante') {
-        _statusColor = greenColor;
+        _statusColor = const Color.fromARGB(255, 21, 172, 56);
       } else {
         _statusColor = greyColor;
       }
@@ -85,70 +84,6 @@ class _ConversationScreenState extends State<ConversationScreen>
         _dropdownAnimationController.reverse();
       }
     });
-  }
-
-  void _showStatusSelectionBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (BuildContext context) {
-        return Container(
-          padding: EdgeInsets.all(20.w),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.r),
-              topRight: Radius.circular(20.r),
-            ),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: 4.h,
-                width: 40.w,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(2.r),
-                ),
-              ),
-              20.verticalSpace,
-              Text(
-                'Actualizar tu estado',
-                style: style16B.copyWith(color: blackColor),
-              ),
-              20.verticalSpace,
-              _buildStatusRowForBottomSheet(
-                'Ya no estoy interesado en la vacante',
-                'Notificarás al reclutador que ya no estás interesado',
-                brownColor2,
-              ),
-              10.verticalSpace,
-              _buildStatusRowForBottomSheet(
-                'Por el momento no estoy disponible',
-                'Notificarás al reclutador que no estás disponible actualmente',
-                yellowBrownColor,
-              ),
-              10.verticalSpace,
-              _buildStatusRowForBottomSheet(
-                'Estoy interesado en la vacante',
-                'Notificarás al reclutador que sigues interesado',
-                darkgreenColor,
-              ),
-              20.verticalSpace,
-              CustomButton(
-                backgroundColor: brownColor,
-                text: "Cancelar",
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
   }
 
   @override
@@ -260,10 +195,39 @@ class _ConversationScreenState extends State<ConversationScreen>
                                     ],
                                   ),
                                   _isDropdownOpen == true
-                                      ? SizedBox(
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                            0.18.h,
+                                      ? AnimatedSwitcher(
+                                        duration: const Duration(
+                                          milliseconds: 200,
+                                        ),
+                                        reverseDuration: const Duration(
+                                          milliseconds: 100,
+                                        ), // Faster when closing
+                                        transitionBuilder: (
+                                          Widget child,
+                                          Animation<double> animation,
+                                        ) {
+                                          return SizeTransition(
+                                            sizeFactor: animation,
+                                            axisAlignment: 1.0,
+                                            child: child,
+                                          );
+                                        },
+                                        child:
+                                            _isDropdownOpen
+                                                ? SlideTransition(
+                                                  key: ValueKey<bool>(
+                                                    _isDropdownOpen,
+                                                  ),
+                                                  position: _dropdownAnimation,
+                                                  child: SizedBox(
+                                                    height:
+                                                        MediaQuery.sizeOf(
+                                                          context,
+                                                        ).height *
+                                                        0.18.h,
+                                                  ),
+                                                )
+                                                : SizedBox.shrink(),
                                       )
                                       : 5.verticalSpace,
                                   Text(
@@ -304,6 +268,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                     ),
                                     5.horizontalSpace,
                                     PopupMenuButton<String>(
+                                      padding: EdgeInsetsGeometry.zero,
                                       offset: Offset(10, 22),
                                       constraints: BoxConstraints(
                                         minWidth: 65.w,
@@ -312,6 +277,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                             0.8,
                                       ),
                                       color: Colors.transparent,
+
                                       elevation: 0,
                                       onSelected: (String result) {
                                         _updateStatusColor(result);
@@ -330,24 +296,45 @@ class _ConversationScreenState extends State<ConversationScreen>
                                             PopupMenuItem<String>(
                                               value:
                                                   'Ya no estoy interesado en la vacante',
-                                              child: _buildMenuItem(
+                                              child: _buildStatusItem(
                                                 'Ya no estoy interesado en la vacante',
-                                                brownColor2,
+                                                _currentStatus ==
+                                                        'Ya no estoy interesado en la vacante'
+                                                    ? brownColor.withOpacity(
+                                                      0.3,
+                                                    )
+                                                    : brownColor.withOpacity(
+                                                      0.1,
+                                                    ),
+
+                                                brownColor,
                                               ),
                                             ),
                                             PopupMenuItem<String>(
                                               value:
                                                   'Por el momento no estoy disponible',
-                                              child: _buildMenuItem(
+                                              child: _buildStatusItem(
                                                 'Por el momento no estoy disponible',
+                                                _currentStatus ==
+                                                        'Por el momento no estoy disponible'
+                                                    ? yellowBrownColor
+                                                        .withOpacity(0.3)
+                                                    : yellowBrownColor
+                                                        .withOpacity(0.1),
                                                 yellowBrownColor,
                                               ),
                                             ),
                                             PopupMenuItem<String>(
                                               value:
                                                   'Estoy interesado en la vacante',
-                                              child: _buildMenuItem(
+                                              child: _buildStatusItem(
                                                 'Estoy interesado en la vacante',
+                                                _currentStatus ==
+                                                        'Estoy interesado en la vacante'
+                                                    ? darkgreenColor
+                                                        .withOpacity(0.3)
+                                                    : darkgreenColor
+                                                        .withOpacity(0.1),
                                                 darkgreenColor,
                                               ),
                                             ),
@@ -422,39 +409,9 @@ class _ConversationScreenState extends State<ConversationScreen>
     );
   }
 
-  Widget _buildMenuItem(String text, Color color) {
-    return SlideTransition(
-      position: _dropdownAnimation,
-      child: Material(
-        color: transparent,
-        child: Container(
-          decoration: BoxDecoration(
-            color: color.withOpacity(0.2),
-            border: Border.all(color: color),
-            borderRadius: BorderRadius.circular(6.r),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Flexible(
-                  child: Text(
-                    text,
-                    softWrap: true,
-                    style: style14B.copyWith(color: color, fontSize: 13.sp),
-                  ),
-                ),
-                3.horizontalSpace,
-                CircleAvatar(radius: 8.r, backgroundColor: color),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
+  ///
+  ///. message input field
+  ///
   Widget _buildMessageInput(BuildContext context, ConversationViewModel model) {
     return Padding(
       padding: EdgeInsetsGeometry.only(
@@ -479,6 +436,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                               children: [
                                 GestureDetector(
                                   onTap: () {
+                                    Get.to(AvailabilityScreenThree());
                                     print('calender opened');
                                   },
                                   child: Image.asset(
@@ -501,6 +459,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                 10.horizontalSpace,
                                 GestureDetector(
                                   onTap: () {
+                                    showActionBottomSheet(context);
                                     print('setting opened');
                                   },
                                   child: Image.asset(
@@ -613,7 +572,7 @@ class _ConversationScreenState extends State<ConversationScreen>
               20.verticalSpace,
               Text(
                 'Aquí podrás ver el estado actual de tu proceso en esta vacante, asignado directamente por el reclutador. Existen tres posibles estados:',
-                style: style18M.copyWith(color: textDarkGreyColor),
+                style: style14M.copyWith(color: blackColor),
                 textAlign: TextAlign.start,
               ),
               15.verticalSpace,
@@ -665,89 +624,161 @@ class _ConversationScreenState extends State<ConversationScreen>
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (BuildContext bc) {
-        return Container(
-          padding: EdgeInsets.all(20.w),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.r),
-              topRight: Radius.circular(20.r),
-            ),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Drag indicator
-              Center(
-                child: Container(
-                  height: 4.h,
-                  width: 40.w,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(2.r),
-                  ),
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              height: MediaQuery.sizeOf(context).height * 0.6,
+              padding: EdgeInsets.all(20.w),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.r),
+                  topRight: Radius.circular(20.r),
                 ),
               ),
-              20.verticalSpace,
-              Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(AppAssets.arrowDown, height: 24.h, width: 24.w),
-                  10.horizontalSpace,
+                  // Drag indicator
+                  Center(
+                    child: Container(
+                      height: 4.h,
+                      width: 60.w,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(2.r),
+                      ),
+                    ),
+                  ),
+                  20.verticalSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        AppAssets.arrowDown,
+                        height: 24.h,
+                        width: 24.w,
+                      ),
+                      10.horizontalSpace,
+                      Text(
+                        'Actualiza tu interés en la vacante',
+                        style: style18B.copyWith(color: blackColor),
+                      ),
+                    ],
+                  ),
+                  20.verticalSpace,
                   Text(
-                    'Actualiza tu interés en la vacante',
-                    style: style18B.copyWith(color: blackColor),
+                    'Declara tu disponibilidad y nivel de interés respecto a esta oportunidad laboral directamente desde el chat. Como candidato, podrás seleccionar entre tres opciones para informar al reclutador sobre tu situación actual:',
+                    style: style14M.copyWith(color: textDarkGreyColor),
+                    textAlign: TextAlign.start,
+                  ),
+                  15.verticalSpace,
+                  GestureDetector(
+                    onTap: () {
+                      _updateStatusColor(
+                        'Ya no estoy interesado en la vacante',
+                      );
+                      Navigator.pop(context);
+                    },
+                    child: _buildStatusItem(
+                      'Ya no estoy interesado en la vacante',
+                      _currentStatus == 'Ya no estoy interesado en la vacante'
+                          ? brownColor.withOpacity(0.4)
+                          : brownColor.withOpacity(0.3),
+                      brownColor,
+                    ),
+                  ),
+                  10.verticalSpace,
+                  GestureDetector(
+                    onTap: () {
+                      _updateStatusColor('Por el momento no estoy disponible');
+                      Navigator.pop(context);
+                    },
+                    child: _buildStatusItem(
+                      'Por el momento no estoy disponible',
+                      _currentStatus == 'Por el momento no estoy disponible'
+                          ? Color(0xffE9E4D2)
+                          : Color(0xffE9E4D2),
+                      yellowBrownColor,
+                    ),
+                  ),
+                  10.verticalSpace,
+                  GestureDetector(
+                    onTap: () {
+                      _updateStatusColor('Estoy interesado en la vacante');
+                      Navigator.pop(context);
+                    },
+                    child: _buildStatusItem(
+                      'Estoy interesado en la vacante',
+                      _currentStatus == 'Estoy interesado en la vacante'
+                          ? darkgreenColor.withOpacity(0.3)
+                          : darkgreenColor.withOpacity(0.1),
+                      darkgreenColor,
+                    ),
+                  ),
+                  20.verticalSpace,
+                  Text(
+                    'Esto permite una comunicación más clara, directa y respetuosa con las empresas.',
+                    style: style12M.copyWith(color: textLightGreyColor),
+                    textAlign: TextAlign.start,
+                  ),
+                  20.verticalSpace,
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 18.0),
+                    child: CustomButton(
+                      backgroundColor: brownColor2,
+                      text: "Entiendo",
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
                   ),
                 ],
               ),
-              20.verticalSpace,
-              Text(
-                'Declara tu disponibilidad y nivel de interés respecto a esta oportunidad laboral directamente desde el chat. Como candidato, podrás seleccionar entre tres opciones para informar al reclutador sobre tu situación actual:',
-                style: style14M.copyWith(color: textDarkGreyColor),
-                textAlign: TextAlign.start,
-              ),
-              15.verticalSpace,
-              _buildStatusRowForBottomSheet(
-                'Ya no estoy interesado en la vacante',
-                'no_description_needed', // The image doesn't show a description for these buttons
-                brownColor,
-              ),
-              10.verticalSpace,
-              _buildStatusRowForBottomSheet(
-                'Por el momento no estoy disponible',
-                'no_description_needed',
-                yellowBrownColor,
-              ),
-              10.verticalSpace,
-              _buildStatusRowForBottomSheet(
-                'Estoy interesado en la vacante',
-                'no_description_needed',
-                greenColor,
-              ),
-              20.verticalSpace,
-              Text(
-                'Esto permite una comunicación más clara, directa y respetuosa con las empresas.',
-                style: style12M.copyWith(color: textLightGreyColor),
-                textAlign: TextAlign.start,
-              ),
-              20.verticalSpace,
-              CustomButton(
-                backgroundColor: primaryColor,
-                text: "Entiendo",
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              SizedBox(height: MediaQuery.of(context).padding.bottom),
-            ],
-          ),
+            );
+          },
         );
       },
     );
   }
 
-  // Your existing _buildStatusRowForBottomSheet method from the prompt
+  ///
+  /// use in drop down
+  ///
+  Widget _buildStatusItem(String text, Color bgColor, Color borderColor) {
+    return Container(
+      constraints: BoxConstraints(minWidth: 100.w), // Set minimum width
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
+      decoration: BoxDecoration(
+        color: bgColor,
+        border: Border.all(color: borderColor),
+        borderRadius: BorderRadius.circular(6.r),
+      ),
+      child: SingleChildScrollView(
+        scrollDirection:
+            Axis.horizontal, // Enable horizontal scrolling if needed
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              text,
+              style: style14B.copyWith(color: borderColor, fontSize: 13.sp),
+              maxLines: 1, // Force single line
+              overflow: TextOverflow.visible, // Allow text to extend
+            ),
+            SizedBox(width: 8.w),
+            CircleAvatar(radius: 8.r, backgroundColor: borderColor),
+          ],
+        ),
+      ),
+    );
+  }
+
+  ///
+  ///. used in second bottom sheet om top right--> support icon
+  ///
   Widget _buildStatusRowForBottomSheet(
     String status,
     String description,
@@ -755,38 +786,52 @@ class _ConversationScreenState extends State<ConversationScreen>
   ) {
     return GestureDetector(
       onTap: () {
-        // You should have a way to call _updateStatusColor from here
-        // If this is a stateful widget, this will be available
+        // Your onTap logic here
+        // For example, calling a function to handle the selection
+        // And closing the bottom sheet
         // _updateStatusColor(status);
         // Navigator.pop(context);
       },
       child: Container(
-        width: double.infinity,
+        // The image shows some vertical space between the containers.
+        // This margin adds that space.
+        margin: EdgeInsets.only(bottom: 12.h),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.2),
-          border: Border.all(color: color),
+          color: color.withOpacity(0.1), // The color opacity is subtle
+          border: Border.all(color: color, width: 1.w),
           borderRadius: BorderRadius.circular(6.r),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // Use MainAxisAlignment.start to align children to the left
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            CircleAvatar(radius: 8.r, backgroundColor: color),
+            // Add some space between the circle and the text
+            10.horizontalSpace,
             Flexible(
               child: Text(
                 status,
                 softWrap: true,
-                style: style14B.copyWith(color: color, fontSize: 13.sp),
+                style: TextStyle(
+                  color: color,
+                  fontSize: 13.sp,
+                  fontWeight:
+                      FontWeight
+                          .w500, // Slightly bolder font weight for the status text
+                ),
               ),
             ),
-            5.horizontalSpace,
-            CircleAvatar(radius: 8.r, backgroundColor: color),
           ],
         ),
       ),
     );
   }
 
-  // Your existing _buildStatusRow method from the prompt
+  ///
+  ///. used in first bottom sheet--> help icon
+  ///
+
   Widget _buildStatusRow(String status, String description, Color color) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -808,10 +853,203 @@ class _ConversationScreenState extends State<ConversationScreen>
   }
 
   ///
-  ///  second bottom shet end
+  ///  when click on setting bottom sheet will open
   ///
+
+  void showActionBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: Icon(Icons.close, color: Colors.black),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
+              _buildActionItem(
+                context,
+                icon: Icons.flag_outlined,
+                text: 'Reportar vacante',
+                color: Colors.black,
+                onTap: () {
+                  Navigator.pop(context); // Close the current bottom sheet
+                  showReportBottomSheet(
+                    context,
+                  ); // Open the second bottom sheet
+                },
+              ),
+              _buildActionItem(
+                context,
+                icon: Icons.business_outlined,
+                text: 'Reportar empresa',
+                color: Colors.red,
+                onTap: () {
+                  // Add your logic here
+                },
+              ),
+              _buildActionItem(
+                context,
+                icon: Icons.delete_outline,
+                text: 'Vaciar Chat',
+                color: Colors.red,
+                onTap: () {
+                  // Add your logic here
+                },
+              ),
+              _buildActionItem(
+                context,
+                icon: Icons.close_sharp,
+                text: 'Eliminar Chat',
+                color: Colors.red,
+                onTap: () {
+                  // Add your logic here
+                },
+              ),
+              _buildActionItem(
+                context,
+                icon: Icons.block_flipped,
+                text: 'Bloquear empresa',
+                color: Colors.red,
+                onTap: () {
+                  // Add your logic here
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // A helper method to build the individual action items
+  Widget _buildActionItem(
+    BuildContext context, {
+    required IconData icon,
+    required String text,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: color, size: 24),
+            SizedBox(width: 16),
+            Text(
+              text,
+              style: TextStyle(
+                color: color,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  ///
+  ///.  inside setting bottom sheet first bottom sheet to report
+  ///
+
+  void showReportBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.7,
+          padding: EdgeInsets.only(top: 20, left: 16, right: 16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
+            ),
+          ),
+          child: Column(
+            children: [
+              // Drag handle
+              Container(
+                height: 4,
+                width: 40,
+                margin: EdgeInsets.only(bottom: 20),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              Text(
+                'Selecciona el motivo de tu reporte',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 20),
+              Expanded(
+                child: ListView(
+                  children: [
+                    _buildReportItem(
+                      'Uso de lenguaje ofensivo o irrespetuoso.',
+                    ),
+                    _buildReportItem('Acoso o comportamiento agresivo.'),
+                    _buildReportItem('Discriminación o discurso de odio.'),
+                    _buildReportItem('Datos falsos o engañosos en su perfil.'),
+                    _buildReportItem('Cuenta sospechosa o fraudulenta.'),
+                    _buildReportItem('Suplantación de identidad.'),
+                    _buildReportItem(
+                      'Incumplió con los términos del servicio.',
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // A helper method to build the individual report items
+  Widget _buildReportItem(String text) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
+      ),
+      child: Text(text, style: TextStyle(fontSize: 16, color: Colors.black87)),
+    );
+  }
 }
 
+///
+///. message bubble how message will looks like
+///
 class MessageBubble extends StatelessWidget {
   final Message message;
   final bool isMe;
@@ -962,5 +1200,88 @@ class MessageBubbleTailPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
+  }
+}
+
+///
+///
+///
+
+// Assuming you have these color and dimension variables from a utility file
+// For example:
+// final redColor = Colors.red;
+// final greyColor = Colors.grey;
+// final blackColor = Colors.black;
+// final double screenWidth = 375; // Example screen width
+// double w = screenWidth / 100;
+// double h = 812 / 100;
+
+///
+///.
+///
+
+class ReportBottomSheet extends StatelessWidget {
+  const ReportBottomSheet({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height:
+          MediaQuery.of(context).size.height * 0.7, // Adjust height as needed
+      padding: EdgeInsets.only(top: 20, left: 16, right: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+        ),
+      ),
+      child: Column(
+        children: [
+          // Drag handle
+          Container(
+            height: 4,
+            width: 40,
+            margin: EdgeInsets.only(bottom: 20),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          Text(
+            'Selecciona el motivo de tu reporte',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(height: 20),
+          Expanded(
+            child: ListView(
+              children: [
+                _buildReportItem('Uso de lenguaje ofensivo o irrespetuoso.'),
+                _buildReportItem('Acoso o comportamiento agresivo.'),
+                _buildReportItem('Discriminación o discurso de odio.'),
+                _buildReportItem('Datos falsos o engañosos en su perfil.'),
+                _buildReportItem('Cuenta sospechosa o fraudulenta.'),
+                _buildReportItem('Suplantación de identidad.'),
+                _buildReportItem('Incumplió con los términos del servicio.'),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildReportItem(String text) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
+      ),
+      child: Text(text, style: TextStyle(fontSize: 16, color: Colors.black87)),
+    );
   }
 }
