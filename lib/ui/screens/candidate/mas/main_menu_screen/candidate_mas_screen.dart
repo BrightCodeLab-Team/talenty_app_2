@@ -17,7 +17,7 @@ import 'package:talenty_app/ui/screens/candidate/mas/c_mas_deactivate_visibility
 import 'package:talenty_app/ui/screens/candidate/mas/candidate_profile.dart/candidate_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/delete_account/delete_account_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/mas_calendar_screen/calendar_screen.dart';
-import 'package:talenty_app/ui/screens/common/splash2_screen.dart';
+import 'package:talenty_app/ui/screens/common/splash_screen.dart';
 import 'package:talenty_app/ui/screens/company/further_menu/menu_view_model.dart';
 
 class CandidateMasScreen extends StatefulWidget {
@@ -265,7 +265,7 @@ class _CandidateMasScreenState extends State<CandidateMasScreen> {
                         leading: Icon(Icons.logout, color: primaryColor),
                         title: 'Tèrminos y condiciones',
                         onTap: () {
-                          Get.offAll(Splash2Screen());
+                          Get.offAll(() => SplashScreen());
                         },
                         //child: AnimatedContainer(duration: Duration()),
                         textStyle: style14sourceblack.copyWith(

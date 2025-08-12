@@ -45,22 +45,13 @@ class LoginScreen extends StatelessWidget {
                         ///
                         Header(),
                         7.verticalSpace,
-                        AnimatedSwitcher(
-                          duration: Duration(milliseconds: 300),
-                          transitionBuilder:
-                              (child, animation) => ScaleTransition(
-                                scale: animation,
-                                child: child,
-                              ),
-
-                          child: Text(
-                            model.isCandidate
-                                ? 'login_tagline_candidate'.tr
-                                : 'login_tagline_recruiter'.tr,
-                            key: ValueKey<bool>(model.isCandidate),
-                            textAlign: TextAlign.center,
-                            style: style14M.copyWith(color: lightBlackColor),
-                          ),
+                        Text(
+                          model.isCandidate
+                              ? 'login_tagline_candidate'.tr
+                              : 'login_tagline_recruiter'.tr,
+                          key: ValueKey<bool>(model.isCandidate),
+                          textAlign: TextAlign.center,
+                          style: style14M.copyWith(color: lightBlackColor),
                         ),
                         7.verticalSpace,
                         Align(
@@ -179,29 +170,20 @@ class LoginScreen extends StatelessWidget {
                               onTap: () {
                                 model.toggleHidden();
                               },
-                              child: AnimatedSwitcher(
-                                duration: Duration(milliseconds: 300),
-                                transitionBuilder: (child, animation) {
-                                  return ScaleTransition(
-                                    scale: animation,
-                                    child: child,
-                                  );
-                                },
-                                child:
-                                    model.isHidden
-                                        ? Icon(
-                                          Icons.visibility_off,
-                                          key: ValueKey('visibility_off'),
-                                          color: Color(0xff707070),
-                                          size: 20,
-                                        )
-                                        : Icon(
-                                          Icons.visibility,
-                                          key: ValueKey('visibility'),
-                                          color: Color(0xff707070),
-                                          size: 20,
-                                        ),
-                              ),
+                              child:
+                                  model.isHidden
+                                      ? Icon(
+                                        Icons.visibility_off,
+                                        key: ValueKey('visibility_off'),
+                                        color: Color(0xff707070),
+                                        size: 20,
+                                      )
+                                      : Icon(
+                                        Icons.visibility,
+                                        key: ValueKey('visibility'),
+                                        color: Color(0xff707070),
+                                        size: 20,
+                                      ),
                             ),
                           ),
                           obscureText: model.isHidden,
@@ -259,103 +241,95 @@ class LoginScreen extends StatelessWidget {
                           ],
                         ),
                         15.verticalSpace,
-                        AnimatedContainer(
-                          duration: Duration(milliseconds: 250),
+                        Container(
                           height: model.isCandidate ? 125 : 120,
-                          child: AnimatedSwitcher(
-                            duration: Duration(milliseconds: 300),
-                            transitionBuilder:
-                                (child, animation) => ScaleTransition(
-                                  scale: animation,
-                                  child: child,
-                                ),
-                            child:
-                                model.isCandidate
-                                    ? SizedBox(
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 54,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                color: Color(0xFFADADAD),
-                                              ),
+                          child:
+                              model.isCandidate
+                                  ? SizedBox(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: 54,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              10,
                                             ),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Image.asset(
-                                                    AppAssets.googleIcon,
-                                                    width: 19.31,
-                                                    height: 20,
-                                                  ),
-                                                  15.horizontalSpace,
-                                                  Text(
-                                                    'btn_google'.tr,
-                                                    style: style16M,
-                                                  ),
-                                                ],
-                                              ),
+                                            border: Border.all(
+                                              color: Color(0xFFADADAD),
                                             ),
                                           ),
-                                          12.verticalSpace,
-                                          Container(
-                                            height: 54,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                color: Color(0xFFADADAD),
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Image.asset(
-                                                    AppAssets.appleIcon,
-                                                    width: 20,
-                                                    height: 20,
-                                                  ),
-                                                  15.horizontalSpace,
-                                                  Text(
-                                                    'btn_apple'.tr,
-                                                    style: style16M,
-                                                  ),
-                                                ],
-                                              ),
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  AppAssets.googleIcon,
+                                                  width: 19.31,
+                                                  height: 20,
+                                                ),
+                                                15.horizontalSpace,
+                                                Text(
+                                                  'btn_google'.tr,
+                                                  style: style16M,
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    )
-                                    : RichText(
-                                      textAlign: TextAlign.center,
-                                      text: TextSpan(
-                                        style: style16M,
-                                        children: [
-                                          TextSpan(
-                                            text: 'login_recruiter_prefix'.tr,
-                                          ),
-                                          TextSpan(
-                                            text:
-                                                'login_recruiter_highlight'.tr,
-                                            style: style16M.copyWith(
-                                              color: brownColor,
+                                        ),
+                                        12.verticalSpace,
+                                        Container(
+                                          height: 54,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              10,
+                                            ),
+                                            border: Border.all(
+                                              color: Color(0xFFADADAD),
                                             ),
                                           ),
-                                          TextSpan(
-                                            text: 'login_recruiter_suffix'.tr,
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  AppAssets.appleIcon,
+                                                  width: 20,
+                                                  height: 20,
+                                                ),
+                                                15.horizontalSpace,
+                                                Text(
+                                                  'btn_apple'.tr,
+                                                  style: style16M,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                          ),
+                                  )
+                                  : RichText(
+                                    textAlign: TextAlign.center,
+                                    text: TextSpan(
+                                      style: style16M,
+                                      children: [
+                                        TextSpan(
+                                          text: 'login_recruiter_prefix'.tr,
+                                        ),
+                                        TextSpan(
+                                          text: 'login_recruiter_highlight'.tr,
+                                          style: style16M.copyWith(
+                                            color: brownColor,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: 'login_recruiter_suffix'.tr,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                         ),
                         10.verticalSpace,
                         RichText(
