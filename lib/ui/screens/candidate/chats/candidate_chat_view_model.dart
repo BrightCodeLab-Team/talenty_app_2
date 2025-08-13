@@ -13,9 +13,15 @@ class CandidateChatViewModel extends BaseViewModel {
   ];
 
   String selectedFilter = 'Todos';
-  void deleteChat(String chatName) {
-    // Remove the chat where name matches
-    allChats.removeWhere((chat) => chat.name == chatName);
+  void deleteChat(CandidateChatItem chatToDelete) {
+    // Find the exact chat to delete by comparing multiple properties
+    allChats.removeWhere(
+      (chat) =>
+          chat.name == chatToDelete.name &&
+          chat.role == chatToDelete.role &&
+          chat.companyName == chatToDelete.companyName &&
+          chat.state == chatToDelete.state,
+    );
     notifyListeners();
   }
 
@@ -30,7 +36,7 @@ class CandidateChatViewModel extends BaseViewModel {
       avatarUrl: AppAssets.img,
       isOnline: false,
       companyName: 'Puma',
-      state: 'Coyoacán, CDMX',
+      state: 'Coyoacán, CDMX ',
     ),
     CandidateChatItem(
       name: 'Sanan ZAhid',

@@ -2,7 +2,6 @@ import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -97,9 +96,9 @@ class _ConversationScreenState extends State<ConversationScreen>
         ),
         ChangeNotifierProvider(create: (_) => CandidateChatViewModel()),
       ],
-      //   create: (context) => ConversationViewModel()..init(widget.chatItem),
+
       child: Consumer2<ConversationViewModel, CandidateChatViewModel>(
-        builder: (context, model, child, chatListModel) {
+        builder: (context, model, chatListModel, child) {
           return Scaffold(
             appBar: AppBar(
               title: Row(
@@ -424,7 +423,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                 ///
                 ///
                 ///
-                // _buildMessageInput(context, model, chatListModel),
+                _buildMessageInput(context, model, chatListModel),
               ],
             ),
           );
@@ -1036,10 +1035,25 @@ class _ConversationScreenState extends State<ConversationScreen>
                   showSettingDialogBox(
                     context: context,
                     onTap: () {
-                      chatListModel.deleteChat(widget.chatItem.name);
-                      Navigator.pop(context); // Close dialog
-                      Navigator.pop(context); // Close action sheet
-                      Navigator.pop(context); // Go back to chat list
+                      chatListModel.deleteChat(widget.chatItem);
+
+                      // Close dialogs and navigate back safely
+                      Navigator.of(
+                        context,
+                        rootNavigator: true,
+                      ).pop(); // Close dialog
+                      Navigator.of(
+                        context,
+                        rootNavigator: true,
+                      ).pop(); // Close action sheet
+
+                      // Check if we can pop the current route (conversation screen)
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context); // Go back to chat list
+                      } else {
+                        // If we can't pop (maybe we're at root), just do nothing
+                        // or navigate to a different screen if needed
+                      }
                     },
                     title: '¿Estás seguro de que quieres eliminar este chat??',
                     subtittle:
