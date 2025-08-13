@@ -424,7 +424,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                 ///
                 ///
                 ///
-                _buildMessageInput(context, model, chatListModel),
+                // _buildMessageInput(context, model, chatListModel),
               ],
             ),
           );
