@@ -6,9 +6,11 @@ import 'package:talenty_app/core/others/base_view_model.dart';
 class ConversationViewModel extends BaseViewModel {
   late CandidateChatItem _chatItem;
   List<Message> _messages = [];
+  bool _isChatDeleted = false;
 
   CandidateChatItem get chatItem => _chatItem;
   List<Message> get messages => _messages;
+  bool get isChatDeleted => _isChatDeleted;
 
   void init(CandidateChatItem chatItem) {
     _chatItem = chatItem;
@@ -27,7 +29,7 @@ class ConversationViewModel extends BaseViewModel {
         imgUrl: AppAssets.menulogo,
       ),
       Message(
-        sender: "Tú", // This would be the current user
+        sender: "Tú",
         text: "Si claro! Me encuentro disponible en este momento",
         time: "7:03 PM",
         isMe: true,
@@ -47,6 +49,12 @@ class ConversationViewModel extends BaseViewModel {
     );
 
     _messages.add(newMessage);
+    notifyListeners();
+  }
+
+  // Clear all messages from the chat
+  void clearChat() {
+    _messages.clear();
     notifyListeners();
   }
 

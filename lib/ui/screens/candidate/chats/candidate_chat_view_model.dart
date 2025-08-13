@@ -3,7 +3,6 @@ import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/model/company/chat_items.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
-import 'package:talenty_app/ui/screens/company/chat/chat_screen.dart';
 
 class CandidateChatViewModel extends BaseViewModel {
   final List<String> filters = [
@@ -14,6 +13,11 @@ class CandidateChatViewModel extends BaseViewModel {
   ];
 
   String selectedFilter = 'Todos';
+  void deleteChat(String chatName) {
+    // Remove the chat where name matches
+    allChats.removeWhere((chat) => chat.name == chatName);
+    notifyListeners();
+  }
 
   // Static list of all chats
   final List<CandidateChatItem> allChats = [
@@ -335,3 +339,50 @@ class CandidateChatViewModel extends BaseViewModel {
   ///
   // In your CandidateChatViewModel (or the UI part of the main chat list)
 }
+/*
+ackage:talenty_app/core/model/company/your_vacancies.dart';
+
+import 'your_vacancies.dart';
+
+class ChatItem {
+  final String name;
+  final String role;
+  final String preview;
+  final String timestamp;
+  final int unreadCount;
+  final String avatarUrl;
+  final bool isOnline;
+
+  ChatItem({
+    required this.name,
+    required this.role,
+    required this.preview,
+    required this.timestamp,
+    required this.unreadCount,
+    required this.avatarUrl,
+    required this.isOnline,
+  });
+}
+
+class CandidateChatItem extends JobVacancyModel {
+  final String name;
+  final String role;
+  final String preview;
+  final String timestamp;
+  final String unreadCount;
+  final String avatarUrl;
+  final bool isOnline;
+
+  CandidateChatItem({
+    required this.name,
+    required this.role,
+    required this.preview,
+    required this.timestamp,
+    required this.unreadCount,
+    required this.avatarUrl,
+    required this.isOnline,
+    String? companyName,
+    String? state,
+  }) : super(companyName: companyName, state: state);
+}
+*/

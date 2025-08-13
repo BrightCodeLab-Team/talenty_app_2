@@ -1,3 +1,4 @@
+import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,8 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/model/company/chat_items.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
-import 'package:talenty_app/ui/screens/candidate/chats/conversation/view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/chats/conversation/chating_screen_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/availability_screen_3/availability_screen_3.dart';
 
 class ConversationScreen extends StatefulWidget {
@@ -88,10 +90,16 @@ class _ConversationScreenState extends State<ConversationScreen>
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ConversationViewModel()..init(widget.chatItem),
-      child: Consumer<ConversationViewModel>(
-        builder: (context, model, child) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ConversationViewModel()..init(widget.chatItem),
+        ),
+        ChangeNotifierProvider(create: (_) => CandidateChatViewModel()),
+      ],
+      //   create: (context) => ConversationViewModel()..init(widget.chatItem),
+      child: Consumer2<ConversationViewModel, CandidateChatViewModel>(
+        builder: (context, model, child, chatListModel) {
           return Scaffold(
             appBar: AppBar(
               title: Row(
@@ -400,7 +408,23 @@ class _ConversationScreenState extends State<ConversationScreen>
                     },
                   ),
                 ),
-                _buildMessageInput(context, model),
+
+                ///
+                ///
+                ///
+                ///
+                ///
+                ///
+                ///
+                ///
+                ///
+                ///
+                ///
+                ///
+                ///
+                ///
+                ///
+                _buildMessageInput(context, model, chatListModel),
               ],
             ),
           );
@@ -412,7 +436,11 @@ class _ConversationScreenState extends State<ConversationScreen>
   ///
   ///. message input field
   ///
-  Widget _buildMessageInput(BuildContext context, ConversationViewModel model) {
+  Widget _buildMessageInput(
+    BuildContext context,
+    ConversationViewModel model,
+    CandidateChatViewModel chatListModel,
+  ) {
     return Padding(
       padding: EdgeInsetsGeometry.only(
         left: 15.0,
@@ -459,7 +487,11 @@ class _ConversationScreenState extends State<ConversationScreen>
                                 10.horizontalSpace,
                                 GestureDetector(
                                   onTap: () {
-                                    showActionBottomSheet(context);
+                                    showActionBottomSheet(
+                                      context,
+                                      model,
+                                      chatListModel,
+                                    );
                                     print('setting opened');
                                   },
                                   child: Image.asset(
@@ -852,95 +884,10 @@ class _ConversationScreenState extends State<ConversationScreen>
     );
   }
 
-  ///
-  ///  when click on setting bottom sheet will open
-  ///
-
-  void showActionBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        return Container(
-          padding: EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25),
-              topRight: Radius.circular(25),
-            ),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  icon: Icon(Icons.close, color: Colors.black),
-                  onPressed: () => Navigator.pop(context),
-                ),
-              ),
-              _buildActionItem(
-                context,
-                icon: Icons.flag_outlined,
-                text: 'Reportar vacante',
-                color: Colors.black,
-                onTap: () {
-                  Navigator.pop(context); // Close the current bottom sheet
-                  showReportBottomSheet(
-                    context,
-                  ); // Open the second bottom sheet
-                },
-              ),
-              _buildActionItem(
-                context,
-                icon: Icons.business_outlined,
-                text: 'Reportar empresa',
-                color: Colors.red,
-                onTap: () {
-                  // Add your logic here
-                },
-              ),
-              _buildActionItem(
-                context,
-                icon: Icons.delete_outline,
-                text: 'Vaciar Chat',
-                color: Colors.red,
-                onTap: () {
-                  // Add your logic here
-                },
-              ),
-              _buildActionItem(
-                context,
-                icon: Icons.close_sharp,
-                text: 'Eliminar Chat',
-                color: Colors.red,
-                onTap: () {
-                  // Add your logic here
-                },
-              ),
-              _buildActionItem(
-                context,
-                icon: Icons.block_flipped,
-                text: 'Bloquear empresa',
-                color: Colors.red,
-                onTap: () {
-                  // Add your logic here
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
   // A helper method to build the individual action items
   Widget _buildActionItem(
     BuildContext context, {
-    required IconData icon,
+    required String? icon,
     required String text,
     required Color color,
     required VoidCallback onTap,
@@ -948,13 +895,38 @@ class _ConversationScreenState extends State<ConversationScreen>
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        margin: EdgeInsetsGeometry.symmetric(vertical: 1.h),
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-        decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
-        ),
+        decoration: BoxDecoration(),
         child: Row(
           children: [
-            Icon(icon, color: color, size: 24),
+            Image.asset(
+              icon!,
+              height:
+                  icon == AppAssets.reportIcon
+                      ? 24.h
+                      : icon == AppAssets.companyIcon
+                      ? 20.h
+                      : icon == AppAssets.deleteBoxIcon
+                      ? 24.h
+                      : icon == AppAssets.crossIcon
+                      ? 20.h
+                      : icon == AppAssets.blockCompanyIcon
+                      ? 20.h
+                      : 24.h,
+              width:
+                  icon == AppAssets.reportIcon
+                      ? 24.h
+                      : icon == AppAssets.companyIcon
+                      ? 20.h
+                      : icon == AppAssets.deleteBoxIcon
+                      ? 24.h
+                      : icon == AppAssets.crossIcon
+                      ? 20.h
+                      : icon == AppAssets.blockCompanyIcon
+                      ? 20.h
+                      : 24.h,
+            ),
             SizedBox(width: 16),
             Text(
               text,
@@ -971,7 +943,136 @@ class _ConversationScreenState extends State<ConversationScreen>
   }
 
   ///
-  ///.  inside setting bottom sheet first bottom sheet to report
+  ///  when click on setting in message inout field bottom sheet will open
+  ///
+  void showActionBottomSheet(
+    BuildContext context,
+    ConversationViewModel model,
+    CandidateChatViewModel chatListModel,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          height: MediaQuery.sizeOf(context).height * 0.48,
+          padding: EdgeInsets.only(
+            top: 15.h,
+            left: 16.w,
+            right: 16.w,
+            bottom: 20.h,
+          ),
+          decoration: BoxDecoration(
+            color: whiteColor,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Close icon moved to the beginning of the Column for left alignment
+              Align(
+                alignment: Alignment.centerLeft,
+                child: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Image.asset(
+                    AppAssets.crossIcon,
+                    height: 18.h,
+                    width: 18.w,
+                    color: blackColor,
+                  ),
+                ),
+              ),
+              30.verticalSpace,
+              _buildActionItem(
+                context,
+                icon: AppAssets.reportIcon,
+                text: 'Reportar vacante',
+                color: Colors.black,
+                onTap: () {
+                  // No need to pop here. The new bottom sheet will be stacked on top.
+                  showReportBottomSheet(context);
+                },
+              ),
+              _buildActionItem(
+                context,
+                icon: AppAssets.companyIcon,
+                text: 'Reportar empresa',
+                color: brownColor2,
+                onTap: () {
+                  // No need to pop here. The new bottom sheet will be stacked on top.
+                  showReportBottomSheet(context);
+                },
+              ),
+              _buildActionItem(
+                context,
+                icon: AppAssets.deleteBoxIcon,
+                text: 'Vaciar Chat',
+                color: brownColor2,
+                onTap: () {
+                  showSettingDialogBox(
+                    context: context,
+                    onTap: () {
+                      model.clearChat();
+                      Navigator.pop(context);
+                    },
+                    title: '¿Estás seguro de que quieres vaciar este chat?',
+                    subtittle:
+                        'Eliminarás el registro de conversación hasta este punto.',
+                    buttonText: 'Vaciar chat',
+                  );
+                },
+              ),
+              _buildActionItem(
+                context,
+                icon: AppAssets.crossIcon,
+                text: 'Eliminar Chat',
+                color: brownColor2,
+                onTap: () {
+                  showSettingDialogBox(
+                    context: context,
+                    onTap: () {
+                      chatListModel.deleteChat(widget.chatItem.name);
+                      Navigator.pop(context); // Close dialog
+                      Navigator.pop(context); // Close action sheet
+                      Navigator.pop(context); // Go back to chat list
+                    },
+                    title: '¿Estás seguro de que quieres eliminar este chat??',
+                    subtittle:
+                        'Esto eliminará el match que tienes con esta empresa.',
+                    buttonText: 'Eliminar chat',
+                  );
+                },
+              ),
+              _buildActionItem(
+                context,
+                icon: AppAssets.blockCompanyIcon,
+                text: 'Bloquear empresa',
+                color: brownColor2,
+                onTap: () {
+                  showSettingDialogBox(
+                    context: context,
+                    onTap: () {},
+                    title: '¿Seguro que quieres bloquear a Puma?',
+                    subtittle:
+                        'Si los bloqueas, ya no podrás ver sus vacantes ni recibir oportunidades de esta empresa',
+                    buttonText: 'Bloquear',
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  ///
+  ///.  inside setting bottom sheet first and second text bottom sheet to report
   ///
 
   void showReportBottomSheet(BuildContext context) {
@@ -1012,20 +1113,27 @@ class _ConversationScreenState extends State<ConversationScreen>
               ),
               SizedBox(height: 20),
               Expanded(
-                child: ListView(
-                  children: [
-                    _buildReportItem(
-                      'Uso de lenguaje ofensivo o irrespetuoso.',
-                    ),
-                    _buildReportItem('Acoso o comportamiento agresivo.'),
-                    _buildReportItem('Discriminación o discurso de odio.'),
-                    _buildReportItem('Datos falsos o engañosos en su perfil.'),
-                    _buildReportItem('Cuenta sospechosa o fraudulenta.'),
-                    _buildReportItem('Suplantación de identidad.'),
-                    _buildReportItem(
-                      'Incumplió con los términos del servicio.',
-                    ),
-                  ],
+                child: GestureDetector(
+                  onTap: () {
+                    showReportSubBottomSheet(context);
+                  },
+                  child: ListView(
+                    children: [
+                      _buildReportItem(
+                        'Uso de lenguaje ofensivo o irrespetuoso.',
+                      ),
+                      _buildReportItem('Acoso o comportamiento agresivo.'),
+                      _buildReportItem('Discriminación o discurso de odio.'),
+                      _buildReportItem(
+                        'Datos falsos o engañosos en su perfil.',
+                      ),
+                      _buildReportItem('Cuenta sospechosa o fraudulenta.'),
+                      _buildReportItem('Suplantación de identidad.'),
+                      _buildReportItem(
+                        'Incumplió con los términos del servicio.',
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -1035,7 +1143,96 @@ class _ConversationScreenState extends State<ConversationScreen>
     );
   }
 
-  // A helper method to build the individual report items
+  ///
+  /// setting bottom sheet dialog box first and second tab report vacanta / emperasa sub bottom sheet
+  ///
+
+  void showReportSubBottomSheet(BuildContext context) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        pageBuilder: (BuildContext context, _, __) {
+          return Align(
+            alignment: Alignment.bottomRight,
+            child: Material(
+              color: Colors.transparent,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.7,
+
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(25),
+                    bottomLeft: Radius.circular(25),
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Drag handle
+                    Container(
+                      height: 4.h,
+                      width: 80.w,
+                      margin: EdgeInsets.only(top: 20, bottom: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                    30.verticalSpace,
+                    Text(
+                      'Gracias por tu reporte',
+                      style: style16B.copyWith(fontSize: 15.sp),
+                    ),
+                    30.verticalSpace,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Con tu ayuda, mantenemos una comunidad segura y confiable.\n\nRevisaremos este reporte y tomaremos las medidas necesarias si se encuentra alguna violación a nuestras normas. Gracias por contribuir a un mejor espacio para todos',
+                        textAlign: TextAlign.start,
+                        style: style16M.copyWith(color: darkPurpleColor),
+                      ),
+                    ),
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 30.0,
+                        left: 15.0,
+                        right: 15.0,
+                      ),
+                      child: CustomButton(
+                        text: 'Listo',
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        backgroundColor: brownColor2,
+                        textColor: whiteColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+          var tween = Tween(
+            begin: begin,
+            end: end,
+          ).chain(CurveTween(curve: curve));
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
+    );
+  } // A helper method to build the individual report items
+
   Widget _buildReportItem(String text) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
@@ -1045,11 +1242,95 @@ class _ConversationScreenState extends State<ConversationScreen>
       child: Text(text, style: TextStyle(fontSize: 16, color: Colors.black87)),
     );
   }
+
+  ///
+  /// setting bottom sheet dialog box
+  ///
+
+  void showSettingDialogBox({
+    required BuildContext context,
+    // required VoidCallback onConfirmActivate,
+    required String? title,
+    required String? subtittle,
+    required String? buttonText,
+    required VoidCallback onTap,
+  }) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: Container(
+            width: 270.w,
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15),
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Padding(
+              padding: EdgeInsetsGeometry.symmetric(
+                horizontal: 15.w,
+                vertical: 20,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset(
+                    AppAssets.appLogo2,
+                    color: brownColor2,
+                    height: 40.h,
+                    width: 134.w,
+                  ), // Talenty Logo
+                  20.verticalSpace,
+                  Text(
+                    title!,
+                    textAlign: TextAlign.center,
+                    style: style14B.copyWith(color: blackColor),
+                  ),
+                  20.verticalSpace,
+                  Text(
+                    subtittle!,
+                    textAlign: TextAlign.center,
+                    style: style14M.copyWith(color: blackColor),
+                  ),
+                  10.verticalSpace,
+                  CustomButton(
+                    text: buttonText!,
+                    onTap: onTap,
+                    //onTap: onConfirmActivate,
+                    backgroundColor: candidatoPrimaryColor,
+                    textColor: whiteColor,
+                    radius: 10.r,
+                  ),
+                  12.verticalSpace,
+                  CustomButton(
+                    text: 'Cancelar',
+                    onTap: () {
+                      Navigator.of(dialogContext).pop(); // Dismiss the dialog
+                    },
+                    backgroundColor: Colors.transparent,
+                    textColor: blackColor,
+                    borderColor: blackColor,
+                    radius: 10.r,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
 
 ///
 ///. message bubble how message will looks like
 ///
+
 class MessageBubble extends StatelessWidget {
   final Message message;
   final bool isMe;
@@ -1064,9 +1345,9 @@ class MessageBubble extends StatelessWidget {
     final Color nameColor = isMe ? blackColor : textDarkGreyColor;
 
     final ImageProvider avatarImage =
-        (message.imgUrl != null && message.imgUrl!.isNotEmpty)
-            ? AssetImage(message.imgUrl!)
-            : AssetImage(AppAssets.menulogo);
+        (message.imgUrl.isNotEmpty)
+            ? AssetImage(message.imgUrl)
+            : AssetImage(AppAssets.profileIcon);
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4.h),
@@ -1106,60 +1387,21 @@ class MessageBubble extends StatelessWidget {
               children: [
                 if (!isMe) ...[
                   CircleAvatar(radius: 16.r, backgroundImage: avatarImage),
-                  CustomPaint(
-                    painter: MessageBubbleTailPainter(
-                      isMe: false,
-                      color: bubbleColor,
-                    ),
-                    child: SizedBox(width: 8.w, height: 16.h),
-                  ),
+                  SizedBox(width: 2.w), // Small gap before tail
                 ],
-                ConstrainedBox(
+                // Using chat_bubbles package BubbleSpecialThree for perfect notch
+                BubbleSpecialThree(
+                  text: message.text,
+                  color: bubbleColor,
+                  tail: true,
+                  isSender: isMe,
+                  textStyle: style14M.copyWith(color: textColor),
                   constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.8,
+                    maxWidth: MediaQuery.of(context).size.width * 0.7,
                     minWidth: 100.w,
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 20.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: bubbleColor,
-                      borderRadius: BorderRadius.circular(30.r),
-                    ),
-                    child: Column(
-                      crossAxisAlignment:
-                          isMe
-                              ? CrossAxisAlignment.start
-                              : CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          message.text,
-                          style: style14M.copyWith(color: textColor),
-                        ),
-                        SizedBox(height: 4.h),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Text(
-                            message.time,
-                            style: style12M.copyWith(
-                              color: isMe ? Colors.white70 : Colors.grey[600],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
                 if (isMe) ...[
-                  CustomPaint(
-                    painter: MessageBubbleTailPainter(
-                      isMe: true,
-                      color: bubbleColor,
-                    ),
-                    child: SizedBox(width: 8.w, height: 16.h),
-                  ),
                   CircleAvatar(radius: 16.r, backgroundImage: avatarImage),
                 ],
               ],
@@ -1167,121 +1409,6 @@ class MessageBubble extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class MessageBubbleTailPainter extends CustomPainter {
-  final bool isMe;
-  final Color color;
-  MessageBubbleTailPainter({required this.isMe, required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = color
-          ..style = PaintingStyle.fill;
-    final path = Path();
-    if (isMe) {
-      path.moveTo(size.width, size.height * 0.6);
-      path.lineTo(0, size.height);
-      path.lineTo(0, size.height * 0.1);
-      path.close();
-    } else {
-      path.moveTo(0, size.height * 0.6);
-      path.lineTo(size.width, size.height);
-      path.lineTo(size.width, size.height * 0.1);
-      path.close();
-    }
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
-}
-
-///
-///
-///
-
-// Assuming you have these color and dimension variables from a utility file
-// For example:
-// final redColor = Colors.red;
-// final greyColor = Colors.grey;
-// final blackColor = Colors.black;
-// final double screenWidth = 375; // Example screen width
-// double w = screenWidth / 100;
-// double h = 812 / 100;
-
-///
-///.
-///
-
-class ReportBottomSheet extends StatelessWidget {
-  const ReportBottomSheet({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height:
-          MediaQuery.of(context).size.height * 0.7, // Adjust height as needed
-      padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25),
-          topRight: Radius.circular(25),
-        ),
-      ),
-      child: Column(
-        children: [
-          // Drag handle
-          Container(
-            height: 4,
-            width: 40,
-            margin: EdgeInsets.only(bottom: 20),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          Text(
-            'Selecciona el motivo de tu reporte',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          SizedBox(height: 20),
-          Expanded(
-            child: ListView(
-              children: [
-                _buildReportItem('Uso de lenguaje ofensivo o irrespetuoso.'),
-                _buildReportItem('Acoso o comportamiento agresivo.'),
-                _buildReportItem('Discriminación o discurso de odio.'),
-                _buildReportItem('Datos falsos o engañosos en su perfil.'),
-                _buildReportItem('Cuenta sospechosa o fraudulenta.'),
-                _buildReportItem('Suplantación de identidad.'),
-                _buildReportItem('Incumplió con los términos del servicio.'),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildReportItem(String text) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
-      ),
-      child: Text(text, style: TextStyle(fontSize: 16, color: Colors.black87)),
     );
   }
 }

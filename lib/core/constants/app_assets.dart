@@ -161,4 +161,9 @@ class AppAssets {
   static String settingIcon = "$iconsAssets/settingIcon.png";
   static String helpIcon = "$iconsAssets/helpIcon.png";
   static String supportIcon = "$iconsAssets/supportIcon.png";
+  static String blockCompanyIcon = "$iconsAssets/blockCompanyIcon.png";
+  static String companyIcon = "$iconsAssets/CompanyIcon.png";
+  static String crossIcon = "$iconsAssets/crossIcon.png";
+  static String deleteBoxIcon = "$iconsAssets/deleteBoxIcon.png";
+  static String reportIcon = "$iconsAssets/reportIcon.png";
 }

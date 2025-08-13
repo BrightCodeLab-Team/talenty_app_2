@@ -8,7 +8,7 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model.dart';
-import 'package:talenty_app/ui/screens/candidate/chats/conversation/one_to_one_chat.dart';
+import 'package:talenty_app/ui/screens/candidate/chats/conversation/chating_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/help_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/main_menu_screen/candidate_mas_screen.dart';
 import 'package:talenty_app/ui/screens/company/chat/chat_screen.dart';
