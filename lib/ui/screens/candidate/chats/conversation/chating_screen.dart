@@ -37,22 +37,21 @@ class _ConversationScreenState extends State<ConversationScreen>
 
   String _currentStatus = 'En proceso';
   Color _statusColor = greyColor;
-
   @override
   void initState() {
     super.initState();
     _updateStatusColor(_currentStatus);
     _dropdownAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 100), // Increased duration
+      duration: const Duration(milliseconds: 300), // Adjusted duration
       vsync: this,
     );
     _dropdownAnimation = Tween<Offset>(
-      begin: const Offset(1.0, 0.0),
+      begin: const Offset(1.0, 0.0), // Starts from right
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
         parent: _dropdownAnimationController,
-        curve: Curves.easeOut,
+        curve: Curves.fastEaseInToSlowEaseOut,
       ),
     );
   }
