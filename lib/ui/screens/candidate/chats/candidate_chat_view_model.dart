@@ -12,22 +12,45 @@ class CandidateChatViewModel extends BaseViewModel {
     'Ventas',
   ];
 
-  String selectedFilter = 'Todos';
-  void deleteChat(CandidateChatItem chatToDelete) {
-    // Find the exact chat to delete by comparing multiple properties
-    allChats.removeWhere(
-      (chat) =>
-          chat.name == chatToDelete.name &&
-          chat.role == chatToDelete.role &&
-          chat.companyName == chatToDelete.companyName &&
-          chat.state == chatToDelete.state,
-    );
+  CandidateChatItem? _chatToAnimate;
+  bool _isAnimatingDeletion = false;
+
+  void startAutoSwipeAnimation(CandidateChatItem chat) {
+    _chatToAnimate = chat;
+    _isAnimatingDeletion = true;
     notifyListeners();
+
+    // After animation completes, remove the chat
+    Future.delayed(Duration(seconds: 1), () {
+      _isAnimatingDeletion = false;
+      notifyListeners();
+    });
   }
 
-  // Static list of all chats
+  bool shouldAnimateDeletion(CandidateChatItem chat) {
+    return _isAnimatingDeletion && _chatToAnimate?.id == chat.id;
+  }
+
+  String selectedFilter = 'Todos';
+
+  void deleteChat(CandidateChatItem chatToDelete) {
+    // Store the chat to be animated before removal
+    _chatToAnimate = chatToDelete;
+    _isAnimatingDeletion = true;
+    notifyListeners();
+
+    // Remove the chat after a small delay to allow the animation to start
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      allChats.removeWhere((chat) => chat.id == chatToDelete.id);
+      _isAnimatingDeletion = false;
+      _chatToAnimate = null;
+      notifyListeners();
+    });
+  }
+
   final List<CandidateChatItem> allChats = [
     CandidateChatItem(
+      id: 1,
       name: 'Shayan ZAhid',
       role: 'Diseñador Web',
       preview: '¡Hola! soy Jorge Pérez diseñador web...',
@@ -39,6 +62,7 @@ class CandidateChatViewModel extends BaseViewModel {
       state: 'Coyoacán, CDMX ',
     ),
     CandidateChatItem(
+      id: 2,
       name: 'Sanan ZAhid',
       role: 'Becario en Programación',
       preview: '¡Hola! soy Jorge Pérez diseñador web...',
@@ -50,6 +74,7 @@ class CandidateChatViewModel extends BaseViewModel {
       state: 'Coyoacán, CDMX',
     ),
     CandidateChatItem(
+      id: 3,
       name: 'Jorge Pérez',
       role: 'Programador HTML',
       preview: '¡Hola! soy Jorge Pérez diseñador web...',
@@ -61,6 +86,7 @@ class CandidateChatViewModel extends BaseViewModel {
       state: 'Coyoacán, CDMX',
     ),
     CandidateChatItem(
+      id: 4,
       name: 'Jorge Pérez',
       role: 'Diseñador Web',
       preview: '¡Hola! soy Jorge Pérez diseñador web...',
@@ -72,6 +98,7 @@ class CandidateChatViewModel extends BaseViewModel {
       state: 'Coyoacán, CDMX',
     ),
     CandidateChatItem(
+      id: 5,
       name: 'Jorge Pérez',
       role: 'Becario en ventas',
       preview: '¡Hola! soy Jorge Pérez diseñador web...',
@@ -83,6 +110,7 @@ class CandidateChatViewModel extends BaseViewModel {
       state: 'Coyoacán, CDMX',
     ),
     CandidateChatItem(
+      id: 6,
       name: 'Jorge Pérez',
       role: 'Becario en Programación',
       preview: '¡Hola! soy Jorge Pérez diseñador web...',

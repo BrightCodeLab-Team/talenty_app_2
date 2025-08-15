@@ -16,11 +16,13 @@ import 'package:talenty_app/ui/screens/candidate/mas/availability_screen_3/avail
 class ConversationScreen extends StatefulWidget {
   final CandidateChatItem chatItem;
   final JobVacancyModel vacancy;
+  final CandidateChatViewModel chatListModel;
   const ConversationScreen({
-    Key? key,
+    super.key,
     required this.chatItem,
     required this.vacancy,
-  }) : super(key: key);
+    required this.chatListModel,
+  });
 
   @override
   _ConversationScreenState createState() => _ConversationScreenState();
@@ -94,7 +96,13 @@ class _ConversationScreenState extends State<ConversationScreen>
         ChangeNotifierProvider(
           create: (_) => ConversationViewModel()..init(widget.chatItem),
         ),
-        ChangeNotifierProvider(create: (_) => CandidateChatViewModel()),
+        ChangeNotifierProvider.value(value: widget.chatListModel),
+        // ChangeNotifierProvider.value(
+        //   value: Provider.of<CandidateChatViewModel>(
+        //     context,
+        //     listen: false,
+        //   ), // ✅ Use existing instance
+        // ),
       ],
 
       child: Consumer2<ConversationViewModel, CandidateChatViewModel>(
@@ -163,15 +171,31 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                       'No seleccionado'
                                                   ? lightBrownColor2
                                                       .withOpacity(0.3)
-                                                  : darkgreenColor.withOpacity(
+                                                  : widget
+                                                          .chatItem
+                                                          .unreadCount ==
+                                                      'Seleccionado'
+                                                  ? darkgreenColor.withOpacity(
                                                     0.2,
-                                                  ),
+                                                  )
+                                                  : yellowBrownColor
+                                                      .withOpacity(0.2),
                                           borderRadius: BorderRadius.circular(
                                             4.r,
                                           ),
                                         ),
+
+                                        ///
+                                        ///. here is the problem when i navigate from allChats list it is ok but when navigate from vacanices list then i want text En Proceso but it is not showing
+                                        ///
                                         child: Text(
-                                          widget.chatItem.unreadCount!,
+                                          widget.chatItem.unreadCount ==
+                                                  'No seleccionado'
+                                              ? 'No seleccionado'
+                                              : widget.chatItem.unreadCount ==
+                                                  'Seleccionado'
+                                              ? 'Seleccionado'
+                                              : 'En proceso',
                                           style: style14M.copyWith(
                                             color:
                                                 widget.chatItem.unreadCount ==
@@ -182,7 +206,12 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                             .unreadCount ==
                                                         'No seleccionado'
                                                     ? lightBrownColor2
-                                                    : darkgreenColor,
+                                                    : widget
+                                                            .chatItem
+                                                            .unreadCount ==
+                                                        'Seleccionado'
+                                                    ? darkgreenColor
+                                                    : yellowBrownColor,
                                           ),
                                         ),
                                       ),
@@ -274,110 +303,118 @@ class _ConversationScreenState extends State<ConversationScreen>
                                       ),
                                     ),
                                     5.horizontalSpace,
-                                    PopupMenuButton<String>(
-                                      padding: EdgeInsetsGeometry.zero,
-                                      offset: Offset(10, 22),
-                                      constraints: BoxConstraints(
-                                        minWidth: 65.w,
-                                        maxWidth:
-                                            MediaQuery.of(context).size.width *
-                                            0.8,
-                                      ),
-                                      color: Colors.transparent,
-
-                                      elevation: 0,
-                                      onSelected: (String result) {
-                                        _updateStatusColor(result);
-                                        _handleDropdownState(false);
-                                      },
-                                      onCanceled: () {
-                                        _handleDropdownState(false);
-                                      },
-                                      onOpened: () {
-                                        _handleDropdownState(true);
-                                      },
-                                      itemBuilder:
-                                          (
-                                            BuildContext context,
-                                          ) => <PopupMenuEntry<String>>[
-                                            PopupMenuItem<String>(
-                                              value:
-                                                  'Ya no estoy interesado en la vacante',
-                                              child: _buildStatusItem(
-                                                'Ya no estoy interesado en la vacante',
-                                                _currentStatus ==
-                                                        'Ya no estoy interesado en la vacante'
-                                                    ? brownColor.withOpacity(
-                                                      0.3,
-                                                    )
-                                                    : brownColor.withOpacity(
-                                                      0.1,
-                                                    ),
-
-                                                brownColor,
-                                              ),
-                                            ),
-                                            PopupMenuItem<String>(
-                                              value:
-                                                  'Por el momento no estoy disponible',
-                                              child: _buildStatusItem(
-                                                'Por el momento no estoy disponible',
-                                                _currentStatus ==
-                                                        'Por el momento no estoy disponible'
-                                                    ? yellowBrownColor
-                                                        .withOpacity(0.3)
-                                                    : yellowBrownColor
-                                                        .withOpacity(0.1),
-                                                yellowBrownColor,
-                                              ),
-                                            ),
-                                            PopupMenuItem<String>(
-                                              value:
-                                                  'Estoy interesado en la vacante',
-                                              child: _buildStatusItem(
-                                                'Estoy interesado en la vacante',
-                                                _currentStatus ==
-                                                        'Estoy interesado en la vacante'
-                                                    ? darkgreenColor
-                                                        .withOpacity(0.3)
-                                                    : darkgreenColor
-                                                        .withOpacity(0.1),
-                                                darkgreenColor,
-                                              ),
-                                            ),
-                                          ],
-                                      child: Container(
-                                        height: 32.h,
-                                        width: 65.w,
-                                        decoration: BoxDecoration(
-                                          color: whiteColor,
-                                          border: Border.all(
-                                            color: borderGreyColor,
-                                          ),
-                                          borderRadius: BorderRadius.circular(
-                                            6.r,
-                                          ),
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: PopupMenuButton<String>(
+                                        padding: EdgeInsetsGeometry.zero,
+                                        offset: Offset(0, 20),
+                                        constraints: BoxConstraints(
+                                          minWidth: 65.w,
+                                          maxWidth:
+                                              MediaQuery.of(
+                                                context,
+                                              ).size.width *
+                                              0.8,
                                         ),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              radius: 8.r,
-                                              backgroundColor: _statusColor,
+                                        color: Colors.transparent,
+
+                                        elevation: 0,
+                                        onSelected: (String result) {
+                                          _updateStatusColor(result);
+                                          _handleDropdownState(false);
+                                        },
+                                        onCanceled: () {
+                                          _handleDropdownState(false);
+                                        },
+                                        onOpened: () {
+                                          _handleDropdownState(true);
+                                        },
+                                        itemBuilder:
+                                            (
+                                              BuildContext context,
+                                            ) => <PopupMenuEntry<String>>[
+                                              PopupMenuItem<String>(
+                                                value:
+                                                    'Ya no estoy interesado en la vacante',
+                                                child: _buildStatusItem(
+                                                  'Ya no estoy interesado en la vacante',
+                                                  _currentStatus ==
+                                                          'Ya no estoy interesado en la vacante'
+                                                      ? brownColor.withOpacity(
+                                                        0.3,
+                                                      )
+                                                      : brownColor.withOpacity(
+                                                        0.1,
+                                                      ),
+
+                                                  brownColor,
+                                                  brownColor,
+                                                ),
+                                              ),
+                                              PopupMenuItem<String>(
+                                                value:
+                                                    'Por el momento no estoy disponible',
+                                                child: _buildStatusItem(
+                                                  'Por el momento no estoy disponible',
+                                                  _currentStatus ==
+                                                          'Por el momento no estoy disponible'
+                                                      ? yellowBrownColor
+                                                          .withOpacity(0.3)
+                                                      : yellowBrownColor
+                                                          .withOpacity(0.1),
+                                                  yellowBrownColor,
+                                                  Color(0xffFFCC4D),
+                                                ),
+                                              ),
+                                              PopupMenuItem<String>(
+                                                value:
+                                                    'Estoy interesado en la vacante',
+                                                child: _buildStatusItem(
+                                                  'Estoy interesado en la vacante',
+                                                  _currentStatus ==
+                                                          'Estoy interesado en la vacante'
+                                                      ? darkgreenColor
+                                                          .withOpacity(0.3)
+                                                      : darkgreenColor
+                                                          .withOpacity(0.1),
+                                                  darkgreenColor,
+                                                  darkgreenColor,
+                                                ),
+                                              ),
+                                            ],
+                                        child: Container(
+                                          height: 32.h,
+                                          width: 65.w,
+                                          decoration: BoxDecoration(
+                                            color: whiteColor,
+                                            border: Border.all(
+                                              color: borderGreyColor,
                                             ),
-                                            4.horizontalSpace,
-                                            Icon(
-                                              _isDropdownOpen
-                                                  ? Icons
-                                                      .keyboard_arrow_up_rounded
-                                                  : Icons
-                                                      .keyboard_arrow_down_rounded,
-                                              color: greyColor,
+                                            borderRadius: BorderRadius.circular(
+                                              6.r,
                                             ),
-                                          ],
+                                          ),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                radius: 8.r,
+                                                backgroundColor: _statusColor,
+                                              ),
+                                              4.horizontalSpace,
+                                              Icon(
+                                                _isDropdownOpen
+                                                    ? Icons
+                                                        .keyboard_arrow_up_rounded
+                                                    : Icons
+                                                        .keyboard_arrow_down_rounded,
+                                                color: greyColor,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -718,6 +755,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                           ? brownColor.withOpacity(0.4)
                           : brownColor.withOpacity(0.3),
                       brownColor,
+                      brownColor,
                     ),
                   ),
                   10.verticalSpace,
@@ -732,6 +770,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                           ? Color(0xffE9E4D2)
                           : Color(0xffE9E4D2),
                       yellowBrownColor,
+                      Color(0xffFFCC4D),
                     ),
                   ),
                   10.verticalSpace,
@@ -745,6 +784,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                       _currentStatus == 'Estoy interesado en la vacante'
                           ? darkgreenColor.withOpacity(0.3)
                           : darkgreenColor.withOpacity(0.1),
+                      darkgreenColor,
                       darkgreenColor,
                     ),
                   ),
@@ -778,7 +818,12 @@ class _ConversationScreenState extends State<ConversationScreen>
   ///
   /// use in drop down
   ///
-  Widget _buildStatusItem(String text, Color bgColor, Color borderColor) {
+  Widget _buildStatusItem(
+    String text,
+    Color bgColor,
+    Color borderColor,
+    Color? circleColor,
+  ) {
     return Container(
       constraints: BoxConstraints(minWidth: 100.w), // Set minimum width
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
@@ -800,7 +845,10 @@ class _ConversationScreenState extends State<ConversationScreen>
               overflow: TextOverflow.visible, // Allow text to extend
             ),
             SizedBox(width: 8.w),
-            CircleAvatar(radius: 8.r, backgroundColor: borderColor),
+            CircleAvatar(
+              radius: 8.r,
+              backgroundColor: circleColor ?? blackColor,
+            ),
           ],
         ),
       ),
@@ -1035,25 +1083,19 @@ class _ConversationScreenState extends State<ConversationScreen>
                   showSettingDialogBox(
                     context: context,
                     onTap: () {
-                      chatListModel.deleteChat(widget.chatItem);
+                      // Store the chat to be deleted
 
-                      // Close dialogs and navigate back safely
-                      Navigator.of(
-                        context,
-                        rootNavigator: true,
-                      ).pop(); // Close dialog
-                      Navigator.of(
-                        context,
-                        rootNavigator: true,
-                      ).pop(); // Close action sheet
+                      Navigator.of(context, rootNavigator: true).pop();
 
-                      // Check if we can pop the current route (conversation screen)
-                      if (Navigator.canPop(context)) {
-                        Navigator.pop(context); // Go back to chat list
-                      } else {
-                        // If we can't pop (maybe we're at root), just do nothing
-                        // or navigate to a different screen if needed
-                      }
+                      model.clearChat();
+                      Future.delayed(Duration(milliseconds: 200));
+                      Navigator.of(context, rootNavigator: true).pop();
+                      model.clearChat();
+                      Navigator.of(context).pop();
+                      final chatToDelete = widget.chatItem;
+                      chatListModel.deleteChat(chatToDelete);
+                      Future.delayed(Duration(milliseconds: 200));
+                      chatListModel.startAutoSwipeAnimation(chatToDelete);
                     },
                     title: '¿Estás seguro de que quieres eliminar este chat??',
                     subtittle:

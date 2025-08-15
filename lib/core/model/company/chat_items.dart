@@ -23,15 +23,17 @@ class ChatItem {
 }
 
 class CandidateChatItem extends JobVacancyModel {
+  final int? id;
   final String name;
   final String role;
   final String preview;
   final String timestamp;
-  final String unreadCount;
+  final String? unreadCount;
   final String avatarUrl;
   final bool isOnline;
 
   CandidateChatItem({
+    this.id,
     required this.name,
     required this.role,
     required this.preview,
