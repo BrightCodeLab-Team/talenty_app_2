@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, unused_field, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/script/upgrade_all_dependencies.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -105,6 +106,8 @@ class OtpScreen extends StatelessWidget {
                       ),
                     20.verticalSpace,
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'otp_resend_timer'.tr,
@@ -123,11 +126,13 @@ class OtpScreen extends StatelessWidget {
                         onTap: () {
                           model.resendOtp();
                         },
-                        child: Text(
-                          'Resend OTP',
-                          style: style14M.copyWith(
-                            color: primaryColor,
-                            fontWeight: FontWeight.w600,
+                        child: Center(
+                          child: Text(
+                            'resend_otp'.tr,
+                            style: style14M.copyWith(
+                              color: primaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),

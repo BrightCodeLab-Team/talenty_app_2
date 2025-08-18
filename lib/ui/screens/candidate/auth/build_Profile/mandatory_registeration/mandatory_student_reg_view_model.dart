@@ -5,12 +5,23 @@ import 'package:get/get.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
 
 class MandatoryStudentRegViewModel extends BaseViewModel {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController middleNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController optionalController = TextEditingController();
+  TextEditingController federativeEntityController = TextEditingController();
+  TextEditingController cologneController = TextEditingController();
 
   ///
   /// Bool
   ///
-  bool nameErrorFlag = false;
+  bool emailErrorFlag = false;
+  bool middleNameErrorFlag = false;
+  bool lastNameErrorFlag = false;
+  bool optionalErrorFlag = false;
+  bool federativeEntityErrorFlag = false;
+  bool cologneErrorFlag = false;
+
   bool dropDown1Error = false;
   bool dropDown2Error = false;
   bool dropDown3Error = false;
@@ -33,7 +44,14 @@ class MandatoryStudentRegViewModel extends BaseViewModel {
   ///
   /// String
   ///
-  String? get nameError => nameErrorFlag ? validateEmail() : null;
+  String? get emailError => emailErrorFlag ? validateEmail() : null;
+  String? get middleNameError =>
+      middleNameErrorFlag ? validateMiddleName() : null;
+  String? get lastNameError => lastNameErrorFlag ? validateLastName() : null;
+
+  String? get federativeEntityError =>
+      federativeEntityErrorFlag ? federativeEntityValidation() : null;
+  String? get cologneError => cologneErrorFlag ? cologneValidation() : null;
   String _dropDownText1 = '';
   String _dropDownText2 = '';
   String _dropDownText3 = '';
@@ -45,10 +63,42 @@ class MandatoryStudentRegViewModel extends BaseViewModel {
   String get dropDownText3 => _dropDownText3;
   String get dropDownText4 => _dropDownText4;
   String get dropDownText5 => _dropDownText5;
-
+  // email
   String? validateEmail() {
-    final name = nameController.text.trim();
-    if (name.isEmpty) return 'enterValidEmail'.tr;
+    final email = emailController.text.trim();
+    if (email.isEmpty) return 'enterValidEmail'.tr;
+
+    return null;
+  }
+
+  // middle name
+  String? validateMiddleName() {
+    final middleName = middleNameController.text.trim();
+    if (middleName.isEmpty) return 'enter valid middle name'.tr;
+
+    return null;
+  }
+
+  // last name
+  String? validateLastName() {
+    final lastName = lastNameController.text.trim();
+    if (lastName.isEmpty) return 'enter valid last name'.tr;
+
+    return null;
+  }
+  // federativeEntity
+
+  String? federativeEntityValidation() {
+    final federativeEntity = federativeEntityController.text.trim();
+    if (federativeEntity.isEmpty) return 'enter valid federativeEntity'.tr;
+
+    return null;
+  }
+
+  // cologne
+  String? cologneValidation() {
+    final cologne = cologneController.text.trim();
+    if (cologne.isEmpty) return 'enter valid cologne'.tr;
 
     return null;
   }
@@ -247,12 +297,22 @@ class MandatoryStudentRegViewModel extends BaseViewModel {
   }
 
   init() {
-    nameController.addListener(_onFieldChanged);
+    emailController.addListener(_onFieldChanged);
+    middleNameController.addListener(_onFieldChanged);
+    lastNameController.addListener(_onFieldChanged);
+    optionalController.addListener(_onFieldChanged);
+    federativeEntityController.addListener(_onFieldChanged);
+    cologneController.addListener(_onFieldChanged);
   }
 
   void updateFormValidity() {
     isFormValid =
-        nameController.text.trim().isNotEmpty &&
+        emailController.text.trim().isNotEmpty &&
+        middleNameController.text.trim().isNotEmpty &&
+        lastNameController.text.trim().isNotEmpty &&
+        optionalController.text.trim().isNotEmpty &&
+        federativeEntityController.text.trim().isNotEmpty &&
+        cologneController.text.trim().isNotEmpty &&
         dropDownText1.isNotEmpty &&
         dropDownText2.isNotEmpty &&
         dropDownText3.isNotEmpty &&
@@ -263,9 +323,19 @@ class MandatoryStudentRegViewModel extends BaseViewModel {
   }
 
   void _onFieldChanged() {
-    if (nameErrorFlag && validateEmail() == null) {
-      nameErrorFlag = false;
+    if (emailErrorFlag && validateEmail() == null) {
+      emailErrorFlag = false;
+    } else if (middleNameErrorFlag && validateMiddleName() == null) {
+      emailErrorFlag = false;
+    } else if (lastNameErrorFlag && validateLastName() == null) {
+      emailErrorFlag = false;
+    } else if (federativeEntityErrorFlag &&
+        federativeEntityValidation() == null) {
+      federativeEntityErrorFlag = false;
+    } else if (cologneErrorFlag && cologneValidation() == null) {
+      cologneErrorFlag = false;
     }
+
     updateFormValidity(); // <-- add this
     notifyListeners();
   }

@@ -37,7 +37,12 @@ class ImagePickerModalBottomSheet extends StatelessWidget {
               ),
 
               // Logo
-              Image.asset(AppAssets.appLogo2, scale: 4),
+              Image.asset(
+                AppAssets.appLogo2,
+                scale: 4,
+                height: 40.h,
+                width: 134.w,
+              ),
               5.verticalSpace,
 
               // Instruction text

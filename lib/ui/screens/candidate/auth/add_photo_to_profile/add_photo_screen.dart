@@ -30,7 +30,12 @@ class CandidateAddPhotoScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: transparent,
           leading: CustomBackButton(),
-          title: Image.asset(AppAssets.appLogo2, scale: 4),
+          title: Image.asset(
+            AppAssets.appLogo2,
+            scale: 4,
+            height: 40.h,
+            width: 134.w,
+          ),
           centerTitle: true,
         ),
         body: SingleChildScrollView(

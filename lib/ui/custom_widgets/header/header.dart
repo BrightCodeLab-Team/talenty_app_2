@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constants/app_assets.dart';
@@ -32,7 +33,12 @@ class Header extends StatelessWidget {
               child: Icon(Icons.arrow_back, color: whiteColor),
             ),
           ),
-        Image.asset(AppAssets.appLogo2, scale: scale ?? 4),
+        Image.asset(
+          AppAssets.appLogo2,
+          scale: scale ?? 4,
+          height: 40.h,
+          width: 134.w,
+        ),
 
         if (hasBackButton)
           Container(

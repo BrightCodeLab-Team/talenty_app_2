@@ -95,6 +95,7 @@ class LocalizationService extends Translations {
       'otp_resend_timer': 'Resend code in ',
       'passwordsDoNotMatch': 'Passwords do not match',
       'please_enter_6_digit_code': 'Please enter the full 6-digit code',
+      'resend_otp': 'Resend OTP',
 
       // NotificationPermissionScreen
       'notif_title': 'Stay informed at all times',
@@ -1026,6 +1027,9 @@ class LocalizationService extends Translations {
       'passwordsDoNotMatch': 'Las contraseñas no coinciden',
       'please_enter_6_digit_code':
           'Por favor, introduzca el código completo de 6 dígitos',
+
+      'resend_otp': 'Reenviar OTP',
+
       // NotificationPermissionScreen
       'notif_title': 'Mantente informado en todo momento',
       'notif_body':

@@ -24,7 +24,12 @@ class TipsScreen extends StatelessWidget {
             /// App Bar
             ///
             appBar: AppBar(
-              title: Image.asset(AppAssets.appLogo2, scale: 6),
+              title: Image.asset(
+                AppAssets.appLogo2,
+                scale: 6,
+                height: 40.h,
+                width: 134.w,
+              ),
               centerTitle: true,
             ),
 

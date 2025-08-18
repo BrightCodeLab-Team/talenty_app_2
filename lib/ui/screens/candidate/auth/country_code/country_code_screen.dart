@@ -22,7 +22,12 @@ class CandidateRegistrationCountryCodeScreen extends StatelessWidget {
         builder:
             (context, model, child) => Scaffold(
               appBar: AppBar(
-                title: Image.asset(AppAssets.appLogo2, scale: 4),
+                title: Image.asset(
+                  AppAssets.appLogo2,
+                  scale: 4,
+                  height: 40.h,
+                  width: 134.w,
+                ),
                 centerTitle: true,
                 backgroundColor: Colors.white,
                 elevation: 0,

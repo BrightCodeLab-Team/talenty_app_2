@@ -36,7 +36,12 @@ class Candidate77PercentScreen extends StatelessWidget {
               appBar: AppBar(
                 leading: CustomBackButton(),
                 centerTitle: true,
-                title: Image.asset(AppAssets.appLogo2, scale: 4),
+                title: Image.asset(
+                  AppAssets.appLogo2,
+                  scale: 4,
+                  height: 40.h,
+                  width: 134.w,
+                ),
                 backgroundColor: transparent,
               ),
               body: Padding(

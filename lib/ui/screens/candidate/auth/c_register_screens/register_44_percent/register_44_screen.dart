@@ -47,7 +47,12 @@ class Candidate44PercentScreen extends StatelessWidget {
                 backgroundColor: transparent,
                 leading: CustomBackButton(),
                 centerTitle: true,
-                title: Image.asset(AppAssets.appLogo2, scale: 4),
+                title: Image.asset(
+                  AppAssets.appLogo2,
+                  scale: 4,
+                  height: 40.h,
+                  width: 134.w,
+                ),
               ),
               body: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),

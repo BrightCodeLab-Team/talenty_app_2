@@ -142,7 +142,7 @@ class SelectionScreen extends StatelessWidget {
 Widget _header() {
   return Column(
     children: [
-      Image.asset('assets/static_assets/talenty_logo.png', scale: 3.5),
+      Image.asset(AppAssets.appLogo2, scale: 3.5, height: 40.h, width: 134.w),
 
       const SizedBox(height: 10),
       RichText(
