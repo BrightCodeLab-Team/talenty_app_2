@@ -63,6 +63,11 @@ class ConversationViewModel extends BaseViewModel {
     final period = time.hour >= 12 ? 'PM' : 'AM';
     return '$hour:${time.minute.toString().padLeft(2, '0')} $period';
   }
+
+  ///
+  ///
+  ///
+  ///
 }
 
 // message_model.dart
