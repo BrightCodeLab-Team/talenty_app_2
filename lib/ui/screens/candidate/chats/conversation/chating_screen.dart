@@ -8,6 +8,7 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/model/company/chat_items.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
+import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/conversation/chating_screen_view_model.dart';
@@ -108,10 +109,11 @@ class _ConversationScreenState extends State<ConversationScreen>
         builder: (context, model, chatListModel, child) {
           return Scaffold(
             appBar: AppBar(
+              leading: CustomBackButton(position: false),
               title: Row(
                 children: [
                   CircleAvatar(
-                    radius: 15.r,
+                    radius: 20.r,
                     backgroundImage: AssetImage(widget.chatItem.avatarUrl),
                   ),
                   SizedBox(width: 10.w),

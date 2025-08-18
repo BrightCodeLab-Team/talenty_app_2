@@ -12,6 +12,22 @@ class CandidateChatViewModel extends BaseViewModel {
     'Ventas',
   ];
 
+  ///
+  ///. for searching
+  ///
+  List<CandidateChatItem> searchChats(String query) {
+    if (query.isEmpty) return allChats;
+    return allChats
+        .where(
+          (chat) =>
+              chat.name.toLowerCase().contains(query.toLowerCase()) ||
+              chat.role.toLowerCase().contains(query.toLowerCase()) ||
+              (chat.companyName?.toLowerCase().contains(query.toLowerCase()) ??
+                  false),
+        )
+        .toList();
+  }
+
   CandidateChatItem? _chatToAnimate;
   bool _isAnimatingDeletion = false;
 

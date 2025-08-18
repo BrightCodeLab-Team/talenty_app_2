@@ -8,6 +8,7 @@ class CustomBackButton extends StatelessWidget {
   final Color? iconColor;
   final double? size;
   final EdgeInsetsGeometry? padding;
+  final bool? position; // Added position parameter
 
   const CustomBackButton({
     super.key,
@@ -15,12 +16,18 @@ class CustomBackButton extends StatelessWidget {
     this.iconColor = Colors.white,
     this.size = 20,
     this.padding,
+    this.position, // Made optional
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding ?? EdgeInsets.only(top: 30.h, left: 15.w),
+      padding:
+          padding ??
+          EdgeInsets.only(
+            top: (position == false ? 10.h : 30.h), // Conditional top padding
+            left: 15.w,
+          ),
       child: CircleAvatar(
         radius: size?.r,
         backgroundColor: backgroundColor,
