@@ -1,7 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, unused_field, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter_localization/script/upgrade_all_dependencies.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -38,7 +37,7 @@ class OtpScreen extends StatelessWidget {
                     model.verify();
                   }
                 },
-                text: 'btn_continue'.tr,
+                text: 'btn_continue',
                 backgroundColor: model.isComplete ? primaryColor : greyColor,
               ),
             ),

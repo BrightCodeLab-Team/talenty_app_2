@@ -28,7 +28,7 @@ class ImagePermissionScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 40.verticalSpace,
-                Header(hasBackButton: false),
+                Header(hasBackButton: false, height: 30, width: 110),
                 10.verticalSpace,
                 Text('image_title'.tr, style: style24M),
                 10.verticalSpace,

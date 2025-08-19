@@ -8,7 +8,7 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/core/enums/user_roles.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
-import '../auth/login_screen/login_screen.dart';
+import '../../common/login_screen/login_screen.dart';
 import 'onboarding_view_model.dart';
 import 'onboarding_widget.dart';
 
@@ -150,7 +150,7 @@ class _OnboardingCandidatoScreenState extends State<OnboardingScreen> {
                         vertical: 15,
                       ),
                       child: CustomButton(
-                        text: 'btn_continue'.tr,
+                        text: 'btn_continue',
                         onTap:
                             () => Get.to(
                               () => LoginScreen(

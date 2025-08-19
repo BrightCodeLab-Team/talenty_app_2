@@ -361,7 +361,7 @@ class RegisterCompany33PercentScreen extends StatelessWidget {
                 vertical: 15,
               ),
               child: CustomButton(
-                text: 'btn_continue'.tr,
+                text: 'btn_continue',
                 onTap: () {
                   // Validate all fields
                   model.validateDropdowns();

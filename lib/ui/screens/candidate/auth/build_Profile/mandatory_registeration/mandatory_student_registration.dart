@@ -34,7 +34,12 @@ class MandatoryStudentRegistration extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         20.verticalSpace,
-                        Header(hasBackButton: false),
+                        Header(
+                          hasBackButton: false,
+                          height: 28.h,
+                          width: 180,
+                          color: brownColor2,
+                        ),
                         30.verticalSpace,
                         Text('Crea una cuenta'.tr, style: style24M),
                         20.verticalSpace,

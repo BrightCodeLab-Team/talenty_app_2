@@ -199,7 +199,7 @@ class RegisterCompany16PercentScreen extends StatelessWidget {
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
             child: CustomButton(
-              text: 'btn_continue'.tr,
+              text: 'btn_continue',
               onTap: () {
                 model.validateForm(); // Show errors if any
 
@@ -219,20 +219,3 @@ class RegisterCompany16PercentScreen extends StatelessWidget {
     );
   }
 }
-/*
- CustomButton(
-              text: 'btn_continue'.tr,
-              onTap: () {
-                model.validateForm(); // Show errors if any
-
-                // Check if both fields are valid
-                final isTitleValid = model.validateTitle() == null;
-                final isDescriptionValid = model.validateDescription() == null;
-
-                if (isTitleValid && isDescriptionValid) {
-                  Get.to(() => RegisterCompany33PercentScreen());
-                }
-              },
-              backgroundColor: model.isFormFilled ? primaryColor : greyColor,
-            ),
-            */

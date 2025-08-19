@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,8 +14,8 @@ import 'package:talenty_app/ui/custom_widgets/header/header.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/sign_up/sign_up_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
 import 'package:talenty_app/ui/screens/company/root/root_screen.dart';
-import '../../../../custom_widgets/paddings_and_margins/custom_padding.dart';
-import '../resgister_screen/register_screen.dart';
+import '../../../custom_widgets/paddings_and_margins/custom_padding.dart';
+import '../../company/auth/resgister_screen/register_screen.dart';
 import 'login_view_model.dart';
 
 class LoginScreen extends StatelessWidget {

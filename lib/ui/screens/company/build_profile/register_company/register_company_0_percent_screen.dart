@@ -65,7 +65,7 @@ class RegisterCompany0PercentScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 15, vertical: 15),
         child: CustomButton(
-          text: 'btn_continue'.tr,
+          text: 'btn_continue',
           onTap: () {
             Get.to(() => RegisterCompany16PercentScreen());
           },

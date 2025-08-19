@@ -8,10 +8,20 @@ import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/colors.dart';
 
 class Header extends StatelessWidget {
-  Header({super.key, this.hasBackButton = true, this.scale});
+  Header({
+    super.key,
+    this.hasBackButton = true,
+    this.scale,
+    this.height,
+    this.width,
+    this.color,
+  });
+
   final bool hasBackButton;
   double? scale;
-
+  double? height;
+  double? width;
+  Color? color;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -28,7 +38,7 @@ class Header extends StatelessWidget {
               height: 32,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color(0xFF4E4E4E),
+                color: const Color(0xFF4E4E4E),
               ),
               child: Icon(Icons.arrow_back, color: whiteColor),
             ),
@@ -36,15 +46,15 @@ class Header extends StatelessWidget {
         Image.asset(
           AppAssets.appLogo2,
           scale: scale ?? 4,
-          height: 40.h,
-          width: 134.w,
+          height: height ?? 40.h, // default height
+          width: width ?? 134.w, // default width
+          color: color ?? primaryColor,
         ),
-
         if (hasBackButton)
           Container(
             width: 32,
             height: 32,
-            decoration: BoxDecoration(shape: BoxShape.circle),
+            decoration: const BoxDecoration(shape: BoxShape.circle),
           ),
       ],
     );

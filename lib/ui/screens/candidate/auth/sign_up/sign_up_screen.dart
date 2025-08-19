@@ -229,7 +229,7 @@ class CandidateSignUpScreen extends StatelessWidget {
                     );
                   }
                 },
-                text: 'btn_continue'.tr,
+                text: 'btn_continue',
                 backgroundColor: model.canSubmit ? primaryColor : greyColor,
               ),
             ),

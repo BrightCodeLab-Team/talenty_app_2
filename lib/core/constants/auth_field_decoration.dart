@@ -8,16 +8,25 @@ final authFieldDecoration = InputDecoration(
   fillColor: Colors.white,
   hintText: 'Enter your email',
   hintStyle: style14M.copyWith(color: borderGreyColor),
+
   enabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10.r), // Rounded corners
+    borderRadius: BorderRadius.circular(10.r),
     borderSide: BorderSide(color: borderGreyColor),
   ),
   focusedBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
+    borderRadius: BorderRadius.circular(10.r),
     borderSide: BorderSide(color: darkPurpleColor, width: 1.2),
   ),
-  disabledBorder: UnderlineInputBorder(
-    borderSide: BorderSide(color: borderGreyColor),
+  disabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.r),
+    borderSide: BorderSide(color: borderGreyColor),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10.r),
+    borderSide: BorderSide(color: Colors.red, width: 1.2),
+  ),
+  focusedErrorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10.r),
+    borderSide: BorderSide(color: Colors.red, width: 1.5),
   ),
 );

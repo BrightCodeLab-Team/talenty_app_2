@@ -37,7 +37,7 @@ class SelectionScreen extends StatelessWidget {
                   children: [
                     40.verticalSpace,
                     _header(),
-                    20.verticalSpace,
+                    16.verticalSpace,
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text('choose_one'.tr, style: style24M),
@@ -142,9 +142,11 @@ class SelectionScreen extends StatelessWidget {
 Widget _header() {
   return Column(
     children: [
-      Image.asset(AppAssets.appLogo2, scale: 3.5, height: 40.h, width: 134.w),
+      ///
+      /// App Logo
+      ///
+      Image.asset(AppAssets.appLogo2, height: 58.h, width: 180.w),
 
-      const SizedBox(height: 10),
       RichText(
         text: TextSpan(
           children: [

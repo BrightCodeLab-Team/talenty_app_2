@@ -28,7 +28,8 @@ class NotificationPermissionScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 40.verticalSpace,
-                Header(hasBackButton: false),
+                Header(hasBackButton: false, height: 30, width: 110),
+                10.verticalSpace,
                 Text('notif_title'.tr, style: style24M),
                 Text(
                   'notif_body'.tr,
@@ -37,6 +38,7 @@ class NotificationPermissionScreen extends StatelessWidget {
                 ),
               ],
             ),
+
             Center(
               child: Image.asset(
                 AppAssets.notificationIcon,

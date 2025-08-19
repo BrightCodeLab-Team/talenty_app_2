@@ -182,7 +182,7 @@ class RegistroEmpresaScreen extends StatelessWidget {
                     Get.to(() => OtpScreen(email: model.emailController.text));
                   }
                 },
-                text: 'btn_continue'.tr,
+                text: 'btn_continue',
                 backgroundColor: model.canSubmitReg ? primaryColor : greyColor,
               ),
             ),

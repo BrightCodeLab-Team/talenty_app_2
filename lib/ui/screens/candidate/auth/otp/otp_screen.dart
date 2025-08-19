@@ -40,7 +40,7 @@ class CandidateOTPScreen extends StatelessWidget {
                     Get.to(() => MandatoryStudentRegistration());
                   }
                 },
-                text: 'btn_continue'.tr,
+                text: 'btn_continue',
                 backgroundColor: model.isComplete ? primaryColor : greyColor,
               ),
             ),

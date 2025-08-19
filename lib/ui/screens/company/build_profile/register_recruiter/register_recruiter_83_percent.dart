@@ -27,7 +27,7 @@ class RegisterRecruiter83PercentScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
             child: CustomButton(
               horizontalPadding: 20,
-              text: 'btn_continue'.tr,
+              text: 'btn_continue',
 
               onTap: () {
                 model.validateRecruiter83Form();

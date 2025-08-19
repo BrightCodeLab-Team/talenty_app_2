@@ -951,7 +951,7 @@ class LocalizationService extends Translations {
       'header_part1': 'La ',
       'header_part2': '1.ª APP',
       'header_part3': ' laboral',
-      'header_part4': ' creada para jóvenes',
+      'header_part4': ' creada para',
       'header_part5': ' jóvenes',
       // Candidate Screens
       'candidate_onboard_title_1': 'Bienvenido a Talenty',

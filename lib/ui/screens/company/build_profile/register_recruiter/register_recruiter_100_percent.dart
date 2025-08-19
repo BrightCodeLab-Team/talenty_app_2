@@ -28,7 +28,7 @@ class RegisterRecruiter100PercentScreen extends StatelessWidget {
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
             child: CustomButton(
-              text: 'btn_continue'.tr,
+              text: 'btn_continue',
               onTap: () {
                 Get.offAll(() => RootScreen());
               },
