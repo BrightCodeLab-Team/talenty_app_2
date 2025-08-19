@@ -128,7 +128,8 @@ class Candidate22PercentScreen extends StatelessWidget {
                             child: Text(
                               "No tengo experiencia laboral",
                               style: style14M.copyWith(
-                                color: textDarkGreyColor,
+                                color: Color(0xff9D9D9D),
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                           ),
@@ -153,6 +154,23 @@ class Candidate22PercentScreen extends StatelessWidget {
                         ),
                       ),
 
+                      Visibility(
+                        visible: !model.skipExperience == false,
+                        child: Center(
+                          child: Padding(
+                            padding: EdgeInsetsGeometry.symmetric(
+                              horizontal: 30.h,
+                              vertical: 70.h,
+                            ),
+                            child: Text(
+                              '! No te preocupes! Estamos aquí para\n ayudarte a iniciar tu experencia laboral.',
+                              textAlign: TextAlign.center,
+                              style: style14M.copyWith(color: textGreyColor),
+                            ),
+                          ),
+                        ),
+                      ),
+
                       // Continue button
                       Padding(
                         padding: EdgeInsets.only(bottom: 90.h),
@@ -165,7 +183,7 @@ class Candidate22PercentScreen extends StatelessWidget {
                               Get.snackbar(
                                 'Error',
                                 'Por favor completa todos los campos obligatorios',
-                                backgroundColor: Colors.red,
+                                backgroundColor: primaryColor,
                                 colorText: Colors.white,
                               );
                             }
@@ -509,7 +527,7 @@ class WorkExperienceEntryWidget extends StatelessWidget {
               GestureDetector(
                 onTap: model.addWorkExperienceEntry,
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 3),
                   margin: EdgeInsets.symmetric(vertical: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6.r),

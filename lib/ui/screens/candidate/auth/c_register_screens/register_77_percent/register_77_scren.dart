@@ -109,7 +109,7 @@ class Candidate77PercentScreen extends StatelessWidget {
                               Text(
                                 'Especifica tu nivel de dominio en cada idioma. Esto permitirá a los reclutadores identificar si tu perfil se ajusta a las vacantes disponibles.',
                                 style: style14M.copyWith(
-                                  color: textGreyColor,
+                                  color: textLightGreyColor,
                                 ), // textGreyColor for the description
                                 textAlign: TextAlign.start,
                               ),

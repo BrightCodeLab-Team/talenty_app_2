@@ -145,8 +145,8 @@ Widget _header() {
       ///
       /// App Logo
       ///
-      Image.asset(AppAssets.appLogo2, height: 58.h, width: 180.w),
-
+      Image.asset(AppAssets.appLogo2, height: 52.h, width: 185.w),
+      5.verticalSpace,
       RichText(
         text: TextSpan(
           children: [

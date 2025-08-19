@@ -126,7 +126,7 @@ class Candidate55PercentScreen extends StatelessWidget {
                               Text(
                                 'Selecciona hasta 10 hobbies o intereses personales que te representen.',
                                 style: style14M.copyWith(
-                                  color: textGreyColor,
+                                  color: textLightGreyColor,
                                 ), // textGreyColor for the description
                                 textAlign: TextAlign.start,
                               ),
@@ -136,7 +136,7 @@ class Candidate55PercentScreen extends StatelessWidget {
                                   Text(''),
                                   Spacer(),
                                   Text(
-                                    '0 de 10',
+                                    '${model.selectedTags.length} de 10',
                                     style: style16B.copyWith(
                                       color: darkPurpleColor,
                                     ),
@@ -206,34 +206,27 @@ class Candidate55PercentScreen extends StatelessWidget {
                         ),
                       ),
                       20.verticalSpace,
-                      Center(
-                        child:
-                            model.tagItemsList == null ||
-                                    model.tagItemsList.isEmpty
-                                ? Text(
-                                  'No tags available',
-                                  style: style14M.copyWith(
-                                    color: textGreyColor,
-                                  ),
-                                )
-                                : Wrap(
-                                  spacing: 5.w,
-                                  runSpacing: 10.h,
-                                  children: List.generate(
-                                    model.tagItemsList.length,
-                                    (index) {
-                                      final item = model.tagItemsList[index];
-                                      return CustomShadowIconTextTagWithoutIcon(
-                                        isShowAddIcon: false,
-                                        item: item,
-                                        isSelected: model.isSelected(item),
-                                        onTap:
-                                            () => model.toggleSelection(item),
-                                      );
-                                    },
-                                  ),
-                                ),
-                      ),
+                      model.tagItemsList == null || model.tagItemsList.isEmpty
+                          ? Text(
+                            'No tags available',
+                            style: style14M.copyWith(color: textGreyColor),
+                          )
+                          : Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: 5.w,
+                            runSpacing: 10.h,
+                            children: List.generate(model.tagItemsList.length, (
+                              index,
+                            ) {
+                              final item = model.tagItemsList[index];
+                              return CustomShadowIconTextTagWithoutIcon(
+                                isShowAddIcon: false,
+                                item: item,
+                                isSelected: model.isSelected(item),
+                                onTap: () => model.toggleSelection(item),
+                              );
+                            }),
+                          ),
 
                       50.verticalSpace,
                     ],

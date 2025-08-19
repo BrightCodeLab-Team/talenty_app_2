@@ -80,7 +80,9 @@ class Candidate88PercentScreen extends StatelessWidget {
                               8.verticalSpace,
                               Text(
                                 'Describe hasta 3 cursos o certificaciones que respalden tu experiencia. Haz clic en cada uno para añadir los detalles y fortalecer tu perfil.',
-                                style: style14M.copyWith(color: textGreyColor),
+                                style: style14M.copyWith(
+                                  color: textLightGreyColor,
+                                ),
                               ),
                               8.verticalSpace,
                               Row(
@@ -125,8 +127,8 @@ class Candidate88PercentScreen extends StatelessWidget {
                           Flexible(
                             child: Text(
                               "NO tengo cursos ni certificaciones",
-                              style: style14M.copyWith(
-                                color: textDarkGreyColor,
+                              style: style14B.copyWith(
+                                color: Color(0xff9D9D9D),
                               ),
                             ),
                           ),
@@ -318,7 +320,7 @@ class WorkExperienceEntryWidget extends StatelessWidget {
               GestureDetector(
                 onTap: model.addWorkExperienceEntry,
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  padding: EdgeInsets.symmetric(vertical: 5),
                   margin: EdgeInsets.symmetric(vertical: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6.r),

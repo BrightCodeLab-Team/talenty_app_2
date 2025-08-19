@@ -45,13 +45,14 @@ class Candidate44PercentScreen extends StatelessWidget {
               ),
               appBar: AppBar(
                 backgroundColor: transparent,
-                leading: CustomBackButton(),
+                leading: CustomBackButton(position: false),
                 centerTitle: true,
                 title: Image.asset(
                   AppAssets.appLogo2,
                   scale: 4,
-                  height: 40.h,
-                  width: 134.w,
+                  height: 28.h,
+                  width: 115.w,
+                  color: primaryColor,
                 ),
               ),
               body: Padding(
@@ -101,7 +102,9 @@ class Candidate44PercentScreen extends StatelessWidget {
                             8.verticalSpace,
                             Text(
                               'Selecciona hasta 10 de los 34 talentos que mejor te describan. Haz clic en un talento para ver su descripción: ',
-                              style: style14M.copyWith(color: textGreyColor),
+                              style: style14M.copyWith(
+                                color: textLightGreyColor,
+                              ),
                               textAlign: TextAlign.start,
                             ),
                             8.verticalSpace,
@@ -228,7 +231,10 @@ class TalentCircleWidget extends StatelessWidget {
                   8.verticalSpace,
                   Text(
                     talent.name,
-                    style: style14B.copyWith(color: darkPurpleColor),
+                    style: style14B.copyWith(
+                      fontSize: 13.sp,
+                      color: blackColor,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -237,22 +243,17 @@ class TalentCircleWidget extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      //  color: isSelected ? brownColor : lightbrownColor,
                       color: lightbrownColor,
                       shape: BoxShape.circle,
                       border: Border.all(color: brownColor),
-                      // isSelected
-                      //     ? Border.all(color: Colors.deepPurple, width: 2.w)
-                      //     : null,
                     ),
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.all(30.0),
                         child: Image.asset(
-                          //isSelected ? talent.selectedImageUrl : talent.imageUrl,
                           talent.imageUrl,
                           scale: 4,
-                          //  color: isSelected ? Colors.white : brownColor,
+
                           color: brownColor,
                         ),
                       ),
@@ -261,7 +262,10 @@ class TalentCircleWidget extends StatelessWidget {
                   8.verticalSpace,
                   Text(
                     talent.name,
-                    style: style14M.copyWith(color: darkPurpleColor),
+                    style: style14B.copyWith(
+                      fontSize: 13.sp,
+                      color: blackColor,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],

@@ -55,7 +55,12 @@ class CandidateOTPScreen extends StatelessWidget {
 
                 children: [
                   45.verticalSpace,
-                  Header(hasBackButton: false),
+                  Header(
+                    hasBackButton: false,
+                    color: candidatoPrimaryColor,
+                    height: 28.h,
+                    width: 115,
+                  ),
                   25.verticalSpace,
                   Align(
                     alignment: Alignment.topLeft,
@@ -91,10 +96,13 @@ class CandidateOTPScreen extends StatelessWidget {
                       fieldWidth: 55.0,
                       numberOfFields: 6,
                       showFieldAsBox: true,
+                      fillColor: lightBlackColor,
+                      disabledBorderColor: lightBlackColor,
+                      borderColor: lightBlackColor,
                       focusedBorderColor:
                           model.hasError ? primaryColor : lightBlackColor,
                       enabledBorderColor:
-                          model.hasError ? primaryColor : lightBlackColor,
+                          model.hasError ? primaryColor : borderGreyColor,
                       cursorColor: darkPurpleColor,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       borderRadius: BorderRadius.circular(8.r),

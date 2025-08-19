@@ -36,7 +36,7 @@ class CandidateSignUpScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       45.verticalSpace,
-                      Header(),
+                      Header(height: 28.h, width: 115.w),
                       25.verticalSpace,
                       Text('create_an_account'.tr, style: style24M),
                       20.verticalSpace,
@@ -144,7 +144,7 @@ class CandidateSignUpScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'confirmar Contraseña crear cuenta'.tr,
+                            'Confirma tu contraseña'.tr,
                             style: style16M.copyWith(
                               fontWeight: FontWeight.w600,
                             ),

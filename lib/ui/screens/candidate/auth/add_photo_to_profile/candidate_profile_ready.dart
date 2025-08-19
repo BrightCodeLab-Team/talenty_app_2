@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
@@ -26,7 +27,7 @@ class CandidateProfileReadyScreen extends StatelessWidget {
       ),
       appBar: AppBar(
         backgroundColor: transparent,
-        leading: CustomBackButton(),
+        leading: CustomBackButton(position: false),
         centerTitle: true,
         title: Image.asset(
           AppAssets.appLogo2,

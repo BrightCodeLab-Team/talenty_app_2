@@ -24,9 +24,10 @@ class CandidateRegistrationCountryCodeScreen extends StatelessWidget {
               appBar: AppBar(
                 title: Image.asset(
                   AppAssets.appLogo2,
+                  color: candidatoPrimaryColor,
                   scale: 4,
-                  height: 40.h,
-                  width: 134.w,
+                  height: 28.h,
+                  width: 115.w,
                 ),
                 centerTitle: true,
                 backgroundColor: Colors.white,
@@ -124,6 +125,22 @@ class CandidateRegistrationCountryCodeScreen extends StatelessWidget {
                                 controller: model.phoneNumberController,
                                 keyboardType: TextInputType.phone,
                                 decoration: authFieldDecoration.copyWith(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                      color: darkPurpleColor,
+                                    ),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: darkPurpleColor,
+                                    ),
+                                  ),
+                                  disabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: darkPurpleColor,
+                                    ),
+                                  ),
                                   hintText: '55-00-000-000',
                                   errorText:
                                       model.phoneNumberError

@@ -121,7 +121,7 @@ class Candidate66PercentScreen extends StatelessWidget {
                               Text(
                                 'Selecciona hasta 10 idiomas que hablas. Esto ayudará a los reclutadores a encontrar oportunidades que se ajusten mejor a tu perfil. Haz clic en un idioma para indicar tu nivel.s',
                                 style: style14M.copyWith(
-                                  color: textGreyColor,
+                                  color: textLightGreyColor,
                                 ), // textGreyColor for the description
                                 textAlign: TextAlign.start,
                               ),
@@ -131,7 +131,7 @@ class Candidate66PercentScreen extends StatelessWidget {
                                   Text(''),
                                   Spacer(),
                                   Text(
-                                    'Máximo 10 idiomas',
+                                    'Máximo 10  idiomas',
                                     style: style16B.copyWith(
                                       color: darkPurpleColor,
                                     ),
@@ -201,22 +201,23 @@ class Candidate66PercentScreen extends StatelessWidget {
                         ),
                       ),
                       20.verticalSpace,
-                      Center(
-                        child: Wrap(
-                          spacing: 5.w,
-                          runSpacing: 10.h,
-                          children: List.generate(model.filteredTags.length, (
-                            index,
-                          ) {
-                            final item = model.filteredTags[index];
-                            return CustomShadowIconTextTagWithoutIcon(
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 5.w,
+                        runSpacing: 10.h,
+                        children: List.generate(model.filteredTags.length, (
+                          index,
+                        ) {
+                          final item = model.filteredTags[index];
+                          return Center(
+                            child: CustomShadowIconTextTagWithoutIcon(
                               isShowAddIcon: false,
                               isSelected: model.isSelected(item),
                               item: item,
                               onTap: () => model.toggleSelection(item),
-                            );
-                          }),
-                        ),
+                            ),
+                          );
+                        }),
                       ),
 
                       50.verticalSpace,

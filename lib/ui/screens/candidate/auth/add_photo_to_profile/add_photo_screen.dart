@@ -29,7 +29,7 @@ class CandidateAddPhotoScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: transparent,
-          leading: CustomBackButton(),
+          leading: CustomBackButton(position: false),
           title: Image.asset(
             AppAssets.appLogo2,
             scale: 4,

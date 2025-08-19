@@ -160,7 +160,7 @@ class CustomShadowIconTextTagWithoutIcon extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: darkPurpleColor.withOpacity(0.25),
+                color: darkPurpleColor.withOpacity(0.3),
                 offset: Offset(0, 4),
                 blurRadius: 4,
                 spreadRadius: 0,

@@ -1,3 +1,4 @@
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/material.dart';
@@ -167,7 +168,7 @@ class Candidate33PercentScreen extends StatelessWidget {
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
-                                  left: index == 1 ? 5.w : 0,
+                                  left: index == 1 ? 10.w : 7,
                                 ),
                                 decoration: BoxDecoration(
                                   color: whiteColor,
@@ -196,7 +197,7 @@ class Candidate33PercentScreen extends StatelessWidget {
                                   child: Center(
                                     child: Text(
                                       label,
-                                      style: style16M.copyWith(
+                                      style: style14M.copyWith(
                                         color:
                                             isSelected
                                                 ? Colors.red
@@ -355,7 +356,7 @@ class _Candidate33PercentScreen2State extends State<Candidate33PercentScreen2> {
       ),
       appBar: AppBar(
         backgroundColor: transparent,
-        leading: CustomBackButton(),
+        leading: CustomBackButton(position: false),
         centerTitle: true,
         title: Image.asset(
           AppAssets.appLogo2,

@@ -45,8 +45,8 @@ class LoginScreen extends StatelessWidget {
                         ///
                         /// Header
                         ///
-                        Header(),
-                        7.verticalSpace,
+                        Header(height: 28.h, width: 95.w, color: primaryColor),
+                        10.verticalSpace,
                         Text(
                           model.isCandidate
                               ? 'login_tagline_candidate'.tr

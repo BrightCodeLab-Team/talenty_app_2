@@ -102,7 +102,7 @@ class CandidateRegister11PercentScreen extends StatelessWidget {
                           );
                         },
                       ),
-
+                      50.verticalSpace,
                       // Update your Continuar button
                       // In CandidateRegister11PercentScreen
                       Padding(
@@ -579,11 +579,11 @@ class UniversityEntryWidget extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6.r),
-                      border: Border.all(color: darkPurpleColor, width: 2),
+
                       color: whiteColor,
                       boxShadow: [
                         BoxShadow(
-                          color: darkPurpleColor.withOpacity(0.25),
+                          color: blackColor.withOpacity(0.25),
                           offset: Offset(0, 2),
                           blurRadius: 4,
                           spreadRadius: 0,
@@ -592,7 +592,7 @@ class UniversityEntryWidget extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 8.w,
+                        horizontal: 5.w,
                         vertical: 5.h,
                       ),
                       child: Row(
@@ -600,7 +600,7 @@ class UniversityEntryWidget extends StatelessWidget {
                         children: [
                           Text(
                             'Agregar otra experiencia',
-                            style: style16M.copyWith(color: lightBlackColor),
+                            style: style14M.copyWith(color: lightBlackColor),
                           ),
                           2.horizontalSpace,
                           Icon(
@@ -626,7 +626,7 @@ class UniversityEntryWidget extends StatelessWidget {
                       10.horizontalSpace,
                       Text(
                         'Borrar estudio',
-                        style: style16M.copyWith(color: darkPurpleColor),
+                        style: style14M.copyWith(color: darkPurpleColor),
                       ),
                     ],
                   ),
