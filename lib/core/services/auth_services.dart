@@ -73,63 +73,17 @@ class AuthService {
     return otpResponse;
   }
 
-  // _getUserProfile() async {
-  //   UserProfileResponse response = await _dbService.getUserProfile();
-  //   if (response.success) {
-  //     userProfile = response.profile;
-  //     log.d('Got User Data: ${userProfile?.toJson()}');
-  //   } else {
-  //     Get.dialog(AuthDialog(title: 'Title', message: response.error!));
-  //   }
-  // }
+  Future<AuthResponse> loginUser(AppUser user) async {
+    final response = await _dbService.login(user);
+    if (response.success && response.token != null) {
+      await _localStorageService.setAccessToken(response.token!);
+      print("Login Success, token saved: ${response.token}");
+    } else {
+      print("Login Failed: ${response.message}");
+    }
 
-  ///
-  /// Updating FCM Token here...
-  ///
-  // _updateFcmToken() async {
-  //   final fcmToken = await locator<NotificationsService>().getFcmToken();
-  //   final deviceId = await DeviceInfoService().getDeviceId();
-  //   final response = await _dbService.updateFcmToken(deviceId, fcmToken!);
-  //   if (response.success) {
-  //     userProfile!.fcmToken = fcmToken;
-  //   }
-  // }
-
-  // signupWithEmailAndPassword(SignUpBody body) async {
-  //   late AuthResponse response;
-  //   response = await _dbService.createAccount(body);
-  //   if (response.success) {
-  //     userProfile = UserProfile.fromJson(body.toJson());
-  //     _localStorageService.accessToken = response.accessToken;
-  //     await _updateFcmToken();
-  //   }
-  //   return response;
-  // }
-
-  // loginWithEmailAndPassword(LoginBody body) async {
-  //   late AuthResponse response;
-  //   response = await _dbService.loginWithEmailAndPassword(body);
-  //   if (response.success) {
-  //     _localStorageService.accessToken = response.accessToken;
-  //     await _getUserProfile();
-  //     _updateFcmToken();
-  //   }
-  //   return response;
-  // }
-
-  // resetPassword(ResetPasswordBody body) async {
-  //   final AuthResponse response = await _dbService.resetPassword(body);
-  //   if (response.success) {
-  //     _localStorageService.accessToken = response.accessToken;
-  //   }
-  //   return response;
-  // }
-
-  signupWithApple() {}
-
-  signupWithGmail() {}
-
-  signupWithFacebook() {}
+    return response;
+  }
 
   logout() async {
     isLogin = false;

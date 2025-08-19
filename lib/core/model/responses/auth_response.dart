@@ -1,21 +1,31 @@
+// ignore_for_file: annotate_overrides, overridden_fields, use_super_parameters
+
 import 'package:talenty_app/core/model/app_user.dart';
 import 'package:talenty_app/core/model/responses/base_response/base_response.dart';
 
 class AuthResponse extends BaseResponse {
-  AppUser user = AppUser();
-  String? message = '';
+  AppUser? user;
+  String? token;
 
-  /// Default constructor
-  AuthResponse(bool success, {String? error, this.message = ''})
-    : super(success, message: error);
+  AuthResponse(bool success, {String? message, this.user, this.token})
+    : super(success, message: message);
 
-  /// Named constructor from JSON
   AuthResponse.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
-    final body = json['body'];
+    // Parse the token from the body
+    if (json['body'] != null && json['body'] is Map<String, dynamic>) {
+      final body = json['body'] as Map<String, dynamic>;
+      token = body['token'];
 
-    if (body != null && body is Map<String, dynamic>) {
+      // Create user from body data
       user = AppUser.fromJson(body);
     }
-    message = json['message'] ?? '';
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = super.toJson();
+    data['token'] = token;
+    data['user'] = user?.toJson();
+    return data;
   }
 }

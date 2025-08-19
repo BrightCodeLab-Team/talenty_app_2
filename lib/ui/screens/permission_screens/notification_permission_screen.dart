@@ -27,7 +27,7 @@ class NotificationPermissionScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                40.verticalSpace,
+                50.verticalSpace,
                 Header(hasBackButton: false, height: 30, width: 110),
                 10.verticalSpace,
                 Text('notif_title'.tr, style: style24M),

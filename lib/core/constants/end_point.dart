@@ -6,4 +6,10 @@ class EndPoints {
   ///
   static const registerUser = 'users/register';
   static const verifyotp = 'users/verify';
+
+  ///
+  /// Login User
+  ///
+
+  static const login = 'users/login';
 }

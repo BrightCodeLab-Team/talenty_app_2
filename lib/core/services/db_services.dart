@@ -37,57 +37,15 @@ class DatabaseService {
     return OtpResponse.fromJson(response.toJson());
   }
 
-  // Future<CreateUserResponse> getUserProfile() async {
-  //   final CreateUserResponse response = await _apiServices.get(
-  //     endPoint: EndPoints.userProfile,
-  //   );
-  //   return UserProfileResponse.fromJson(response.data);
-  // }
+  Future<AuthResponse> login(AppUser user) async {
+    final RequestResponse response = await _apiServices.post(
+      url: "${EndPoints.baseUrl}${EndPoints.login}",
+      data: user.toLoginJson(),
+    );
 
-  // Future<OnboardingResponse> getOnboardingData() async {
-  //   final RequestResponse response = await _apiServices.get(
-  //     endPoint: EndPoints.onboardingData,
-  //   );
-  //   return OnboardingResponse.fromJson(response.data);
-  // }
+    print("@Login raw response: ${response.toJson()}");
 
-  // Future<BaseResponse> updateFcmToken(String deviceId, String token) async {
-  //   final RequestResponse response = await _apiServices.post(
-  //     endPoint: EndPoints.fcmToken,
-  //     data: {'device_id': deviceId, 'token': token},
-  //   );
-  //   return BaseResponse.fromJson(response.data);
-  // }
-
-  // Future<BaseResponse> clearFcmToken(String deviceId) async {
-  //   final RequestResponse response = await _apiServices.post(
-  //     endPoint: EndPoints.clearFcmToken,
-  //     data: {'device_id': deviceId},
-  //   );
-  //   return BaseResponse.fromJson(response.data);
-  // }
-
-  // Future<AuthResponse> loginWithEmailAndPassword(LoginBody body) async {
-  //   final RequestResponse response = await _apiServices.post(
-  //     endPoint: EndPoints.login,
-  //     data: body.toJson(),
-  //   );
-  //   return AuthResponse.fromJson(response.data);
-  // }
-
-  // Future<AuthResponse> createAccount(SignUpBody body) async {
-  //   final RequestResponse response = await _apiServices.post(
-  //     endPoint: EndPoints.signUp,
-  //     data: body.toJson(),
-  //   );
-  //   return AuthResponse.fromJson(response.data);
-  // }
-
-  // Future<AuthResponse> resetPassword(ResetPasswordBody body) async {
-  //   final RequestResponse response = await _apiServices.post(
-  //     endPoint: EndPoints.resetPassword,
-  //     data: body.toJson(),
-  //   );
-  //   return AuthResponse.fromJson(response.data);
-  // }
+    // Convert RequestResponse to AuthResponse
+    return AuthResponse.fromJson(response.toJson());
+  }
 }

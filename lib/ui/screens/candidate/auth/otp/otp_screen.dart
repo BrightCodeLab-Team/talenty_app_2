@@ -36,8 +36,8 @@ class CandidateOTPScreen extends StatelessWidget {
                 onTap: () {
                   if (model.validateOtp()) {
                     model.otpModel.email = email;
-                    // model.verify();
-                    Get.to(() => MandatoryStudentRegistration());
+                    model.verify();
+                    // Get.to(() => MandatoryStudentRegistration());
                   }
                 },
                 text: 'btn_continue',
