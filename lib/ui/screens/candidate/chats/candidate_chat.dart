@@ -1,7 +1,8 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -12,7 +13,6 @@ import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model
 import 'package:talenty_app/ui/screens/candidate/chats/conversation/chating_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/help_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/main_menu_screen/candidate_mas_screen.dart';
-import 'package:talenty_app/ui/screens/company/chat/chat_screen.dart';
 
 class CandidateChatScreen extends StatefulWidget {
   const CandidateChatScreen({super.key});

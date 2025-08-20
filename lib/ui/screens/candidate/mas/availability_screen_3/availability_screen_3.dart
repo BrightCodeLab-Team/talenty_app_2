@@ -6,7 +6,6 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
-import 'package:talenty_app/ui/custom_widgets/divider.dart';
 
 class AvailabilityScreenThree extends StatefulWidget {
   const AvailabilityScreenThree({super.key});

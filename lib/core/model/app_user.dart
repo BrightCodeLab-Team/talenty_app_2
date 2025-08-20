@@ -1,10 +1,12 @@
+import 'package:talenty_app/core/enums/user_roles.dart';
+
 class AppUser {
   String? id;
   String? name;
   String? email;
   String? password;
   String? confirmPassword;
-  String? role;
+  UserRole? role; // yahan enum rakhenge
   String? otp;
 
   AppUser({
@@ -25,9 +27,16 @@ class AppUser {
       email: json['email']?.toString(),
       password: json['password']?.toString(),
       confirmPassword: json['confirmPassword']?.toString(),
-      role: json['role']?.toString(),
+      role: _stringToUserRole(json['role']?.toString()), // ✅ string → enum
       otp: json['otp']?.toString(),
     );
+  }
+  Map<String, dynamic> toLoginJson() {
+    return {
+      'email': email,
+      'password': password,
+      'role': role?.name, // or role.toString() depending on your enum
+    };
   }
 
   /// Convert AppUser to JSON
@@ -38,8 +47,17 @@ class AppUser {
       'email': email,
       'password': password,
       'confirmPassword': confirmPassword,
-      'role': role,
+      'role': role?.name, // ✅ enum → string
       'otp': otp,
     };
+  }
+
+  /// Helper function: String → UserRole
+  static UserRole? _stringToUserRole(String? role) {
+    if (role == null) return null;
+    return UserRole.values.firstWhere(
+      (e) => e.name == role,
+      orElse: () => UserRole.candidate, // default
+    );
   }
 }

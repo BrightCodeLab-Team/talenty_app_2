@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/core/enums/user_roles.dart';
 import 'package:talenty_app/core/enums/view_state.dart';
 import 'package:talenty_app/ui/custom_widgets/header/header.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
@@ -221,12 +222,13 @@ class CandidateSignUpScreen extends StatelessWidget {
                   final isValid =
                       model.formKey.currentState?.validate() ?? false;
                   if (isValid && model.canSubmit) {
-                    model.appUser.role = "candidate";
-                    // model.registerUser();
-                    Get.to(
-                      () =>
-                          CandidateOTPScreen(email: model.emailController.text),
-                    );
+                    model.appUser.role = UserRole.candidate;
+                    print("appUser Data SingUp==> ${model.appUser.toJson()}");
+                    model.registerUser();
+                    // Get.to(
+                    //   () =>
+                    //       CandidateOTPScreen(email: model.emailController.text),
+                    // );
                   }
                 },
                 text: 'btn_continue',

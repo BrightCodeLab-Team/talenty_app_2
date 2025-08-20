@@ -31,7 +31,7 @@ class CameraPermissionScreen extends StatelessWidget {
                 ///
                 /// Header
                 ///
-                40.verticalSpace,
+                50.verticalSpace,
                 Header(hasBackButton: false, height: 30, width: 110),
                 10.verticalSpace,
                 Text('camera_title'.tr, style: style24M),
