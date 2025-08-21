@@ -12,9 +12,24 @@ import 'core/services/api_services.dart';
 
 GetIt locator = GetIt.instance;
 
+// setupLocator(Env env) async {
+//   locator.registerSingleton(Config(env));
+//   locator.registerSingleton<LocalStorageService>(LocalStorageService());
+//   locator.registerSingleton(NotificationsService());
+//   locator.registerSingleton(ApiService());
+//   locator.registerLazySingleton<DatabaseService>(() => DatabaseService());
+//   locator.registerSingleton<AuthService>(AuthService());
+//   locator.registerLazySingleton(() => FilePickerService());
+// }
+
 setupLocator(Env env) async {
   locator.registerSingleton(Config(env));
-  locator.registerSingleton(LocalStorageService());
+
+  // LocalStorageService init karna zaroori hai
+  final localStorage = LocalStorageService();
+  await localStorage.init();
+  locator.registerSingleton<LocalStorageService>(localStorage);
+
   locator.registerSingleton(NotificationsService());
   locator.registerSingleton(ApiService());
   locator.registerLazySingleton<DatabaseService>(() => DatabaseService());

@@ -258,31 +258,36 @@ class LoginScreen extends StatelessWidget {
                                     ? SizedBox(
                                       child: Column(
                                         children: [
-                                          Container(
-                                            height: 54,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                color: Color(0xFFADADAD),
+                                          GestureDetector(
+                                            onTap: () {
+                                              model.loginWithGoogle(context);
+                                            },
+                                            child: Container(
+                                              height: 54,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                border: Border.all(
+                                                  color: Color(0xFFADADAD),
+                                                ),
                                               ),
-                                            ),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Image.asset(
-                                                    AppAssets.googleIcon,
-                                                    width: 19.31,
-                                                    height: 20,
-                                                  ),
-                                                  15.horizontalSpace,
-                                                  Text(
-                                                    'btn_google'.tr,
-                                                    style: style16M,
-                                                  ),
-                                                ],
+                                              child: Center(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Image.asset(
+                                                      AppAssets.googleIcon,
+                                                      width: 19.31,
+                                                      height: 20,
+                                                    ),
+                                                    15.horizontalSpace,
+                                                    Text(
+                                                      'btn_google'.tr,
+                                                      style: style16M,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),

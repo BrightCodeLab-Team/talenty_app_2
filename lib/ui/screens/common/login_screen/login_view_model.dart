@@ -48,6 +48,52 @@ class LoginViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  // Google Sign-In method
+  Future<void> loginWithGoogle(BuildContext context) async {
+    setState(ViewState.busy);
+    try {
+      // Set the role before Google login
+      final UserRole selectedRole =
+          _isCandidate ? UserRole.candidate : UserRole.recruiter;
+
+      final result = await authServices.loginWithGoogle(selectedRole);
+
+      if (result.status == true && result.user != null) {
+        // Successfully logged in with Google
+        if (result.user!.role == UserRole.candidate) {
+          Get.offAll(() => CandidateRootScreen());
+          CustomSnackbar.show(
+            title: "Success",
+            message: "Google Sign-In successful as Candidate",
+            textColor: whiteColor,
+          );
+        } else {
+          Get.offAll(() => RootScreen());
+          CustomSnackbar.show(
+            title: "Success",
+            message: "Google Sign-In successful as Recruiter",
+            textColor: whiteColor,
+          );
+        }
+      } else {
+        CustomSnackbar.show(
+          title: "Error",
+          message: result.errorMessage ?? "Google Sign-In failed",
+          textColor: whiteColor,
+        );
+      }
+    } catch (e) {
+      print("Google Sign-In error: $e");
+      CustomSnackbar.show(
+        title: "Error",
+        message: "Google Sign-In failed, please try again",
+        textColor: whiteColor,
+      );
+    } finally {
+      setState(ViewState.idle);
+    }
+  }
+
   // login method
   loginUser(BuildContext context) async {
     setState(ViewState.busy);
