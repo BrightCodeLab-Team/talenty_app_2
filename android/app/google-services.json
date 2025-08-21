@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "641592510704",
+    "project_id": "talenty-app",
+    "storage_bucket": "talenty-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:641592510704:android:6780e10ce9c7c98d991a35",
+        "android_client_info": {
+          "package_name": "com.example.talenty_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "641592510704-jmfmuinqhb8vekoinfvsn17jce0u55d3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.talenty_app",
+            "certificate_hash": "af243271d16601590914e8b7eb3e1871f8e27eac"
+          }
+        },
+        {
+          "client_id": "641592510704-lru42mmghvij0en2943at7qq2eflbi38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9dLTx_EbtRRkBnU2Ad_hfq6_M5nmd2Ns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "641592510704-lru42mmghvij0en2943at7qq2eflbi38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
