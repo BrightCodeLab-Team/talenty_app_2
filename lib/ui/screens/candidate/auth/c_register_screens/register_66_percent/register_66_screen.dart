@@ -28,7 +28,7 @@ class Candidate66PercentScreen extends StatelessWidget {
             (context, model, child) => Scaffold(
               appBar: AppBar(
                 backgroundColor: transparent,
-                leading: CustomBackButton(),
+                leading: CustomBackButton(position: false),
                 centerTitle: true,
                 title: Image.asset(
                   AppAssets.appLogo2,
@@ -209,13 +209,11 @@ class Candidate66PercentScreen extends StatelessWidget {
                           index,
                         ) {
                           final item = model.filteredTags[index];
-                          return Center(
-                            child: CustomShadowIconTextTagWithoutIcon(
-                              isShowAddIcon: false,
-                              isSelected: model.isSelected(item),
-                              item: item,
-                              onTap: () => model.toggleSelection(item),
-                            ),
+                          return CustomShadowIconTextTagWithoutIcon(
+                            isShowAddIcon: false,
+                            isSelected: model.isSelected(item),
+                            item: item,
+                            onTap: () => model.toggleSelection(item),
                           );
                         }),
                       ),

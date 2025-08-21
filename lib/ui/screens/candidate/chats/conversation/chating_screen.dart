@@ -14,6 +14,20 @@ import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model
 import 'package:talenty_app/ui/screens/candidate/chats/conversation/chating_screen_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/availability_screen_3/availability_screen_3.dart';
 
+class JerkyElasticCurve extends Curve {
+  @override
+  double transform(double t) {
+    if (t < 0.7) {
+      // Quick movement from right
+      return Curves.easeOutQuart.transform(t / 0.7) * 1.08; // Slight overshoot
+    } else {
+      // Gentle bounce back
+      double bounceT = (t - 0.7) / 0.3;
+      return 1.08 - (0.08 * Curves.easeOutCubic.transform(bounceT));
+    }
+  }
+}
+
 class ConversationScreen extends StatefulWidget {
   final CandidateChatItem chatItem;
   final JobVacancyModel vacancy;
@@ -43,16 +57,21 @@ class _ConversationScreenState extends State<ConversationScreen>
     super.initState();
     _updateStatusColor(_currentStatus);
     _dropdownAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 300), // Adjusted duration
+      duration: const Duration(milliseconds: 600), // Longer for elastic effect
+      reverseDuration: const Duration(milliseconds: 200), // Faster closing
       vsync: this,
     );
     _dropdownAnimation = Tween<Offset>(
-      begin: const Offset(1.0, 0.0), // Starts from right
+      begin: const Offset(
+        1.2,
+        0.0,
+      ), // Start further right for more dramatic effect
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
         parent: _dropdownAnimationController,
-        curve: Curves.fastEaseInToSlowEaseOut,
+        curve: JerkyElasticCurve(), // Use your custom curve here
+        reverseCurve: Curves.easeInCubic, // Simple and quick closing
       ),
     );
   }
@@ -97,12 +116,6 @@ class _ConversationScreenState extends State<ConversationScreen>
           create: (_) => ConversationViewModel()..init(widget.chatItem),
         ),
         ChangeNotifierProvider.value(value: widget.chatListModel),
-        // ChangeNotifierProvider.value(
-        //   value: Provider.of<CandidateChatViewModel>(
-        //     context,
-        //     listen: false,
-        //   ), // ✅ Use existing instance
-        // ),
       ],
 
       child: Consumer2<ConversationViewModel, CandidateChatViewModel>(
@@ -124,345 +137,349 @@ class _ConversationScreenState extends State<ConversationScreen>
                 ],
               ),
             ),
-            body: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(
-                    vertical: 8.h,
-                    horizontal: 16.w,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: topChatContainerBorderColor),
-                    color: textLightGreyColor.withOpacity(0.02),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 10.0,
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 8.w,
-                                          vertical: 4.h,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color:
-                                              widget.chatItem.unreadCount ==
-                                                      'En proceso'
-                                                  ? yellowBrownColor
-                                                      .withOpacity(0.3)
-                                                  : widget
-                                                          .chatItem
-                                                          .unreadCount ==
-                                                      'No seleccionado'
-                                                  ? lightBrownColor2
-                                                      .withOpacity(0.3)
-                                                  : widget
-                                                          .chatItem
-                                                          .unreadCount ==
-                                                      'Seleccionado'
-                                                  ? darkgreenColor.withOpacity(
-                                                    0.2,
-                                                  )
-                                                  : yellowBrownColor
-                                                      .withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(
-                                            4.r,
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 8.h,
+                      horizontal: 16.w,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: topChatContainerBorderColor),
+                      color: textLightGreyColor.withOpacity(0.02),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10.0,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 8.w,
+                                            vertical: 4.h,
                                           ),
-                                        ),
-
-                                        ///
-                                        ///. here is the problem when i navigate from allChats list it is ok but when navigate from vacanices list then i want text En Proceso but it is not showing
-                                        ///
-                                        child: Text(
-                                          widget.chatItem.unreadCount ==
-                                                  'No seleccionado'
-                                              ? 'No seleccionado'
-                                              : widget.chatItem.unreadCount ==
-                                                  'Seleccionado'
-                                              ? 'Seleccionado'
-                                              : 'En proceso',
-                                          style: style14M.copyWith(
+                                          decoration: BoxDecoration(
                                             color:
                                                 widget.chatItem.unreadCount ==
                                                         'En proceso'
                                                     ? yellowBrownColor
+                                                        .withOpacity(0.3)
                                                     : widget
                                                             .chatItem
                                                             .unreadCount ==
                                                         'No seleccionado'
                                                     ? lightBrownColor2
+                                                        .withOpacity(0.3)
                                                     : widget
                                                             .chatItem
                                                             .unreadCount ==
                                                         'Seleccionado'
                                                     ? darkgreenColor
-                                                    : yellowBrownColor,
-                                          ),
-                                        ),
-                                      ),
-                                      3.horizontalSpace,
-                                      GestureDetector(
-                                        onTap: () {
-                                          _showApplicationStatusBottomSheet(
-                                            context,
-                                          );
-                                        },
-                                        child: Image.asset(
-                                          AppAssets.helpIcon,
-                                          height: 22.h,
-                                          width: 22,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  _isDropdownOpen == true
-                                      ? AnimatedSwitcher(
-                                        duration: const Duration(
-                                          milliseconds: 200,
-                                        ),
-                                        reverseDuration: const Duration(
-                                          milliseconds: 100,
-                                        ), // Faster when closing
-                                        transitionBuilder: (
-                                          Widget child,
-                                          Animation<double> animation,
-                                        ) {
-                                          return SizeTransition(
-                                            sizeFactor: animation,
-                                            axisAlignment: 1.0,
-                                            child: child,
-                                          );
-                                        },
-                                        child:
-                                            _isDropdownOpen
-                                                ? SlideTransition(
-                                                  key: ValueKey<bool>(
-                                                    _isDropdownOpen,
-                                                  ),
-                                                  position: _dropdownAnimation,
-                                                  child: SizedBox(
-                                                    height:
-                                                        MediaQuery.sizeOf(
-                                                          context,
-                                                        ).height *
-                                                        0.18.h,
-                                                  ),
-                                                )
-                                                : SizedBox.shrink(),
-                                      )
-                                      : 5.verticalSpace,
-                                  Text(
-                                    widget.chatItem.role,
-                                    style: style18B.copyWith(color: blackColor),
-                                  ),
-                                  5.verticalSpace,
-                                  Text(
-                                    '${widget.chatItem.companyName}, ${widget.chatItem.state}',
-                                    style: style14M.copyWith(
-                                      color: textDarkGreyColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 10.0,
-                                ),
-                                child: Row(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        _showApplicationSupportBottomSheet(
-                                          context,
-                                        );
-                                      },
-                                      child: Image.asset(
-                                        AppAssets.supportIcon,
-                                        height: 26.h,
-                                        width: 26.w,
-                                      ),
-                                    ),
-                                    5.horizontalSpace,
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: PopupMenuButton<String>(
-                                        padding: EdgeInsetsGeometry.zero,
-                                        offset: Offset(0, 20),
-                                        constraints: BoxConstraints(
-                                          minWidth: 65.w,
-                                          maxWidth:
-                                              MediaQuery.of(
-                                                context,
-                                              ).size.width *
-                                              0.8,
-                                        ),
-                                        color: Colors.transparent,
-
-                                        elevation: 0,
-                                        onSelected: (String result) {
-                                          _updateStatusColor(result);
-                                          _handleDropdownState(false);
-                                        },
-                                        onCanceled: () {
-                                          _handleDropdownState(false);
-                                        },
-                                        onOpened: () {
-                                          _handleDropdownState(true);
-                                        },
-                                        itemBuilder:
-                                            (
-                                              BuildContext context,
-                                            ) => <PopupMenuEntry<String>>[
-                                              PopupMenuItem<String>(
-                                                value:
-                                                    'Ya no estoy interesado en la vacante',
-                                                child: _buildStatusItem(
-                                                  'Ya no estoy interesado en la vacante',
-                                                  _currentStatus ==
-                                                          'Ya no estoy interesado en la vacante'
-                                                      ? brownColor.withOpacity(
-                                                        0.3,
-                                                      )
-                                                      : brownColor.withOpacity(
-                                                        0.1,
-                                                      ),
-
-                                                  brownColor,
-                                                  brownColor,
-                                                ),
-                                              ),
-                                              PopupMenuItem<String>(
-                                                value:
-                                                    'Por el momento no estoy disponible',
-                                                child: _buildStatusItem(
-                                                  'Por el momento no estoy disponible',
-                                                  _currentStatus ==
-                                                          'Por el momento no estoy disponible'
-                                                      ? yellowBrownColor
-                                                          .withOpacity(0.3)
-                                                      : yellowBrownColor
-                                                          .withOpacity(0.1),
-                                                  yellowBrownColor,
-                                                  Color(0xffFFCC4D),
-                                                ),
-                                              ),
-                                              PopupMenuItem<String>(
-                                                value:
-                                                    'Estoy interesado en la vacante',
-                                                child: _buildStatusItem(
-                                                  'Estoy interesado en la vacante',
-                                                  _currentStatus ==
-                                                          'Estoy interesado en la vacante'
-                                                      ? darkgreenColor
-                                                          .withOpacity(0.3)
-                                                      : darkgreenColor
-                                                          .withOpacity(0.1),
-                                                  darkgreenColor,
-                                                  darkgreenColor,
-                                                ),
-                                              ),
-                                            ],
-                                        child: Container(
-                                          height: 32.h,
-                                          width: 65.w,
-                                          decoration: BoxDecoration(
-                                            color: whiteColor,
-                                            border: Border.all(
-                                              color: borderGreyColor,
-                                            ),
+                                                        .withOpacity(0.2)
+                                                    : yellowBrownColor
+                                                        .withOpacity(0.2),
                                             borderRadius: BorderRadius.circular(
-                                              6.r,
+                                              4.r,
                                             ),
                                           ),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              CircleAvatar(
-                                                radius: 8.r,
-                                                backgroundColor: _statusColor,
-                                              ),
-                                              4.horizontalSpace,
-                                              Icon(
-                                                _isDropdownOpen
-                                                    ? Icons
-                                                        .keyboard_arrow_up_rounded
-                                                    : Icons
-                                                        .keyboard_arrow_down_rounded,
-                                                color: greyColor,
-                                              ),
-                                            ],
+
+                                          ///
+                                          ///. here is the problem when i navigate from allChats list it is ok but when navigate from vacanices list then i want text En Proceso but it is not showing
+                                          ///
+                                          child: Text(
+                                            widget.chatItem.unreadCount ==
+                                                    'No seleccionado'
+                                                ? 'No seleccionado'
+                                                : widget.chatItem.unreadCount ==
+                                                    'Seleccionado'
+                                                ? 'Seleccionado'
+                                                : 'En proceso',
+                                            style: style14M.copyWith(
+                                              color:
+                                                  widget.chatItem.unreadCount ==
+                                                          'En proceso'
+                                                      ? yellowBrownColor
+                                                      : widget
+                                                              .chatItem
+                                                              .unreadCount ==
+                                                          'No seleccionado'
+                                                      ? lightBrownColor2
+                                                      : widget
+                                                              .chatItem
+                                                              .unreadCount ==
+                                                          'Seleccionado'
+                                                      ? darkgreenColor
+                                                      : yellowBrownColor,
+                                            ),
                                           ),
                                         ),
+                                        3.horizontalSpace,
+                                        GestureDetector(
+                                          onTap: () {
+                                            _showApplicationStatusBottomSheet(
+                                              context,
+                                            );
+                                          },
+                                          child: Image.asset(
+                                            AppAssets.helpIcon,
+                                            height: 22.h,
+                                            width: 22,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    _isDropdownOpen == true
+                                        ? AnimatedSwitcher(
+                                          duration: const Duration(
+                                            milliseconds: 600,
+                                          ),
+                                          reverseDuration: const Duration(
+                                            milliseconds: 200,
+                                          ), // Faster when closing
+                                          transitionBuilder: (
+                                            Widget child,
+                                            Animation<double> animation,
+                                          ) {
+                                            return SizeTransition(
+                                              sizeFactor: animation,
+                                              axisAlignment: 1.0,
+                                              child: child,
+                                            );
+                                          },
+                                          child:
+                                              _isDropdownOpen
+                                                  ? SlideTransition(
+                                                    key: ValueKey<bool>(
+                                                      _isDropdownOpen,
+                                                    ),
+                                                    position:
+                                                        _dropdownAnimation,
+                                                    child: SizedBox(
+                                                      height:
+                                                          MediaQuery.sizeOf(
+                                                            context,
+                                                          ).height *
+                                                          0.18.h,
+                                                    ),
+                                                  )
+                                                  : SizedBox.shrink(),
+                                        )
+                                        : 5.verticalSpace,
+                                    Text(
+                                      widget.chatItem.role,
+                                      style: style18B.copyWith(
+                                        color: blackColor,
+                                      ),
+                                    ),
+                                    5.verticalSpace,
+                                    Text(
+                                      '${widget.chatItem.companyName}, ${widget.chatItem.state}',
+                                      style: style14M.copyWith(
+                                        color: textDarkGreyColor,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 8.h,
-                    ),
-                    itemCount: model.messages.length,
-                    itemBuilder: (context, index) {
-                      final message = model.messages[index];
-                      return MessageBubble(
-                        message: message,
-                        isMe: message.isMe,
-                      );
-                    },
-                  ),
-                ),
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          _showApplicationSupportBottomSheet(
+                                            context,
+                                          );
+                                        },
+                                        child: Image.asset(
+                                          AppAssets.supportIcon,
+                                          height: 26.h,
+                                          width: 26.w,
+                                        ),
+                                      ),
+                                      5.horizontalSpace,
+                                      Align(
+                                        alignment: Alignment.topRight,
+                                        child: PopupMenuButton<String>(
+                                          padding: EdgeInsetsGeometry.only(
+                                            right: 1,
+                                          ),
+                                          offset: Offset(1, 20),
 
-                ///
-                ///
-                ///
-                ///
-                ///
-                ///
-                ///
-                ///
-                ///
-                ///
-                ///
-                ///
-                ///
-                ///
-                ///
-                _buildMessageInput(context, model, chatListModel),
-              ],
+                                          constraints: BoxConstraints(
+                                            minWidth: 65.w,
+                                            maxWidth:
+                                                MediaQuery.of(
+                                                  context,
+                                                ).size.width *
+                                                0.8,
+                                          ),
+                                          color: Colors.transparent,
+
+                                          elevation: 0,
+                                          onSelected: (String result) {
+                                            _updateStatusColor(result);
+                                            _handleDropdownState(false);
+                                          },
+                                          onCanceled: () {
+                                            _handleDropdownState(false);
+                                          },
+                                          onOpened: () {
+                                            _handleDropdownState(true);
+                                          },
+                                          itemBuilder:
+                                              (
+                                                BuildContext context,
+                                              ) => <PopupMenuEntry<String>>[
+                                                PopupMenuItem<String>(
+                                                  value:
+                                                      'Ya no estoy interesado en la vacante',
+                                                  child: _buildStatusItem(
+                                                    'Ya no estoy interesado en la vacante',
+                                                    _currentStatus ==
+                                                            'Ya no estoy interesado en la vacante'
+                                                        ? brownColor
+                                                            .withOpacity(0.3)
+                                                        : brownColor
+                                                            .withOpacity(0.1),
+
+                                                    brownColor,
+                                                    brownColor,
+                                                  ),
+                                                ),
+                                                PopupMenuItem<String>(
+                                                  value:
+                                                      'Por el momento no estoy disponible',
+                                                  child: _buildStatusItem(
+                                                    'Por el momento no estoy disponible',
+                                                    _currentStatus ==
+                                                            'Por el momento no estoy disponible'
+                                                        ? yellowBrownColor
+                                                            .withOpacity(0.3)
+                                                        : yellowBrownColor
+                                                            .withOpacity(0.1),
+                                                    yellowBrownColor,
+                                                    Color(0xffFFCC4D),
+                                                  ),
+                                                ),
+                                                PopupMenuItem<String>(
+                                                  value:
+                                                      'Estoy interesado en la vacante',
+                                                  child: _buildStatusItem(
+                                                    'Estoy interesado en la vacante',
+                                                    _currentStatus ==
+                                                            'Estoy interesado en la vacante'
+                                                        ? darkgreenColor
+                                                            .withOpacity(0.3)
+                                                        : darkgreenColor
+                                                            .withOpacity(0.1),
+                                                    darkgreenColor,
+                                                    darkgreenColor,
+                                                  ),
+                                                ),
+                                              ],
+                                          child: Container(
+                                            height: 32.h,
+                                            width: 65.w,
+                                            decoration: BoxDecoration(
+                                              color: whiteColor,
+                                              border: Border.all(
+                                                color: borderGreyColor,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(6.r),
+                                            ),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 8.r,
+                                                  backgroundColor: _statusColor,
+                                                ),
+                                                4.horizontalSpace,
+                                                Icon(
+                                                  _isDropdownOpen
+                                                      ? Icons
+                                                          .keyboard_arrow_up_rounded
+                                                      : Icons
+                                                          .keyboard_arrow_down_rounded,
+                                                  color: greyColor,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 8.h,
+                      ),
+                      itemCount: model.messages.length,
+                      itemBuilder: (context, index) {
+                        final message = model.messages[index];
+                        return MessageBubble(
+                          message: message,
+                          isMe: message.isMe,
+                        );
+                      },
+                    ),
+                  ),
+
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  ///
+                  _buildMessageInput(context, model, chatListModel),
+                ],
+              ),
             ),
           );
         },
@@ -627,16 +644,9 @@ class _ConversationScreenState extends State<ConversationScreen>
                 ),
               ),
               20.verticalSpace,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.push_pin_outlined, color: redColor),
-                  5.horizontalSpace,
-                  Text(
-                    'Estado de tu postulación',
-                    style: style16B.copyWith(color: blackColor),
-                  ),
-                ],
+              Text(
+                '📌 Estado de tu postulación',
+                style: style16B.copyWith(color: blackColor),
               ),
               20.verticalSpace,
               Text(
@@ -952,11 +962,11 @@ class _ConversationScreenState extends State<ConversationScreen>
               icon!,
               height:
                   icon == AppAssets.reportIcon
-                      ? 24.h
+                      ? 17.h
                       : icon == AppAssets.companyIcon
                       ? 20.h
                       : icon == AppAssets.deleteBoxIcon
-                      ? 24.h
+                      ? 18.h
                       : icon == AppAssets.crossIcon
                       ? 20.h
                       : icon == AppAssets.blockCompanyIcon
@@ -964,11 +974,11 @@ class _ConversationScreenState extends State<ConversationScreen>
                       : 24.h,
               width:
                   icon == AppAssets.reportIcon
-                      ? 24.h
+                      ? 15.h
                       : icon == AppAssets.companyIcon
                       ? 20.h
                       : icon == AppAssets.deleteBoxIcon
-                      ? 24.h
+                      ? 16.h
                       : icon == AppAssets.crossIcon
                       ? 20.h
                       : icon == AppAssets.blockCompanyIcon
@@ -1067,6 +1077,12 @@ class _ConversationScreenState extends State<ConversationScreen>
                     onTap: () {
                       model.clearChat();
                       Navigator.pop(context);
+                      Navigator.pop(context);
+                      model.isChatDeleted == true
+                          ? Get.back()
+                          : model.isChatDeleted == false
+                          ? Future.delayed(Duration(seconds: 3))
+                          : Get.back();
                     },
                     title: '¿Estás seguro de que quieres vaciar este chat?',
                     subtittle:

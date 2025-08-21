@@ -31,7 +31,7 @@ class Candidate55PercentScreen extends StatelessWidget {
             (context, model, child) => Scaffold(
               appBar: AppBar(
                 backgroundColor: transparent,
-                leading: CustomBackButton(),
+                leading: CustomBackButton(position: false),
                 centerTitle: true,
                 title: Image.asset(
                   AppAssets.appLogo2,
