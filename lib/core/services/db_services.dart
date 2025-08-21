@@ -48,4 +48,38 @@ class DatabaseService {
     // Convert RequestResponse to AuthResponse
     return AuthResponse.fromJson(response.toJson());
   }
+
+  Future<bool> checkUser(AppUser user) async {
+    try {
+      final RequestResponse response = await _apiServices.get(
+        url: "${EndPoints.baseUrl}${EndPoints.getUserById}/${user.id}",
+      );
+
+      print("@CheckUser raw response: ${response.toJson()}");
+
+      // Assuming your API returns a boolean or has a success field
+      // Adjust this based on your actual API response structure
+      return response.success ?? false;
+    } catch (e) {
+      print("Error checking user: $e");
+      return false;
+    }
+  }
+
+  Future<AuthResponse> getUserById(String userId) async {
+    final RequestResponse response = await _apiServices.get(
+      url: "${EndPoints.baseUrl}${EndPoints.getUserById}/$userId",
+    );
+
+    print("@GetUserById raw response: ${response.toJson()}");
+
+    return AuthResponse.fromJson(response.toJson());
+  }
+
+  Future<AuthResponse> getUserProfile() async {
+    RequestResponse response = await _apiServices.get(
+      url: "${EndPoints.baseUrl}${EndPoints.userProfile}",
+    );
+    return AuthResponse.fromJson(response.body);
+  }
 }

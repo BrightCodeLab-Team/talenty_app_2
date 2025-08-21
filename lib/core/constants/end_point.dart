@@ -1,5 +1,5 @@
 class EndPoints {
-  static const baseUrl = 'http://10.0.2.2:3000/';
+  static const baseUrl = 'https://apptalenty.com/api/';
 
   ///
   /// Register User
@@ -12,4 +12,6 @@ class EndPoints {
   ///
 
   static const login = 'users/login';
+  static const getUserById = '/getuserByid';
+  static const userProfile = '/allusers';
 }
