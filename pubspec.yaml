@@ -61,7 +61,7 @@ dependencies:
   google_sign_in: ^6.0.0
   firebase_auth:
   firebase_core:
-  
+  flutter_keyboard_visibility: ^6.0.0
 
   # ✅ Add this line here
   implicitly_animated_reorderable_list: ^0.4.0
