@@ -326,12 +326,12 @@ class _ConversationScreenState extends State<ConversationScreen>
                                     ///
                                     GestureDetector(
                                       onTap: () {
-                                        Get.to(
-                                          () => CompanyJobDetailScreen(
-                                            jobVacancyModel: JobVacancyModel(),
-                                            index: 1,
-                                          ),
-                                        );
+                                        // Get.to(
+                                        //   (index) => CompanyJobDetailScreen(
+                                        //     jobVacancyModel: JobVacancyModel(),
+                                        //     index: index,
+                                        //   ),
+                                        // );
                                       },
                                       child: Text(
                                         widget.chatItem.role,
