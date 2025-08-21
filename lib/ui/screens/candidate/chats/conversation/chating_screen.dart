@@ -12,6 +12,7 @@ import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/conversation/chating_screen_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/availability_screen_3/availability_screen_3.dart';
 
 class JerkyElasticCurve extends Curve {
@@ -46,16 +47,35 @@ class ConversationScreen extends StatefulWidget {
 class _ConversationScreenState extends State<ConversationScreen>
     with SingleTickerProviderStateMixin {
   final TextEditingController _messageController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  final FocusNode _messageFocusNode = FocusNode();
   bool _isDropdownOpen = false;
   late AnimationController _dropdownAnimationController;
   late Animation<Offset> _dropdownAnimation;
 
   String _currentStatus = 'En proceso';
   Color _statusColor = greyColor;
+
   @override
   void initState() {
     super.initState();
     _updateStatusColor(_currentStatus);
+
+    // Add listener to scroll to bottom when keyboard appears
+    _messageFocusNode.addListener(() {
+      if (_messageFocusNode.hasFocus) {
+        // Wait a bit for keyboard to fully open then scroll
+        Future.delayed(const Duration(milliseconds: 300), () {
+          _scrollToBottom();
+        });
+      }
+    });
+
+    // Scroll to bottom initially
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToBottom();
+    });
+
     _dropdownAnimationController = AnimationController(
       duration: const Duration(milliseconds: 600), // Longer for elastic effect
       reverseDuration: const Duration(milliseconds: 200), // Faster closing
@@ -78,6 +98,8 @@ class _ConversationScreenState extends State<ConversationScreen>
 
   @override
   void dispose() {
+    _scrollController.dispose();
+    _messageFocusNode.dispose();
     _dropdownAnimationController.dispose();
     super.dispose();
   }
@@ -108,6 +130,16 @@ class _ConversationScreenState extends State<ConversationScreen>
     });
   }
 
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -120,6 +152,13 @@ class _ConversationScreenState extends State<ConversationScreen>
 
       child: Consumer2<ConversationViewModel, CandidateChatViewModel>(
         builder: (context, model, chatListModel, child) {
+          // Scroll to bottom when messages change
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (model.messages.isNotEmpty) {
+              _scrollToBottom();
+            }
+          });
+
           return Scaffold(
             appBar: AppBar(
               leading: CustomBackButton(position: false),
@@ -281,10 +320,24 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                   : SizedBox.shrink(),
                                         )
                                         : 5.verticalSpace,
-                                    Text(
-                                      widget.chatItem.role,
-                                      style: style18B.copyWith(
-                                        color: blackColor,
+
+                                    ///
+                                    ///. here it will navigate to job detail screen
+                                    ///
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.to(
+                                          () => CompanyJobDetailScreen(
+                                            jobVacancyModel: JobVacancyModel(),
+                                            index: 1,
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        widget.chatItem.role,
+                                        style: style18B.copyWith(
+                                          color: blackColor,
+                                        ),
                                       ),
                                     ),
                                     5.verticalSpace,
@@ -447,6 +500,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                   ),
                   Expanded(
                     child: ListView.builder(
+                      controller: _scrollController,
                       padding: EdgeInsets.symmetric(
                         horizontal: 16.w,
                         vertical: 8.h,
@@ -1129,7 +1183,13 @@ class _ConversationScreenState extends State<ConversationScreen>
                 onTap: () {
                   showSettingDialogBox(
                     context: context,
-                    onTap: () {},
+                    onTap: () {
+                      _showBlockCompanyBottomSheet(
+                        context,
+                        chatListModel,
+                        model,
+                      );
+                    },
                     title: '¿Seguro que quieres bloquear a Puma?',
                     subtittle:
                         'Si los bloqueas, ya no podrás ver sus vacantes ni recibir oportunidades de esta empresa',
@@ -1393,6 +1453,89 @@ class _ConversationScreenState extends State<ConversationScreen>
                 ],
               ),
             ),
+          ),
+        );
+      },
+    );
+  }
+
+  ///
+  ///. block company dialog box
+  ///
+  void _showBlockCompanyBottomSheet(
+    BuildContext context,
+    CandidateChatViewModel chatListModel,
+    ConversationViewModel model,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext bc) {
+        return Container(
+          padding: EdgeInsets.all(20.w),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.r),
+              topRight: Radius.circular(20.r),
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 4.h,
+                width: 40.w,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              ),
+              20.verticalSpace,
+              Image.asset(
+                AppAssets.appLogo2,
+                scale: 4,
+                height: 28.h,
+                width: 115.w,
+                color: candidatoPrimaryColor,
+              ),
+              20.verticalSpace,
+              Text(
+                'Esta empresa ha sido bloqueada',
+                style: style16B.copyWith(
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w600,
+                  color: blackColor,
+                ),
+                textAlign: TextAlign.start,
+              ),
+
+              20.verticalSpace,
+              Text(
+                'Has bloqueado a esta empresa. A partir de ahora, no verás más vacantes publicadas por ella ni recibirás mensajes o solicitudes de contacto. Si deseas revertir esta acción, podrás desbloquearla en cualquier momento la barra de navegación, en el apartado de “Más”.',
+                style: style16M.copyWith(color: darkPurpleColor),
+                textAlign: TextAlign.center,
+              ),
+              60.verticalSpace,
+              CustomButton(
+                backgroundColor: candidatoPrimaryColor,
+                text: "Listo",
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                  model.clearChat();
+                  Future.delayed(Duration(milliseconds: 200));
+                  Navigator.of(context, rootNavigator: true).pop();
+                  model.clearChat();
+                  Navigator.of(context).pop();
+                  final chatToDelete = widget.chatItem;
+                  chatListModel.deleteChat(chatToDelete);
+                  Future.delayed(Duration(milliseconds: 200));
+                  chatListModel.startAutoSwipeAnimation(chatToDelete);
+                },
+              ),
+              SizedBox(height: MediaQuery.of(context).padding.bottom),
+            ],
           ),
         );
       },

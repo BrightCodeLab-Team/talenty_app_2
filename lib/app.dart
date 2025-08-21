@@ -1,5 +1,4 @@
 // ignore_for_file: use_super_parameters
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,8 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat.dart';
-import 'package:talenty_app/ui/screens/common/splash_screen.dart';
-import 'package:talenty_app/ui/screens/company/chat/chat_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 

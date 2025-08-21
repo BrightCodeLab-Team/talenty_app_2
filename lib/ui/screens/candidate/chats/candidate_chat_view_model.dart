@@ -67,7 +67,7 @@ class CandidateChatViewModel extends BaseViewModel {
     CandidateChatItem(
       id: 1,
       name: 'Shayan ZAhid',
-      role: 'Diseñador Web',
+      role: 'Marketing intern',
       preview: '¡Hola! soy Jorge Pérez diseñador web...',
       timestamp: '7:03 pm',
       unreadCount: 'En proceso',
