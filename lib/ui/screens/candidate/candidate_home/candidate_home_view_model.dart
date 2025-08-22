@@ -167,6 +167,7 @@ class CandidateHomeViewModel extends BaseViewModel {
   final List<JobVacancyModel> vacancies = [
     // Remote job in California with Flutter skills (matches first category)
     JobVacancyModel(
+      companyName: 'puma',
       jobTitle: 'Marketing intern',
       jobSubTitle: 'Viajes Premium',
       category: 'Arte y Diseño', // ⬅️ MATCHES categoryList
@@ -197,6 +198,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     ),
 
     JobVacancyModel(
+      companyName: 'puma',
       jobTitle: 'Coordinador de Marketing',
       jobSubTitle: 'Rappi',
       category: 'Arte y Diseño', // ⬅️ MATCHES categoryList
@@ -227,6 +229,7 @@ class CandidateHomeViewModel extends BaseViewModel {
     ),
 
     JobVacancyModel(
+      companyName: 'puma',
       jobTitle: 'Flutter Developer',
       jobSubTitle: 'MVVM',
       category: 'Programación y Tecnología',
@@ -258,6 +261,7 @@ class CandidateHomeViewModel extends BaseViewModel {
 
     // Hybrid Data Analyst in Texas (matches third category)
     JobVacancyModel(
+      companyName: 'puma',
       jobTitle: 'Especialista en Marketing Digital',
       jobSubTitle: 'BBVA',
       imageUrl: AppAssets.cImg03,
@@ -290,6 +294,7 @@ class CandidateHomeViewModel extends BaseViewModel {
 
     // Digital Marketing in Jalisco (matches fourth category)
     JobVacancyModel(
+      companyName: 'puma',
       jobTitle: 'Empaquetador',
       jobSubTitle: 'Pepsi',
       imageUrl: AppAssets.cImg4,
@@ -321,6 +326,7 @@ class CandidateHomeViewModel extends BaseViewModel {
 
     // Part-time Frontend Developer in Nuevo León
     JobVacancyModel(
+      companyName: 'puma',
       jobTitle: 'Frontend Developer',
       jobSubTitle: 'React Specialist',
       imageUrl: AppAssets.cImg1,
@@ -352,6 +358,7 @@ class CandidateHomeViewModel extends BaseViewModel {
 
     // On-site Backend Developer in Ciudad de México
     JobVacancyModel(
+      companyName: 'BrightCodelab',
       jobTitle: 'Backend Developer',
       jobSubTitle: 'Node.js Expert',
       imageUrl: AppAssets.cImg05,

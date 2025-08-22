@@ -14,7 +14,6 @@ import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_det
 import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_view_model.dart';
 
 class CompanyProfileScreen extends StatefulWidget {
-  // final JobVacancyModel jobVacancyModel;
   @override
   State<CompanyProfileScreen> createState() => _CompanyProfileScreenState();
 }
@@ -38,16 +37,8 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create:
-          (context) =>
-              //CompanyProfileViewModel(),
-              CandidateHomeViewModel(),
-
-      child: Consumer<
-        CandidateHomeViewModel
-
-        //CompanyProfileViewModel
-      >(
+      create: (context) => CandidateHomeViewModel(),
+      child: Consumer<CandidateHomeViewModel>(
         builder:
             (context, model, child) => Scaffold(
               body: Stack(
@@ -431,7 +422,7 @@ class CustomJobVacancyCard extends StatelessWidget {
                           Expanded(
                             child: Text(
                               jobVacancyModel.jobTitle ?? 'Job Title',
-                              style: style16B.copyWith(color: darkPurpleColor),
+                              style: style16B.copyWith(color: blackTittleColor),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               softWrap: false,
@@ -439,12 +430,10 @@ class CustomJobVacancyCard extends StatelessWidget {
                           ),
 
                           Container(
+                            height: 17.h,
                             color: darkBlueColor.withOpacity(0.1),
                             child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 2,
-                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 10.w),
                               child: Text(
                                 '¡Match!',
                                 style: style12M.copyWith(
@@ -482,7 +471,7 @@ class CustomJobVacancyCard extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               jobVacancyModel.jobDescription ?? 'No description provided.',
-              style: style14M.copyWith(color: darkPurpleColor),
+              style: style14M.copyWith(color: descriptionBlackColor),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),

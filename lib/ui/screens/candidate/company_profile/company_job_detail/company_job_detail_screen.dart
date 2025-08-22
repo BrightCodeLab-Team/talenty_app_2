@@ -6,26 +6,27 @@ import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/text_style.dart';
+import 'package:talenty_app/core/model/company/chat_items.dart';
 import 'package:talenty_app/core/model/company/your_vacancies.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat.dart';
+import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model.dart';
+import 'package:talenty_app/ui/screens/candidate/chats/conversation/chating_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_view_model.dart';
 
 class CompanyJobDetailScreen extends StatelessWidget {
   final JobVacancyModel jobVacancyModel;
   final int index; // Add index as a required parameter
-  // un comment this if problem not solved
-  //final CompanyProfileViewModel? jobModel;
   final CandidateHomeViewModel? jobModel;
-  final bool fromFirstTab; // Add this flag
+  final bool fromFirstTab;
 
   CompanyJobDetailScreen({
     required this.jobVacancyModel,
-    required this.index, // Make it required
+    required this.index,
     this.jobModel,
     this.fromFirstTab = false,
   });
@@ -48,75 +49,101 @@ class CompanyJobDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final int index = 0;
-    return ChangeNotifierProvider(
-      create:
-          (context) =>
-              //CompanyProfileViewModel(),
-              CandidateHomeViewModel(),
-      child: Consumer<
-        //CompanyProfileViewModel
-        CandidateHomeViewModel
-      >(
-        builder:
-            (context, model, child) => Scaffold(
-              body: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                controller: _scrollController,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                          height: 286.h,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF28407B),
-                            image: DecorationImage(
-                              image: AssetImage(
-                                "${model.vacancies[index].imageUrl}",
-                              ),
-                              fit: BoxFit.cover,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CandidateHomeViewModel()),
+        ChangeNotifierProvider(create: (_) => CandidateChatViewModel()),
+      ],
+      child: Consumer2<CandidateHomeViewModel, CandidateChatViewModel>(
+        builder: (context, model, chatModel, child) {
+          return Scaffold(
+            body: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              controller: _scrollController,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        height: 286.h,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF28407B),
+                          image: DecorationImage(
+                            image: AssetImage(
+                              "${model.vacancies[index].imageUrl}",
                             ),
-                          ),
-                        ),
-                        CustomBackButton(),
-                      ],
-                    ),
-                    if (fromFirstTab)
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 30,
-                          left: 20.0,
-                          right: 20,
-                        ),
-                        child: CustomButton(
-                          text: 'Enviar mensaje a la empresa',
-                          onTap: () {
-                            Get.to(CandidateChatScreen());
-                          },
-                          backgroundColor: primaryColor,
-                          textColor: whiteColor,
-                          image: Image.asset(
-                            AppAssets.chat,
-                            color: whiteColor,
-                            scale: 4,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
+                      CustomBackButton(),
+                    ],
+                  ),
+                  if (fromFirstTab)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 30,
+                        left: 20.0,
+                        right: 20,
+                      ),
+                      child: CustomButton(
+                        text: 'Enviar mensaje a la empresa',
+                        onTap: () {
+                          final vacancy = model.vacancies[index];
 
-                    _firstSection(model),
-                    _secondSection(),
-                    _thirdSection(model),
-                    _fourthSection(),
-                    _fifthSection(),
-                    _sixthSection(),
-                    _seventhSection(context), //last section
-                  ],
-                ),
+                          final matchingChat = chatModel.allChats.firstWhere(
+                            (chat) => chat.companyName == vacancy.companyName,
+                            orElse:
+                                () => CandidateChatItem(
+                                  name: vacancy.companyName ?? 'Unknown',
+                                  role: vacancy.jobTitle ?? '',
+                                  preview: '',
+                                  timestamp: '',
+                                  unreadCount: '',
+                                  avatarUrl: vacancy.imageUrl ?? AppAssets.img,
+                                  isOnline: false,
+                                  companyName: vacancy.companyName,
+                                  state: vacancy.state,
+                                ),
+                          );
+
+                          Get.to(
+                            ConversationScreen(
+                              chatItem: matchingChat,
+                              vacancy: vacancy,
+                              chatListModel:
+                                  Provider.of<CandidateChatViewModel>(
+                                    context,
+                                    listen: false,
+                                  ),
+                            ),
+                          );
+                        },
+                        backgroundColor: primaryColor,
+                        textColor: whiteColor,
+                        image: Image.asset(
+                          AppAssets.chat,
+                          color: whiteColor,
+                          scale: 4,
+                        ),
+                      ),
+                    ),
+
+                  _firstSection(model),
+                  _secondSection(),
+                  _thirdSection(model),
+                  _fourthSection(),
+                  _fifthSection(),
+                  _sixthSection(),
+                  _seventhSection(context, model, chatModel), //last section
+                ],
               ),
             ),
+          );
+        },
       ),
     );
   }
@@ -158,7 +185,11 @@ class CompanyJobDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(AppAssets.menulogo, height: 30, width: 30),
+                  Image.asset(
+                    model.vacancies[index].imageUrl ?? AppAssets.menulogo,
+                    height: 30,
+                    width: 30,
+                  ),
                   SizedBox(width: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -460,7 +491,11 @@ class CompanyJobDetailScreen extends StatelessWidget {
   ///
   ///. third section
   ///
-  Padding _seventhSection(BuildContext context) {
+  Padding _seventhSection(
+    BuildContext context,
+    CandidateHomeViewModel model,
+    CandidateChatViewModel chatModel,
+  ) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -474,7 +509,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
           ),
           5.verticalSpace,
           Text(
-            'Lunes a viernes de 9:00 a 7:00 pm, sábado de 9:00 am a 10:00 pm',
+            'Lunes a viernes de 9:00 a 7:00 pm, sábado de\n9:00 am a 10:00 pm',
             style: style14M.copyWith(color: lightBlackColor),
           ),
           20.verticalSpace,
@@ -490,7 +525,34 @@ class CompanyJobDetailScreen extends StatelessWidget {
                   CustomButton(
                     text: 'Enviar mensaje a la empresa',
                     onTap: () {
-                      Get.to(CandidateChatScreen());
+                      final vacancy = model.vacancies[index];
+
+                      final matchingChat = chatModel.allChats.firstWhere(
+                        (chat) => chat.companyName == vacancy.companyName,
+                        orElse:
+                            () => CandidateChatItem(
+                              name: vacancy.companyName ?? 'Unknown',
+                              role: vacancy.jobTitle ?? '',
+                              preview: '',
+                              timestamp: '',
+                              unreadCount: '',
+                              avatarUrl: vacancy.imageUrl ?? AppAssets.img,
+                              isOnline: false,
+                              companyName: vacancy.companyName,
+                              state: vacancy.state,
+                            ),
+                      );
+
+                      Get.to(
+                        ConversationScreen(
+                          chatItem: matchingChat,
+                          vacancy: vacancy,
+                          chatListModel: Provider.of<CandidateChatViewModel>(
+                            context,
+                            listen: false,
+                          ),
+                        ),
+                      );
                     },
                     backgroundColor: primaryColor,
                     textColor: whiteColor,
@@ -526,12 +588,12 @@ class CompanyJobDetailScreen extends StatelessWidget {
                     onTap: () {},
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: pinkColor),
-                        color: whiteColor,
+                        border: Border.all(color: blackColor, width: 2.w),
+                        color: blackColor.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
                       padding: EdgeInsets.all(15),
-                      child: Icon(Icons.close, color: pinkColor, size: 30),
+                      child: Icon(Icons.close, color: blackColor, size: 30),
                     ),
                   ),
                   GestureDetector(
@@ -539,7 +601,7 @@ class CompanyJobDetailScreen extends StatelessWidget {
                       _scrollController.animateTo(
                         0,
                         duration: Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
+                        curve: Curves.bounceIn,
                       );
                     },
                     child: Container(
@@ -562,14 +624,14 @@ class CompanyJobDetailScreen extends StatelessWidget {
                     onTap: () {},
                     child: Container(
                       decoration: BoxDecoration(
-                        color: whiteColor,
+                        color: darkgreenColor.withOpacity(0.2),
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.green),
+                        border: Border.all(color: darkgreenColor, width: 2.w),
                       ),
                       padding: EdgeInsets.all(15),
                       child: Icon(
                         Icons.favorite,
-                        color: Colors.green,
+                        color: darkgreenColor,
                         size: 30,
                       ),
                     ),

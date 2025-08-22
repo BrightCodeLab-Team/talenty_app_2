@@ -52,3 +52,5 @@ const Color topChatContainerColor = Color(0xffFCFCFC);
 const Color topChatContainerBorderColor = Color(0xffEDF0F3);
 const Color redColor = Colors.red;
 const Color yellowColor = Colors.yellow;
+const Color blackTittleColor = Color(0xff4C4C4C);
+const Color descriptionBlackColor = Color(0xff2C2C2C);

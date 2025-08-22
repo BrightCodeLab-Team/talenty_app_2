@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -157,7 +158,7 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
         5.verticalSpace,
         Text(
           '¡Felicidades! Tienes matches con reclutadores. Explora las vacantes, muestra tu interés y da el siguiente paso hacia tu próxima oportunidad.',
-          style: style14M.copyWith(color: textGreyColor),
+          style: style14M.copyWith(color: textLightGreyColor),
         ),
         10.verticalSpace,
         ListView.builder(

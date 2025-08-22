@@ -213,15 +213,3 @@ class CompanyProfileViewModel extends BaseViewModel {
   ];
 */
 }
-/*
-  final String? imageUrl;
-  final String? jobTitle;
-  final String? jobSubTitle;
-  final String? location;
-  final String? description;
-  final String? postedTime;
-  final String? matches;
-  final String? minSalary;
-  final String? maxSalary;
-  final String? state;
-  */

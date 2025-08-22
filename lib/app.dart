@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
-import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           _designWidth,
           _designHeight,
         ), // Use your constants
-        builder: (context, child) => CandidateChatScreen(),
+        builder: (context, child) => CandidateRootScreen(),
       ),
     );
   }
