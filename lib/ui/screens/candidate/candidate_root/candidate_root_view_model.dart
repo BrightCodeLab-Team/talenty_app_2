@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, strict_top_level_inference
 
 import 'package:flutter/material.dart';
+import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/enums/view_state.dart';
 import 'package:talenty_app/core/others/base_view_model.dart';
@@ -43,35 +44,35 @@ class CandidateRootScreenViewModel extends BaseViewModel {
       'description':
           'Aquí podrás personalizar tus resultados de búsqueda con filtros como tu localidad, habilidades o preferencias. Encuentra vacantes que realmente se adapten a ti.',
       'icon': '$iconsAssets/polygon.png',
-      'number': '1',
+      'number': "$iconsAssets/num1.svg",
     },
     {
       'title': 'Notificaciones',
       'description':
           'Mantente al día con nuevas ofertas, matches y actualizaciones importantes. Revisa esta sección para no perder oportunidades clave.',
       'icon': '$iconsAssets/polygon.png',
-      'number': '2',
+      'number': AppAssets.num2,
     },
     {
       'title': 'Búsqueda',
       'description':
           'Utiliza palabras clave para encontrar vacantes específicas. Ideal si ya sabes qué tipo de trabajo estás buscando.',
       'icon': '$iconsAssets/polygon.png',
-      'number': '3',
+      'number': AppAssets.num3,
     },
     {
       'title': 'Categorías',
       'description':
           'Explora ofertas laborales organizadas por áreas o industrias. Filtrar por categoría te ahorra tiempo y mejora la precisión de tu búsqueda.',
       'icon': '$iconsAssets/polygon.png',
-      'number': '4',
+      'number': AppAssets.num4,
     },
     {
       'title': 'Explora con la barra de búsqueda',
       'description':
           'Desde aquí podrás navegar fácilmente por la app: accede a tips para mejorar tu perfil, revisa tus matches con empresas, chatea con reclutadores y actualiza tu información en el perfil. Todo lo que necesitas dentro de la app.',
       'icon': '$iconsAssets/polygon2.png',
-      'number': '5',
+      'number': AppAssets.num5,
     },
   ];
 

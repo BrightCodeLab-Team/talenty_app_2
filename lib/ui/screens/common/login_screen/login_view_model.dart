@@ -139,7 +139,10 @@ class LoginViewModel extends BaseViewModel {
   }
 
   // form validation helper
-  final emailRegEx = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  final emailRegEx = RegExp(
+    r'^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
+    caseSensitive: false,
+  );
 
   bool get _emailValid => emailRegEx.hasMatch(emailController.text);
   bool get _passwordValid => passwordController.text.trim().length >= 6;

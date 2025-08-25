@@ -2,6 +2,8 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
@@ -138,7 +140,7 @@ class CandidateRootScreen extends StatelessWidget {
       title: model.onboardingSteps[model.currentStep]['title']!,
       description: model.onboardingSteps[model.currentStep]['description']!,
       iconPath: model.onboardingSteps[model.currentStep]['icon']!,
-      number: model.onboardingSteps[model.currentStep]['number']!,
+      number: model.onboardingSteps[model.currentStep]['number']!.toString(),
     );
   }
 
@@ -198,26 +200,31 @@ class CustomOnboardingTooltip extends StatelessWidget {
                     child: Row(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(right: 10),
+                          margin: EdgeInsets.only(right: 10),
                           alignment: Alignment.center,
-                          height: 24,
-                          width: 24,
+                          height: 24.h,
+                          width: 24.w,
                           decoration: BoxDecoration(
-                            color: const Color(0xffF1F1F1),
+                            color: Color(0xffF1F1F1),
                             borderRadius: BorderRadius.circular(5),
                             border: Border.all(width: 1, color: Colors.brown),
                           ),
-                          child: Text(
+                          child: SvgPicture.asset(
                             number,
-                            style: GoogleFonts.notoSerif(
-                              textStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: brownColor,
-                              ),
-                            ),
-                          ),
+                            placeholderBuilder: (context) => Icon(Icons.error),
+                          ), // Error placeholder),
+                          // child: Text(
+                          //   number,
+                          //   style: GoogleFonts.notoSerif(
+                          //     textStyle: const TextStyle(
+                          //       fontSize: 14,
+                          //       fontWeight: FontWeight.bold,
+                          //       color: brownColor,
+                          //     ),
+                          //   ),
+                          // ),
                         ),
+
                         Flexible(
                           child: Text(
                             title,

@@ -5,7 +5,13 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/build_Profile/mandatory_registeration/mandatory_student_registration.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/sign_up/sign_up_screen.dart';
+import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
+import 'package:talenty_app/ui/screens/common/login_screen/login_screen.dart';
+import 'package:talenty_app/ui/screens/common/splash_screen.dart';
+import 'package:talenty_app/ui/screens/company/root/root_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
