@@ -73,7 +73,10 @@ class CandidateSignUpViewModel extends BaseViewModel {
     return null;
   }
 
-  final _emailRegEx = RegExp(r'^[\w\.\-]+@([\w\-]+\.)+[\w\-]{2,4}$');
+  final _emailRegEx = RegExp(
+    r'^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@(gmail|yahoo|hotmail|outlook|icloud|aol|protonmail|zoho|yandex|mail)\.(com|net|org|edu|gov|co\.uk|de|fr|ca|au|us)$',
+    caseSensitive: false,
+  );
   final _securePasswordRegEx = RegExp(
     r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$',
   );

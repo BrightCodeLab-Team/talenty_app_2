@@ -130,9 +130,9 @@ class CandidateRootScreen extends StatelessWidget {
             child: _buildTooltipContent(model),
           )
         else if (model.currentStep == 1)
-          Positioned(top: 60, right: 10.w, child: _buildTooltipContent(model))
+          Positioned(top: 60, right: 15.w, child: _buildTooltipContent(model))
         else if (model.currentStep == 2)
-          Positioned(top: 60, right: 5.w, child: _buildTooltipContent(model))
+          Positioned(top: 60, right: 0.w, child: _buildTooltipContent(model))
         else
           Column(
             children: [const SizedBox(height: 60), _buildTooltipContent(model)],
