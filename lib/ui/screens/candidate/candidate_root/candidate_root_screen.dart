@@ -3,8 +3,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
@@ -125,14 +123,16 @@ class CandidateRootScreen extends StatelessWidget {
           )
         else if (model.currentStep == 3)
           Positioned(
-            bottom: 230.h,
+            bottom: 135.h,
             left: -1,
             child: _buildTooltipContent(model),
           )
+        else if (model.currentStep == 0)
+          Positioned(top: 70, right: 30.w, child: _buildTooltipContent(model))
         else if (model.currentStep == 1)
-          Positioned(top: 60, right: 15.w, child: _buildTooltipContent(model))
+          Positioned(top: 70, right: 15.w, child: _buildTooltipContent(model))
         else if (model.currentStep == 2)
-          Positioned(top: 60, right: 0.w, child: _buildTooltipContent(model))
+          Positioned(top: 70, right: 0.w, child: _buildTooltipContent(model))
         else
           Column(
             children: [const SizedBox(height: 60), _buildTooltipContent(model)],
