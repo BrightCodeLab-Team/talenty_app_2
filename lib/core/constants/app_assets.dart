@@ -166,9 +166,9 @@ class AppAssets {
   static String crossIcon = "$iconsAssets/crossIcon.png";
   static String deleteBoxIcon = "$iconsAssets/deleteBoxIcon.png";
   static String reportIcon = "$iconsAssets/reportIcon.png";
-  static String num1 = "$iconsAssets/num1.svg";
-  static String num2 = "$iconsAssets/num2.svg";
-  static String num3 = "$iconsAssets/num3.svg";
-  static String num4 = "$iconsAssets/num4.svg";
-  static String num5 = "$iconsAssets/num5.svg";
+  static String num1 = "$iconsAssets/n1.png";
+  static String num2 = "$iconsAssets/n2.png";
+  static String num3 = "$iconsAssets/n3.png";
+  static String num4 = "$iconsAssets/n4.png";
+  static String num5 = "$iconsAssets/n5.png";
 }

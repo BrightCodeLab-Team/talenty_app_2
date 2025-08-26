@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
+import 'package:talenty_app/rough/r1_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/build_Profile/mandatory_registeration/mandatory_student_registration.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/sign_up/sign_up_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_screen.dart';

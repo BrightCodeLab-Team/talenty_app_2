@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/constants/strings.dart';
+import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/bottom_bar/bottom_navigation_bar.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_view_model.dart';
 
@@ -118,15 +119,23 @@ class CandidateRootScreen extends StatelessWidget {
         if (model.currentStep == 4)
           Positioned(
             bottom: 100,
-            left: 40,
-            right: 40,
+            left: 25,
+            right: 25,
             child: _buildTooltipContent(model),
           )
         else if (model.currentStep == 3)
-          Positioned(bottom: 100, left: -1, child: _buildTooltipContent(model))
+          Positioned(
+            bottom: 230.h,
+            left: -1,
+            child: _buildTooltipContent(model),
+          )
+        else if (model.currentStep == 1)
+          Positioned(top: 60, right: 10.w, child: _buildTooltipContent(model))
+        else if (model.currentStep == 2)
+          Positioned(top: 60, right: 5.w, child: _buildTooltipContent(model))
         else
           Column(
-            children: [const SizedBox(height: 70), _buildTooltipContent(model)],
+            children: [const SizedBox(height: 60), _buildTooltipContent(model)],
           ),
       ],
     );
@@ -188,7 +197,7 @@ class CustomOnboardingTooltip extends StatelessWidget {
               BoxShadow(color: Colors.black.withOpacity(0.20), blurRadius: 10),
             ],
           ),
-          width: 303,
+          width: MediaQuery.of(context).size.width * 0.85,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,11 +218,13 @@ class CustomOnboardingTooltip extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5),
                             border: Border.all(width: 1, color: Colors.brown),
                           ),
-                          child: SvgPicture.asset(
-                            number,
-                            placeholderBuilder: (context) => Icon(Icons.error),
-                          ), // Error placeholder),
-                          // child: Text(
+                          child: Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Image(
+                              image: AssetImage(number),
+                              fit: BoxFit.cover,
+                            ),
+                          ), // child: Text(
                           //   number,
                           //   style: GoogleFonts.notoSerif(
                           //     textStyle: const TextStyle(
@@ -242,7 +253,10 @@ class CustomOnboardingTooltip extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 25),
-              Text(description, style: const TextStyle(fontSize: 14)),
+              Text(
+                description,
+                style: style14M.copyWith(color: lightBlackColor),
+              ),
               const SizedBox(height: 25),
               Row(
                 children: List.generate(
@@ -310,9 +324,9 @@ class CustomOnboardingTooltip extends StatelessWidget {
   double _getRightPosition() {
     switch (currentIndex) {
       case 0:
-        return 85;
+        return 55;
       case 1:
-        return 50;
+        return 35;
       case 2:
         return 8;
       default:

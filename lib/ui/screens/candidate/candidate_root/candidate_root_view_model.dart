@@ -44,7 +44,7 @@ class CandidateRootScreenViewModel extends BaseViewModel {
       'description':
           'Aquí podrás personalizar tus resultados de búsqueda con filtros como tu localidad, habilidades o preferencias. Encuentra vacantes que realmente se adapten a ti.',
       'icon': '$iconsAssets/polygon.png',
-      'number': "$iconsAssets/num1.svg",
+      'number': AppAssets.num1,
     },
     {
       'title': 'Notificaciones',
