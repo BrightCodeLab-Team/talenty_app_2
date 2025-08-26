@@ -59,78 +59,80 @@ class _CandidateMatchesScreenState extends State<CandidateMatchesScreen> {
                     ),
                   ),
                 ),
-                body: Column(
-                  children: [
-                    15.verticalSpace,
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: TabBarView(
-                          children: [
-                            model.vacancies.isEmpty
-                                ? Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 20.0,
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          AppAssets.appLogo2,
-                                          scale: 6,
-                                        ),
-                                        5.verticalSpace,
-                                        Text(
-                                          textAlign: TextAlign.center,
-                                          '¡Estás al día! No hay más vacantes interesadas por ahora, pero sigue explorando para descubrir nuevas oportunidades. ¡Tu próximo match está a solo un swipe de distancia!.',
-                                          style: style14M.copyWith(
-                                            color: textGreyColor,
+                body: SafeArea(
+                  child: Column(
+                    children: [
+                      15.verticalSpace,
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: TabBarView(
+                            children: [
+                              model.vacancies.isEmpty
+                                  ? Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20.0,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            AppAssets.appLogo2,
+                                            scale: 6,
                                           ),
-                                        ),
-                                      ],
+                                          5.verticalSpace,
+                                          Text(
+                                            textAlign: TextAlign.center,
+                                            '¡Estás al día! No hay más vacantes interesadas por ahora, pero sigue explorando para descubrir nuevas oportunidades. ¡Tu próximo match está a solo un swipe de distancia!.',
+                                            style: style14M.copyWith(
+                                              color: textGreyColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                )
-                                : firstTabBarView(model),
+                                  )
+                                  : firstTabBarView(model),
 
-                            model.vacancies.isEmpty
-                                ? Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 20.0,
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          AppAssets.appLogo2,
-                                          scale: 6,
-                                        ),
-                                        5.verticalSpace,
-                                        Text(
-                                          textAlign: TextAlign.center,
-                                          '¡Estás al día! No hay más vacantes interesadas por ahora, pero sigue explorando para descubrir nuevas oportunidades. ¡Tu próximo match está a solo un swipe de distancia!.',
-                                          style: style14M.copyWith(
-                                            color: textGreyColor,
+                              model.vacancies.isEmpty
+                                  ? Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20.0,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            AppAssets.appLogo2,
+                                            scale: 6,
                                           ),
-                                        ),
-                                      ],
+                                          5.verticalSpace,
+                                          Text(
+                                            textAlign: TextAlign.center,
+                                            '¡Estás al día! No hay más vacantes interesadas por ahora, pero sigue explorando para descubrir nuevas oportunidades. ¡Tu próximo match está a solo un swipe de distancia!.',
+                                            style: style14M.copyWith(
+                                              color: textGreyColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                )
-                                : secondTabBarView(model, rootModel),
-                          ],
+                                  )
+                                  : secondTabBarView(model, rootModel),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

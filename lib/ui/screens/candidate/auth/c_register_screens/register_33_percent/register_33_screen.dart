@@ -52,248 +52,251 @@ class Candidate33PercentScreen extends StatelessWidget {
                   width: 134.w,
                 ),
               ),
-              body: Padding(
-                padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      20.verticalSpace,
-                      Center(
-                        child: Text(
-                          '33%',
-                          style: style16M.copyWith(color: lightBlackColor),
-                        ),
-                      ),
-
-                      ///
-                      ///
-                      ///
-                      4.verticalSpace,
-                      ProgressContainer(
-                        progressWidth: MediaQuery.of(context).size.width * 0.33,
-                      ),
-
-                      ///
-                      ///
-                      ///
-                      20.verticalSpace,
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(
-                            color: darkPurpleColor,
-                            width: 1.w,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: darkPurpleColor,
-                              offset: Offset(-4, 4),
-                              blurRadius: 0,
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 16.h,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Habilidades',
-                                style: style20B.copyWith(
-                                  color: darkPurpleColor,
-                                ),
-                              ),
-                              8.verticalSpace,
-                              Text(
-                                'Selecciona hasta 10 habilidades que mejor describan tu personalidad y capacidades técnicas.',
-                                style: style14M.copyWith(
-                                  color: textGreyColor,
-                                ), // textGreyColor for the description
-                                textAlign: TextAlign.start,
-                              ),
-                              8.verticalSpace,
-                              Row(
-                                children: [
-                                  Text(''),
-                                  Spacer(),
-                                  Text(
-                                    '0 de 10',
-                                    style: style16B.copyWith(
-                                      color: darkPurpleColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+              body: SafeArea(
+                child: Padding(
+                  padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        20.verticalSpace,
+                        Center(
+                          child: Text(
+                            '33%',
+                            style: style16M.copyWith(color: lightBlackColor),
                           ),
                         ),
-                      ),
 
-                      ///
-                      /// Button
-                      ///
-                      5.verticalSpace,
-                      Text(
-                        'Filtra por tipo de habilidad',
-                        style: style16M.copyWith(color: textDarkGreyColor),
-                      ),
-                      5.verticalSpace,
+                        ///
+                        ///
+                        ///
+                        4.verticalSpace,
+                        ProgressContainer(
+                          progressWidth:
+                              MediaQuery.of(context).size.width * 0.33,
+                        ),
 
-                      ///
-                      ///
-                      ///
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: List.generate(2, (index) {
-                          final isSelected =
-                              model.selectedCategoryIndex == index;
-                          final label =
-                              index == 0
-                                  ? 'Habilidades humanas'
-                                  : 'Habilidades técnicas';
-
-                          return Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                model.selectCategory(index);
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                  left: index == 1 ? 10.w : 7,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: whiteColor,
-                                  borderRadius: BorderRadius.circular(28.r),
-                                  border: Border.all(
-                                    color:
-                                        isSelected
-                                            ? Colors.red
-                                            : darkPurpleColor,
-                                    width: 2.w,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: darkPurpleColor,
-                                      offset: Offset(-6, 4),
-                                      blurRadius: 0,
-                                      spreadRadius: 0,
-                                    ),
-                                  ],
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 6,
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      label,
-                                      style: style14M.copyWith(
-                                        color:
-                                            isSelected
-                                                ? Colors.red
-                                                : textGreyColor,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
-
-                      ///
-                      ///
-                      ///
-                      10.verticalSpace,
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 3.0),
-                        child: Container(
+                        ///
+                        ///
+                        ///
+                        20.verticalSpace,
+                        Container(
+                          width: double.infinity,
                           decoration: BoxDecoration(
                             color: whiteColor,
-                            borderRadius: BorderRadius.circular(28.r),
+                            borderRadius: BorderRadius.circular(8.r),
                             border: Border.all(
                               color: darkPurpleColor,
-                              width: 2.w,
+                              width: 1.w,
                             ),
                             boxShadow: [
                               BoxShadow(
                                 color: darkPurpleColor,
-                                offset: Offset(-1.w, 2.w),
+                                offset: Offset(-4, 4),
                                 blurRadius: 0,
                                 spreadRadius: 0,
                               ),
                             ],
                           ),
                           child: Padding(
-                            padding: EdgeInsetsGeometry.symmetric(
-                              horizontal: 8,
-                              vertical: 6,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 16.h,
                             ),
-                            child: TextFormField(
-                              onChanged: model.filterBySearch,
-                              decoration: authFieldDecoration.copyWith(
-                                hintText: 'Busca más habilidades',
-                                hintStyle: style16M.copyWith(
-                                  color: darkPurpleColor,
-                                  fontFamily: GoogleFonts.inter().fontFamily,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Habilidades',
+                                  style: style20B.copyWith(
+                                    color: darkPurpleColor,
+                                  ),
                                 ),
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                  size: 25,
-                                  color: darkPurpleColor,
+                                8.verticalSpace,
+                                Text(
+                                  'Selecciona hasta 10 habilidades que mejor describan tu personalidad y capacidades técnicas.',
+                                  style: style14M.copyWith(
+                                    color: textGreyColor,
+                                  ), // textGreyColor for the description
+                                  textAlign: TextAlign.start,
                                 ),
-                                border: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                errorBorder: InputBorder.none,
-                                focusedErrorBorder: InputBorder.none,
-                                disabledBorder: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                  vertical: 10.h,
+                                8.verticalSpace,
+                                Row(
+                                  children: [
+                                    Text(''),
+                                    Spacer(),
+                                    Text(
+                                      '0 de 10',
+                                      style: style16B.copyWith(
+                                        color: darkPurpleColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        ///
+                        /// Button
+                        ///
+                        5.verticalSpace,
+                        Text(
+                          'Filtra por tipo de habilidad',
+                          style: style16M.copyWith(color: textDarkGreyColor),
+                        ),
+                        5.verticalSpace,
+
+                        ///
+                        ///
+                        ///
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: List.generate(2, (index) {
+                            final isSelected =
+                                model.selectedCategoryIndex == index;
+                            final label =
+                                index == 0
+                                    ? 'Habilidades humanas'
+                                    : 'Habilidades técnicas';
+
+                            return Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  model.selectCategory(index);
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    left: index == 1 ? 10.w : 7,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: whiteColor,
+                                    borderRadius: BorderRadius.circular(28.r),
+                                    border: Border.all(
+                                      color:
+                                          isSelected
+                                              ? Colors.red
+                                              : darkPurpleColor,
+                                      width: 2.w,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: darkPurpleColor,
+                                        offset: Offset(-6, 4),
+                                        blurRadius: 0,
+                                        spreadRadius: 0,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 6,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        label,
+                                        style: style14M.copyWith(
+                                          color:
+                                              isSelected
+                                                  ? Colors.red
+                                                  : textGreyColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
+                        ),
+
+                        ///
+                        ///
+                        ///
+                        10.verticalSpace,
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.circular(28.r),
+                              border: Border.all(
+                                color: darkPurpleColor,
+                                width: 2.w,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: darkPurpleColor,
+                                  offset: Offset(-1.w, 2.w),
+                                  blurRadius: 0,
+                                  spreadRadius: 0,
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsGeometry.symmetric(
+                                horizontal: 8,
+                                vertical: 6,
+                              ),
+                              child: TextFormField(
+                                onChanged: model.filterBySearch,
+                                decoration: authFieldDecoration.copyWith(
+                                  hintText: 'Busca más habilidades',
+                                  hintStyle: style16M.copyWith(
+                                    color: darkPurpleColor,
+                                    fontFamily: GoogleFonts.inter().fontFamily,
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.search,
+                                    size: 25,
+                                    color: darkPurpleColor,
+                                  ),
+                                  border: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  focusedErrorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 10.h,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      40.verticalSpace,
-                      Wrap(
-                        spacing: 4.w,
-                        runSpacing: 5.h,
-                        children: List.generate(model.displayedItems.length, (
-                          index,
-                        ) {
-                          return CustomShadowIconTextTag(
-                            item: model.displayedItems[index],
-                            isSelected: model.selectedTags.contains(
-                              model.displayedItems[index],
-                            ),
-                            onTap:
-                                () => model.toggleSelection(
-                                  model.displayedItems[index],
-                                ),
-                            isShowAddIcon: model.selectedTags.contains(
-                              model.displayedItems[index],
-                            ),
-                          );
-                        }),
-                      ),
+                        40.verticalSpace,
+                        Wrap(
+                          spacing: 4.w,
+                          runSpacing: 5.h,
+                          children: List.generate(model.displayedItems.length, (
+                            index,
+                          ) {
+                            return CustomShadowIconTextTag(
+                              item: model.displayedItems[index],
+                              isSelected: model.selectedTags.contains(
+                                model.displayedItems[index],
+                              ),
+                              onTap:
+                                  () => model.toggleSelection(
+                                    model.displayedItems[index],
+                                  ),
+                              isShowAddIcon: model.selectedTags.contains(
+                                model.displayedItems[index],
+                              ),
+                            );
+                          }),
+                        ),
 
-                      50.verticalSpace,
-                    ],
+                        50.verticalSpace,
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -365,105 +368,110 @@ class _Candidate33PercentScreen2State extends State<Candidate33PercentScreen2> {
           width: 134.w,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            20.verticalSpace,
-            Center(
-              child: Text(
-                '33%',
-                style: style16M.copyWith(color: lightBlackColor),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              20.verticalSpace,
+              Center(
+                child: Text(
+                  '33%',
+                  style: style16M.copyWith(color: lightBlackColor),
+                ),
               ),
-            ),
-            4.verticalSpace,
-            ProgressContainer(
-              progressWidth: MediaQuery.of(context).size.width * 0.33,
-            ),
-            20.verticalSpace,
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(color: darkPurpleColor, width: 1.w),
-                boxShadow: [
-                  BoxShadow(
-                    color: darkPurpleColor,
-                    offset: Offset(-1.w, 2.w),
-                    blurRadius: 0,
-                    spreadRadius: 0,
-                  ),
-                ],
+              4.verticalSpace,
+              ProgressContainer(
+                progressWidth: MediaQuery.of(context).size.width * 0.33,
               ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 16.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Cuéntanos más de tus habilidades',
-                      style: style20B.copyWith(color: darkPurpleColor),
-                    ),
-                    8.verticalSpace,
-                    Text(
-                      'Este espacio es para que nos compartas tus habilidades blandas y técnicas de forma libre. Describe tus capacidades en formato de lista.',
-                      style: style14M.copyWith(color: textGreyColor),
-                      textAlign: TextAlign.start,
-                    ),
-                    8.verticalSpace,
-                    Row(
-                      children: [
-                        const Text(''),
-                        const Spacer(),
-                        Text(
-                          'Máximo 500 caracteres',
-                          style: style16B.copyWith(color: darkPurpleColor),
-                        ),
-                      ],
+              20.verticalSpace,
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(color: darkPurpleColor, width: 1.w),
+                  boxShadow: [
+                    BoxShadow(
+                      color: darkPurpleColor,
+                      offset: Offset(-1.w, 2.w),
+                      blurRadius: 0,
+                      spreadRadius: 0,
                     ),
                   ],
                 ),
-              ),
-            ),
-            20.verticalSpace,
-            Row(
-              children: [
-                Text(
-                  'Acerca de mí',
-                  style: style16B.copyWith(color: textDarkGreyColor),
-                ),
-                const Spacer(),
-                Text(
-                  '$textLength/500 caracteres',
-                  style: style14M.copyWith(
-                    color: isOverLimit ? Colors.red : darkPurpleColor,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8.w,
+                    vertical: 16.h,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Cuéntanos más de tus habilidades',
+                        style: style20B.copyWith(color: darkPurpleColor),
+                      ),
+                      8.verticalSpace,
+                      Text(
+                        'Este espacio es para que nos compartas tus habilidades blandas y técnicas de forma libre. Describe tus capacidades en formato de lista.',
+                        style: style14M.copyWith(color: textGreyColor),
+                        textAlign: TextAlign.start,
+                      ),
+                      8.verticalSpace,
+                      Row(
+                        children: [
+                          const Text(''),
+                          const Spacer(),
+                          Text(
+                            'Máximo 500 caracteres',
+                            style: style16B.copyWith(color: darkPurpleColor),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            10.verticalSpace,
-            TextFormField(
-              controller: _aboutMeController,
-              maxLines: 7,
-
-              decoration: authFieldDecoration.copyWith(
-                hintText:
-                    'Ej:¨• Creatividad para campañas digitales • Gestión de redes sociales (Instagram, TikTok, LinkedIn) • Edición básica de video y diseño gráfico con Canva • Conocimientos en Google Ads y Meta Business Suite • Estrategias de posicionamiento y branding • Facilidad para comunicar ideas y trabajar en equipo.¨',
               ),
-            ),
-            10.verticalSpace,
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Text(
-                'Máximo 500 caracteres',
-                style: style14M.copyWith(
-                  color: isOverLimit ? Colors.red : textGreyColor,
+              20.verticalSpace,
+              Row(
+                children: [
+                  Text(
+                    'Acerca de mí',
+                    style: style16B.copyWith(color: textDarkGreyColor),
+                  ),
+                  const Spacer(),
+                  Text(
+                    '$textLength/500 caracteres',
+                    style: style14M.copyWith(
+                      color: isOverLimit ? Colors.red : darkPurpleColor,
+                    ),
+                  ),
+                ],
+              ),
+              10.verticalSpace,
+              TextFormField(
+                controller: _aboutMeController,
+                maxLines: 7,
+
+                decoration: authFieldDecoration.copyWith(
+                  hintText:
+                      'Ej:¨• Creatividad para campañas digitales • Gestión de redes sociales (Instagram, TikTok, LinkedIn) • Edición básica de video y diseño gráfico con Canva • Conocimientos en Google Ads y Meta Business Suite • Estrategias de posicionamiento y branding • Facilidad para comunicar ideas y trabajar en equipo.¨',
                 ),
               ),
-            ),
-          ],
+              10.verticalSpace,
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Text(
+                  'Máximo 500 caracteres',
+                  style: style14M.copyWith(
+                    color: isOverLimit ? Colors.red : textGreyColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

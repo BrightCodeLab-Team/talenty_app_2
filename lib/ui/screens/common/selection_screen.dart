@@ -27,113 +27,115 @@ class SelectionScreen extends StatelessWidget {
       ///
       /// Start Body
       ///
-      body: Consumer<OnBoardingViewModel>(
-        builder: (context, model, child) {
-          return SingleChildScrollView(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  children: [
-                    40.verticalSpace,
-                    _header(),
-                    16.verticalSpace,
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('choose_one'.tr, style: style24M),
-                    ),
-                    10.verticalSpace,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              model.selectRole(UserRole.candidate);
-                              Get.to(() => OnboardingScreen());
-                            },
-                            child: Container(
-                              height: 146.h,
-                              width: 146.w,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: whiteColor,
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  width: 2,
-                                  color: darkPurpleColor,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Image.asset(AppAssets.student, scale: 3),
-                                  20.verticalSpace,
-                                  Text(
-                                    'i_am_candidate'.tr,
-                                    style: style14M,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        10.horizontalSpace,
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              model.selectRole(UserRole.recruiter);
-                              Get.to(() => OnboardingScreen());
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              height: 146.h,
-                              width: 146.w,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: whiteColor,
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  width: 2,
-                                  color: darkPurpleColor,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Image.asset(AppAssets.comapnay, scale: 3),
-                                  20.verticalSpace,
-                                  Text(
-                                    'i_am_company_or_recruiter'.tr,
-                                    style: style14M,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    70.verticalSpace,
-                    Center(
-                      child: Image.asset(
-                        AppAssets.selectionScreenGif,
-                        scale: 3.5,
-                        // width: 400,
-                        // height: 500,
+      body: SafeArea(
+        child: Consumer<OnBoardingViewModel>(
+          builder: (context, model, child) {
+            return SingleChildScrollView(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      40.verticalSpace,
+                      _header(),
+                      16.verticalSpace,
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text('choose_one'.tr, style: style24M),
                       ),
-                    ),
-                  ],
+                      10.verticalSpace,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                model.selectRole(UserRole.candidate);
+                                Get.to(() => OnboardingScreen());
+                              },
+                              child: Container(
+                                height: 146.h,
+                                width: 146.w,
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: whiteColor,
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    width: 2,
+                                    color: darkPurpleColor,
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(AppAssets.student, scale: 3),
+                                    20.verticalSpace,
+                                    Text(
+                                      'i_am_candidate'.tr,
+                                      style: style14M,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          10.horizontalSpace,
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                model.selectRole(UserRole.recruiter);
+                                Get.to(() => OnboardingScreen());
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                height: 146.h,
+                                width: 146.w,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: whiteColor,
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    width: 2,
+                                    color: darkPurpleColor,
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(AppAssets.comapnay, scale: 3),
+                                    20.verticalSpace,
+                                    Text(
+                                      'i_am_company_or_recruiter'.tr,
+                                      style: style14M,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      70.verticalSpace,
+                      Center(
+                        child: Image.asset(
+                          AppAssets.selectionScreenGif,
+                          scale: 3.5,
+                          // width: 400,
+                          // height: 500,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

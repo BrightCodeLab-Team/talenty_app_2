@@ -55,114 +55,121 @@ class Candidate44PercentScreen extends StatelessWidget {
                   color: primaryColor,
                 ),
               ),
-              body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  children: [
-                    20.verticalSpace,
-                    Center(
-                      child: Text(
-                        '44%',
-                        style: style16M.copyWith(color: lightBlackColor),
-                      ),
-                    ),
-                    4.verticalSpace,
-                    ProgressContainer(
-                      progressWidth: MediaQuery.of(context).size.width * 0.44,
-                    ),
-                    20.verticalSpace,
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.circular(8.r),
-                        border: Border.all(color: darkPurpleColor, width: 1.w),
-                        boxShadow: [
-                          BoxShadow(
-                            color: darkPurpleColor,
-                            offset: Offset(-1.w, 2.w),
-                            blurRadius: 0,
-                            spreadRadius: 0,
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 8.w,
-                          vertical: 16.h,
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Column(
+                    children: [
+                      20.verticalSpace,
+                      Center(
+                        child: Text(
+                          '44%',
+                          style: style16M.copyWith(color: lightBlackColor),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Talentos',
-                              style: style20B.copyWith(color: darkPurpleColor),
-                            ),
-                            8.verticalSpace,
-                            Text(
-                              'Selecciona hasta 10 de los 34 talentos que mejor te describan. Haz clic en un talento para ver su descripción: ',
-                              style: style14M.copyWith(
-                                color: textLightGreyColor,
-                              ),
-                              textAlign: TextAlign.start,
-                            ),
-                            8.verticalSpace,
-                            Row(
-                              children: [
-                                const Text(''),
-                                const Spacer(),
-                                Text(
-                                  '${model.selectedTalents.length} de 10',
-                                  style: style16B.copyWith(
-                                    color: darkPurpleColor,
-                                  ),
-                                ),
-                              ],
+                      ),
+                      4.verticalSpace,
+                      ProgressContainer(
+                        progressWidth: MediaQuery.of(context).size.width * 0.44,
+                      ),
+                      20.verticalSpace,
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: whiteColor,
+                          borderRadius: BorderRadius.circular(8.r),
+                          border: Border.all(
+                            color: darkPurpleColor,
+                            width: 1.w,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: darkPurpleColor,
+                              offset: Offset(-1.w, 2.w),
+                              blurRadius: 0,
+                              spreadRadius: 0,
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                    20.verticalSpace,
-                    Expanded(
-                      child: Center(
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 10.w,
-                                mainAxisSpacing: 5.h,
-                                childAspectRatio: 0.8,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8.w,
+                            vertical: 16.h,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Talentos',
+                                style: style20B.copyWith(
+                                  color: darkPurpleColor,
+                                ),
                               ),
-                          itemCount: model.talents.length,
-                          itemBuilder: (context, index) {
-                            final talent = model.talents[index];
-                            final isSelected = model.selectedTalents.contains(
-                              talent,
-                            );
-                            return TalentCircleWidget(
-                              talent: talent,
-                              isSelected: isSelected,
-                              onTap: () {
-                                model.toggleTalentSelection(talent);
-                                // Get.snackbar(
-                                //   "Analitica",
-                                //   'you chose ${talent.name}',
-                                //   snackPosition: SnackPosition.BOTTOM,
-                                //   backgroundColor: Colors.white,
-                                //   colorText: brownColor,
-                                //   duration: const Duration(seconds: 2),
-                                //   borderColor: brownColor,
-                                // );
-                              },
-                            );
-                          },
+                              8.verticalSpace,
+                              Text(
+                                'Selecciona hasta 10 de los 34 talentos que mejor te describan. Haz clic en un talento para ver su descripción: ',
+                                style: style14M.copyWith(
+                                  color: textLightGreyColor,
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                              8.verticalSpace,
+                              Row(
+                                children: [
+                                  const Text(''),
+                                  const Spacer(),
+                                  Text(
+                                    '${model.selectedTalents.length} de 10',
+                                    style: style16B.copyWith(
+                                      color: darkPurpleColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      20.verticalSpace,
+                      Expanded(
+                        child: Center(
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 10.w,
+                                  mainAxisSpacing: 5.h,
+                                  childAspectRatio: 0.8,
+                                ),
+                            itemCount: model.talents.length,
+                            itemBuilder: (context, index) {
+                              final talent = model.talents[index];
+                              final isSelected = model.selectedTalents.contains(
+                                talent,
+                              );
+                              return TalentCircleWidget(
+                                talent: talent,
+                                isSelected: isSelected,
+                                onTap: () {
+                                  model.toggleTalentSelection(talent);
+                                  // Get.snackbar(
+                                  //   "Analitica",
+                                  //   'you chose ${talent.name}',
+                                  //   snackPosition: SnackPosition.BOTTOM,
+                                  //   backgroundColor: Colors.white,
+                                  //   colorText: brownColor,
+                                  //   duration: const Duration(seconds: 2),
+                                  //   borderColor: brownColor,
+                                  // );
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

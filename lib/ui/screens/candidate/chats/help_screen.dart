@@ -51,27 +51,29 @@ class _OnboardingScreenState extends State<CandidateChatHelpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white, // Use your desired background color here
-      body: PageView.builder(
-        controller: _pageController,
-        itemCount: _onboardingData.length,
-        itemBuilder: (context, index) {
-          final data = _onboardingData[index];
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Onboarding Image
-                // NOTE: Replace 'assets/images/onboarding_image.png' with your actual image path.
-                // The provided image shows four distinct card-like sections, which this
-                // PageView structure facilitates.
-                Image.asset(data['image']!, scale: 4),
+      body: SafeArea(
+        child: PageView.builder(
+          controller: _pageController,
+          itemCount: _onboardingData.length,
+          itemBuilder: (context, index) {
+            final data = _onboardingData[index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Onboarding Image
+                  // NOTE: Replace 'assets/images/onboarding_image.png' with your actual image path.
+                  // The provided image shows four distinct card-like sections, which this
+                  // PageView structure facilitates.
+                  Image.asset(data['image']!, scale: 4),
 
-                // Onboarding Title Text
-              ],
-            ),
-          );
-        },
+                  // Onboarding Title Text
+                ],
+              ),
+            );
+          },
+        ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 30, left: 15, right: 15),

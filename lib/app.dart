@@ -7,10 +7,12 @@ import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
 import 'package:talenty_app/rough/r1_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/build_Profile/mandatory_registeration/mandatory_student_registration.dart';
+import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_11_percent/candidate_11_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/sign_up/sign_up_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_home/candidate_home_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
 import 'package:talenty_app/ui/screens/common/login_screen/login_screen.dart';
+import 'package:talenty_app/ui/screens/common/selection_screen.dart';
 import 'package:talenty_app/ui/screens/common/splash_screen.dart';
 import 'package:talenty_app/ui/screens/company/root/root_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
@@ -49,7 +51,7 @@ class MyApp extends StatelessWidget {
           _designWidth,
           _designHeight,
         ), // Use your constants
-        builder: (context, child) => SplashScreen(),
+        builder: (context, child) => LoginScreen(isCadidate: true),
       ),
     );
   }

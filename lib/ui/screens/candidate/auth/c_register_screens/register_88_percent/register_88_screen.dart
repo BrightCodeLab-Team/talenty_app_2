@@ -27,154 +27,160 @@ class Candidate88PercentScreen extends StatelessWidget {
       child: Consumer<CandidateRegister88PercentViewModel>(
         builder:
             (context, model, child) => Scaffold(
-              body: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 40.h, left: 0.0, right: 0.0),
-                child: CustomPadding(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      45.verticalSpace,
-                      Header(hasBackButton: true, scale: 5),
-                      20.verticalSpace,
-                      Center(
-                        child: Text(
-                          '88%',
-                          style: style16M.copyWith(color: lightBlackColor),
-                        ),
-                      ),
-                      4.verticalSpace,
-                      ProgressContainer(
-                        progressWidth: MediaQuery.of(context).size.width * 0.80,
-                      ),
-                      20.verticalSpace,
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: darkPurpleColor, width: 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: darkPurpleColor,
-                              offset: Offset(-4, 4),
-                              blurRadius: 0,
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 16,
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(bottom: 40.h, left: 0.0, right: 0.0),
+                  child: CustomPadding(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        45.verticalSpace,
+                        Header(hasBackButton: true, scale: 5),
+                        20.verticalSpace,
+                        Center(
+                          child: Text(
+                            '88%',
+                            style: style16M.copyWith(color: lightBlackColor),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '¿Tienes algún curso, diplomado o certificación?',
-                                style: style20B.copyWith(
-                                  color: darkPurpleColor,
-                                ),
-                              ),
-                              8.verticalSpace,
-                              Text(
-                                'Describe hasta 3 cursos o certificaciones que respalden tu experiencia. Haz clic en cada uno para añadir los detalles y fortalecer tu perfil.',
-                                style: style14M.copyWith(
-                                  color: textLightGreyColor,
-                                ),
-                              ),
-                              8.verticalSpace,
-                              Row(
-                                children: [
-                                  Text(''),
-                                  Spacer(),
-                                  Text(
-                                    'Máximo 32',
-                                    style: style16B.copyWith(
-                                      color: darkPurpleColor,
-                                    ),
-                                  ),
-                                ],
+                        ),
+                        4.verticalSpace,
+                        ProgressContainer(
+                          progressWidth:
+                              MediaQuery.of(context).size.width * 0.80,
+                        ),
+                        20.verticalSpace,
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: darkPurpleColor,
+                              width: 1,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: darkPurpleColor,
+                                offset: Offset(-4, 4),
+                                blurRadius: 0,
+                                spreadRadius: 0,
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                      15.verticalSpace,
-
-                      // Add this checkbox
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: model.skipExperience,
-                            onChanged:
-                                (value) =>
-                                    model.setSkipExperience(value ?? false),
-                            activeColor: darkgreenColor.withOpacity(0.30),
-                            checkColor: whiteColor,
-                            side: BorderSide(
-                              color:
-                                  model.skipExperience
-                                      ? darkgreenColor
-                                      : greyColor,
-                              width: 1.4,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 16,
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '¿Tienes algún curso, diplomado o certificación?',
+                                  style: style20B.copyWith(
+                                    color: darkPurpleColor,
+                                  ),
+                                ),
+                                8.verticalSpace,
+                                Text(
+                                  'Describe hasta 3 cursos o certificaciones que respalden tu experiencia. Haz clic en cada uno para añadir los detalles y fortalecer tu perfil.',
+                                  style: style14M.copyWith(
+                                    color: textLightGreyColor,
+                                  ),
+                                ),
+                                8.verticalSpace,
+                                Row(
+                                  children: [
+                                    Text(''),
+                                    Spacer(),
+                                    Text(
+                                      'Máximo 32',
+                                      style: style16B.copyWith(
+                                        color: darkPurpleColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                          Flexible(
-                            child: Text(
-                              "NO tengo cursos ni certificaciones",
-                              style: style14B.copyWith(
-                                color: Color(0xff9D9D9D),
+                        ),
+                        15.verticalSpace,
+
+                        // Add this checkbox
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: model.skipExperience,
+                              onChanged:
+                                  (value) =>
+                                      model.setSkipExperience(value ?? false),
+                              activeColor: darkgreenColor.withOpacity(0.30),
+                              checkColor: whiteColor,
+                              side: BorderSide(
+                                color:
+                                    model.skipExperience
+                                        ? darkgreenColor
+                                        : greyColor,
+                                width: 1.4,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      10.verticalSpace,
-                      // Wrap your ListView.builder in a Visibility widget
-                      Visibility(
-                        visible: !model.skipExperience,
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: model.workExperienceEntries.length,
-                          itemBuilder: (context, index) {
-                            return WorkExperienceEntryWidget(
-                              entry: model.workExperienceEntries[index],
-                              index: index,
-                              model: model,
-                            );
-                          },
+                            Flexible(
+                              child: Text(
+                                "NO tengo cursos ni certificaciones",
+                                style: style14B.copyWith(
+                                  color: Color(0xff9D9D9D),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-
-                      // Continue button
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 90.h),
-                        child: CustomButton(
-                          text: 'Continuar',
-                          onTap: () {
-                            if (model.skipExperience || model.isFormValid) {
-                              Get.to(Candidate100PercentScreen());
-                            } else {
-                              Get.snackbar(
-                                'Error',
-                                'Por favor completa todos los campos obligatorios',
-                                backgroundColor: Colors.red,
-                                colorText: Colors.white,
+                        10.verticalSpace,
+                        // Wrap your ListView.builder in a Visibility widget
+                        Visibility(
+                          visible: !model.skipExperience,
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: model.workExperienceEntries.length,
+                            itemBuilder: (context, index) {
+                              return WorkExperienceEntryWidget(
+                                entry: model.workExperienceEntries[index],
+                                index: index,
+                                model: model,
                               );
-                            }
-                          },
-                          backgroundColor:
-                              model.isFormValid ? primaryColor : greyColor,
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+
+                        // Continue button
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 90.h),
+                          child: CustomButton(
+                            text: 'Continuar',
+                            onTap: () {
+                              if (model.skipExperience || model.isFormValid) {
+                                Get.to(Candidate100PercentScreen());
+                              } else {
+                                Get.snackbar(
+                                  'Error',
+                                  'Por favor completa todos los campos obligatorios',
+                                  backgroundColor: Colors.red,
+                                  colorText: Colors.white,
+                                );
+                              }
+                            },
+                            backgroundColor:
+                                model.isFormValid ? primaryColor : greyColor,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

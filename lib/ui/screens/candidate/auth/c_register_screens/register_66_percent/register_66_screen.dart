@@ -57,106 +57,43 @@ class Candidate66PercentScreen extends StatelessWidget {
                   },
                 ),
               ),
-              body: Padding(
-                padding: EdgeInsetsGeometry.symmetric(horizontal: 15),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      20.verticalSpace,
-                      Center(
-                        child: Text(
-                          '66%',
-                          style: style16M.copyWith(color: lightBlackColor),
-                        ),
-                      ),
-
-                      ///
-                      ///
-                      ///
-                      4.verticalSpace,
-                      ProgressContainer(
-                        progressWidth: MediaQuery.of(context).size.width * 0.66,
-                      ),
-
-                      ///
-                      ///
-                      ///
-                      20.verticalSpace,
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(
-                            color: darkPurpleColor,
-                            width: 1.w,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: darkPurpleColor,
-                              offset: Offset(-1.w, 2.w),
-                              blurRadius: 0,
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 16.h,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                '¿Hablas otro idioma?',
-                                style: style20B.copyWith(
-                                  color: darkPurpleColor,
-                                ),
-                              ),
-                              8.verticalSpace,
-                              Text(
-                                'Selecciona hasta 10 idiomas que hablas. Esto ayudará a los reclutadores a encontrar oportunidades que se ajusten mejor a tu perfil. Haz clic en un idioma para indicar tu nivel.s',
-                                style: style14M.copyWith(
-                                  color: textLightGreyColor,
-                                ), // textGreyColor for the description
-                                textAlign: TextAlign.start,
-                              ),
-                              8.verticalSpace,
-                              Row(
-                                children: [
-                                  Text(''),
-                                  Spacer(),
-                                  Text(
-                                    'Máximo 10  idiomas',
-                                    style: style16B.copyWith(
-                                      color: darkPurpleColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+              body: SafeArea(
+                child: Padding(
+                  padding: EdgeInsetsGeometry.symmetric(horizontal: 15),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        20.verticalSpace,
+                        Center(
+                          child: Text(
+                            '66%',
+                            style: style16M.copyWith(color: lightBlackColor),
                           ),
                         ),
-                      ),
 
-                      ///
-                      ///
-                      ///
-                      10.verticalSpace,
+                        ///
+                        ///
+                        ///
+                        4.verticalSpace,
+                        ProgressContainer(
+                          progressWidth:
+                              MediaQuery.of(context).size.width * 0.66,
+                        ),
 
-                      Padding(
-                        padding: const EdgeInsets.only(left: 3.0),
-                        child: Container(
+                        ///
+                        ///
+                        ///
+                        20.verticalSpace,
+                        Container(
+                          width: double.infinity,
                           decoration: BoxDecoration(
                             color: whiteColor,
-                            borderRadius: BorderRadius.circular(28.r),
+                            borderRadius: BorderRadius.circular(8.r),
                             border: Border.all(
                               color: darkPurpleColor,
-                              width: 2.w,
+                              width: 1.w,
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -168,58 +105,124 @@ class Candidate66PercentScreen extends StatelessWidget {
                             ],
                           ),
                           child: Padding(
-                            padding: EdgeInsetsGeometry.symmetric(
-                              horizontal: 8,
-                              vertical: 6,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 16.h,
                             ),
-                            child: TextFormField(
-                              onChanged: model.searchTags,
-                              decoration: authFieldDecoration.copyWith(
-                                hintText: 'Busca más habilidades',
-                                hintStyle: style16M.copyWith(
-                                  color: darkPurpleColor,
-                                  fontFamily: GoogleFonts.inter().fontFamily,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '¿Hablas otro idioma?',
+                                  style: style20B.copyWith(
+                                    color: darkPurpleColor,
+                                  ),
                                 ),
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                  size: 25,
-                                  color: darkPurpleColor,
+                                8.verticalSpace,
+                                Text(
+                                  'Selecciona hasta 10 idiomas que hablas. Esto ayudará a los reclutadores a encontrar oportunidades que se ajusten mejor a tu perfil. Haz clic en un idioma para indicar tu nivel.s',
+                                  style: style14M.copyWith(
+                                    color: textLightGreyColor,
+                                  ), // textGreyColor for the description
+                                  textAlign: TextAlign.start,
                                 ),
-                                border: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                errorBorder: InputBorder.none,
-                                focusedErrorBorder: InputBorder.none,
-                                disabledBorder: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                  vertical: 10.h,
+                                8.verticalSpace,
+                                Row(
+                                  children: [
+                                    Text(''),
+                                    Spacer(),
+                                    Text(
+                                      'Máximo 10  idiomas',
+                                      style: style16B.copyWith(
+                                        color: darkPurpleColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        ///
+                        ///
+                        ///
+                        10.verticalSpace,
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.circular(28.r),
+                              border: Border.all(
+                                color: darkPurpleColor,
+                                width: 2.w,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: darkPurpleColor,
+                                  offset: Offset(-1.w, 2.w),
+                                  blurRadius: 0,
+                                  spreadRadius: 0,
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsGeometry.symmetric(
+                                horizontal: 8,
+                                vertical: 6,
+                              ),
+                              child: TextFormField(
+                                onChanged: model.searchTags,
+                                decoration: authFieldDecoration.copyWith(
+                                  hintText: 'Busca más habilidades',
+                                  hintStyle: style16M.copyWith(
+                                    color: darkPurpleColor,
+                                    fontFamily: GoogleFonts.inter().fontFamily,
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.search,
+                                    size: 25,
+                                    color: darkPurpleColor,
+                                  ),
+                                  border: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  focusedErrorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 10.h,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      20.verticalSpace,
-                      Wrap(
-                        alignment: WrapAlignment.center,
-                        spacing: 5.w,
-                        runSpacing: 10.h,
-                        children: List.generate(model.filteredTags.length, (
-                          index,
-                        ) {
-                          final item = model.filteredTags[index];
-                          return CustomShadowIconTextTagWithoutIcon(
-                            isShowAddIcon: false,
-                            isSelected: model.isSelected(item),
-                            item: item,
-                            onTap: () => model.toggleSelection(item),
-                          );
-                        }),
-                      ),
+                        20.verticalSpace,
+                        Wrap(
+                          alignment: WrapAlignment.center,
+                          spacing: 5.w,
+                          runSpacing: 10.h,
+                          children: List.generate(model.filteredTags.length, (
+                            index,
+                          ) {
+                            final item = model.filteredTags[index];
+                            return CustomShadowIconTextTagWithoutIcon(
+                              isShowAddIcon: false,
+                              isSelected: model.isSelected(item),
+                              item: item,
+                              onTap: () => model.toggleSelection(item),
+                            );
+                          }),
+                        ),
 
-                      50.verticalSpace,
-                    ],
+                        50.verticalSpace,
+                      ],
+                    ),
                   ),
                 ),
               ),

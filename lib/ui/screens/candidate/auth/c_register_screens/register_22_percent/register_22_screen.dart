@@ -27,172 +27,180 @@ class Candidate22PercentScreen extends StatelessWidget {
       child: Consumer<CandidateRegister22PercentViewModel>(
         builder:
             (context, model, child) => Scaffold(
-              body: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 40.h, left: 0.0, right: 0.0),
-                child: CustomPadding(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      45.verticalSpace,
-                      Header(hasBackButton: true, scale: 5),
-                      20.verticalSpace,
-                      Center(
-                        child: Text(
-                          '22%',
-                          style: style16M.copyWith(color: lightBlackColor),
-                        ),
-                      ),
-                      4.verticalSpace,
-                      ProgressContainer(
-                        progressWidth: MediaQuery.of(context).size.width * 0.22,
-                      ),
-                      20.verticalSpace,
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: darkPurpleColor, width: 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: darkPurpleColor,
-                              offset: Offset(-4, 4),
-                              blurRadius: 0,
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 16,
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(bottom: 40.h, left: 0.0, right: 0.0),
+                  child: CustomPadding(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        45.verticalSpace,
+                        Header(hasBackButton: true, scale: 5),
+                        20.verticalSpace,
+                        Center(
+                          child: Text(
+                            '22%',
+                            style: style16M.copyWith(color: lightBlackColor),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Experiencia laboral',
-                                style: style20B.copyWith(
-                                  color: darkPurpleColor,
-                                ),
-                              ),
-                              8.verticalSpace,
-                              Text(
-                                'Añade tu experiencia laboral más relevante, especificando los roles que has desempeñado y las empresas en las que has trabajado.',
-                                style: style14M.copyWith(color: textGreyColor),
-                              ),
-                              8.verticalSpace,
-                              Row(
-                                children: [
-                                  Text(''),
-                                  Spacer(),
-                                  Text(
-                                    'Máximo 3',
-                                    style: style16B.copyWith(
-                                      color: darkPurpleColor,
-                                    ),
-                                  ),
-                                ],
+                        ),
+                        4.verticalSpace,
+                        ProgressContainer(
+                          progressWidth:
+                              MediaQuery.of(context).size.width * 0.22,
+                        ),
+                        20.verticalSpace,
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: darkPurpleColor,
+                              width: 1,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: darkPurpleColor,
+                                offset: Offset(-4, 4),
+                                blurRadius: 0,
+                                spreadRadius: 0,
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                      15.verticalSpace,
-
-                      15.verticalSpace,
-
-                      // Add this checkbox
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: model.skipExperience,
-                            onChanged:
-                                (value) =>
-                                    model.setSkipExperience(value ?? false),
-                            activeColor: darkgreenColor.withOpacity(0.30),
-                            checkColor: whiteColor,
-                            side: BorderSide(
-                              color:
-                                  model.skipExperience
-                                      ? darkgreenColor
-                                      : greyColor,
-                              width: 1.4,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 16,
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Experiencia laboral',
+                                  style: style20B.copyWith(
+                                    color: darkPurpleColor,
+                                  ),
+                                ),
+                                8.verticalSpace,
+                                Text(
+                                  'Añade tu experiencia laboral más relevante, especificando los roles que has desempeñado y las empresas en las que has trabajado.',
+                                  style: style14M.copyWith(
+                                    color: textGreyColor,
+                                  ),
+                                ),
+                                8.verticalSpace,
+                                Row(
+                                  children: [
+                                    Text(''),
+                                    Spacer(),
+                                    Text(
+                                      'Máximo 3',
+                                      style: style16B.copyWith(
+                                        color: darkPurpleColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                          Flexible(
-                            child: Text(
-                              "No tengo experiencia laboral",
-                              style: style14M.copyWith(
-                                color: Color(0xff9D9D9D),
-                                fontWeight: FontWeight.w700,
+                        ),
+                        15.verticalSpace,
+
+                        15.verticalSpace,
+
+                        // Add this checkbox
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: model.skipExperience,
+                              onChanged:
+                                  (value) =>
+                                      model.setSkipExperience(value ?? false),
+                              activeColor: darkgreenColor.withOpacity(0.30),
+                              checkColor: whiteColor,
+                              side: BorderSide(
+                                color:
+                                    model.skipExperience
+                                        ? darkgreenColor
+                                        : greyColor,
+                                width: 1.4,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                "No tengo experiencia laboral",
+                                style: style14M.copyWith(
+                                  color: Color(0xff9D9D9D),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        15.verticalSpace,
+
+                        // Wrap your ListView.builder in a Visibility widget
+                        Visibility(
+                          visible: !model.skipExperience,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: model.workExperienceEntries.length,
+                            itemBuilder: (context, index) {
+                              return WorkExperienceEntryWidget(
+                                entry: model.workExperienceEntries[index],
+                                index: index,
+                                model: model,
+                              );
+                            },
+                          ),
+                        ),
+
+                        Visibility(
+                          visible: !model.skipExperience == false,
+                          child: Center(
+                            child: Padding(
+                              padding: EdgeInsetsGeometry.symmetric(
+                                horizontal: 30.h,
+                                vertical: 70.h,
+                              ),
+                              child: Text(
+                                '! No te preocupes! Estamos aquí para\n ayudarte a iniciar tu experencia laboral.',
+                                textAlign: TextAlign.center,
+                                style: style14M.copyWith(color: textGreyColor),
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      15.verticalSpace,
-
-                      // Wrap your ListView.builder in a Visibility widget
-                      Visibility(
-                        visible: !model.skipExperience,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: model.workExperienceEntries.length,
-                          itemBuilder: (context, index) {
-                            return WorkExperienceEntryWidget(
-                              entry: model.workExperienceEntries[index],
-                              index: index,
-                              model: model,
-                            );
-                          },
                         ),
-                      ),
 
-                      Visibility(
-                        visible: !model.skipExperience == false,
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsetsGeometry.symmetric(
-                              horizontal: 30.h,
-                              vertical: 70.h,
-                            ),
-                            child: Text(
-                              '! No te preocupes! Estamos aquí para\n ayudarte a iniciar tu experencia laboral.',
-                              textAlign: TextAlign.center,
-                              style: style14M.copyWith(color: textGreyColor),
-                            ),
+                        // Continue button
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 90.h),
+                          child: CustomButton(
+                            text: 'Continuar',
+                            onTap: () {
+                              if (model.skipExperience || model.isFormValid) {
+                                Get.to(Candidate33PercentScreen());
+                              } else {
+                                Get.snackbar(
+                                  'Error',
+                                  'Por favor completa todos los campos obligatorios',
+                                  backgroundColor: primaryColor,
+                                  colorText: Colors.white,
+                                );
+                              }
+                            },
+                            backgroundColor:
+                                model.isFormValid ? primaryColor : greyColor,
                           ),
                         ),
-                      ),
-
-                      // Continue button
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 90.h),
-                        child: CustomButton(
-                          text: 'Continuar',
-                          onTap: () {
-                            if (model.skipExperience || model.isFormValid) {
-                              Get.to(Candidate33PercentScreen());
-                            } else {
-                              Get.snackbar(
-                                'Error',
-                                'Por favor completa todos los campos obligatorios',
-                                backgroundColor: primaryColor,
-                                colorText: Colors.white,
-                              );
-                            }
-                          },
-                          backgroundColor:
-                              model.isFormValid ? primaryColor : greyColor,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

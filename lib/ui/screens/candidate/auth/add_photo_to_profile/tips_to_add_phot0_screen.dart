@@ -60,35 +60,37 @@ class CandidateAddPhotoTipsScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              30.verticalSpace,
-              Text(
-                'Tips para una foto de perfil profesional', // Tips for your photos
-                style: style24.copyWith(color: darkPurpleColor),
-              ),
-              20.verticalSpace,
-              SizedBox(
-                height: 410,
-                width: double.infinity,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: tipsData.length,
-                  padding: EdgeInsets.zero, // Remove default listview padding
-                  itemBuilder: (context, index) {
-                    final tip = tipsData[index];
-                    return Padding(
-                      padding: EdgeInsets.all(10), // Space between cards
-                      child: _TipCard(tip: tip),
-                    );
-                  },
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                30.verticalSpace,
+                Text(
+                  'Tips para una foto de perfil profesional', // Tips for your photos
+                  style: style24.copyWith(color: darkPurpleColor),
                 ),
-              ),
-            ],
+                20.verticalSpace,
+                SizedBox(
+                  height: 410,
+                  width: double.infinity,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: tipsData.length,
+                    padding: EdgeInsets.zero, // Remove default listview padding
+                    itemBuilder: (context, index) {
+                      final tip = tipsData[index];
+                      return Padding(
+                        padding: EdgeInsets.all(10), // Space between cards
+                        child: _TipCard(tip: tip),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

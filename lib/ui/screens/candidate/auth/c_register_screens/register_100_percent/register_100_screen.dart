@@ -79,118 +79,121 @@ class _Candidate100PercentScreenState extends State<Candidate100PercentScreen> {
                   width: 134.w,
                 ),
               ),
-              body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      20.verticalSpace,
-                      Center(
-                        child: Text(
-                          '100%',
-                          style: style16M.copyWith(color: lightBlackColor),
-                        ),
-                      ),
-                      4.verticalSpace,
-                      ProgressContainer(
-                        progressWidth: MediaQuery.of(context).size.width * 1,
-                      ),
-                      20.verticalSpace,
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(
-                            color: darkPurpleColor,
-                            width: 1.w,
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        20.verticalSpace,
+                        Center(
+                          child: Text(
+                            '100%',
+                            style: style16M.copyWith(color: lightBlackColor),
                           ),
-                          boxShadow: [
-                            BoxShadow(
+                        ),
+                        4.verticalSpace,
+                        ProgressContainer(
+                          progressWidth: MediaQuery.of(context).size.width * 1,
+                        ),
+                        20.verticalSpace,
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
                               color: darkPurpleColor,
-                              offset: Offset(-1.w, 2.w),
-                              blurRadius: 0,
-                              spreadRadius: 0,
+                              width: 1.w,
                             ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 16.h,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Cuéntanos más de tus habilidades',
-                                style: style20B.copyWith(
-                                  color: darkPurpleColor,
-                                ),
-                              ),
-                              8.verticalSpace,
-                              Text(
-                                'Este espacio es para que nos compartas tus habilidades blandas y técnicas de forma libre. Describe tus capacidades en formato de lista.',
-                                style: style14M.copyWith(
-                                  color: textLightGreyColor,
-                                ),
-                                textAlign: TextAlign.start,
-                              ),
-                              8.verticalSpace,
-                              Row(
-                                children: [
-                                  const Text(''),
-                                  const Spacer(),
-                                  Text(
-                                    'Máximo 500 caracteres',
-                                    style: style16B.copyWith(
-                                      color: darkPurpleColor,
-                                    ),
-                                  ),
-                                ],
+                            boxShadow: [
+                              BoxShadow(
+                                color: darkPurpleColor,
+                                offset: Offset(-1.w, 2.w),
+                                blurRadius: 0,
+                                spreadRadius: 0,
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                      20.verticalSpace,
-                      Row(
-                        children: [
-                          Text(
-                            'Acerca de mí',
-                            style: style16B.copyWith(color: lightBlackColor),
-                          ),
-                          const Spacer(),
-                          Text(
-                            '$textLength/500 caracteres',
-                            style: style14M.copyWith(
-                              color: isOverLimit ? Colors.red : darkPurpleColor,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 16.h,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Cuéntanos más de tus habilidades',
+                                  style: style20B.copyWith(
+                                    color: darkPurpleColor,
+                                  ),
+                                ),
+                                8.verticalSpace,
+                                Text(
+                                  'Este espacio es para que nos compartas tus habilidades blandas y técnicas de forma libre. Describe tus capacidades en formato de lista.',
+                                  style: style14M.copyWith(
+                                    color: textLightGreyColor,
+                                  ),
+                                  textAlign: TextAlign.start,
+                                ),
+                                8.verticalSpace,
+                                Row(
+                                  children: [
+                                    const Text(''),
+                                    const Spacer(),
+                                    Text(
+                                      'Máximo 500 caracteres',
+                                      style: style16B.copyWith(
+                                        color: darkPurpleColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                      10.verticalSpace,
-                      TextFormField(
-                        controller: _aboutMeController,
-                        maxLines: 7,
-
-                        decoration: authFieldDecoration.copyWith(
-                          hintText:
-                              'Ej:¨• Creatividad para campañas digitales  • Gestión de redes sociales (Instagram, TikTok, LinkedIn)  • Edición básica de video y diseño gráfico con Canva  • Conocimientos en Google Ads y Meta Business Suite  • Estrategias de posicionamiento y branding  • Facilidad para comunicar ideas y trabajar en equipo.¨',
                         ),
-                      ),
-                      10.verticalSpace,
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Text(
-                          'Máximo 500 caracteres',
-                          style: style14M.copyWith(
-                            color: isOverLimit ? Colors.red : textGreyColor,
+                        20.verticalSpace,
+                        Row(
+                          children: [
+                            Text(
+                              'Acerca de mí',
+                              style: style16B.copyWith(color: lightBlackColor),
+                            ),
+                            const Spacer(),
+                            Text(
+                              '$textLength/500 caracteres',
+                              style: style14M.copyWith(
+                                color:
+                                    isOverLimit ? Colors.red : darkPurpleColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        10.verticalSpace,
+                        TextFormField(
+                          controller: _aboutMeController,
+                          maxLines: 7,
+
+                          decoration: authFieldDecoration.copyWith(
+                            hintText:
+                                'Ej:¨• Creatividad para campañas digitales  • Gestión de redes sociales (Instagram, TikTok, LinkedIn)  • Edición básica de video y diseño gráfico con Canva  • Conocimientos en Google Ads y Meta Business Suite  • Estrategias de posicionamiento y branding  • Facilidad para comunicar ideas y trabajar en equipo.¨',
                           ),
                         ),
-                      ),
-                    ],
+                        10.verticalSpace,
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(
+                            'Máximo 500 caracteres',
+                            style: style14M.copyWith(
+                              color: isOverLimit ? Colors.red : textGreyColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

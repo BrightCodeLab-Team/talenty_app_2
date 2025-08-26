@@ -34,7 +34,7 @@ class CandidateRootScreen extends StatelessWidget {
           if (isDirectNavigation) {
             return Scaffold(
               backgroundColor: whiteColor,
-              body: model.allScreen[model.selectedScreen],
+              body: SafeArea(child: model.allScreen[model.selectedScreen]),
               bottomNavigationBar: _buildDirectContentBottomBar(model),
             );
           }

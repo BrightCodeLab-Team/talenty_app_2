@@ -36,29 +36,31 @@ class CandidateProfileReadyScreen extends StatelessWidget {
           width: 134.w,
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '¡Tu perfil está casi listo!',
-                style: style24M.copyWith(color: darkPurpleColor),
-              ),
-              10.verticalSpace,
-              Text(
-                'Un currículum completo aumenta tus oportunidades de ser descubierto por el empleador ideal. Completa tu cuenta y destaca entre los mejores.',
-                style: style14M.copyWith(color: textGreyColor),
-                textAlign: TextAlign.start,
-              ),
-              10.verticalSpace,
-              Text(
-                '¡Completa por una última vez tu CV!',
-                style: style16B.copyWith(color: textDarkGreyColor),
-              ),
-            ],
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '¡Tu perfil está casi listo!',
+                  style: style24M.copyWith(color: darkPurpleColor),
+                ),
+                10.verticalSpace,
+                Text(
+                  'Un currículum completo aumenta tus oportunidades de ser descubierto por el empleador ideal. Completa tu cuenta y destaca entre los mejores.',
+                  style: style14M.copyWith(color: textGreyColor),
+                  textAlign: TextAlign.start,
+                ),
+                10.verticalSpace,
+                Text(
+                  '¡Completa por una última vez tu CV!',
+                  style: style16B.copyWith(color: textDarkGreyColor),
+                ),
+              ],
+            ),
           ),
         ),
       ),

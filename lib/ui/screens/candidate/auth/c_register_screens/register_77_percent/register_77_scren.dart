@@ -44,256 +44,259 @@ class Candidate77PercentScreen extends StatelessWidget {
                 ),
                 backgroundColor: transparent,
               ),
-              body: Padding(
-                padding: EdgeInsetsGeometry.symmetric(horizontal: 15),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      20.verticalSpace,
+              body: SafeArea(
+                child: Padding(
+                  padding: EdgeInsetsGeometry.symmetric(horizontal: 15),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        20.verticalSpace,
 
-                      Center(
-                        child: Text(
-                          '77%',
-                          style: style16M.copyWith(color: lightBlackColor),
-                        ),
-                      ),
-
-                      ///
-                      ///
-                      ///
-                      4.verticalSpace,
-                      ProgressContainer(
-                        progressWidth: MediaQuery.of(context).size.width * 0.77,
-                      ),
-
-                      ///
-                      ///
-                      ///
-                      20.verticalSpace,
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(
-                            color: darkPurpleColor,
-                            width: 1.w,
+                        Center(
+                          child: Text(
+                            '77%',
+                            style: style16M.copyWith(color: lightBlackColor),
                           ),
-                          boxShadow: [
-                            BoxShadow(
+                        ),
+
+                        ///
+                        ///
+                        ///
+                        4.verticalSpace,
+                        ProgressContainer(
+                          progressWidth:
+                              MediaQuery.of(context).size.width * 0.77,
+                        ),
+
+                        ///
+                        ///
+                        ///
+                        20.verticalSpace,
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
                               color: darkPurpleColor,
-                              offset: Offset(-1.w, 2.w),
-                              blurRadius: 0,
-                              spreadRadius: 0,
+                              width: 1.w,
                             ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 16.h,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                '¿Qué tanto los hablas?',
-                                style: style20B.copyWith(
-                                  color: darkPurpleColor,
-                                ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: darkPurpleColor,
+                                offset: Offset(-1.w, 2.w),
+                                blurRadius: 0,
+                                spreadRadius: 0,
                               ),
-                              8.verticalSpace,
-                              Text(
-                                'Especifica tu nivel de dominio en cada idioma. Esto permitirá a los reclutadores identificar si tu perfil se ajusta a las vacantes disponibles.',
-                                style: style14M.copyWith(
-                                  color: textLightGreyColor,
-                                ), // textGreyColor for the description
-                                textAlign: TextAlign.start,
-                              ),
-                              8.verticalSpace,
                             ],
                           ),
-                        ),
-                      ),
-
-                      ///
-                      ///
-                      ///
-                      20.verticalSpace,
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: whiteColor,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: greyColor, width: 1.2),
-                          ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 16.h,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                15.verticalSpace,
                                 Text(
-                                  '🇨🇳 Chino mandarín',
-                                  style: style20B.copyWith(),
-                                ),
-                                15.verticalSpace,
-                                Text(
-                                  'Describe qué tanto dominio tienes en éste idioma.',
-                                  style: style16M.copyWith(
-                                    color: lightBlackColor2,
+                                  '¿Qué tanto los hablas?',
+                                  style: style20B.copyWith(
+                                    color: darkPurpleColor,
                                   ),
                                 ),
-                                20.verticalSpace,
-                                GestureDetector(
-                                  child: Container(
-                                    width: double.infinity,
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 10,
-                                    ),
-                                    margin: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: whiteColor,
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        width: 1,
-                                        color: greyColor,
-                                      ),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(
-                                          Icons.touch_app_outlined,
-                                          size: 25,
-                                          color: lightBlackColor,
-                                        ),
-                                        10.horizontalSpace,
-                                        Text(
-                                          'Conoce más',
-                                          style: GoogleFonts.roboto(
-                                            textStyle: style16M.copyWith(
-                                              fontWeight: FontWeight.w400,
-                                              color: lightBlackColor,
-                                            ),
-                                          ),
-                                        ),
-                                        10.horizontalSpace,
-                                        Icon(
-                                          Icons.keyboard_arrow_down_rounded,
-                                          color: lightBlackColor,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                8.verticalSpace,
+                                Text(
+                                  'Especifica tu nivel de dominio en cada idioma. Esto permitirá a los reclutadores identificar si tu perfil se ajusta a las vacantes disponibles.',
+                                  style: style14M.copyWith(
+                                    color: textLightGreyColor,
+                                  ), // textGreyColor for the description
+                                  textAlign: TextAlign.start,
                                 ),
+                                8.verticalSpace,
                               ],
                             ),
                           ),
                         ),
-                      ),
 
-                      ///
-                      ///
-                      ///
-                      20.verticalSpace,
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: whiteColor,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: greyColor, width: 1.2),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0,
+                        ///
+                        ///
+                        ///
+                        20.verticalSpace,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: greyColor, width: 1.2),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                15.verticalSpace,
-                                Text(
-                                  '🇲🇽 Español ',
-                                  style: style20B.copyWith(),
-                                ),
-                                15.verticalSpace,
-                                Text(
-                                  'Describe qué tanto dominio tienes en éste idioma.',
-                                  style: style16M.copyWith(
-                                    color: lightBlackColor2,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  15.verticalSpace,
+                                  Text(
+                                    '🇨🇳 Chino mandarín',
+                                    style: style20B.copyWith(),
                                   ),
-                                ),
-                                20.verticalSpace,
-                                GestureDetector(
-                                  child: Container(
-                                    width: double.infinity,
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 10,
+                                  15.verticalSpace,
+                                  Text(
+                                    'Describe qué tanto dominio tienes en éste idioma.',
+                                    style: style16M.copyWith(
+                                      color: lightBlackColor2,
                                     ),
-                                    margin: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: whiteColor,
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        width: 1,
-                                        color: greyColor,
+                                  ),
+                                  20.verticalSpace,
+                                  GestureDetector(
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 10,
                                       ),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(
-                                          Icons.touch_app_outlined,
-                                          size: 25,
-                                          color: lightBlackColor,
+                                      margin: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: whiteColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: greyColor,
                                         ),
-                                        10.horizontalSpace,
-                                        Text(
-                                          'Conoce más',
-                                          style: GoogleFonts.roboto(
-                                            textStyle: style16M.copyWith(
-                                              fontWeight: FontWeight.w400,
-                                              color: lightBlackColor,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.touch_app_outlined,
+                                            size: 25,
+                                            color: lightBlackColor,
+                                          ),
+                                          10.horizontalSpace,
+                                          Text(
+                                            'Conoce más',
+                                            style: GoogleFonts.roboto(
+                                              textStyle: style16M.copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                color: lightBlackColor,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        10.horizontalSpace,
-                                        Icon(
-                                          Icons.keyboard_arrow_down_rounded,
-                                          color: lightBlackColor,
-                                        ),
-                                      ],
+                                          10.horizontalSpace,
+                                          Icon(
+                                            Icons.keyboard_arrow_down_rounded,
+                                            color: lightBlackColor,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      50.verticalSpace,
-                    ],
 
-                    ///
+                        ///
+                        ///
+                        ///
+                        20.verticalSpace,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: greyColor, width: 1.2),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  15.verticalSpace,
+                                  Text(
+                                    '🇲🇽 Español ',
+                                    style: style20B.copyWith(),
+                                  ),
+                                  15.verticalSpace,
+                                  Text(
+                                    'Describe qué tanto dominio tienes en éste idioma.',
+                                    style: style16M.copyWith(
+                                      color: lightBlackColor2,
+                                    ),
+                                  ),
+                                  20.verticalSpace,
+                                  GestureDetector(
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 10,
+                                      ),
+                                      margin: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: whiteColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: greyColor,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.touch_app_outlined,
+                                            size: 25,
+                                            color: lightBlackColor,
+                                          ),
+                                          10.horizontalSpace,
+                                          Text(
+                                            'Conoce más',
+                                            style: GoogleFonts.roboto(
+                                              textStyle: style16M.copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                color: lightBlackColor,
+                                              ),
+                                            ),
+                                          ),
+                                          10.horizontalSpace,
+                                          Icon(
+                                            Icons.keyboard_arrow_down_rounded,
+                                            color: lightBlackColor,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        50.verticalSpace,
+                      ],
+
+                      ///
+                    ),
                   ),
                 ),
               ),

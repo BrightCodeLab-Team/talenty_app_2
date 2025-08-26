@@ -29,179 +29,182 @@ class CandidateSignUpScreen extends StatelessWidget {
 
             ///
             ///
-            body: SingleChildScrollView(
-              child: CustomPadding(
-                child: Form(
-                  key: model.formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      45.verticalSpace,
-                      Header(height: 28.h, width: 115.w),
-                      25.verticalSpace,
-                      Text('create_an_account'.tr, style: style24M),
-                      20.verticalSpace,
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: CustomPadding(
+                  child: Form(
+                    key: model.formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        45.verticalSpace,
+                        Header(height: 28.h, width: 115.w),
+                        25.verticalSpace,
+                        Text('create_an_account'.tr, style: style24M),
+                        20.verticalSpace,
 
-                      20.verticalSpace,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'enter_your_email'.tr,
-                            style: style16M.copyWith(
-                              fontWeight: FontWeight.w600,
+                        20.verticalSpace,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'enter_your_email'.tr,
+                              style: style16M.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'label_required'.tr,
-                            style: style14M.copyWith(color: textGreyColor),
-                          ),
-                        ],
-                      ),
-                      4.verticalSpace,
-                      TextFormField(
-                        controller: model.emailController,
-                        decoration: authFieldDecoration.copyWith(
-                          hintText: 'hint_email'.tr,
-                          errorText: model.emailError,
+                            Text(
+                              'label_required'.tr,
+                              style: style14M.copyWith(color: textGreyColor),
+                            ),
+                          ],
                         ),
-                        onChanged: (value) {
-                          model.appUser.email = value;
-                        },
-                        // validator: (_) => model.validateEmail(),
-                        keyboardType: TextInputType.emailAddress,
-                      ),
+                        4.verticalSpace,
+                        TextFormField(
+                          controller: model.emailController,
+                          decoration: authFieldDecoration.copyWith(
+                            hintText: 'hint_email'.tr,
+                            errorText: model.emailError,
+                          ),
+                          onChanged: (value) {
+                            model.appUser.email = value;
+                          },
+                          // validator: (_) => model.validateEmail(),
+                          keyboardType: TextInputType.emailAddress,
+                        ),
 
-                      16.verticalSpace,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'password_create_account'.tr,
-                            style: style16M.copyWith(
-                              fontWeight: FontWeight.w600,
+                        16.verticalSpace,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'password_create_account'.tr,
+                              style: style16M.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'label_required'.tr,
-                            style: style14M.copyWith(color: textGreyColor),
-                          ),
-                        ],
-                      ),
-                      4.verticalSpace,
-                      TextFormField(
-                        controller: model.passwordController,
-                        keyboardType: TextInputType.visiblePassword,
+                            Text(
+                              'label_required'.tr,
+                              style: style14M.copyWith(color: textGreyColor),
+                            ),
+                          ],
+                        ),
+                        4.verticalSpace,
+                        TextFormField(
+                          controller: model.passwordController,
+                          keyboardType: TextInputType.visiblePassword,
 
-                        // validator: (_) => model.validatePassword(),
-                        onChanged: (value) {
-                          model.appUser.password = value;
-                        },
-                        decoration: authFieldDecoration.copyWith(
-                          hintText: 'hint_password'.tr,
-                          errorText: model.passwordError,
+                          // validator: (_) => model.validatePassword(),
+                          onChanged: (value) {
+                            model.appUser.password = value;
+                          },
+                          decoration: authFieldDecoration.copyWith(
+                            hintText: 'hint_password'.tr,
+                            errorText: model.passwordError,
 
-                          suffixIcon: InkWell(
-                            onTap: () {
-                              model.toggleHidden();
-                            },
-                            child: AnimatedSwitcher(
-                              duration: Duration(milliseconds: 300),
-                              transitionBuilder: (child, animation) {
-                                return ScaleTransition(
-                                  scale: animation,
-                                  child: child,
-                                );
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                model.toggleHidden();
                               },
-                              child:
-                                  model.isPasswordHidden
-                                      ? Icon(
-                                        Icons.visibility_off,
-                                        key: ValueKey('visibility_off'),
-                                        color: Color(0xff707070),
-                                        size: 20,
-                                      )
-                                      : Icon(
-                                        Icons.visibility,
-                                        key: ValueKey('visibility'),
-                                        color: Color(0xff707070),
-                                        size: 20,
-                                      ),
+                              child: AnimatedSwitcher(
+                                duration: Duration(milliseconds: 300),
+                                transitionBuilder: (child, animation) {
+                                  return ScaleTransition(
+                                    scale: animation,
+                                    child: child,
+                                  );
+                                },
+                                child:
+                                    model.isPasswordHidden
+                                        ? Icon(
+                                          Icons.visibility_off,
+                                          key: ValueKey('visibility_off'),
+                                          color: Color(0xff707070),
+                                          size: 20,
+                                        )
+                                        : Icon(
+                                          Icons.visibility,
+                                          key: ValueKey('visibility'),
+                                          color: Color(0xff707070),
+                                          size: 20,
+                                        ),
+                              ),
                             ),
                           ),
+                          obscureText: model.isPasswordHidden,
                         ),
-                        obscureText: model.isPasswordHidden,
-                      ),
 
-                      10.verticalSpace,
+                        10.verticalSpace,
 
-                      Text(
-                        'register_company_password_info'.tr.tr,
-                        maxLines: 3,
-                        style: style14M.copyWith(color: textDarkGreyColor),
-                      ),
-                      16.verticalSpace,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Confirma tu contraseña'.tr,
-                            style: style16M.copyWith(
-                              fontWeight: FontWeight.w600,
+                        Text(
+                          'register_company_password_info'.tr.tr,
+                          maxLines: 3,
+                          style: style14M.copyWith(color: textDarkGreyColor),
+                        ),
+                        16.verticalSpace,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Confirma tu contraseña'.tr,
+                              style: style16M.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'label_required'.tr,
-                            style: style14M.copyWith(color: textGreyColor),
-                          ),
-                        ],
-                      ),
+                            Text(
+                              'label_required'.tr,
+                              style: style14M.copyWith(color: textGreyColor),
+                            ),
+                          ],
+                        ),
 
-                      4.verticalSpace,
-                      TextFormField(
-                        controller: model.confirmPasswordController,
-                        onChanged: (value) {
-                          model.appUser.confirmPassword = value;
-                        },
-                        // validator: (_) => model.validateConfirmPassword(),
-                        decoration: authFieldDecoration.copyWith(
-                          hintText: 'register_company_confirm_password_hint'.tr,
-                          errorText: model.confirmError,
+                        4.verticalSpace,
+                        TextFormField(
+                          controller: model.confirmPasswordController,
+                          onChanged: (value) {
+                            model.appUser.confirmPassword = value;
+                          },
+                          // validator: (_) => model.validateConfirmPassword(),
+                          decoration: authFieldDecoration.copyWith(
+                            hintText:
+                                'register_company_confirm_password_hint'.tr,
+                            errorText: model.confirmError,
 
-                          suffixIcon: InkWell(
-                            onTap: () {
-                              model.toggleConfirmPasswordHidden();
-                            },
-
-                            child: AnimatedSwitcher(
-                              duration: Duration(milliseconds: 300),
-                              transitionBuilder: (child, animation) {
-                                return ScaleTransition(
-                                  scale: animation,
-                                  child: child,
-                                );
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                model.toggleConfirmPasswordHidden();
                               },
-                              child:
-                                  model.isConfirmPasswordHidden
-                                      ? Icon(
-                                        Icons.visibility_off,
-                                        key: ValueKey('visibility_off'),
-                                        color: Color(0xff707070),
-                                        size: 20,
-                                      )
-                                      : Icon(
-                                        Icons.visibility,
-                                        key: ValueKey('visibility'),
-                                        color: Color(0xff707070),
-                                        size: 20,
-                                      ),
+
+                              child: AnimatedSwitcher(
+                                duration: Duration(milliseconds: 300),
+                                transitionBuilder: (child, animation) {
+                                  return ScaleTransition(
+                                    scale: animation,
+                                    child: child,
+                                  );
+                                },
+                                child:
+                                    model.isConfirmPasswordHidden
+                                        ? Icon(
+                                          Icons.visibility_off,
+                                          key: ValueKey('visibility_off'),
+                                          color: Color(0xff707070),
+                                          size: 20,
+                                        )
+                                        : Icon(
+                                          Icons.visibility,
+                                          key: ValueKey('visibility'),
+                                          color: Color(0xff707070),
+                                          size: 20,
+                                        ),
+                              ),
                             ),
                           ),
+                          obscureText: model.isConfirmPasswordHidden,
                         ),
-                        obscureText: model.isConfirmPasswordHidden,
-                      ),
-                      100.verticalSpace,
-                    ],
+                        100.verticalSpace,
+                      ],
+                    ),
                   ),
                 ),
               ),

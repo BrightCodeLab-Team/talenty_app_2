@@ -23,115 +23,123 @@ class CandidateRegister11PercentScreen extends StatelessWidget {
       child: Consumer<CandidateRegister11PercentViewModel>(
         builder:
             (context, model, child) => Scaffold(
-              body: SingleChildScrollView(
-                padding: EdgeInsets.only(
-                  bottom: 40.h,
-                ), // Add only bottom padding
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      45.verticalSpace,
-                      Header(hasBackButton: true, scale: 5),
-                      20.verticalSpace,
-                      Center(
-                        child: Text(
-                          '11%',
-                          style: style16M.copyWith(color: lightBlackColor),
-                        ),
-                      ),
-                      4.verticalSpace,
-                      ProgressContainer(
-                        progressWidth: MediaQuery.of(context).size.width * 0.11,
-                      ),
-                      20.verticalSpace,
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(color: darkPurpleColor, width: 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: darkPurpleColor,
-                              offset: Offset(-4, 4),
-                              blurRadius: 0,
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 16.h,
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(
+                    bottom: 40.h,
+                  ), // Add only bottom padding
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        45.verticalSpace,
+                        Header(hasBackButton: true, scale: 5),
+                        20.verticalSpace,
+                        Center(
+                          child: Text(
+                            '11%',
+                            style: style16M.copyWith(color: lightBlackColor),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                '¿Cuáles son tus estudios?',
-                                style: style20B.copyWith(
-                                  color: darkPurpleColor,
-                                ),
-                              ),
-                              8.verticalSpace,
-                              Text(
-                                'Registra tu trayectoria académica, indicando el nombre de la universidad, preparatoria o institución de donde provienes.',
-                                style: style14M.copyWith(color: textGreyColor),
-                                textAlign: TextAlign.start,
+                        ),
+                        4.verticalSpace,
+                        ProgressContainer(
+                          progressWidth:
+                              MediaQuery.of(context).size.width * 0.11,
+                        ),
+                        20.verticalSpace,
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
+                              color: darkPurpleColor,
+                              width: 1,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: darkPurpleColor,
+                                offset: Offset(-4, 4),
+                                blurRadius: 0,
+                                spreadRadius: 0,
                               ),
                             ],
                           ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 16.h,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '¿Cuáles son tus estudios?',
+                                  style: style20B.copyWith(
+                                    color: darkPurpleColor,
+                                  ),
+                                ),
+                                8.verticalSpace,
+                                Text(
+                                  'Registra tu trayectoria académica, indicando el nombre de la universidad, preparatoria o institución de donde provienes.',
+                                  style: style14M.copyWith(
+                                    color: textGreyColor,
+                                  ),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                      15.verticalSpace,
+                        15.verticalSpace,
 
-                      // Display all university entries
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: model.universityEntries.length,
-                        itemBuilder: (context, index) {
-                          return UniversityEntryWidget(
-                            entry: model.universityEntries[index],
-                            index: index,
-                            model: model,
-                          );
-                        },
-                      ),
-                      50.verticalSpace,
-                      // Update your Continuar button
-                      // In CandidateRegister11PercentScreen
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 90.h),
-                        child: CustomButton(
-                          text: 'Continuar',
-                          onTap: () {
-                            // Validate all entries
-                            model.validateAllEntries();
-
-                            // Only navigate if valid
-                            if (model.isFormValid) {
-                              Get.to(Candidate22PercentScreen());
-                            } else {
-                              // Show error message if not valid
-                              Get.snackbar(
-                                'Error',
-                                'Por favor completa todos los campos obligatorios',
-                                backgroundColor: Colors.red,
-                                colorText: Colors.white,
-                              );
-                            }
+                        // Display all university entries
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: model.universityEntries.length,
+                          itemBuilder: (context, index) {
+                            return UniversityEntryWidget(
+                              entry: model.universityEntries[index],
+                              index: index,
+                              model: model,
+                            );
                           },
-                          backgroundColor:
-                              model.isFormValid ? primaryColor : greyColor,
                         ),
-                      ),
-                      30.verticalSpace,
-                    ],
+                        50.verticalSpace,
+                        // Update your Continuar button
+                        // In CandidateRegister11PercentScreen
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 90.h),
+                          child: CustomButton(
+                            text: 'Continuar',
+                            onTap: () {
+                              // Validate all entries
+                              model.validateAllEntries();
+
+                              // Only navigate if valid
+                              if (model.isFormValid) {
+                                Get.to(Candidate22PercentScreen());
+                              } else {
+                                // Show error message if not valid
+                                Get.snackbar(
+                                  'Error',
+                                  'Por favor completa todos los campos obligatorios',
+                                  backgroundColor: Colors.red,
+                                  colorText: Colors.white,
+                                );
+                              }
+                            },
+                            backgroundColor:
+                                model.isFormValid ? primaryColor : greyColor,
+                          ),
+                        ),
+                        30.verticalSpace,
+                      ],
+                    ),
                   ),
                 ),
               ),
