@@ -6,22 +6,17 @@ import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/colors.dart';
 import 'package:talenty_app/core/services/localization_services.dart';
 import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
-import 'package:talenty_app/ui/screens/common/splash_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
 class MyApp extends StatelessWidget {
   final String title;
-
   static const double _designWidth = 375;
   static const double _designHeight = 812;
-
   const MyApp({required this.title, Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final languageProvider = Provider.of<LanThemeProvider>(context);
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: title,
@@ -43,7 +38,7 @@ class MyApp extends StatelessWidget {
           _designWidth,
           _designHeight,
         ), // Use your constants
-        builder: (context, child) => SplashScreen(),
+        builder: (context, child) => CandidateRootScreen(),
       ),
     );
   }

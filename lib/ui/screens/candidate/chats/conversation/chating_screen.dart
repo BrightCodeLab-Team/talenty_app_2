@@ -12,7 +12,6 @@ import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/conversation/chating_screen_view_model.dart';
-import 'package:talenty_app/ui/screens/candidate/company_profile/company_job_detail/company_job_detail_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/mas/availability_screen_3/availability_screen_3.dart';
 
 class JerkyElasticCurve extends Curve {

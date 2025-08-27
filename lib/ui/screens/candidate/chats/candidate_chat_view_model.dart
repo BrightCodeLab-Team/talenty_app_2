@@ -6,9 +6,8 @@ import 'package:talenty_app/core/others/base_view_model.dart';
 class CandidateChatViewModel extends BaseViewModel {
   final List<String> filters = [
     'Todos',
-    'Diseño web',
-    'Becario programación',
-    'Ventas',
+    'Vacantes en proceso',
+    'Vacantes cerradas',
   ];
 
   ///

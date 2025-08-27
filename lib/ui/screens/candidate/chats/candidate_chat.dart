@@ -412,7 +412,7 @@ class _CandidateChatScreenState extends State<CandidateChatScreen> {
                         SizedBox(height: 4),
 
                         ///
-                        ///. here i also want to navigate to conversationScreen like as below on listView.separate
+                        ///.
                         ///
                         SizedBox(
                           height: 36,
@@ -481,421 +481,30 @@ class _CandidateChatScreenState extends State<CandidateChatScreen> {
                         ///
                         ///
                         ///
-                        ///
-                        ///
+                        ///.  .where((name) => name.toLowerCase().startsWith("t")) .toList(),
                         ///
                         ///
                         ///
                         searchController.text.isEmpty
-                            ? ListView.separated(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: model.allChats.length,
-                              separatorBuilder:
-                                  (_, __) =>
-                                      Divider(thickness: 0.1, color: greyColor),
-                              itemBuilder: (_, index) {
-                                final chat = model.allChats[index];
-                                final shouldAnimate = model
-                                    .shouldAnimateDeletion(chat);
-                                return AnimatedContainer(
-                                  key: ValueKey(chat.id),
-                                  duration: Duration(seconds: 1),
-                                  curve: Curves.fastEaseInToSlowEaseOut,
-                                  transform:
-                                      shouldAnimate
-                                          ? Matrix4.translationValues(
-                                            -MediaQuery.of(context).size.width,
-                                            0,
-                                            0,
-                                          )
-                                          : Matrix4.identity(),
-                                  onEnd: () {
-                                    if (shouldAnimate) {
-                                      model.deleteChat(chat);
-                                    }
-                                  },
-                                  child: AbsorbPointer(
-                                    absorbing: shouldAnimate,
-                                    child: Container(
-                                      constraints: BoxConstraints(
-                                        minHeight: 80,
-                                        maxHeight: 100,
-                                      ),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 4,
-                                      ),
-                                      child: GestureDetector(
-                                        behavior: HitTestBehavior.opaque,
-                                        onTap: () {
-                                          Get.to(
-                                            ConversationScreen(
-                                              chatItem: chat,
-                                              vacancy: JobVacancyModel(),
-                                              chatListModel: Provider.of<
-                                                CandidateChatViewModel
-                                              >(context, listen: false),
-                                            ),
-                                          );
-                                        },
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              width: 60,
-                                              alignment: Alignment.center,
-                                              child: Stack(
-                                                alignment:
-                                                    Alignment.bottomRight,
-                                                children: [
-                                                  CircleAvatar(
-                                                    radius: 24,
-                                                    backgroundImage: AssetImage(
-                                                      chat.avatarUrl,
-                                                    ),
-                                                  ),
-                                                  if (chat.isOnline)
-                                                    Container(
-                                                      width: 12,
-                                                      height: 12,
-                                                      decoration: BoxDecoration(
-                                                        color: lightgreenColor,
-                                                        shape: BoxShape.circle,
-                                                        border: Border.all(
-                                                          color: whiteColor,
-                                                          width: 2,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 8,
-                                                ),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          chat.name,
-                                                          style: style16B
-                                                              .copyWith(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color:
-                                                                    blackColor,
-                                                              ),
-                                                        ),
-                                                        if (chat
-                                                            .unreadCount!
-                                                            .isNotEmpty)
-                                                          Container(
-                                                            padding:
-                                                                EdgeInsets.symmetric(
-                                                                  horizontal: 6,
-                                                                  vertical: 2,
-                                                                ),
-                                                            decoration: BoxDecoration(
-                                                              color:
-                                                                  chat.unreadCount ==
-                                                                          'En proceso'
-                                                                      ? yellowBrownColor
-                                                                          .withOpacity(
-                                                                            0.3,
-                                                                          )
-                                                                      : chat.unreadCount ==
-                                                                          'No seleccionado'
-                                                                      ? lightBrownColor2
-                                                                          .withOpacity(
-                                                                            0.3,
-                                                                          )
-                                                                      : darkgreenColor
-                                                                          .withOpacity(
-                                                                            0.2,
-                                                                          ),
-                                                              borderRadius:
-                                                                  BorderRadius.circular(
-                                                                    4.r,
-                                                                  ),
-                                                            ),
-                                                            child: Text(
-                                                              chat.unreadCount!,
-                                                              style: style16M.copyWith(
-                                                                color:
-                                                                    chat.unreadCount ==
-                                                                            'En proceso'
-                                                                        ? yellowBrownColor
-                                                                        : chat.unreadCount ==
-                                                                            'No seleccionado'
-                                                                        ? lightBrownColor2
-                                                                        : darkgreenColor,
-                                                              ),
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              maxLines: 1,
-                                                            ),
-                                                          ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(height: 4),
-                                                    SizedBox(
-                                                      width: double.infinity,
-                                                      child: Text(
-                                                        chat.role,
-                                                        softWrap: false,
-                                                        style: style14M
-                                                            .copyWith(
-                                                              fontSize: 15,
-                                                            ),
-                                                      ),
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: Text(
-                                                            chat.preview,
-                                                            softWrap: false,
-                                                            maxLines: 1,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style: style14M
-                                                                .copyWith(
-                                                                  color:
-                                                                      textLightGreyColor,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                        Spacer(),
-                                                        Text(
-                                                          chat.timestamp,
-                                                          style: style12M.copyWith(
-                                                            color:
-                                                                textLightGreyColor,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            )
-                            : ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount:
-                                  model
-                                      .searchChats(searchController.text)
-                                      .length,
-                              itemBuilder: (_, index) {
-                                final chat =
-                                    model.searchChats(
-                                      searchController.text,
-                                    )[index];
-                                return Container(
-                                  constraints: BoxConstraints(
-                                    minHeight: 80,
-                                    maxHeight: 100,
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  child: GestureDetector(
-                                    behavior: HitTestBehavior.opaque,
-                                    onTap: () {
-                                      Get.to(
-                                        ConversationScreen(
-                                          chatItem: chat,
-                                          vacancy: JobVacancyModel(),
-                                          chatListModel: Provider.of<
-                                            CandidateChatViewModel
-                                          >(context, listen: false),
-                                        ),
-                                      );
-                                    },
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          width: 60,
-                                          alignment: Alignment.center,
-                                          child: Stack(
-                                            alignment: Alignment.bottomRight,
-                                            children: [
-                                              CircleAvatar(
-                                                radius: 24,
-                                                backgroundImage: AssetImage(
-                                                  chat.avatarUrl,
-                                                ),
-                                              ),
-                                              if (chat.isOnline)
-                                                Container(
-                                                  width: 12,
-                                                  height: 12,
-                                                  decoration: BoxDecoration(
-                                                    color: lightgreenColor,
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                      color: whiteColor,
-                                                      width: 2,
-                                                    ),
-                                                  ),
-                                                ),
-                                            ],
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 8,
-                                            ),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      chat.name,
-                                                      style: style16B.copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: blackColor,
-                                                      ),
-                                                    ),
-                                                    if (chat
-                                                        .unreadCount!
-                                                        .isNotEmpty)
-                                                      Container(
-                                                        padding:
-                                                            EdgeInsets.symmetric(
-                                                              horizontal: 6,
-                                                              vertical: 2,
-                                                            ),
-                                                        decoration: BoxDecoration(
-                                                          color:
-                                                              chat.unreadCount ==
-                                                                      'En proceso'
-                                                                  ? yellowBrownColor
-                                                                      .withOpacity(
-                                                                        0.3,
-                                                                      )
-                                                                  : chat.unreadCount ==
-                                                                      'No seleccionado'
-                                                                  ? lightBrownColor2
-                                                                      .withOpacity(
-                                                                        0.3,
-                                                                      )
-                                                                  : darkgreenColor
-                                                                      .withOpacity(
-                                                                        0.2,
-                                                                      ),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                4.r,
-                                                              ),
-                                                        ),
-                                                        child: Text(
-                                                          chat.unreadCount!,
-                                                          style: style16M.copyWith(
-                                                            color:
-                                                                chat.unreadCount ==
-                                                                        'En proceso'
-                                                                    ? yellowBrownColor
-                                                                    : chat.unreadCount ==
-                                                                        'No seleccionado'
-                                                                    ? lightBrownColor2
-                                                                    : darkgreenColor,
-                                                          ),
-                                                          overflow:
-                                                              TextOverflow
-                                                                  .ellipsis,
-                                                          maxLines: 1,
-                                                        ),
-                                                      ),
-                                                  ],
-                                                ),
-                                                SizedBox(height: 4),
-                                                SizedBox(
-                                                  width: double.infinity,
-                                                  child: Text(
-                                                    chat.role,
-                                                    softWrap: false,
-                                                    style: style14M.copyWith(
-                                                      fontSize: 15,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        chat.preview,
-                                                        softWrap: false,
-                                                        maxLines: 1,
-                                                        overflow:
-                                                            TextOverflow
-                                                                .ellipsis,
-                                                        style: style14M.copyWith(
-                                                          color:
-                                                              textLightGreyColor,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Spacer(),
-                                                    Text(
-                                                      chat.timestamp,
-                                                      style: style12M.copyWith(
-                                                        color:
-                                                            textLightGreyColor,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
+                            ? _buildSearchChatList(model, context)
+                            : _buildChatList(model, context),
+                        /*
+                        
+                            model.selectedFilter=='Todos'? _buildChatList(model, context):   
+                            
+                            
+                            model.selectedFilter=='Vacantes en proceso'? _buildChatList (
+                                model.allChats
+                                    .where((chat) =>
+                                        chat.unreadCount == 'En proceso')
+                                    .toList(),
+                              ): _buildChatList(
+                                model.allChats
+                                    .where((chat) =>
+                                        chat.unreadCount == 'Vacantes cerradas')
+                                    .toList(),
+                              ),
+                              */
                       ],
                     ),
                   ),
@@ -903,6 +512,328 @@ class _CandidateChatScreenState extends State<CandidateChatScreen> {
               ),
             ),
       ),
+    );
+  }
+
+  ListView _buildSearchChatList(
+    CandidateChatViewModel model,
+    BuildContext context,
+  ) {
+    return ListView.separated(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: model.allChats.length,
+      separatorBuilder: (_, __) => Divider(thickness: 0.1, color: greyColor),
+      itemBuilder: (_, index) {
+        final chat = model.allChats[index];
+        final shouldAnimate = model.shouldAnimateDeletion(chat);
+        return AnimatedContainer(
+          key: ValueKey(chat.id),
+          duration: Duration(seconds: 1),
+          curve: Curves.fastEaseInToSlowEaseOut,
+          transform:
+              shouldAnimate
+                  ? Matrix4.translationValues(
+                    -MediaQuery.of(context).size.width,
+                    0,
+                    0,
+                  )
+                  : Matrix4.identity(),
+          onEnd: () {
+            if (shouldAnimate) {
+              model.deleteChat(chat);
+            }
+          },
+          child: AbsorbPointer(
+            absorbing: shouldAnimate,
+            child: Container(
+              constraints: BoxConstraints(minHeight: 80, maxHeight: 100),
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  Get.to(
+                    ConversationScreen(
+                      chatItem: chat,
+                      vacancy: JobVacancyModel(),
+                      chatListModel: Provider.of<CandidateChatViewModel>(
+                        context,
+                        listen: false,
+                      ),
+                    ),
+                  );
+                },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 60,
+                      alignment: Alignment.center,
+                      child: Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(chat.avatarUrl),
+                          ),
+                          if (chat.isOnline)
+                            Container(
+                              width: 12,
+                              height: 12,
+                              decoration: BoxDecoration(
+                                color: lightgreenColor,
+                                shape: BoxShape.circle,
+                                border: Border.all(color: whiteColor, width: 2),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  chat.name,
+                                  style: style16B.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: blackColor,
+                                  ),
+                                ),
+                                if (chat.unreadCount!.isNotEmpty)
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 6,
+                                      vertical: 2,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          chat.unreadCount == 'En proceso'
+                                              ? yellowBrownColor.withOpacity(
+                                                0.3,
+                                              )
+                                              : chat.unreadCount ==
+                                                  'No seleccionado'
+                                              ? lightBrownColor2.withOpacity(
+                                                0.3,
+                                              )
+                                              : darkgreenColor.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(4.r),
+                                    ),
+                                    child: Text(
+                                      chat.unreadCount!,
+                                      style: style16M.copyWith(
+                                        color:
+                                            chat.unreadCount == 'En proceso'
+                                                ? yellowBrownColor
+                                                : chat.unreadCount ==
+                                                    'No seleccionado'
+                                                ? lightBrownColor2
+                                                : darkgreenColor,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            SizedBox(height: 4),
+                            SizedBox(
+                              width: double.infinity,
+                              child: Text(
+                                chat.role,
+                                softWrap: false,
+                                style: style14M.copyWith(fontSize: 15),
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    chat.preview,
+                                    softWrap: false,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: style14M.copyWith(
+                                      color: textLightGreyColor,
+                                    ),
+                                  ),
+                                ),
+                                Spacer(),
+                                Text(
+                                  chat.timestamp,
+                                  style: style12M.copyWith(
+                                    color: textLightGreyColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  ///
+  ///. all chats
+  ///
+  ///
+  ListView _buildChatList(CandidateChatViewModel model, BuildContext context) {
+    return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: model.searchChats(searchController.text).length,
+      itemBuilder: (_, index) {
+        final chat = model.searchChats(searchController.text)[index];
+        return Container(
+          constraints: BoxConstraints(minHeight: 80, maxHeight: 100),
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              Get.to(
+                ConversationScreen(
+                  chatItem: chat,
+                  vacancy: JobVacancyModel(),
+                  chatListModel: Provider.of<CandidateChatViewModel>(
+                    context,
+                    listen: false,
+                  ),
+                ),
+              );
+            },
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 60,
+                  alignment: Alignment.center,
+                  child: Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      CircleAvatar(
+                        radius: 24,
+                        backgroundImage: AssetImage(chat.avatarUrl),
+                      ),
+                      if (chat.isOnline)
+                        Container(
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            color: lightgreenColor,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: whiteColor, width: 2),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              chat.name,
+                              style: style16B.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: blackColor,
+                              ),
+                            ),
+                            if (chat.unreadCount!.isNotEmpty)
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
+                                decoration: BoxDecoration(
+                                  color:
+                                      chat.unreadCount == 'En proceso'
+                                          ? yellowBrownColor.withOpacity(0.3)
+                                          : chat.unreadCount ==
+                                              'No seleccionado'
+                                          ? lightBrownColor2.withOpacity(0.3)
+                                          : darkgreenColor.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(4.r),
+                                ),
+                                child: Text(
+                                  chat.unreadCount!,
+                                  style: style16M.copyWith(
+                                    color:
+                                        chat.unreadCount == 'En proceso'
+                                            ? yellowBrownColor
+                                            : chat.unreadCount ==
+                                                'No seleccionado'
+                                            ? lightBrownColor2
+                                            : darkgreenColor,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ),
+                          ],
+                        ),
+                        SizedBox(height: 4),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            chat.role,
+                            softWrap: false,
+                            style: style14M.copyWith(fontSize: 15),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                chat.preview,
+                                softWrap: false,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: style14M.copyWith(
+                                  color: textLightGreyColor,
+                                ),
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              chat.timestamp,
+                              style: style12M.copyWith(
+                                color: textLightGreyColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
