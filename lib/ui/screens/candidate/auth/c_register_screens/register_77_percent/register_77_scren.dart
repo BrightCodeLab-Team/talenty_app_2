@@ -159,7 +159,6 @@ class Candidate77PercentScreen extends StatelessWidget {
                                       width: double.infinity,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 10,
-                                        vertical: 10,
                                       ),
                                       margin: EdgeInsets.all(10),
                                       decoration: BoxDecoration(
@@ -193,14 +192,88 @@ class Candidate77PercentScreen extends StatelessWidget {
                                             ),
                                           ),
                                           10.horizontalSpace,
-                                          Icon(
-                                            Icons.keyboard_arrow_down_rounded,
-                                            color: lightBlackColor,
+                                          PopupMenuButton(
+                                            icon:
+                                                model.isFirstDropDownOpen ==
+                                                        false
+                                                    ? Icon(
+                                                      Icons
+                                                          .keyboard_arrow_down_rounded,
+                                                      color: lightBlackColor,
+                                                    )
+                                                    : Icon(
+                                                      Icons
+                                                          .keyboard_arrow_up_rounded,
+                                                      color: lightBlackColor,
+                                                    ),
+                                            offset: Offset(1, 30),
+
+                                            constraints: BoxConstraints(
+                                              minWidth: 65.w,
+                                              maxWidth:
+                                                  MediaQuery.of(
+                                                    context,
+                                                  ).size.width *
+                                                  0.8,
+                                            ),
+                                            color: Colors.transparent,
+
+                                            elevation: 0,
+                                            onOpened: () {
+                                              model.setFirstDropdown(true);
+                                            },
+                                            onCanceled: () {
+                                              Future.delayed(
+                                                Duration(milliseconds: 200),
+                                                () {
+                                                  model.setFirstDropdown(false);
+                                                },
+                                              );
+                                            },
+                                            onSelected: (value) {
+                                              Future.delayed(
+                                                Duration(milliseconds: 200),
+                                                () {
+                                                  model.setFirstDropdown(false);
+                                                },
+                                              );
+                                              // Handle the selected value here
+                                            },
+
+                                            itemBuilder:
+                                                (
+                                                  BuildContext context,
+                                                ) => <PopupMenuEntry<String>>[
+                                                  PopupMenuItem<String>(
+                                                    value: 'option1',
+                                                    child: Text('Básico'),
+                                                    onTap: () {},
+                                                  ),
+                                                  PopupMenuItem<String>(
+                                                    value: 'option2',
+                                                    child: Text('Intermedio'),
+                                                    onTap: () {},
+                                                  ),
+                                                  PopupMenuItem<String>(
+                                                    value: 'option3',
+                                                    child: Text('Avanzado'),
+                                                    onTap: () {},
+                                                  ),
+                                                  PopupMenuItem<String>(
+                                                    value: 'option4',
+                                                    child: Text('Nativo'),
+                                                    onTap: () {},
+                                                  ),
+                                                ],
                                           ),
                                         ],
                                       ),
                                     ),
                                   ),
+
+                                  model.isFirstDropDownOpen == true
+                                      ? 200.verticalSpace
+                                      : 0.verticalSpace,
                                 ],
                               ),
                             ),
@@ -245,7 +318,6 @@ class Candidate77PercentScreen extends StatelessWidget {
                                       width: double.infinity,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 10,
-                                        vertical: 10,
                                       ),
                                       margin: EdgeInsets.all(10),
                                       decoration: BoxDecoration(
@@ -279,14 +351,91 @@ class Candidate77PercentScreen extends StatelessWidget {
                                             ),
                                           ),
                                           10.horizontalSpace,
-                                          Icon(
-                                            Icons.keyboard_arrow_down_rounded,
-                                            color: lightBlackColor,
+                                          PopupMenuButton(
+                                            icon:
+                                                model.isFirstDropDownOpen ==
+                                                        false
+                                                    ? Icon(
+                                                      Icons
+                                                          .keyboard_arrow_down_rounded,
+                                                      color: lightBlackColor,
+                                                    )
+                                                    : Icon(
+                                                      Icons
+                                                          .keyboard_arrow_up_rounded,
+                                                      color: lightBlackColor,
+                                                    ),
+                                            offset: Offset(1, 30),
+
+                                            constraints: BoxConstraints(
+                                              minWidth: 65.w,
+                                              maxWidth:
+                                                  MediaQuery.of(
+                                                    context,
+                                                  ).size.width *
+                                                  0.8,
+                                            ),
+                                            color: Colors.transparent,
+
+                                            elevation: 0,
+                                            onOpened: () {
+                                              model.setSecondDropdown(true);
+                                            },
+                                            onCanceled: () {
+                                              Future.delayed(
+                                                Duration(milliseconds: 200),
+                                                () {
+                                                  model.setSecondDropdown(
+                                                    false,
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            onSelected: (value) {
+                                              Future.delayed(
+                                                Duration(milliseconds: 200),
+                                                () {
+                                                  model.setSecondDropdown(
+                                                    false,
+                                                  );
+                                                },
+                                              );
+                                              // Handle the selected value here
+                                            },
+
+                                            itemBuilder:
+                                                (
+                                                  BuildContext context,
+                                                ) => <PopupMenuEntry<String>>[
+                                                  PopupMenuItem<String>(
+                                                    value: 'option1',
+                                                    child: Text('Básico'),
+                                                    onTap: () {},
+                                                  ),
+                                                  PopupMenuItem<String>(
+                                                    value: 'option2',
+                                                    child: Text('Intermedio'),
+                                                    onTap: () {},
+                                                  ),
+                                                  PopupMenuItem<String>(
+                                                    value: 'option3',
+                                                    child: Text('Avanzado'),
+                                                    onTap: () {},
+                                                  ),
+                                                  PopupMenuItem<String>(
+                                                    value: 'option4',
+                                                    child: Text('Nativo'),
+                                                    onTap: () {},
+                                                  ),
+                                                ],
                                           ),
                                         ],
                                       ),
                                     ),
                                   ),
+                                  model.isSecondDropDownOpen == true
+                                      ? 200.verticalSpace
+                                      : 0.verticalSpace,
                                 ],
                               ),
                             ),
