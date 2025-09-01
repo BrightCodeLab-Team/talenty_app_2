@@ -10,12 +10,11 @@ import 'package:talenty_app/core/constants/text_style.dart';
 import 'package:talenty_app/ui/custom_widgets/Containers/progress_container.dart';
 import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
-
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_77_percent/register_77_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/register_88_percent/register_88_screen.dart';
 
 class Candidate77PercentScreen extends StatelessWidget {
-  const Candidate77PercentScreen({super.key});
+  Candidate77PercentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -176,14 +175,17 @@ class Candidate77PercentScreen extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Icon(
-                                            Icons.touch_app_outlined,
-                                            size: 25,
-                                            color: lightBlackColor,
-                                          ),
+                                          model.selectedLevel ==
+                                                  'Selecciona tu nivel'
+                                              ? Icon(
+                                                Icons.touch_app_outlined,
+                                                size: 25,
+                                                color: lightBlackColor,
+                                              )
+                                              : Container(),
                                           10.horizontalSpace,
                                           Text(
-                                            'Conoce más',
+                                            model.selectedLevel,
                                             style: GoogleFonts.roboto(
                                               textStyle: style16M.copyWith(
                                                 fontWeight: FontWeight.w400,
@@ -193,6 +195,9 @@ class Candidate77PercentScreen extends StatelessWidget {
                                           ),
                                           10.horizontalSpace,
                                           PopupMenuButton(
+                                            popUpAnimationStyle: AnimationStyle(
+                                              curve: Curves.easeInOut,
+                                            ),
                                             icon:
                                                 model.isFirstDropDownOpen ==
                                                         false
@@ -206,7 +211,44 @@ class Candidate77PercentScreen extends StatelessWidget {
                                                           .keyboard_arrow_up_rounded,
                                                       color: lightBlackColor,
                                                     ),
-                                            offset: Offset(1, 30),
+                                            offset: Offset(
+                                              // MediaQuery.of(
+                                              //       context,
+                                              //     ).size.width *
+                                              //     0.17,
+                                              model.selectedLevel ==
+                                                      'Selecciona tu nivel'
+                                                  ? MediaQuery.of(
+                                                        context,
+                                                      ).size.width *
+                                                      0.1
+                                                  : model.selectedLevel ==
+                                                      '🗨️  Básico'
+                                                  ? MediaQuery.of(
+                                                        context,
+                                                      ).size.width *
+                                                      0.22
+                                                  : model.selectedLevel ==
+                                                      '🗣️ Intermedio'
+                                                  ? MediaQuery.of(
+                                                        context,
+                                                      ).size.width *
+                                                      0.2
+                                                  : model.selectedLevel ==
+                                                      '🧠 Avanzado'
+                                                  ? MediaQuery.of(
+                                                        context,
+                                                      ).size.width *
+                                                      0.2
+                                                  : model.selectedLevel ==
+                                                      '📚  Nativo'
+                                                  ? MediaQuery.of(
+                                                        context,
+                                                      ).size.width *
+                                                      0.22
+                                                  : 0,
+                                              55.0,
+                                            ),
 
                                             constraints: BoxConstraints(
                                               minWidth: 65.w,
@@ -214,10 +256,10 @@ class Candidate77PercentScreen extends StatelessWidget {
                                                   MediaQuery.of(
                                                     context,
                                                   ).size.width *
-                                                  0.8,
+                                                  0.82,
                                             ),
                                             color: Colors.transparent,
-
+                                            clipBehavior: Clip.none,
                                             elevation: 0,
                                             onOpened: () {
                                               model.setFirstDropdown(true);
@@ -231,40 +273,69 @@ class Candidate77PercentScreen extends StatelessWidget {
                                               );
                                             },
                                             onSelected: (value) {
+                                              model.setSelectedLevel(value);
                                               Future.delayed(
                                                 Duration(milliseconds: 200),
                                                 () {
                                                   model.setFirstDropdown(false);
                                                 },
                                               );
-                                              // Handle the selected value here
                                             },
 
-                                            itemBuilder:
-                                                (
-                                                  BuildContext context,
-                                                ) => <PopupMenuEntry<String>>[
-                                                  PopupMenuItem<String>(
-                                                    value: 'option1',
-                                                    child: Text('Básico'),
-                                                    onTap: () {},
+                                            itemBuilder: (
+                                              BuildContext context,
+                                            ) {
+                                              final screenWidth =
+                                                  MediaQuery.of(
+                                                    context,
+                                                  ).size.width;
+                                              final containerWidth =
+                                                  screenWidth - 60;
+                                              return <PopupMenuEntry<String>>[
+                                                PopupMenuItem<String>(
+                                                  value: '🗨️  Básico',
+                                                  child: buildDropdownItem(
+                                                    icon:
+                                                        Icons
+                                                            .record_voice_over_outlined,
+                                                    text: '🗨️  Básico',
+                                                    containerWidth:
+                                                        containerWidth,
                                                   ),
-                                                  PopupMenuItem<String>(
-                                                    value: 'option2',
-                                                    child: Text('Intermedio'),
-                                                    onTap: () {},
+                                                ),
+                                                PopupMenuItem<String>(
+                                                  value: '🗣️ Intermedio',
+                                                  child: buildDropdownItem(
+                                                    containerWidth:
+                                                        containerWidth,
+                                                    icon:
+                                                        Icons
+                                                            .record_voice_over_outlined,
+                                                    text: '🗣️ Intermedio',
                                                   ),
-                                                  PopupMenuItem<String>(
-                                                    value: 'option3',
-                                                    child: Text('Avanzado'),
-                                                    onTap: () {},
+                                                ),
+                                                PopupMenuItem<String>(
+                                                  value: '🧠 Avanzado',
+                                                  child: buildDropdownItem(
+                                                    containerWidth:
+                                                        containerWidth,
+                                                    icon: Icons.school_outlined,
+                                                    text: '🧠 Avanzado',
                                                   ),
-                                                  PopupMenuItem<String>(
-                                                    value: 'option4',
-                                                    child: Text('Nativo'),
-                                                    onTap: () {},
+                                                ),
+                                                PopupMenuItem<String>(
+                                                  value: '📚  Nativo',
+                                                  child: buildDropdownItem(
+                                                    containerWidth:
+                                                        containerWidth,
+                                                    icon:
+                                                        Icons
+                                                            .menu_book_outlined,
+                                                    text: '📚  Nativo',
                                                   ),
-                                                ],
+                                                ),
+                                              ];
+                                            },
                                           ),
                                         ],
                                       ),
@@ -272,7 +343,7 @@ class Candidate77PercentScreen extends StatelessWidget {
                                   ),
 
                                   model.isFirstDropDownOpen == true
-                                      ? 200.verticalSpace
+                                      ? 250.verticalSpace
                                       : 0.verticalSpace,
                                 ],
                               ),
@@ -284,6 +355,7 @@ class Candidate77PercentScreen extends StatelessWidget {
                         ///
                         ///
                         20.verticalSpace,
+
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Container(
@@ -302,7 +374,7 @@ class Candidate77PercentScreen extends StatelessWidget {
                                 children: [
                                   15.verticalSpace,
                                   Text(
-                                    '🇲🇽 Español ',
+                                    '🇲🇽 Español',
                                     style: style20B.copyWith(),
                                   ),
                                   15.verticalSpace,
@@ -335,14 +407,17 @@ class Candidate77PercentScreen extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Icon(
-                                            Icons.touch_app_outlined,
-                                            size: 25,
-                                            color: lightBlackColor,
-                                          ),
+                                          model.selectedSecondLevel ==
+                                                  'Selecciona tu nivel'
+                                              ? Icon(
+                                                Icons.touch_app_outlined,
+                                                size: 25,
+                                                color: lightBlackColor,
+                                              )
+                                              : Container(),
                                           10.horizontalSpace,
                                           Text(
-                                            'Conoce más',
+                                            model.selectedSecondLevel,
                                             style: GoogleFonts.roboto(
                                               textStyle: style16M.copyWith(
                                                 fontWeight: FontWeight.w400,
@@ -352,8 +427,12 @@ class Candidate77PercentScreen extends StatelessWidget {
                                           ),
                                           10.horizontalSpace,
                                           PopupMenuButton(
+                                            clipBehavior: Clip.none,
+                                            popUpAnimationStyle: AnimationStyle(
+                                              curve: Curves.easeInOut,
+                                            ),
                                             icon:
-                                                model.isFirstDropDownOpen ==
+                                                model.isSecondDropDownOpen ==
                                                         false
                                                     ? Icon(
                                                       Icons
@@ -365,18 +444,49 @@ class Candidate77PercentScreen extends StatelessWidget {
                                                           .keyboard_arrow_up_rounded,
                                                       color: lightBlackColor,
                                                     ),
-                                            offset: Offset(1, 30),
-
+                                            offset: Offset(
+                                              model.selectedSecondLevel ==
+                                                      'Selecciona tu nivel'
+                                                  ? MediaQuery.of(
+                                                        context,
+                                                      ).size.width *
+                                                      0.1
+                                                  : model.selectedSecondLevel ==
+                                                      '🗨️  Básico'
+                                                  ? MediaQuery.of(
+                                                        context,
+                                                      ).size.width *
+                                                      0.22
+                                                  : model.selectedSecondLevel ==
+                                                      '🗣️ Intermedio'
+                                                  ? MediaQuery.of(
+                                                        context,
+                                                      ).size.width *
+                                                      0.2
+                                                  : model.selectedSecondLevel ==
+                                                      '🧠 Avanzado'
+                                                  ? MediaQuery.of(
+                                                        context,
+                                                      ).size.width *
+                                                      0.2
+                                                  : model.selectedSecondLevel ==
+                                                      '📚  Nativo'
+                                                  ? MediaQuery.of(
+                                                        context,
+                                                      ).size.width *
+                                                      0.22
+                                                  : 0,
+                                              55.0,
+                                            ),
                                             constraints: BoxConstraints(
                                               minWidth: 65.w,
                                               maxWidth:
                                                   MediaQuery.of(
                                                     context,
                                                   ).size.width *
-                                                  0.8,
+                                                  0.82,
                                             ),
                                             color: Colors.transparent,
-
                                             elevation: 0,
                                             onOpened: () {
                                               model.setSecondDropdown(true);
@@ -392,6 +502,9 @@ class Candidate77PercentScreen extends StatelessWidget {
                                               );
                                             },
                                             onSelected: (value) {
+                                              model.setSelectedSecondLevel(
+                                                value,
+                                              );
                                               Future.delayed(
                                                 Duration(milliseconds: 200),
                                                 () {
@@ -400,34 +513,61 @@ class Candidate77PercentScreen extends StatelessWidget {
                                                   );
                                                 },
                                               );
-                                              // Handle the selected value here
                                             },
-
-                                            itemBuilder:
-                                                (
-                                                  BuildContext context,
-                                                ) => <PopupMenuEntry<String>>[
-                                                  PopupMenuItem<String>(
-                                                    value: 'option1',
-                                                    child: Text('Básico'),
-                                                    onTap: () {},
+                                            itemBuilder: (
+                                              BuildContext context,
+                                            ) {
+                                              final screenWidth =
+                                                  MediaQuery.of(
+                                                    context,
+                                                  ).size.width;
+                                              final containerWidth =
+                                                  screenWidth - 60;
+                                              return <PopupMenuEntry<String>>[
+                                                PopupMenuItem<String>(
+                                                  value: '🗨️  Básico',
+                                                  child: buildDropdownItem(
+                                                    icon:
+                                                        Icons
+                                                            .record_voice_over_outlined,
+                                                    text: '🗨️  Básico',
+                                                    containerWidth:
+                                                        containerWidth,
                                                   ),
-                                                  PopupMenuItem<String>(
-                                                    value: 'option2',
-                                                    child: Text('Intermedio'),
-                                                    onTap: () {},
+                                                ),
+                                                PopupMenuItem<String>(
+                                                  value: '🗣️ Intermedio',
+                                                  child: buildDropdownItem(
+                                                    containerWidth:
+                                                        containerWidth,
+                                                    icon:
+                                                        Icons
+                                                            .record_voice_over_outlined,
+                                                    text: '🗣️ Intermedio',
                                                   ),
-                                                  PopupMenuItem<String>(
-                                                    value: 'option3',
-                                                    child: Text('Avanzado'),
-                                                    onTap: () {},
+                                                ),
+                                                PopupMenuItem<String>(
+                                                  value: '🧠 Avanzado',
+                                                  child: buildDropdownItem(
+                                                    containerWidth:
+                                                        containerWidth,
+                                                    icon: Icons.school_outlined,
+                                                    text: '🧠 Avanzado',
                                                   ),
-                                                  PopupMenuItem<String>(
-                                                    value: 'option4',
-                                                    child: Text('Nativo'),
-                                                    onTap: () {},
+                                                ),
+                                                PopupMenuItem<String>(
+                                                  value: '📚  Nativo',
+                                                  child: buildDropdownItem(
+                                                    containerWidth:
+                                                        containerWidth,
+                                                    icon:
+                                                        Icons
+                                                            .menu_book_outlined,
+                                                    text: '📚  Nativo',
                                                   ),
-                                                ],
+                                                ),
+                                              ];
+                                            },
                                           ),
                                         ],
                                       ),
@@ -450,6 +590,40 @@ class Candidate77PercentScreen extends StatelessWidget {
                 ),
               ),
             ),
+      ),
+    );
+  }
+
+  ///
+  ///. drop Down item
+  ///
+  Widget buildDropdownItem({
+    required IconData icon,
+    required String text,
+    required double containerWidth,
+    Color iconColor = lightBlackColor,
+    Color textColor = lightBlackColor,
+  }) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 3.h),
+      width: containerWidth,
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(width: 1, color: Colors.grey),
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: GoogleFonts.roboto(
+            textStyle: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+              color: textColor,
+            ),
+          ),
+        ),
       ),
     );
   }
