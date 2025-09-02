@@ -43,6 +43,10 @@ class Candidate77PercentScreen extends StatelessWidget {
                 ),
                 backgroundColor: transparent,
               ),
+
+              ///
+              /// Start of the body
+              ///
               body: SafeArea(
                 child: Padding(
                   padding: EdgeInsetsGeometry.symmetric(horizontal: 15),
@@ -153,6 +157,10 @@ class Candidate77PercentScreen extends StatelessWidget {
                                     ),
                                   ),
                                   20.verticalSpace,
+
+                                  ///
+                                  ///. first dropDown
+                                  ///
                                   GestureDetector(
                                     child: Container(
                                       width: double.infinity,
@@ -165,7 +173,7 @@ class Candidate77PercentScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(10),
                                         border: Border.all(
                                           width: 1,
-                                          color: greyColor,
+                                          color: borderGreyColor,
                                         ),
                                       ),
                                       child: Row(
@@ -221,7 +229,7 @@ class Candidate77PercentScreen extends StatelessWidget {
                                                   ? MediaQuery.of(
                                                         context,
                                                       ).size.width *
-                                                      0.1
+                                                      0.12
                                                   : model.selectedLevel ==
                                                       '🗨️  Básico'
                                                   ? MediaQuery.of(
@@ -356,9 +364,16 @@ class Candidate77PercentScreen extends StatelessWidget {
                         ///
                         20.verticalSpace,
 
+                        ///
+                        ///. second dropDown
+                        ///
+                        // First, create a GlobalKey for your dropdown container
+
+                        // Then modify your code:
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Container(
+                            key: model.secondDropdownKey, // Add this key
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: whiteColor,
@@ -490,10 +505,23 @@ class Candidate77PercentScreen extends StatelessWidget {
                                             elevation: 0,
                                             onOpened: () {
                                               model.setSecondDropdown(true);
+                                              // Add this to scroll to the dropdown
+                                              WidgetsBinding.instance
+                                                  .addPostFrameCallback((_) {
+                                                    Scrollable.ensureVisible(
+                                                      model
+                                                          .secondDropdownKey
+                                                          .currentContext!,
+                                                      duration: Duration(
+                                                        milliseconds: 300,
+                                                      ),
+                                                      curve: Curves.easeInOut,
+                                                    );
+                                                  });
                                             },
                                             onCanceled: () {
                                               Future.delayed(
-                                                Duration(milliseconds: 200),
+                                                Duration(milliseconds: 250),
                                                 () {
                                                   model.setSecondDropdown(
                                                     false,
@@ -506,7 +534,7 @@ class Candidate77PercentScreen extends StatelessWidget {
                                                 value,
                                               );
                                               Future.delayed(
-                                                Duration(milliseconds: 200),
+                                                Duration(milliseconds: 250),
                                                 () {
                                                   model.setSecondDropdown(
                                                     false,
@@ -573,15 +601,14 @@ class Candidate77PercentScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  model.isSecondDropDownOpen == true
-                                      ? 200.verticalSpace
-                                      : 0.verticalSpace,
+                                  if (model.isSecondDropDownOpen)
+                                    SizedBox(height: 250),
                                 ],
                               ),
                             ),
                           ),
                         ),
-                        50.verticalSpace,
+                        // 50.verticalSpace,
                       ],
 
                       ///
