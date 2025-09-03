@@ -1,8 +1,17 @@
 {
-    "cSpell.words": [
-        "Arte",
-        "DropपादनMenu",
-        "talenty"
-    ],
-    "cmake.sourceDirectory": "/Users/eapple/talenty_app/windows/runner"
+  "cSpell.words": [
+    "Arte",
+    "DropपादनMenu",
+    "talenty"
+  ],
+  "cmake.sourceDirectory": "/Users/eapple/talenty_app/windows/runner",
+  "task.allowAutomaticTasks": true,
+  "debug.openDebug": "neverOpen",
+  "terminal.integrated.inheritEnv": false,
+  "tasks": {
+    "label": "lint on open",
+    "type": "shell",
+    "command": "npm run lint",
+    "runOn": "folderOpen"
+  }
 }

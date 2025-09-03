@@ -47,6 +47,8 @@ class Candidate77PercentScreen extends StatelessWidget {
                             style: style16M.copyWith(color: lightBlackColor),
                           ),
                         ),
+
+
                         4.verticalSpace,
                         // progress container
                         ProgressContainer(
@@ -54,6 +56,7 @@ class Candidate77PercentScreen extends StatelessWidget {
                               MediaQuery.of(context).size.width * 0.77,
                         ),
                         20.verticalSpace,
+
                         // top container just blow progress bar
                         topMainContainer(),
                         20.verticalSpace,
@@ -69,6 +72,7 @@ class Candidate77PercentScreen extends StatelessWidget {
     );
   }
 
+
   // app bar
   AppBar appBar() {
     return AppBar(
@@ -83,6 +87,7 @@ class Candidate77PercentScreen extends StatelessWidget {
       backgroundColor: transparent,
     );
   }
+
 
   ///
   ///. top container just blow progress bar
@@ -298,6 +303,7 @@ class Candidate77PercentScreen extends StatelessWidget {
                           ),
                         ],
                       ),
+
                     ),
                   ),
 
@@ -377,4 +383,45 @@ class Candidate77PercentScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _header() {
+  return Container(
+    width: double.infinity,
+    decoration: BoxDecoration(
+      color: whiteColor,
+      borderRadius: BorderRadius.circular(8.r),
+      border: Border.all(color: darkPurpleColor, width: 1.w),
+      boxShadow: [
+        BoxShadow(
+          color: darkPurpleColor,
+          offset: Offset(-1.w, 2.w),
+          blurRadius: 0,
+          spreadRadius: 0,
+        ),
+      ],
+    ),
+    child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 16.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            '¿Qué tanto los hablas?',
+            style: style20B.copyWith(color: darkPurpleColor),
+          ),
+          8.verticalSpace,
+          Text(
+            'Especifica tu nivel de dominio en cada idioma. Esto permitirá a los reclutadores identificar si tu perfil se ajusta a las vacantes disponibles.',
+            style: style14M.copyWith(
+              color: textLightGreyColor,
+            ), // textGreyColor for the description
+            textAlign: TextAlign.start,
+          ),
+          8.verticalSpace,
+        ],
+      ),
+    ),
+  );
 }
