@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:talenty_app/core/constants/app_assets.dart';
@@ -65,64 +64,19 @@ class Candidate77PercentScreen extends StatelessWidget {
                         ),
 
                         ///
-                        ///
+                        /// progress indecatoe 77 percent
                         ///
                         4.verticalSpace,
                         ProgressContainer(
                           progressWidth:
                               MediaQuery.of(context).size.width * 0.77,
                         ),
+                        20.verticalSpace,
 
                         ///
+                        /// Header
                         ///
-                        ///
-                        20.verticalSpace,
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: whiteColor,
-                            borderRadius: BorderRadius.circular(8.r),
-                            border: Border.all(
-                              color: darkPurpleColor,
-                              width: 1.w,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: darkPurpleColor,
-                                offset: Offset(-1.w, 2.w),
-                                blurRadius: 0,
-                                spreadRadius: 0,
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 8.w,
-                              vertical: 16.h,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '¿Qué tanto los hablas?',
-                                  style: style20B.copyWith(
-                                    color: darkPurpleColor,
-                                  ),
-                                ),
-                                8.verticalSpace,
-                                Text(
-                                  'Especifica tu nivel de dominio en cada idioma. Esto permitirá a los reclutadores identificar si tu perfil se ajusta a las vacantes disponibles.',
-                                  style: style14M.copyWith(
-                                    color: textLightGreyColor,
-                                  ), // textGreyColor for the description
-                                  textAlign: TextAlign.start,
-                                ),
-                                8.verticalSpace,
-                              ],
-                            ),
-                          ),
-                        ),
+                        _header(),
 
                         ///
                         ///
@@ -159,7 +113,7 @@ class Candidate77PercentScreen extends StatelessWidget {
                                   20.verticalSpace,
 
                                   ///
-                                  ///. first dropDown
+                                  /// First DropDown
                                   ///
                                   GestureDetector(
                                     child: Container(
@@ -359,259 +313,14 @@ class Candidate77PercentScreen extends StatelessWidget {
                           ),
                         ),
 
-                        ///
-                        ///
-                        ///
-                        20.verticalSpace,
-
-                        ///
-                        ///. second dropDown
-                        ///
-                        // First, create a GlobalKey for your dropdown container
-
-                        // Then modify your code:
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Container(
-                            key: model.secondDropdownKey, // Add this key
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: whiteColor,
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: greyColor, width: 1.2),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 15.0,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  15.verticalSpace,
-                                  Text(
-                                    '🇲🇽 Español',
-                                    style: style20B.copyWith(),
-                                  ),
-                                  15.verticalSpace,
-                                  Text(
-                                    'Describe qué tanto dominio tienes en éste idioma.',
-                                    style: style16M.copyWith(
-                                      color: lightBlackColor2,
-                                    ),
-                                  ),
-                                  20.verticalSpace,
-                                  GestureDetector(
-                                    child: Container(
-                                      width: double.infinity,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                      ),
-                                      margin: EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        color: whiteColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          width: 1,
-                                          color: greyColor,
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          model.selectedSecondLevel ==
-                                                  'Selecciona tu nivel'
-                                              ? Icon(
-                                                Icons.touch_app_outlined,
-                                                size: 25,
-                                                color: lightBlackColor,
-                                              )
-                                              : Container(),
-                                          10.horizontalSpace,
-                                          Text(
-                                            model.selectedSecondLevel,
-                                            style: GoogleFonts.roboto(
-                                              textStyle: style16M.copyWith(
-                                                fontWeight: FontWeight.w400,
-                                                color: lightBlackColor,
-                                              ),
-                                            ),
-                                          ),
-                                          10.horizontalSpace,
-                                          PopupMenuButton(
-                                            clipBehavior: Clip.none,
-                                            popUpAnimationStyle: AnimationStyle(
-                                              curve: Curves.easeInOut,
-                                            ),
-                                            icon:
-                                                model.isSecondDropDownOpen ==
-                                                        false
-                                                    ? Icon(
-                                                      Icons
-                                                          .keyboard_arrow_down_rounded,
-                                                      color: lightBlackColor,
-                                                    )
-                                                    : Icon(
-                                                      Icons
-                                                          .keyboard_arrow_up_rounded,
-                                                      color: lightBlackColor,
-                                                    ),
-                                            offset: Offset(
-                                              model.selectedSecondLevel ==
-                                                      'Selecciona tu nivel'
-                                                  ? MediaQuery.of(
-                                                        context,
-                                                      ).size.width *
-                                                      0.1
-                                                  : model.selectedSecondLevel ==
-                                                      '🗨️  Básico'
-                                                  ? MediaQuery.of(
-                                                        context,
-                                                      ).size.width *
-                                                      0.22
-                                                  : model.selectedSecondLevel ==
-                                                      '🗣️ Intermedio'
-                                                  ? MediaQuery.of(
-                                                        context,
-                                                      ).size.width *
-                                                      0.2
-                                                  : model.selectedSecondLevel ==
-                                                      '🧠 Avanzado'
-                                                  ? MediaQuery.of(
-                                                        context,
-                                                      ).size.width *
-                                                      0.2
-                                                  : model.selectedSecondLevel ==
-                                                      '📚  Nativo'
-                                                  ? MediaQuery.of(
-                                                        context,
-                                                      ).size.width *
-                                                      0.22
-                                                  : 0,
-                                              55.0,
-                                            ),
-                                            constraints: BoxConstraints(
-                                              minWidth: 65.w,
-                                              maxWidth:
-                                                  MediaQuery.of(
-                                                    context,
-                                                  ).size.width *
-                                                  0.82,
-                                            ),
-                                            color: Colors.transparent,
-                                            elevation: 0,
-                                            onOpened: () {
-                                              model.setSecondDropdown(true);
-                                              // Add this to scroll to the dropdown
-                                              WidgetsBinding.instance
-                                                  .addPostFrameCallback((_) {
-                                                    Scrollable.ensureVisible(
-                                                      model
-                                                          .secondDropdownKey
-                                                          .currentContext!,
-                                                      duration: Duration(
-                                                        milliseconds: 300,
-                                                      ),
-                                                      curve: Curves.easeInOut,
-                                                    );
-                                                  });
-                                            },
-                                            onCanceled: () {
-                                              Future.delayed(
-                                                Duration(milliseconds: 250),
-                                                () {
-                                                  model.setSecondDropdown(
-                                                    false,
-                                                  );
-                                                },
-                                              );
-                                            },
-                                            onSelected: (value) {
-                                              model.setSelectedSecondLevel(
-                                                value,
-                                              );
-                                              Future.delayed(
-                                                Duration(milliseconds: 250),
-                                                () {
-                                                  model.setSecondDropdown(
-                                                    false,
-                                                  );
-                                                },
-                                              );
-                                            },
-                                            itemBuilder: (
-                                              BuildContext context,
-                                            ) {
-                                              final screenWidth =
-                                                  MediaQuery.of(
-                                                    context,
-                                                  ).size.width;
-                                              final containerWidth =
-                                                  screenWidth - 60;
-                                              return <PopupMenuEntry<String>>[
-                                                PopupMenuItem<String>(
-                                                  value: '🗨️  Básico',
-                                                  child: buildDropdownItem(
-                                                    icon:
-                                                        Icons
-                                                            .record_voice_over_outlined,
-                                                    text: '🗨️  Básico',
-                                                    containerWidth:
-                                                        containerWidth,
-                                                  ),
-                                                ),
-                                                PopupMenuItem<String>(
-                                                  value: '🗣️ Intermedio',
-                                                  child: buildDropdownItem(
-                                                    containerWidth:
-                                                        containerWidth,
-                                                    icon:
-                                                        Icons
-                                                            .record_voice_over_outlined,
-                                                    text: '🗣️ Intermedio',
-                                                  ),
-                                                ),
-                                                PopupMenuItem<String>(
-                                                  value: '🧠 Avanzado',
-                                                  child: buildDropdownItem(
-                                                    containerWidth:
-                                                        containerWidth,
-                                                    icon: Icons.school_outlined,
-                                                    text: '🧠 Avanzado',
-                                                  ),
-                                                ),
-                                                PopupMenuItem<String>(
-                                                  value: '📚  Nativo',
-                                                  child: buildDropdownItem(
-                                                    containerWidth:
-                                                        containerWidth,
-                                                    icon:
-                                                        Icons
-                                                            .menu_book_outlined,
-                                                    text: '📚  Nativo',
-                                                  ),
-                                                ),
-                                              ];
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  if (model.isSecondDropDownOpen)
-                                    SizedBox(height: 250),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        // 50.verticalSpace,
+                        // CustomButton(
+                        //   text: 'Continuar',
+                        //   onTap: () {
+                        //     Get.to(Candidate88PercentScreen());
+                        //   },
+                        // ),
+                        // 60.verticalSpace,
                       ],
-
-                      ///
                     ),
                   ),
                 ),
@@ -654,4 +363,45 @@ class Candidate77PercentScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _header() {
+  return Container(
+    width: double.infinity,
+    decoration: BoxDecoration(
+      color: whiteColor,
+      borderRadius: BorderRadius.circular(8.r),
+      border: Border.all(color: darkPurpleColor, width: 1.w),
+      boxShadow: [
+        BoxShadow(
+          color: darkPurpleColor,
+          offset: Offset(-1.w, 2.w),
+          blurRadius: 0,
+          spreadRadius: 0,
+        ),
+      ],
+    ),
+    child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 16.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            '¿Qué tanto los hablas?',
+            style: style20B.copyWith(color: darkPurpleColor),
+          ),
+          8.verticalSpace,
+          Text(
+            'Especifica tu nivel de dominio en cada idioma. Esto permitirá a los reclutadores identificar si tu perfil se ajusta a las vacantes disponibles.',
+            style: style14M.copyWith(
+              color: textLightGreyColor,
+            ), // textGreyColor for the description
+            textAlign: TextAlign.start,
+          ),
+          8.verticalSpace,
+        ],
+      ),
+    ),
+  );
 }
