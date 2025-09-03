@@ -171,4 +171,5 @@ class AppAssets {
   static String num3 = "$iconsAssets/n3.png";
   static String num4 = "$iconsAssets/n4.png";
   static String num5 = "$iconsAssets/n5.png";
+  static String createVacIconIcon = "$iconsAssets/creatVacIcon.png";
 }
