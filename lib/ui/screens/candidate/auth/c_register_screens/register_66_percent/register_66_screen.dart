@@ -43,6 +43,7 @@ class Candidate66PercentScreen extends StatelessWidget {
                   text: 'Continuar',
                   backgroundColor:
                       model.selectedTags.isEmpty ? greyColor : primaryColor,
+                  // Replace the onTap function in your bottomNavigationBar
                   onTap: () {
                     if (model.selectedTags.isEmpty) {
                       CustomSnackbar.show(
@@ -52,7 +53,11 @@ class Candidate66PercentScreen extends StatelessWidget {
                             "Por favor selecciona al menos un idioma para continuar.",
                       );
                     } else {
-                      Get.to(Candidate77PercentScreen());
+                      Get.to(
+                        () => Candidate77PercentScreen(
+                          selectedLanguages: model.selectedLanguageList,
+                        ),
+                      );
                     }
                   },
                 ),
