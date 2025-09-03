@@ -46,7 +46,7 @@ class CandidateRegister66PercentViewModel extends BaseViewModel {
 
   List<ShadowTagItem> filteredTags = [];
   final List<ShadowTagItem> selectedTags = [];
-
+  final List<Map<String, String>> selectedLanguageList = [];
   CandidateRegister66PercentViewModel() {
     filteredTags = List.from(allTagItems);
   }
@@ -54,9 +54,21 @@ class CandidateRegister66PercentViewModel extends BaseViewModel {
   void toggleSelection(ShadowTagItem item) {
     if (selectedTags.contains(item)) {
       selectedTags.remove(item);
+
+      ///
+      ///. for 77 percent screen
+      selectedLanguageList.removeWhere((lang) => lang['text'] == item.text);
+
+      ///
     } else {
       if (selectedTags.length < 10) {
         selectedTags.add(item);
+        // for 77 percent screen
+        selectedLanguageList.add({
+          'flag': item.text.split('   ')[0], // Extract flag
+          'name': item.text.split('   ')[1], // Extract language name
+          'text': item.text, // Full text with flag and name
+        });
       }
     }
     notifyListeners();
