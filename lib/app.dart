@@ -9,6 +9,7 @@ import 'package:talenty_app/ui/screens/candidate/auth/c_register_screens/registe
 import 'package:talenty_app/ui/screens/candidate/auth/otp/otp_screen.dart';
 import 'package:talenty_app/ui/screens/common/splash_screen.dart';
 import 'package:talenty_app/ui/screens/company/create_vacancy/create_vacancy_screen.dart';
+import 'package:talenty_app/ui/screens/company/home/home_screen.dart';
 import 'package:talenty_app/ui/screens/theme/app_theme.dart';
 import 'package:talenty_app/ui/screens/theme/lang_theme_provider.dart';
 
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
           _designWidth,
           _designHeight,
         ), // Use your constants
-        builder: (context, child) => CreateVacancyScreen(),
+        builder: (context, child) => HomeScreen(),
       ),
     );
   }
