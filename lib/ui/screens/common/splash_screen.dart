@@ -1,14 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talenty_app/core/constants/strings.dart';
 import 'package:talenty_app/core/services/auth_services.dart';
-import 'package:talenty_app/core/services/local_storage_services.dart';
 import 'package:talenty_app/locator.dart';
-import 'package:talenty_app/ui/screens/candidate/candidate_root/candidate_root_screen.dart';
-import 'package:talenty_app/ui/screens/common/login_screen/login_screen.dart';
-import 'package:talenty_app/ui/screens/company/root/root_screen.dart';
 import 'package:talenty_app/ui/screens/permission_screens/notification_permission_screen.dart';
 
 class SplashScreen extends StatefulWidget {
