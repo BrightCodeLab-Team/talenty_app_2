@@ -12,7 +12,6 @@ import 'package:talenty_app/ui/custom_widgets/back_button.dart';
 import 'package:talenty_app/ui/custom_widgets/buttons/custom_buttons.dart';
 import 'package:talenty_app/ui/custom_widgets/candidate/icon_text_tag.dart';
 import 'package:talenty_app/ui/custom_widgets/divider.dart';
-import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/candidate_chat_view_model.dart';
 import 'package:talenty_app/ui/screens/candidate/chats/conversation/chating_screen.dart';
 import 'package:talenty_app/ui/screens/candidate/company_profile/company_profile_screen.dart';
